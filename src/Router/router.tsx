@@ -2,8 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "../Pages/Home";
 import LoginPage from "../Pages/Auth/Login";
 import NotFound from "../Pages/NotFound";
-import Layout from "../Components/Layout";
-import LoginLayout from "../Components/loginLayout";
+import Layout from "../Layouts/layout";
+import LoginLayout from "../Layouts/loginLayout";
 import ProtectedRoute from "../Components/protectedRoute";
 const AppRoutes = () => {
   return (

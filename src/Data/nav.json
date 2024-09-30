@@ -1,0 +1,80 @@
+[
+  {
+    "name": "Dashboard",
+    "path": "/about",
+    "icon": "FaHome",
+    "children": [
+      {
+        "name": "MBU",
+        "path": "/about/team"
+      },
+      {
+        "name": "LTI",
+        "path": "/about/company"
+      },
+
+      {
+        "name": "MANBU",
+        "path": "/about/company"
+      }
+    ]
+  },
+  {
+    "name": "Audit",
+    "path": "/audit",
+    "icon": "AiOutlineAudit"
+  },
+  {
+    "name": "Project",
+    "path": "/project",
+    "icon": "AiOutlineProject"
+  },
+  {
+    "name": "Penjualan",
+    "path": "/about",
+    "icon": "IoCartOutline",
+    "children": [
+      {
+        "name": "Team",
+        "path": "/about/team"
+      },
+      {
+        "name": "Company",
+        "path": "/about/company"
+      }
+    ]
+  },
+
+  {
+    "name": "Pembelian",
+    "path": "/about",
+    "icon": "RiMoneyDollarCircleLine",
+    "children": [
+      {
+        "name": "Team",
+        "path": "/about/team"
+      },
+      {
+        "name": "Company",
+        "path": "/about/company"
+      }
+    ]
+  },
+  {
+    "name": "Master Data",
+    "path": "/about",
+    "icon": "LuDatabase",
+    "children": [
+      {
+        "name": "Farm",
+        "path": "/master-data/farm"
+      }
+    ]
+  },
+
+  {
+    "name": "Management User",
+    "path": "/contact",
+    "icon": "IoPeople"
+  }
+]
