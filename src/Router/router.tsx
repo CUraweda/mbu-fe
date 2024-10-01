@@ -5,16 +5,25 @@ import NotFound from "../Pages/NotFound";
 import Layout from "../Layouts/layout";
 import LoginLayout from "../Layouts/loginLayout";
 import ProtectedRoute from "../Components/protectedRoute";
+import Farm from "../Pages/Farm/farmPage";
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
         <Route element={<Layout />}>
           <Route
-            path="/dashboard"
+            path="/"
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/master-data/farm"
+            element={
+              <ProtectedRoute>
+                <Farm />
               </ProtectedRoute>
             }
           />

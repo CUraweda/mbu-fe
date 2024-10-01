@@ -13,7 +13,7 @@ const LoginPage = () => {
     e.preventDefault();
     if (email === "admin@gmail.com" && password === "password") {
       localStorage.setItem("auth", "true"); // Set auth status di localStorage
-      navigate("/dashboard"); // Arahkan ke halaman dashboard
+      navigate("/"); // Arahkan ke halaman dashboard
       Swal.fire({
         icon: "success",
         title: "Login Berhasil",
