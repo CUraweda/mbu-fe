@@ -4,6 +4,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import sidebarLinks from "../Data/nav.json";
 import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
+import logo from "../assets/Image/logo_mbu_primary.png";
 
 const layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
@@ -77,7 +78,12 @@ const layout = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 min-h-full w-80 p-4">
+
+          {/* <div className="bg-base-200 h-full w-80 p-4"> */}
+          <ul className="menu bg-base-100 min-h-full w-72 p-4 m-auto rounded-md shadow-md text-md">
+            <div className="p-2 w-full">
+              <img src={logo} alt="user" className="h-12" />
+            </div>
             {/* Sidebar content here */}
             {sidebarLinks.map((link) => {
               const IconComponent = iconMap[link.icon];
@@ -133,6 +139,7 @@ const layout = () => {
             })}
           </ul>
         </div>
+        {/* </div> */}
       </div>
     </>
   );

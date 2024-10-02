@@ -6,6 +6,7 @@ import Layout from "../Layouts/layout";
 import LoginLayout from "../Layouts/loginLayout";
 import ProtectedRoute from "../Components/protectedRoute";
 import Farm from "../Pages/Farm/farmPage";
+import ProjectPage from "../Pages/Project/projectPage";
 const AppRoutes = () => {
   return (
     <Router>
@@ -24,6 +25,14 @@ const AppRoutes = () => {
             element={
               <ProtectedRoute>
                 <Farm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/project"
+            element={
+              <ProtectedRoute>
+                <ProjectPage />
               </ProtectedRoute>
             }
           />

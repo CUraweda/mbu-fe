@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 type SearchBarProps = {
   onSearch: (searchQuery: string) => void;
   onAddClick: () => void;
+  children?: React.ReactNode;
 };
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onAddClick }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  onAddClick,
+  children,
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,6 +26,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onAddClick }) => {
   };
   return (
     <div className="w-full flex justify-end gap-2 mb-5">
+      {children}
+
       <form
         onSubmit={handleSearchSubmit}
         className="input input-bordered flex items-center gap-2 w-fit"
