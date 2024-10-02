@@ -65,8 +65,10 @@ const layout = () => {
               </ul>
             </div>
           </div>
-          <div className="h-full">
-            <Outlet />
+          <div className="h-full mt-4">
+            <div className="card bg-white text-slate-800 rounded-lg justify-between p-5">
+              <Outlet />
+            </div>
           </div>
         </div>
         <div className="drawer-side">
@@ -83,14 +85,18 @@ const layout = () => {
                 openSubmenus[link.name] || link.name === "Dashboard";
 
               return (
-                <li key={link.path} className="flex flex-col">
+                <li key={link.path || link.name} className="flex flex-col">
                   <div
                     className="flex items-center justify-between cursor-pointer"
                     onClick={() => toggleSubmenu(link.name)}
                   >
                     <div className="flex items-center">
                       {IconComponent && <IconComponent className="mr-2" />}
-                      <Link to={link.path}>{link.name}</Link>
+                      {link.path ? (
+                        <Link to={link.path}>{link.name}</Link>
+                      ) : (
+                        <span>{link.name}</span>
+                      )}
                     </div>
                     {link.children && (
                       <span
