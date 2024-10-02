@@ -426,7 +426,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.namaBlok}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "namaBlok",
                                         e.target.value
@@ -444,7 +444,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.kodeKandang}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "kodeKandang",
                                         e.target.value
@@ -459,7 +459,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.namaKandang}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "namaKandang",
                                         e.target.value
@@ -474,7 +474,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.Luas}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "Luas",
                                         e.target.value
@@ -489,7 +489,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.Populasi}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "Populasi",
                                         e.target.value
@@ -504,7 +504,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.MaxPopulasi}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "MaxPopulasi",
                                         e.target.value
@@ -519,7 +519,7 @@ const farmPage = () => {
                                     className="input input-bordered w-full"
                                     value={row.Keterangan}
                                     onChange={(e) =>
-                                      handleInputChange(
+                                      handleRowStep3Change(
                                         index,
                                         "Keterangan",
                                         e.target.value
