@@ -111,7 +111,7 @@ const farmPage = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody className="bg-gray-100 ">
+          <tbody className="bg-gray-100">
             <tr>
               <th>1</th>
               <td>Test 1</td>
