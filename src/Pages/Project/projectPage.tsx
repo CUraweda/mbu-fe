@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SearchBar from "../../Components/searchBar";
 import iconMap from "../../Data/iconMap";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 const ProjectPage = () => {
   const [area, setArea] = useState("");
   const [modal, setModal] = useState<false | true>(false);
@@ -91,47 +91,26 @@ const ProjectPage = () => {
   };
 
   // Fungsi untuk menampilkan alert saat finish
-  const handleFinish = () => {
-    Swal.fire({
-      title: "Apakah Anda yakin?",
-      text: "Anda akan menyelesaikan semua test!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, selesai!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          "Selesai!",
-          "Anda telah menyelesaikan semua test.",
-          "success"
-        );
-      }
-    });
-  };
-  const [formStepTwo, setFormStepTwo] = useState({
-    judul: "Test 1 - Aldi",
-    textarea: "",
-    selectAll: false,
-    checks: {
-      kandang_bersih: false,
-      gasolex: false,
-      regulator: false,
-      tempat_minum: false,
-      tempat_pakan: false,
-      lampu: false,
-      tirai_terpal: false,
-      tirai_plastik: false,
-      seng_brooding: false,
-      water_filter: false,
-      sekatan: false,
-      sekam: false,
-      koran: false,
-      lingkungan: false,
-    },
-  });
+  // const handleFinish = () => {
+  //   Swal.fire({
+  //     title: "Apakah Anda yakin?",
+  //     text: "Anda akan menyelesaikan semua test!",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     confirmButtonText: "Ya, selesai!",
+  //     cancelButtonText: "Batal",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire(
+  //         "Selesai!",
+  //         "Anda telah menyelesaikan semua test.",
+  //         "success"
+  //       );
+  //     }
+  //   });
+  // };
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -183,10 +162,10 @@ const ProjectPage = () => {
       setSelectedItems([]);
     }
   };
-  const handleRemoveRow = (index: number) => {
-    const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
-    setRows(updatedRows);
-  };
+  // const handleRemoveRow = (index: number) => {
+  //   const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
+  //   setRows(updatedRows);
+  // };
 
   const handleNext = () => {
     if (currentStep < 5) {
