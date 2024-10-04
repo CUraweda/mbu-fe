@@ -37,6 +37,24 @@ const ProjectPage = () => {
       Ketearngan: "",
     },
   ]);
+
+  const [rowsBudgeting, setRowsBudgeting] = useState<any[]>([
+    {
+      Jenis: "",
+      start_date: "",
+      end_date: "",
+      kebutuhan: "",
+      satuan_standarisasi: "",
+      harga: "",
+      stok: "",
+      pengajuan: "",
+      satuan_pengajuan: "",
+      total: "",
+      periode: "",
+      harga_ekor: "",
+      estimasi: "",
+    },
+  ]);
   const testsData = [
     {
       id: 1,
@@ -124,11 +142,22 @@ const ProjectPage = () => {
     });
     ``;
   };
+  const handleInputstep5Change = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    const updatedRows = [...rowsBudgeting];
+    updatedRows[index][field] = value;
+    setRowsBudgeting(updatedRows);
+  };
+
   const handleInputStep3Change = (index: number, field: any, value: string) => {
     const updatedRows = [...rows];
     updatedRows[index][field] = value;
     setRows(updatedRows);
   };
+
   const handleInputStep2Change = (
     id: number,
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -598,29 +627,41 @@ const ProjectPage = () => {
                             {/* Table Head */}
                             <thead className="bg-gray-200">
                               <tr>
-                                <th className="p-2 text-center">Kandang</th>
-                                <th className="p-2 text-center">Populasi</th>
-                                <th className="p-2 text-center">
-                                  Pemeliharaan DOC IN
+                                <th className="p-2 text-center" rowSpan={2}>
+                                  No
                                 </th>
-                                <th className="p-2 text-center">
-                                  Pemeliharaan Akhir
+                                <th className="p-2 text-center" rowSpan={2}>
+                                  Kandang
                                 </th>
-                                <th className="p-2 text-center">Panen Awal</th>
-                                <th className="p-2 text-center">Panen Akhir</th>
-                                <th className="p-2 text-center">
-                                  Cuci Kandang Awal
+                                <th className="p-2 text-center" rowSpan={2}>
+                                  Populasi
                                 </th>
-                                <th className="p-2 text-center">
-                                  Cuci Kandang Akhir
+                                <th className="p-2 text-center" colSpan={2}>
+                                  Pemeliharaan (35 hari)
                                 </th>
-                                <th className="p-2 text-center">
-                                  Istirahat Kandang Awal
+                                <th className="p-2 text-center" colSpan={2}>
+                                  Panen (0 hari)
                                 </th>
-                                <th className="p-2 text-center">
-                                  Istirahat Kandang Akhir
+                                <th className="p-2 text-center" colSpan={2}>
+                                  Cuci Kandang (14 hari)
                                 </th>
-                                <th className="p-2 text-center">Keterangan</th>
+
+                                <th className="p-2 text-center" colSpan={2}>
+                                  Istirahat Kandang (0 hari)
+                                </th>
+                                <th className="p-2 text-center" rowSpan={2}>
+                                  Keterangan
+                                </th>
+                              </tr>
+                              <tr>
+                                <th className="p-2 text-center">DOC IN</th>
+                                <th className="p-2 text-center">Akhir</th>
+                                <th className="p-2 text-center">Awal</th>
+                                <th className="p-2 text-center">Akhir</th>
+                                <th className="p-2 text-center">Awal</th>
+                                <th className="p-2 text-center">Akhir</th>
+                                <th className="p-2 text-center">Awal</th>
+                                <th className="p-2 text-center">Akhir</th>
                               </tr>
                             </thead>
 
@@ -628,6 +669,7 @@ const ProjectPage = () => {
                             <tbody className="bg-gray-100">
                               {rows.map((row, index) => (
                                 <tr key={index}>
+                                  <td>{index + 1}</td>
                                   {/* Input Kandang */}
                                   <td className="p-2">
                                     <input
@@ -855,6 +897,274 @@ const ProjectPage = () => {
                         </h3>
                       ))}
                     </div> */}
+                  </form>
+                </div>
+              )}
+              {currentStep === 5 && (
+                <div className="card bg-gray-100 p-5">
+                  <form>
+                    {/* Table Container */}
+                    <div className="rounded-lg overflow-x-auto">
+                      <table className="table w-full table-md">
+                        {/* Table Head */}
+                        <thead className="bg-gray-200">
+                          <tr>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              No
+                            </th>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              Jenis
+                            </th>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              Keterangan Standar (M1)
+                            </th>
+                            <th className="p-2 text-center" colSpan={5}>
+                              Standarisasi
+                            </th>
+                            <th className="p-2 text-center" colSpan={4}>
+                              Jumlah Pengajuan
+                            </th>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              Periode Pembebanan
+                            </th>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              Rp/ Ekor
+                            </th>
+                            <th className="p-2 text-center" rowSpan={2}>
+                              Estimasi Realisasi
+                            </th>
+                          </tr>
+                          <tr>
+                            <th className="p-2 text-center">Keterangan</th>
+                            <th className="p-2 text-center">Kebutuhan</th>
+                            <th className="p-2 text-center">Satuan</th>
+                            <th className="p-2 text-center">Rp/ Unit</th>
+                            <th className="p-2 text-center">Total</th>
+                            <th className="p-2 text-center">Stok</th>
+                            <th className="p-2 text-center">Pengajuan</th>
+                            <th className="p-2 text-center">Satuan</th>
+                            <th className="p-2 text-center">Total</th>
+                          </tr>
+                        </thead>
+
+                        {/* Table Body */}
+                        <tbody className="bg-gray-100">
+                          {rowsBudgeting.map((row, index) => (
+                            <tr key={index}>
+                              <td className="p-2 text-center">{index + 1}</td>
+
+                              {/* Jenis */}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  value={row.Jenis}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "Jenis",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Tanggal Mulai */}
+                              <td className="p-2">
+                                <input
+                                  type="date"
+                                  value={row.start_date}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "start_date",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Tanggal Akhir */}
+                              <td className="p-2">
+                                <input
+                                  type="date"
+                                  value={row.end_date}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "end_date",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Kebutuhan */}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  value={row.kebutuhan}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "kebutuhan",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Satuan Standarisasi */}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  value={row.satuan_standarisasi}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "satuan_standarisasi",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Harga */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.harga}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "harga",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Stok */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.stok}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "stok",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Pengajuan */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.pengajuan}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "pengajuan",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Satuan Pengajuan */}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  value={row.satuan_pengajuan}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "satuan_pengajuan",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Total */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.total}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "total",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Periode Pembebanan */}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  value={row.periode}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "periode",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Harga/Ekor */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.harga_ekor}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "harga_ekor",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+
+                              {/* Estimasi Realisasi */}
+                              <td className="p-2">
+                                <input
+                                  type="number"
+                                  value={row.estimasi}
+                                  onChange={(e) =>
+                                    handleInputstep5Change(
+                                      index,
+                                      "estimasi",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="input input-bordered w-full"
+                                />
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </form>
                 </div>
               )}
