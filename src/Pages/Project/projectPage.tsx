@@ -1,23 +1,60 @@
 import { useState } from "react";
 import SearchBar from "../../Components/searchBar";
 import iconMap from "../../Data/iconMap";
+import Swal from "sweetalert2";
 const ProjectPage = () => {
   const [area, setArea] = useState("");
   const [modal, setModal] = useState<false | true>(false);
   const [currentStep, setCurrentStep] = useState(1);
-  // const [rows, setRows] = useState([
-  //   {
-  //     tanggal_mulai: "",
-  //     kategori_proyek: "",
-  //     nama_area: "",
-  //     nama_farm: "",
-  //     periode_projek: "",
-  //     nama_kandang: 0,
-  //     fcr: "",
-  //     mortalitas_calculation: "",
-  //     closing_calculation: "",
-  //   },
-  // ]);
+
+  const initialData = [
+    { id: 1, name: "Jhon", desc: "" },
+    { id: 2, name: "Doe", desc: "" },
+    { id: 3, name: "Jane", desc: "" },
+  ];
+  const [formData, setFormData] = useState<any[]>(initialData);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<{
+    [key: number]: string;
+  }>({});
+
+  // Fungsi untuk menangani perubahan radio button
+  const handleRadioChange = (testId: number, value: string) => {
+    setSelectedOptions((prev) => ({ ...prev, [testId]: value }));
+  };
+  const [rows, setRows] = useState<any[]>([
+    {
+      Kandang: "",
+      Populasi: "",
+      Pemeliharaan_DOC_IN: "",
+      Pemeliharaan_Akhir: "",
+      Panen_Awal: "",
+      Panen_Akhir: "",
+      Cuci_Kandang_Awal: "",
+      Cuci_Kandang_Akhir: "",
+      Istirahat_Kandang_Awal: "",
+      Istiraha_Kandang_Akhir: "",
+      Ketearngan: "",
+    },
+  ]);
+  const testsData = [
+    {
+      id: 1,
+      title: "TEST 1 - 45.000 EKOR",
+      options: [
+        { value: "Cek Semua", label: "Cek Semua" },
+        { value: "ABK - ABK", label: "ABK - ABK" },
+      ],
+    },
+    {
+      id: 2,
+      title: "TEST 2 - 45.000 EKOR",
+      options: [
+        { value: "Cek Semua", label: "Cek Semua" },
+        { value: "ABK - ABK", label: "ABK - ABK" },
+      ],
+    },
+  ];
   const [formOwnFarm, setFormOwnFarm] = useState({
     tanggal_mulai: "",
     kategori_proyek: "",
@@ -29,6 +66,33 @@ const ProjectPage = () => {
     mortalitas_calculation: "",
     closing_calculation: "",
   });
+  const handleSkip = () => {
+    if (currentStep < testsData.length) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  // Fungsi untuk menampilkan alert saat finish
+  const handleFinish = () => {
+    Swal.fire({
+      title: "Apakah Anda yakin?",
+      text: "Anda akan menyelesaikan semua test!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, selesai!",
+      cancelButtonText: "Batal",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          "Selesai!",
+          "Anda telah menyelesaikan semua test.",
+          "success"
+        );
+      }
+    });
+  };
   const [formStepTwo, setFormStepTwo] = useState({
     judul: "Test 1 - Aldi",
     textarea: "",
@@ -60,41 +124,43 @@ const ProjectPage = () => {
     });
     ``;
   };
-  const handleInputChangeKandang = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+  const handleInputStep3Change = (index: number, field: any, value: string) => {
+    const updatedRows = [...rows];
+    updatedRows[index][field] = value;
+    setRows(updatedRows);
+  };
+  const handleInputStep2Change = (
+    id: number,
+    event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    const { name, value, type } = e.target;
+    const newData = formData.map((item) =>
+      item.id === id ? { ...item, desc: event.target.value } : item
+    );
+    setFormData(newData);
+    console.log("Updated data:", newData);
+  };
 
-    if (type === "checkbox" && e.target instanceof HTMLInputElement) {
-      // Handle checkboxes separately
-      const checked = e.target.checked;
-      setFormStepTwo({
-        ...formStepTwo,
-        [name]: checked,
-      });
+  // Handle checkbox perubahan individu
+  const handleCheckboxChange = (id: number) => {
+    setSelectedItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+  const handleSelectAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      const allIds = formData.map((item) => item.id);
+      setSelectedItems(allIds);
     } else {
-      // Handle input, select, and textarea
-      setFormStepTwo({
-        ...formStepTwo,
-        [name]: value,
-      });
+      setSelectedItems([]);
     }
   };
-
-  const handleSelectAll = () => {
-    const allChecked = !formStepTwo.selectAll;
-    setFormStepTwo({
-      ...formStepTwo,
-      selectAll: allChecked,
-      // checks: Object.fromEntries(
-      //   Object.keys(formStepTwo.checks).map((key) => [key, allChecked])
-      // ),
-    });
+  const handleRemoveRow = (index: number) => {
+    const updatedRows = rows.filter((_, rowIndex) => rowIndex !== index);
+    setRows(updatedRows);
   };
+
   const handleNext = () => {
-    if (currentStep < 3) {
+    if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -201,7 +267,7 @@ const ProjectPage = () => {
           onClick={() => setModal(false)}
         >
           <div
-            className="modal-box min-w-[1200px]"
+            className="modal-box xl:min-w-[1200px]"
             onClick={(e) => e.stopPropagation()}
           >
             <form>
@@ -223,12 +289,12 @@ const ProjectPage = () => {
                   Chickin
                 </li>
                 <li
-                  className={`step ${currentStep >= 3 ? "step-primary" : ""}`}
+                  className={`step ${currentStep >= 4 ? "step-primary" : ""}`}
                 >
                   Anak Kandang
                 </li>
                 <li
-                  className={`step ${currentStep >= 3 ? "step-primary" : ""}`}
+                  className={`step ${currentStep >= 5 ? "step-primary" : ""}`}
                 >
                   Budgeting
                 </li>
@@ -427,67 +493,368 @@ const ProjectPage = () => {
                 </div>
               )}
               {currentStep === 2 && (
-                <div className="card bg-gray-100 p-5">
-                  <form className="grid grid-cols-2 gap-4">
-                    {/* Title */}
-                    <div className="col-span-2">
-                      <label className="label font-bold">
-                        {formStepTwo.judul}
-                      </label>
-                    </div>
+                <div className="card bg-gray-100 p-5 grid grid-cols-2">
+                  <div className="">
+                    <h3>Test (1)</h3>
+                    <div className="my-2 border-dashed border-b-2" />
+                    <form className="grid grid-cols-2 gap-4 bg-white rounded-md p-4">
+                      {/* Checkbox "Select All" */}
+                      <div className="col-span-2 flex items-center bg-white rounded-md w-full p-4 shadow-md">
+                        <input
+                          type="checkbox"
+                          className="checkbox checkbox-primary mr-4"
+                          onChange={handleSelectAllChange}
+                          checked={selectedItems.length === formData.length}
+                        />
+                        <label className="label font-bold">Select All</label>
+                      </div>
 
-                    {/* Text Area */}
-                    <div className="col-span-1">
-                      <label className="label">Textarea</label>
-                      <textarea
-                        name="textarea"
-                        value={formStepTwo.textarea}
-                        onChange={handleInputChangeKandang}
-                        className="textarea textarea-bordered w-full"
-                      />
-                    </div>
+                      {/* Render Textarea dan Checkbox Dinamis */}
+                      {formData.map((item) => (
+                        <div
+                          key={item.id}
+                          className="col-span-2 flex items-center "
+                        >
+                          <input
+                            type="checkbox"
+                            className="checkbox checkbox-primary mr-4"
+                            checked={selectedItems.includes(item.id)}
+                            onChange={() => handleCheckboxChange(item.id)}
+                          />
+                          <div className="w-full border-2 border-gray-200 rounded-xl p-2">
+                            <label className="label">{item.name}</label>
+                            <textarea
+                              name={`textarea-${item.id}`}
+                              value={item.desc}
+                              onChange={(event) =>
+                                handleInputStep2Change(item.id, event)
+                              }
+                              className="textarea textarea-bordered w-full"
+                            />
+                          </div>
+                        </div>
+                      ))}
 
-                    {/* Select All */}
-                    <div className="col-span-1">
-                      <li>
-                        Kandang bersih Gasolex berfungsi dengan baik Regulator
-                      </li>
-                      <li>
-                        sudah terpasang Tempat minum otomatis / manual sudah
-                      </li>
-                      <li>
-                        bersih Tempat pakan sudah bersih Lampu dalam dan luar
-                      </li>
-                      <li>
-                        kandang sudah terpasang Tirai terpal biru dalam kondisi
-                      </li>
-                      <li>
-                        baik dan terpasang Tirai plastik bening dalam kondisi
-                        baik
-                      </li>
-                      <li>
-                        dan sudah terpasang Seng brooding dalam kondisi baik dan
-                      </li>
-                      <li>
-                        sudah terpasang Water filter dalam kondisi baik dan
-                        sudah
-                      </li>
-                      <li>
-                        terpasang Sekatan dalam kondisi baik Sekam sudah
-                        tersedia
-                      </li>
-                      <li>
-                        Koran sudah terpasang di brooding Lingkungan bersih
-                      </li>
+                      {/* Tombol Submit */}
+                      {/* <div className="col-span-2">
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() =>
+                            console.log("Selected Items:", selectedItems)
+                          }
+                        >
+                          Submit
+                        </button>
+                      </div> */}
+                    </form>
+                  </div>
+                  {/* Select All */}
+                  <div className="px-5 w-full h-full">
+                    <h2 className="font-bold uppercase">Keterangan</h2>
+                    <div className="border-l-8 border-blue-400 my-5">
+                      <h3 className="font-semibold uppercase text-xl pl-2  text-gray-500">
+                        Ketentuan Persiapan Kandang Ayam Sebelum Penggunaan
+                      </h3>
                     </div>
-                  </form>
+                    <div className=""></div>
+                    <li>
+                      Kandang bersih Gasolex berfungsi dengan baik Regulator
+                    </li>
+                    <li>
+                      sudah terpasang Tempat minum otomatis / manual sudah
+                    </li>
+                    <li>
+                      bersih Tempat pakan sudah bersih Lampu dalam dan luar
+                    </li>
+                    <li>
+                      kandang sudah terpasang Tirai terpal biru dalam kondisi
+                    </li>
+                    <li>
+                      baik dan terpasang Tirai plastik bening dalam kondisi baik
+                    </li>
+                    <li>
+                      dan sudah terpasang Seng brooding dalam kondisi baik dan
+                    </li>
+                    <li>
+                      sudah terpasang Water filter dalam kondisi baik dan sudah
+                    </li>
+                    <li>
+                      terpasang Sekatan dalam kondisi baik Sekam sudah tersedia
+                    </li>
+                    <li>Koran sudah terpasang di brooding Lingkungan bersih</li>
+                  </div>
                 </div>
               )}
               {currentStep === 3 && (
                 <div className="card bg-gray-100 p-5">
                   <form>
                     {/* Area Dropdown */}
-                    <div className="mb-4"></div>
+                    <div className="mb-4">
+                      <form>
+                        {/* Table Container */}
+                        <div className="rounded-lg overflow-x-auto">
+                          <table className="table w-full table-md">
+                            {/* Table Head */}
+                            <thead className="bg-gray-200">
+                              <tr>
+                                <th className="p-2 text-center">Kandang</th>
+                                <th className="p-2 text-center">Populasi</th>
+                                <th className="p-2 text-center">
+                                  Pemeliharaan DOC IN
+                                </th>
+                                <th className="p-2 text-center">
+                                  Pemeliharaan Akhir
+                                </th>
+                                <th className="p-2 text-center">Panen Awal</th>
+                                <th className="p-2 text-center">Panen Akhir</th>
+                                <th className="p-2 text-center">
+                                  Cuci Kandang Awal
+                                </th>
+                                <th className="p-2 text-center">
+                                  Cuci Kandang Akhir
+                                </th>
+                                <th className="p-2 text-center">
+                                  Istirahat Kandang Awal
+                                </th>
+                                <th className="p-2 text-center">
+                                  Istirahat Kandang Akhir
+                                </th>
+                                <th className="p-2 text-center">Keterangan</th>
+                              </tr>
+                            </thead>
+
+                            {/* Table Body */}
+                            <tbody className="bg-gray-100">
+                              {rows.map((row, index) => (
+                                <tr key={index}>
+                                  {/* Input Kandang */}
+                                  <td className="p-2">
+                                    <input
+                                      type="text"
+                                      value={row.Kandang}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Kandang",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+
+                                  {/* Input Populasi */}
+                                  <td className="p-2">
+                                    <input
+                                      type="text"
+                                      value={row.Populasi}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Populasi",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+
+                                  {/* Input Tanggal */}
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Pemeliharaan_DOC_IN}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Pemeliharaan_DOC_IN",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Pemeliharaan_Akhir}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Pemeliharaan_Akhir",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Panen_Awal}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Panen_Awal",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Panen_Akhir}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Panen_Akhir",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Cuci_Kandang_Awal}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Cuci_Kandang_Awal",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Cuci_Kandang_Akhir}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Cuci_Kandang_Akhir",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Istirahat_Kandang_Awal}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Istirahat_Kandang_Awal",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                  <td className="p-2">
+                                    <input
+                                      type="date"
+                                      value={row.Istiraha_Kandang_Akhir}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Istirahat_Kandang_Akhir",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+
+                                  {/* Input Keterangan */}
+                                  <td className="p-2">
+                                    <input
+                                      type="text"
+                                      value={row.Ketearngan}
+                                      onChange={(e) =>
+                                        handleInputStep3Change(
+                                          index,
+                                          "Ketearngan",
+                                          e.target.value
+                                        )
+                                      }
+                                      className="input input-bordered w-full"
+                                    />
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </form>
+                    </div>
+                  </form>
+                </div>
+              )}
+              {currentStep === 4 && (
+                <div className="card bg-gray-100">
+                  <form className="p-5">
+                    <h3 className="font-bold">Data Persiapan Anak Kandang</h3>
+                    {/* Grid dengan 2 kolom */}
+                    <button
+                      type="button"
+                      onClick={handleSkip}
+                      className="btn btn-warning w-full my-5 "
+                    >
+                      Skip Step
+                    </button>
+                    <div className="grid grid-cols-2 gap-5">
+                      {testsData.map((test) => (
+                        <div
+                          key={test.id}
+                          className="card bg-gray-100 rounded-lg"
+                        >
+                          <h2 className="font-bold text-lg mb-4 bg-gray-200 p-5 rounded-md">
+                            {test.title}
+                          </h2>
+
+                          <div className="items-center block">
+                            {test.options.map((option) => (
+                              <label
+                                key={option.value}
+                                className="flex items-center bg-white p-5 rounded-md my-2"
+                              >
+                                <input
+                                  type="radio"
+                                  value={option.value}
+                                  checked={
+                                    selectedOptions[test.id] === option.value
+                                  }
+                                  onChange={() =>
+                                    handleRadioChange(test.id, option.value)
+                                  }
+                                  className="radio radio-primary mr-2"
+                                />
+                                <span>{option.label}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Menampilkan hasil pilihan */}
+                    {/* <div className="mt-5">
+                      {testsData.map((test) => (
+                        <h3 key={test.id} className="font-bold">
+                          Pilihan untuk {test.title}:{" "}
+                          {selectedOptions[test.id] || "Belum dipilih"}
+                        </h3>
+                      ))}
+                    </div> */}
                   </form>
                 </div>
               )}
@@ -503,9 +870,9 @@ const ProjectPage = () => {
                 </button>
                 <button
                   type="button"
-                  className={`btn ${currentStep === 3 ? "btn-disabled" : ""}`}
+                  className={`btn ${currentStep === 5 ? "btn-disabled" : ""}`}
                   onClick={handleNext}
-                  disabled={currentStep === 3}
+                  disabled={currentStep === 5}
                 >
                   Next
                 </button>
