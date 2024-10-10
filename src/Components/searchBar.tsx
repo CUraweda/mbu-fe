@@ -57,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </button>
         </div>
       </div>
-      <div className="border-b-2 border-gray-300 my-4 rounded-md" />
+      <div className="border-b-2 border-gray-200 my-4 rounded-md" />
       <div className="w-full flex justify-end gap-2 mb-5 items-center">
         <form
           onSubmit={handleSearchSubmit}
