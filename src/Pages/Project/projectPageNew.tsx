@@ -3,6 +3,7 @@ import iconMap from "../../Data/iconMap";
 import SearchBar from "../../Components/searchBar";
 import DropdownFilter from "../../Components/filterDropdown";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 interface Item {
   id: string;
@@ -97,6 +98,47 @@ const ProjectPageNew = () => {
       setSelectedItems([]);
     }
   };
+  const deleteData = async (id: any) => {
+    try {
+      const response = await fetch(`http://localhost:3000/project/${id}`, {
+        method: "DELETE",
+      });
+      const data = await response.json();
+      console.log("Success:", data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleEditClick = (type: number, item: Item) => {
+    switch (type) {
+      case 1:
+        navigate(`/project/edit/${item.id}`, { state: { projectData: item } });
+        break;
+      case 2:
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            deleteData(item.id);
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          }
+        });
+        break;
+      case 3:
+        navigate(`/project/approval/${item.id}`, {
+          state: { projectData: item, Status: "approvalView" },
+        });
+        break;
+      default:
+        console.log("Invalid button clicked");
+    }
+  };
 
   const handleRowSelect = (id: string) => {
     setSelectedItems((prevSelected) =>
@@ -142,16 +184,6 @@ const ProjectPageNew = () => {
   return (
     <div className="w-full block">
       <div className="p-5">
-        <div className="breadcrumbs text-sm w-full">
-          <ul>
-            <li>
-              <a>Master Data</a>
-            </li>
-            <li>
-              <a>Project</a>
-            </li>
-          </ul>
-        </div>
         <SearchBar
           onSearch={handleSearch}
           onAddClick={handleAddClick}
@@ -186,8 +218,8 @@ const ProjectPageNew = () => {
           />
         </SearchBar>
       </div>
-      <div className="overflow-x-auto">
-        <table className="table table-md table-zebra">
+      <div className="overflow-x-auto rounded-md m-5  min-h-80">
+        <table className="table table-lg table-zebra ">
           <thead className="bg-slate-100">
             <tr>
               <th className="text-center p-2">
@@ -207,7 +239,7 @@ const ProjectPageNew = () => {
           <tbody>
             {paginatedData.map((item) => (
               <tr key={item.id}>
-                <td className="text-center p-2">
+                <td className="text-center ">
                   <input
                     type="checkbox"
                     checked={selectedItems.includes(item.id)}
@@ -218,9 +250,29 @@ const ProjectPageNew = () => {
                   <td key={column.accessorKey} className="text-center">
                     {column.accessorKey === "aksi" ? (
                       <div>
-                        <button className="btn btn-edit btn-ghost hover:bg-transparent text-center">
-                          <iconMap.HiDotsVertical size={16} />
-                        </button>
+                        <div className="dropdown dropdown-left z-40 relative">
+                          <div
+                            tabIndex={0}
+                            role="button"
+                            className="btn btn-edit btn-ghost hover:bg-transparent text-center"
+                          >
+                            <iconMap.HiDotsVertical size={16} />
+                          </div>
+                          <ul
+                            tabIndex={0}
+                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow absolute"
+                          >
+                            <li onClick={() => handleEditClick(1, item)}>
+                              <a>Edit</a>
+                            </li>
+                            <li onClick={() => handleEditClick(2, item)}>
+                              <a>Delete</a>
+                            </li>
+                            <li onClick={() => handleEditClick(3, item)}>
+                              <a>Aprrove</a>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     ) : column.accessorKey === "statusChickIn" ? (
                       <span

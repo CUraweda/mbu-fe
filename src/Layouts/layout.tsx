@@ -88,6 +88,16 @@ const Layout = () => {
 
         {/* Main content card */}
         <div className="h-full mt-4">
+          <div className="breadcrumbs text-lg w-full m-5">
+            <ul>
+              <li>
+                <a>Master Data</a>
+              </li>
+              <li>
+                <a>Project</a>
+              </li>
+            </ul>
+          </div>
           <div className="card bg-white text-slate-800 rounded-lg justify-between py-5">
             <Outlet />
           </div>

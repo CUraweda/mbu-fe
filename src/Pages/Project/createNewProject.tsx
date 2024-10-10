@@ -1,7 +1,65 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import iconMap from "../../Data/iconMap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateNewProject = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Check if we're editing or creating a new project
+  const isEditMode = !!location.state?.projectData;
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [statusView, setStatusView] = useState<boolean>(false);
+  const [approvalReason, setApprovalReason] = useState<string>("");
+  const [formData, setFormData] = useState({
+    unitBisnis: "",
+    produk: "",
+    area: "",
+    lokasi: "",
+    kandang: "",
+    kapasitas: 0,
+    periode: 0,
+    statusChickIn: "",
+    statusProject: "",
+  });
+  // If we are editing, set the form data to the passed project data
+  useEffect(() => {
+    if (isEditMode) {
+      setFormData(location.state.projectData);
+      if (location.state.Status === "approvalView") {
+        setStatusView(true);
+      }
+    }
+  }, [isEditMode]);
+  const handleSubmitApproval = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isEditMode) {
+      // Handle edit logic
+      console.log("Editing project with data:", formData);
+      // Call an API to update the project...
+    } else {
+      // Handle create logic
+      console.log("Creating new project with data:", formData);
+      // Call an API to create a new project...
+    }
+    navigate("/project"); // Navigate back to the project list after submission
+  };
+  const handleRejectApproval = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isEditMode) {
+      // Handle edit logic
+      console.log("Editing project with data:", formData);
+      // Call an API to update the project...
+    } else {
+      // Handle create logic
+      console.log("Creating new project with data:", formData);
+      // Call an API to create a new project...
+    }
+    navigate("/project"); // Navigate back to the project list after submission
+  };
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
   const itemOptions = [
     { id: 1, name: "Pakan" },
     { id: 2, name: "Obat" },
@@ -108,70 +166,25 @@ const CreateNewProject = () => {
       },
     ]);
   };
-  const initialData = [
-    { id: 1, name: "Jhon", desc: "" },
-    { id: 2, name: "Doe", desc: "" },
-    { id: 3, name: "Jane", desc: "" },
-  ];
-  const [selectedOptions, setSelectedOptions] = useState<{
-    [key: number]: string;
-  }>({});
 
-  // Fungsi untuk menangani perubahan radio button
-  const handleRadioChange = (testId: number, value: string) => {
-    setSelectedOptions((prev) => ({ ...prev, [testId]: value }));
-  };
-  const [rows, setRows] = useState<any[]>([
-    {
-      Kandang: "",
-      Populasi: "",
-      Pemeliharaan_DOC_IN: "",
-      Pemeliharaan_Akhir: "",
-      Panen_Awal: "",
-      Panen_Akhir: "",
-      Cuci_Kandang_Awal: "",
-      Cuci_Kandang_Akhir: "",
-      Istirahat_Kandang_Awal: "",
-      Istiraha_Kandang_Akhir: "",
-      Ketearngan: "",
-    },
-  ]);
-
-  const [rowsBudgeting, setRowsBudgeting] = useState<any[]>([
-    {
-      Jenis: "",
-      start_date: "",
-      end_date: "",
-      kebutuhan: "",
-      satuan_standarisasi: "",
-      harga: "",
-      stok: "",
-      pengajuan: "",
-      satuan_pengajuan: "",
-      total: "",
-      periode: "",
-      harga_ekor: "",
-      estimasi: "",
-    },
-  ]);
-  const testsData = [
-    {
-      id: 1,
-      title: "TEST 1 - 45.000 EKOR",
-      options: [
-        { value: "Cek Semua", label: "Cek Semua" },
-        { value: "ABK - ABK", label: "ABK - ABK" },
-      ],
-    },
-    {
-      id: 2,
-      title: "TEST 2 - 45.000 EKOR",
-      options: [
-        { value: "Cek Semua", label: "Cek Semua" },
-        { value: "ABK - ABK", label: "ABK - ABK" },
-      ],
-    },
-  ];
+//   const testsData = [
+//     {
+//       id: 1,
+//       title: "TEST 1 - 45.000 EKOR",
+//       options: [
+//         { value: "Cek Semua", label: "Cek Semua" },
+//         { value: "ABK - ABK", label: "ABK - ABK" },
+//       ],
+//     },
+//     {
+//       id: 2,
+//       title: "TEST 2 - 45.000 EKOR",
+//       options: [
+//         { value: "Cek Semua", label: "Cek Semua" },
+//         { value: "ABK - ABK", label: "ABK - ABK" },
+//       ],
+//     },
+//   ];
   const [formOwnFarm, setFormOwnFarm] = useState({
     id_project: "",
     nama_area: "",
@@ -182,11 +195,6 @@ const CreateNewProject = () => {
     mortalitas_calculation: "",
     closing_calculation: "",
   });
-  const handleSkip = () => {
-    if (currentStep < testsData.length) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
 
   // Fungsi untuk menampilkan alert saat finish
   // const handleFinish = () => {
@@ -265,21 +273,6 @@ const CreateNewProject = () => {
     });
     ``;
   };
-  const handleInputstep5Change = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const updatedRows = [...rowsBudgeting];
-    updatedRows[index][field] = value;
-    setRowsBudgeting(updatedRows);
-  };
-
-  const handleInputStep3Change = (index: number, field: any, value: string) => {
-    const updatedRows = [...rows];
-    updatedRows[index][field] = value;
-    setRows(updatedRows);
-  };
 
   const handleNext = () => {
     if (currentStep < 5) {
@@ -294,6 +287,39 @@ const CreateNewProject = () => {
   };
   return (
     <div>
+      {showModal && (
+        <div className="modal modal-open">
+          <div className="modal-box">
+            <h2 className="font-bold text-xl text-blue-300 ">
+              Apakah yakin pengajuan sudah sesuai?
+            </h2>
+            <h4 className="mb-5">
+              Klik “setuju” jika sudah sesuai, klik “tolak” jika belum
+            </h4>
+            <label className="font-semibold ">Komentar/catatan :</label>
+            <textarea
+              className="textarea textarea-bordered w-full mt-4"
+              placeholder="Enter reason for approval"
+              value={approvalReason}
+              onChange={(e) => setApprovalReason(e.target.value)}
+            />
+            <div className="modal-action">
+              <button
+                className="btn bg-orange-200 text-orange-700"
+                onClick={handleRejectApproval}
+              >
+                Tolak
+              </button>
+              <button
+                className="btn bg-blue-200 text-blue-700"
+                onClick={handleSubmitApproval}
+              >
+                Setuju
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <form>
         {/* Step Indicators */}
         <ul className="mb-4 w-full flex justify-center gap-5 p-2">
@@ -363,7 +389,7 @@ const CreateNewProject = () => {
                   <input
                     type="text"
                     name="id_project"
-                    disabled
+                    disabled={statusView}
                     value={formOwnFarm.id_project}
                     onChange={handleInputChange}
                     className="input input-bordered w-full"
@@ -375,7 +401,7 @@ const CreateNewProject = () => {
                   <input
                     type="text"
                     name="unit_bisnis"
-                    disabled
+                    disabled={statusView}
                     value={formOwnFarm.unit_bisnis}
                     onChange={handleInputChange}
                     className="input input-bordered w-full"
@@ -385,6 +411,7 @@ const CreateNewProject = () => {
                 <div className="mb-4">
                   <label className="label">Area</label>
                   <select
+                    disabled={statusView}
                     name="nama_area"
                     value={formOwnFarm.nama_area}
                     onChange={handleInputChange}
@@ -395,11 +422,12 @@ const CreateNewProject = () => {
                     <option value="Area 2">Area 2</option>
                   </select>
                 </div>
-                {/* Nama Kandang */}
+                {/* Lokasi */}
                 <div className="mb-4">
                   <label className="label">Lokasi</label>
                   <select
                     name="nama_kandang"
+                    disabled={statusView}
                     value={formOwnFarm.lokasi}
                     onChange={handleInputChange}
                     className="select select-bordered w-full"
@@ -409,23 +437,13 @@ const CreateNewProject = () => {
                     <option value={2}>Kandang 2</option>
                   </select>
                 </div>
-                {/* Tanggal Mulai
-              <div className="mb-4">
-                <label className="label">Tanggal Mulai</label>
-                <input
-                  type="date"
-                  name="tanggal_mulai"
-                  value={formOwnFarm.tanggal_mulai}
-                  onChange={handleInputChange}
-                  className="input input-bordered w-full"
-                />
-              </div> */}
 
-                {/* Nama Farm */}
+                {/* Produk */}
                 <div className="mb-4">
                   <label className="label">Produk</label>
                   <select
                     name="produk"
+                    disabled={statusView}
                     value={formOwnFarm.produk}
                     onChange={handleInputChange}
                     className="select select-bordered w-full"
@@ -435,20 +453,6 @@ const CreateNewProject = () => {
                     <option value="Farm 2">Stock 2</option>
                   </select>
                 </div>
-                {/* Kategori Proyek
-              <div className="mb-4">
-                <label className="label">Kategori Proyek</label>
-                <select
-                  name="kategori_proyek"
-                  value={formOwnFarm.kategori_proyek}
-                  onChange={handleInputChange}
-                  className="select select-bordered w-full"
-                >
-                  <option value="">Pilih Kategori Proyek</option>
-                  <option value="Kategori 1">Kategori 1</option>
-                  <option value="Kategori 2">Kategori 2</option>
-                </select>
-              </div> */}
               </form>
             </div>
 
@@ -480,6 +484,7 @@ const CreateNewProject = () => {
                               <td className="p-2">
                                 <input
                                   type="text"
+                                  disabled={statusView}
                                   placeholder="Masukkan nama farm"
                                   className="input input-bordered w-full"
                                   value={row.fase}
@@ -497,6 +502,7 @@ const CreateNewProject = () => {
                               <td className="p-2">
                                 <input
                                   type="text"
+                                  disabled={statusView}
                                   placeholder="Masukkan nama blok"
                                   className="input input-bordered w-full"
                                   value={row.tanggal_mulai}
@@ -513,6 +519,7 @@ const CreateNewProject = () => {
                               <td className="p-2">
                                 <input
                                   type="text"
+                                  disabled={statusView}
                                   placeholder="Masukkan nama blok"
                                   className="input input-bordered w-full"
                                   value={row.tanggal_selesai}
@@ -529,7 +536,7 @@ const CreateNewProject = () => {
                               <td className="p-2">
                                 <input
                                   type="text"
-                                  disabled
+                                  disabled={statusView}
                                   placeholder="Masukkan nama blok"
                                   className="input input-bordered w-full"
                                   value={row.status}
@@ -544,10 +551,12 @@ const CreateNewProject = () => {
                               </td>
                               {/* Delete Button */}
                               <td className="p-2">
-                                {rows2.length > 1 ? (
+                                {rows2.length > 1 && !statusView ? (
                                   <button
                                     type="button"
-                                    className="btn btn-ghost hover:bg-transparent text-center"
+                                    className={`btn btn-ghost hover:bg-transparent text-center ${
+                                      statusView ? "hidden" : ""
+                                    }`}
                                     onClick={() => handleRemoveRows2(index)}
                                   >
                                     <iconMap.PiTrash
@@ -568,7 +577,9 @@ const CreateNewProject = () => {
                     <div className="flex w-full justify-start m-2">
                       <button
                         type="button"
-                        className="btn btn-ghost hover:bg-transparent text-center"
+                        className={`btn btn-ghost hover:bg-transparent text-center ${
+                          statusView ? "hidden" : ""
+                        }`}
                         onClick={handleAddRow}
                       >
                         <iconMap.IoMdAddCircleOutline
@@ -612,6 +623,7 @@ const CreateNewProject = () => {
                             <td className="p-2">
                               <input
                                 type="text"
+                                disabled={statusView}
                                 placeholder="Masukkan nama farm"
                                 className="input input-bordered w-full"
                                 value={row.nama_kandang}
@@ -630,6 +642,7 @@ const CreateNewProject = () => {
                               <input
                                 type="text"
                                 placeholder="Masukkan nama blok"
+                                disabled={statusView}
                                 className="input input-bordered w-full"
                                 value={row.jenis_form}
                                 onChange={(e) =>
@@ -645,6 +658,7 @@ const CreateNewProject = () => {
                             <td className="p-2">
                               <input
                                 type="text"
+                                disabled={statusView}
                                 placeholder="Masukkan nama blok"
                                 className="input input-bordered w-full"
                                 value={row.periode}
@@ -662,6 +676,7 @@ const CreateNewProject = () => {
                               <input
                                 type="text"
                                 placeholder="Masukkan nama blok"
+                                disabled={statusView}
                                 className="input input-bordered w-full"
                                 value={row.penanggung_jawab}
                                 onChange={(e) =>
@@ -675,7 +690,7 @@ const CreateNewProject = () => {
                             </td>
                             {/* Delete Button */}
                             <td className="p-2">
-                              {rowsFarm.length > 1 ? (
+                              {rowsFarm.length > 1 && !statusView ? (
                                 <button
                                   type="button"
                                   className="btn btn-ghost hover:bg-transparent text-center"
@@ -699,7 +714,9 @@ const CreateNewProject = () => {
                   <div className="flex w-full justify-start m-2">
                     <button
                       type="button"
-                      className="btn btn-ghost hover:bg-transparent text-center"
+                      className={`btn btn-ghost hover:bg-transparent text-center ${
+                        statusView ? "hidden" : ""
+                      }`}
                       onClick={handleAddRowFarm}
                     >
                       <iconMap.IoMdAddCircleOutline
@@ -789,6 +806,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <input
                               type="text"
+                              disabled={statusView}
                               placeholder="Masukkan item"
                               className="input input-bordered w-full"
                               value={row.item}
@@ -806,6 +824,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <input
                               type="number"
+                              disabled={statusView}
                               placeholder="Masukkan qty"
                               className="input input-bordered w-full"
                               value={row.qty}
@@ -823,6 +842,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <input
                               type="number"
+                              disabled={statusView}
                               placeholder="Masukkan harga satuan"
                               className="input input-bordered w-full"
                               value={row.harga_satuan}
@@ -840,6 +860,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <input
                               type="number"
+                              disabled={statusView}
                               placeholder="Total anggaran"
                               className="input input-bordered w-full"
                               value={row.total_anggaran}
@@ -855,7 +876,7 @@ const CreateNewProject = () => {
 
                           {/* Delete Button */}
                           <td className="p-2">
-                            {rowsAnggaran.length > 1 ? (
+                            {rowsAnggaran.length > 1 && !statusView ? (
                               <button
                                 type="button"
                                 className="btn btn-ghost hover:bg-transparent text-center"
@@ -879,7 +900,9 @@ const CreateNewProject = () => {
                 <div className="flex w-full justify-start m-2">
                   <button
                     type="button"
-                    className="btn btn-ghost hover:bg-transparent text-center"
+                    className={`btn btn-ghost hover:bg-transparent text-center ${
+                      statusView ? "hidden" : ""
+                    }`}
                     onClick={handleAddRowAnggaran}
                   >
                     <iconMap.IoMdAddCircleOutline
@@ -919,6 +942,7 @@ const CreateNewProject = () => {
                         {/* Item (Dropdown) */}
                         <td className="p-2">
                           <select
+                            disabled={statusView}
                             className="select select-bordered w-full"
                             value={row.item}
                             onChange={(e) =>
@@ -943,6 +967,7 @@ const CreateNewProject = () => {
                         {/* Satuan (Dropdown) */}
                         <td className="p-2">
                           <select
+                            disabled={statusView}
                             className="select select-bordered w-full"
                             value={row.satuan}
                             onChange={(e) =>
@@ -967,6 +992,7 @@ const CreateNewProject = () => {
                         {/* Interval Recording (Dropdown) */}
                         <td className="p-2">
                           <select
+                            disabled={statusView}
                             className="select select-bordered w-full"
                             value={row.interval_recording}
                             onChange={(e) =>
@@ -990,7 +1016,7 @@ const CreateNewProject = () => {
 
                         {/* Delete Button */}
                         <td className="p-2 text-center">
-                          {rowsRecording.length > 1 && (
+                          {rowsRecording.length > 1 && !statusView && (
                             <button
                               type="button"
                               className="btn btn-ghost hover:bg-transparent text-center"
@@ -1014,7 +1040,9 @@ const CreateNewProject = () => {
               <div className="flex w-full justify-start m-2">
                 <button
                   type="button"
-                  className="btn btn-ghost hover:bg-transparent text-center"
+                  className={`btn btn-ghost hover:bg-transparent text-center ${
+                    statusView ? "hidden" : ""
+                  }`}
                   onClick={handleAddRowRecording}
                 >
                   <iconMap.IoMdAddCircleOutline
@@ -1040,13 +1068,26 @@ const CreateNewProject = () => {
           <button
             type="button"
             className={`btn ${
-              currentStep === 4 ? "btn-disabled" : "bg-[#76A8D8] text-white"
+              currentStep === 4
+                ? "btn-disabled" + statusView
+                  ? "hidden"
+                  : ""
+                : "bg-[#76A8D8] text-white"
             }`}
             onClick={handleNext}
             disabled={currentStep === 4}
           >
             Selanjutnya
           </button>
+          {currentStep === 4 && statusView && (
+            <button
+              type="button"
+              className="btn bg-[#76A8D8] text-white"
+              onClick={() => handleShowModal()}
+            >
+              Approve Project
+            </button>
+          )}
         </div>
       </form>
     </div>
