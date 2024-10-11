@@ -1,11 +1,16 @@
 import { Outlet, Link } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import sidebarLinks from "../Data/nav.json";
+import sidebarLinks from "../Data/navNew.json";
 import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
 import { logout } from "../api/AuthService";
-
+import Breadcrumb from "../Components/bread.tsx";
+const breadcrumbItems = [
+  { label: "Home", link: "/" },
+  { label: "Project", link: "/project" },
+  { label: "List Project" },
+];
 const Layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
     {}
@@ -30,7 +35,7 @@ const Layout = () => {
       {/* Main content */}
       <div className="drawer-content flex flex-col p-5 bg-[#F0F0F0F0] h-screen">
         {/* Navbar */}
-        <div className="navbar bg-white text-slate-800 rounded-lg justify-between w-full">
+        <div className="navbar bg-white text-slate-800 rounded-lg justify-between w-full p-4">
           <div className="block px-5">
             <button className="text-xl font-bold">Welcome 👋,</button>
             <div className="flex-1">Admin MBU</div>
@@ -88,16 +93,7 @@ const Layout = () => {
 
         {/* Main content card */}
         <div className="h-full mt-4">
-          <div className="breadcrumbs text-lg w-full m-5">
-            <ul>
-              <li>
-                <a>Master Data</a>
-              </li>
-              <li>
-                <a>Project</a>
-              </li>
-            </ul>
-          </div>
+          <Breadcrumb items={breadcrumbItems} />
           <div className="card bg-white text-slate-800 rounded-lg justify-between py-5">
             <Outlet />
           </div>
@@ -109,7 +105,7 @@ const Layout = () => {
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
         <ul className="menu bg-base-100 min-h-full w-72 p-4 shadow-md text-md">
           <li>
-            <div className="p-2 w-full">
+            <div className="p-2 w-full mb-5">
               <img src={logo} alt="user" className="h-12" />
             </div>
           </li>
@@ -117,15 +113,26 @@ const Layout = () => {
           {/* Sidebar links */}
           {sidebarLinks.map((link) => {
             const IconComponent = iconMap[link.icon];
-            const isOpen = openSubmenus[link.name] || link.name === "Dashboard";
+            const isOpen = openSubmenus[link.name] || link.name !== "Dashboard";
 
             return (
-              <li key={link.path || link.name} className="flex flex-col">
+              <li
+                key={link.path || link.name}
+                className="flex flex-col text-lg"
+              >
                 <div
-                  className="flex items-center justify-between cursor-pointer"
+                  className={`flex items-center justify-between cursor-pointer  ${
+                    link.name !== "Dashboard"
+                      ? "bg-[#76A8D8BF] text-white shadow-md"
+                      : ""
+                  }
+                    }`}
                   onClick={() => toggleSubmenu(link.name)}
                 >
-                  <div className="flex items-center">
+                  <div
+                    className={`flex items-center
+                    }`}
+                  >
                     {IconComponent && <IconComponent className="mr-2" />}
                     {link.path ? (
                       <Link to={link.path}>{link.name}</Link>
@@ -139,7 +146,7 @@ const Layout = () => {
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
-                      {iconMap.MdExpandMore && link.name !== "Dashboard" && (
+                      {iconMap.MdExpandMore && link.name !== "Project" && (
                         <iconMap.MdExpandMore />
                       )}
                     </span>
@@ -159,7 +166,7 @@ const Layout = () => {
                     ))}
                   </ul>
                 )}
-                {link.name === "Dashboard" && <div>Feature</div>}
+                {/* {link.name === "Dashboard" && <div>Feature</div>} */}
               </li>
             );
           })}

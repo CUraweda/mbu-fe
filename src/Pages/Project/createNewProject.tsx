@@ -167,24 +167,24 @@ const CreateNewProject = () => {
     ]);
   };
 
-//   const testsData = [
-//     {
-//       id: 1,
-//       title: "TEST 1 - 45.000 EKOR",
-//       options: [
-//         { value: "Cek Semua", label: "Cek Semua" },
-//         { value: "ABK - ABK", label: "ABK - ABK" },
-//       ],
-//     },
-//     {
-//       id: 2,
-//       title: "TEST 2 - 45.000 EKOR",
-//       options: [
-//         { value: "Cek Semua", label: "Cek Semua" },
-//         { value: "ABK - ABK", label: "ABK - ABK" },
-//       ],
-//     },
-//   ];
+  //   const testsData = [
+  //     {
+  //       id: 1,
+  //       title: "TEST 1 - 45.000 EKOR",
+  //       options: [
+  //         { value: "Cek Semua", label: "Cek Semua" },
+  //         { value: "ABK - ABK", label: "ABK - ABK" },
+  //       ],
+  //     },
+  //     {
+  //       id: 2,
+  //       title: "TEST 2 - 45.000 EKOR",
+  //       options: [
+  //         { value: "Cek Semua", label: "Cek Semua" },
+  //         { value: "ABK - ABK", label: "ABK - ABK" },
+  //       ],
+  //     },
+  //   ];
   const [formOwnFarm, setFormOwnFarm] = useState({
     id_project: "",
     nama_area: "",
@@ -322,7 +322,7 @@ const CreateNewProject = () => {
       )}
       <form>
         {/* Step Indicators */}
-        <ul className="mb-4 w-full flex justify-center gap-5 p-2">
+        <ul className="mb-4 w-full flex justify-left pl-10 gap-5 py-2">
           <li className={`step flex items-center gap-5`}>
             <div className="flex">
               <div
