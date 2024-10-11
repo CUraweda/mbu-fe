@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import iconMap from "../../Data/iconMap";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import LayoutProject from "../../Layouts/layoutProject";
+import Breadcrumb from "../../Components/bread";
+const breadcrumbItems = [
+  { label: "Home", link: "/" },
+  { label: "Project" },
+  { label: "List Project", link: "/project" },
+  { label: "Project Form" },
+];
 const CreateNewProject = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -286,177 +293,320 @@ const CreateNewProject = () => {
     }
   };
   return (
-    <div>
-      {showModal && (
-        <div className="modal modal-open">
-          <div className="modal-box">
-            <h2 className="font-bold text-xl text-blue-300 ">
-              Apakah yakin pengajuan sudah sesuai?
-            </h2>
-            <h4 className="mb-5">
-              Klik “setuju” jika sudah sesuai, klik “tolak” jika belum
-            </h4>
-            <label className="font-semibold ">Komentar/catatan :</label>
-            <textarea
-              className="textarea textarea-bordered w-full mt-4"
-              placeholder="Enter reason for approval"
-              value={approvalReason}
-              onChange={(e) => setApprovalReason(e.target.value)}
-            />
-            <div className="modal-action">
-              <button
-                className="btn bg-orange-200 text-orange-700"
-                onClick={handleRejectApproval}
-              >
-                Tolak
-              </button>
-              <button
-                className="btn bg-blue-200 text-blue-700"
-                onClick={handleSubmitApproval}
-              >
-                Setuju
-              </button>
+    <div className="w-full block">
+      <Breadcrumb items={breadcrumbItems} />
+      <LayoutProject>
+        {showModal && (
+          <div className="modal modal-open">
+            <div className="modal-box">
+              <h2 className="font-bold text-xl text-blue-300 ">
+                Apakah yakin pengajuan sudah sesuai?
+              </h2>
+              <h4 className="mb-5">
+                Klik “setuju” jika sudah sesuai, klik “tolak” jika belum
+              </h4>
+              <label className="font-semibold ">Komentar/catatan :</label>
+              <textarea
+                className="textarea textarea-bordered w-full mt-4"
+                placeholder="Enter reason for approval"
+                value={approvalReason}
+                onChange={(e) => setApprovalReason(e.target.value)}
+              />
+              <div className="modal-action">
+                <button
+                  className="btn bg-orange-200 text-orange-700"
+                  onClick={handleRejectApproval}
+                >
+                  Tolak
+                </button>
+                <button
+                  className="btn bg-blue-200 text-blue-700"
+                  onClick={handleSubmitApproval}
+                >
+                  Setuju
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      <form>
-        {/* Step Indicators */}
-        <ul className="mb-4 w-full flex justify-left pl-10 gap-5 py-2">
-          <li className={`step flex items-center gap-5`}>
-            <div className="flex">
-              <div
-                className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center  ${
-                  currentStep >= 1 ? "bg-[#76A8D8] " : " bg-gray-300"
-                }`}
-              >
-                1
+        )}
+        <form>
+          {/* Step Indicators */}
+          <ul className="mb-4 w-full flex justify-left pl-10 gap-5 py-2">
+            <li className={`step flex items-center gap-5`}>
+              <div className="flex">
+                <div
+                  className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center  ${
+                    currentStep >= 1 ? "bg-[#76A8D8] " : " bg-gray-300"
+                  }`}
+                >
+                  1
+                </div>
+              </div>
+              <div className="text-xl">Informasi Farm</div>
+            </li>
+            <li className={`step flex items-center gap-5`}>
+              <iconMap.HiChevronRight size={18} />
+
+              <div className="flex">
+                <div
+                  className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
+                    currentStep >= 2 ? "bg-[#76A8D8] " : " bg-gray-300"
+                  }`}
+                >
+                  2
+                </div>
+              </div>
+              <div className="text-xl">Anggaran Project</div>
+            </li>
+            <li className={`step flex items-center gap-5 `}>
+              <iconMap.HiChevronRight size={18} />
+              <div className="flex">
+                <div
+                  className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
+                    currentStep >= 3 ? "bg-[#76A8D8] " : " bg-gray-300"
+                  }`}
+                >
+                  3
+                </div>
+              </div>
+              <div className="text-xl">Informasi Umum</div>
+            </li>
+            <li className={`step flex items-center gap-5 `}>
+              <iconMap.HiChevronRight size={18} />
+
+              <div className="flex">
+                <div
+                  className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
+                    currentStep >= 4 ? "bg-[#76A8D8] " : " bg-gray-300"
+                  }`}
+                >
+                  4
+                </div>
+              </div>
+              <div className="text-xl">Data Recording</div>
+            </li>
+          </ul>
+          <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+          {/* Step Content */}
+          {currentStep === 1 && (
+            <div className="card">
+              <div className="p-8">
+                <form className="grid grid-cols-5 gap-4">
+                  {/* Id Project */}
+                  <div className="mb-4">
+                    <label className="label">Id Project</label>
+                    <input
+                      type="text"
+                      name="id_project"
+                      disabled={statusView}
+                      value={formOwnFarm.id_project}
+                      onChange={handleInputChange}
+                      className="input input-bordered w-full"
+                    />
+                  </div>
+                  {/* Periode Proyek */}
+                  <div className="mb-4">
+                    <label className="label">Unit Bisnis</label>
+                    <input
+                      type="text"
+                      name="unit_bisnis"
+                      disabled={statusView}
+                      value={formOwnFarm.unit_bisnis}
+                      onChange={handleInputChange}
+                      className="input input-bordered w-full"
+                    />
+                  </div>
+                  {/* Nama Area */}
+                  <div className="mb-4">
+                    <label className="label">Area</label>
+                    <select
+                      disabled={statusView}
+                      name="nama_area"
+                      value={formOwnFarm.nama_area}
+                      onChange={handleInputChange}
+                      className="select select-bordered w-full"
+                    >
+                      <option value="">Pilih Area</option>
+                      <option value="Area 1">Area 1</option>
+                      <option value="Area 2">Area 2</option>
+                    </select>
+                  </div>
+                  {/* Lokasi */}
+                  <div className="mb-4">
+                    <label className="label">Lokasi</label>
+                    <select
+                      name="nama_kandang"
+                      disabled={statusView}
+                      value={formOwnFarm.lokasi}
+                      onChange={handleInputChange}
+                      className="select select-bordered w-full"
+                    >
+                      <option value={0}>Pilih Kandang</option>
+                      <option value={1}>Kandang 1</option>
+                      <option value={2}>Kandang 2</option>
+                    </select>
+                  </div>
+
+                  {/* Produk */}
+                  <div className="mb-4">
+                    <label className="label">Produk</label>
+                    <select
+                      name="produk"
+                      disabled={statusView}
+                      value={formOwnFarm.produk}
+                      onChange={handleInputChange}
+                      className="select select-bordered w-full"
+                    >
+                      <option value="">Parent Stock</option>
+                      <option value="Farm 1">Stock 1</option>
+                      <option value="Farm 2">Stock 2</option>
+                    </select>
+                  </div>
+                </form>
+              </div>
+
+              <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+              <div className="p-5">
+                <form>
+                  <div className="card ">
+                    <form>
+                      {/* Table Container */}
+                      <div className="rounded-lg overflow-x-auto">
+                        <table className="table w-full table-md">
+                          {/* Table Head */}
+                          <thead className="">
+                            <tr>
+                              <th className="p-2 text-center">No</th>
+                              <th className="p-2 text-center">Fase</th>
+                              <th className="p-2 text-center">Tanggal Mulai</th>
+                              <th className="p-2 text-center">
+                                Tanggal Selesai
+                              </th>
+                              <th className="p-2 text-center">Status</th>
+                            </tr>
+                          </thead>
+
+                          {/* Table Body */}
+                          <tbody className="">
+                            {rows2.map((row, index) => (
+                              <tr key={index}>
+                                <td className="p-2">{index + 1}</td>
+                                {/* Nama Farm Input */}
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    disabled={statusView}
+                                    placeholder="Masukkan nama farm"
+                                    className="input input-bordered w-full"
+                                    value={row.fase}
+                                    onChange={(e) =>
+                                      handleInputChangeRows2(
+                                        index,
+                                        "fase",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </td>
+
+                                {/* Tanggal Mulai Input */}
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    disabled={statusView}
+                                    placeholder="Masukkan nama blok"
+                                    className="input input-bordered w-full"
+                                    value={row.tanggal_mulai}
+                                    onChange={(e) =>
+                                      handleInputChangeRows2(
+                                        index,
+                                        "tanggal_mulai",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </td>
+                                {/* Tanggal Selesai Input */}
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    disabled={statusView}
+                                    placeholder="Masukkan nama blok"
+                                    className="input input-bordered w-full"
+                                    value={row.tanggal_selesai}
+                                    onChange={(e) =>
+                                      handleInputChangeRows2(
+                                        index,
+                                        "tanggal_selesai",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </td>
+                                {/* Tanggal Selesai Input */}
+                                <td className="p-2">
+                                  <input
+                                    type="text"
+                                    disabled={statusView}
+                                    placeholder="Masukkan nama blok"
+                                    className="input input-bordered w-full"
+                                    value={row.status}
+                                    onChange={(e) =>
+                                      handleInputChangeRows2(
+                                        index,
+                                        "status",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </td>
+                                {/* Delete Button */}
+                                <td className="p-2">
+                                  {rows2.length > 1 && !statusView ? (
+                                    <button
+                                      type="button"
+                                      className={`btn btn-ghost hover:bg-transparent text-center ${
+                                        statusView ? "hidden" : ""
+                                      }`}
+                                      onClick={() => handleRemoveRows2(index)}
+                                    >
+                                      <iconMap.PiTrash
+                                        size={28}
+                                        color="red"
+                                        className="mr-2"
+                                      />
+                                    </button>
+                                  ) : (
+                                    <div className="w-20"></div>
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      <div className="flex w-full justify-start m-2">
+                        <button
+                          type="button"
+                          className={`btn btn-ghost hover:bg-transparent text-center ${
+                            statusView ? "hidden" : ""
+                          }`}
+                          onClick={handleAddRow}
+                        >
+                          <iconMap.IoMdAddCircleOutline
+                            size={30}
+                            color="#00499E"
+                            className="mr-2"
+                          />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </form>
               </div>
             </div>
-            <div className="text-xl">Informasi Farm</div>
-          </li>
-          <li className={`step flex items-center gap-5`}>
-            <iconMap.HiChevronRight size={18} />
-
-            <div className="flex">
-              <div
-                className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
-                  currentStep >= 2 ? "bg-[#76A8D8] " : " bg-gray-300"
-                }`}
-              >
-                2
-              </div>
-            </div>
-            <div className="text-xl">Anggaran Project</div>
-          </li>
-          <li className={`step flex items-center gap-5 `}>
-            <iconMap.HiChevronRight size={18} />
-            <div className="flex">
-              <div
-                className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
-                  currentStep >= 3 ? "bg-[#76A8D8] " : " bg-gray-300"
-                }`}
-              >
-                3
-              </div>
-            </div>
-            <div className="text-xl">Informasi Umum</div>
-          </li>
-          <li className={`step flex items-center gap-5 `}>
-            <iconMap.HiChevronRight size={18} />
-
-            <div className="flex">
-              <div
-                className={`w-10 h-10 rounded-md text-center text-white font-semibold flex items-center justify-center ${
-                  currentStep >= 4 ? "bg-[#76A8D8] " : " bg-gray-300"
-                }`}
-              >
-                4
-              </div>
-            </div>
-            <div className="text-xl">Data Recording</div>
-          </li>
-        </ul>
-        <div className="border-b-2 border-gray-100 my-4 rounded-md" />
-        {/* Step Content */}
-        {currentStep === 1 && (
-          <div className="card">
-            <div className="p-8">
-              <form className="grid grid-cols-5 gap-4">
-                {/* Id Project */}
-                <div className="mb-4">
-                  <label className="label">Id Project</label>
-                  <input
-                    type="text"
-                    name="id_project"
-                    disabled={statusView}
-                    value={formOwnFarm.id_project}
-                    onChange={handleInputChange}
-                    className="input input-bordered w-full"
-                  />
-                </div>
-                {/* Periode Proyek */}
-                <div className="mb-4">
-                  <label className="label">Unit Bisnis</label>
-                  <input
-                    type="text"
-                    name="unit_bisnis"
-                    disabled={statusView}
-                    value={formOwnFarm.unit_bisnis}
-                    onChange={handleInputChange}
-                    className="input input-bordered w-full"
-                  />
-                </div>
-                {/* Nama Area */}
-                <div className="mb-4">
-                  <label className="label">Area</label>
-                  <select
-                    disabled={statusView}
-                    name="nama_area"
-                    value={formOwnFarm.nama_area}
-                    onChange={handleInputChange}
-                    className="select select-bordered w-full"
-                  >
-                    <option value="">Pilih Area</option>
-                    <option value="Area 1">Area 1</option>
-                    <option value="Area 2">Area 2</option>
-                  </select>
-                </div>
-                {/* Lokasi */}
-                <div className="mb-4">
-                  <label className="label">Lokasi</label>
-                  <select
-                    name="nama_kandang"
-                    disabled={statusView}
-                    value={formOwnFarm.lokasi}
-                    onChange={handleInputChange}
-                    className="select select-bordered w-full"
-                  >
-                    <option value={0}>Pilih Kandang</option>
-                    <option value={1}>Kandang 1</option>
-                    <option value={2}>Kandang 2</option>
-                  </select>
-                </div>
-
-                {/* Produk */}
-                <div className="mb-4">
-                  <label className="label">Produk</label>
-                  <select
-                    name="produk"
-                    disabled={statusView}
-                    value={formOwnFarm.produk}
-                    onChange={handleInputChange}
-                    className="select select-bordered w-full"
-                  >
-                    <option value="">Parent Stock</option>
-                    <option value="Farm 1">Stock 1</option>
-                    <option value="Farm 2">Stock 2</option>
-                  </select>
-                </div>
-              </form>
-            </div>
-
-            <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+          )}
+          {currentStep === 2 && (
             <div className="p-5">
               <form>
                 <div className="card ">
@@ -468,48 +618,67 @@ const CreateNewProject = () => {
                         <thead className="">
                           <tr>
                             <th className="p-2 text-center">No</th>
-                            <th className="p-2 text-center">Fase</th>
-                            <th className="p-2 text-center">Tanggal Mulai</th>
-                            <th className="p-2 text-center">Tanggal Selesai</th>
-                            <th className="p-2 text-center">Status</th>
+                            <th className="p-2 text-center">Nama Kandang</th>
+                            <th className="p-2 text-center">Jenis Form</th>
+                            <th className="p-2 text-center">Periode</th>
+                            <th className="p-2 text-center">
+                              Penanggung Jawab
+                            </th>
                           </tr>
                         </thead>
 
                         {/* Table Body */}
                         <tbody className="">
-                          {rows2.map((row, index) => (
+                          {rowsFarm.map((row, index) => (
                             <tr key={index}>
                               <td className="p-2">{index + 1}</td>
-                              {/* Nama Farm Input */}
+                              {/* nama_kandang */}
                               <td className="p-2">
                                 <input
                                   type="text"
                                   disabled={statusView}
                                   placeholder="Masukkan nama farm"
                                   className="input input-bordered w-full"
-                                  value={row.fase}
+                                  value={row.nama_kandang}
                                   onChange={(e) =>
-                                    handleInputChangeRows2(
+                                    handleInputChangeFarm(
                                       index,
-                                      "fase",
+                                      "nama_kandang",
                                       e.target.value
                                     )
                                   }
                                 />
                               </td>
 
-                              {/* Tanggal Mulai Input */}
+                              {/*  jenis_form*/}
+                              <td className="p-2">
+                                <input
+                                  type="text"
+                                  placeholder="Masukkan nama blok"
+                                  disabled={statusView}
+                                  className="input input-bordered w-full"
+                                  value={row.jenis_form}
+                                  onChange={(e) =>
+                                    handleInputChangeFarm(
+                                      index,
+                                      "jenis_form",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              </td>
+                              {/* periode */}
                               <td className="p-2">
                                 <input
                                   type="text"
                                   disabled={statusView}
                                   placeholder="Masukkan nama blok"
                                   className="input input-bordered w-full"
-                                  value={row.tanggal_mulai}
+                                  value={row.periode}
                                   onChange={(e) =>
-                                    handleInputChangeRows2(
+                                    handleInputChangeFarm(
                                       index,
-                                      "tanggal_mulai",
+                                      "periode",
                                       e.target.value
                                     )
                                   }
@@ -519,31 +688,14 @@ const CreateNewProject = () => {
                               <td className="p-2">
                                 <input
                                   type="text"
-                                  disabled={statusView}
                                   placeholder="Masukkan nama blok"
-                                  className="input input-bordered w-full"
-                                  value={row.tanggal_selesai}
-                                  onChange={(e) =>
-                                    handleInputChangeRows2(
-                                      index,
-                                      "tanggal_selesai",
-                                      e.target.value
-                                    )
-                                  }
-                                />
-                              </td>
-                              {/* Tanggal Selesai Input */}
-                              <td className="p-2">
-                                <input
-                                  type="text"
                                   disabled={statusView}
-                                  placeholder="Masukkan nama blok"
                                   className="input input-bordered w-full"
-                                  value={row.status}
+                                  value={row.penanggung_jawab}
                                   onChange={(e) =>
-                                    handleInputChangeRows2(
+                                    handleInputChangeFarm(
                                       index,
-                                      "status",
+                                      "penanggung_jawab",
                                       e.target.value
                                     )
                                   }
@@ -551,13 +703,11 @@ const CreateNewProject = () => {
                               </td>
                               {/* Delete Button */}
                               <td className="p-2">
-                                {rows2.length > 1 && !statusView ? (
+                                {rowsFarm.length > 1 && !statusView ? (
                                   <button
                                     type="button"
-                                    className={`btn btn-ghost hover:bg-transparent text-center ${
-                                      statusView ? "hidden" : ""
-                                    }`}
-                                    onClick={() => handleRemoveRows2(index)}
+                                    className="btn btn-ghost hover:bg-transparent text-center"
+                                    onClick={() => handleRemoveFarm(index)}
                                   >
                                     <iconMap.PiTrash
                                       size={28}
@@ -580,7 +730,7 @@ const CreateNewProject = () => {
                         className={`btn btn-ghost hover:bg-transparent text-center ${
                           statusView ? "hidden" : ""
                         }`}
-                        onClick={handleAddRow}
+                        onClick={handleAddRowFarm}
                       >
                         <iconMap.IoMdAddCircleOutline
                           size={30}
@@ -593,108 +743,157 @@ const CreateNewProject = () => {
                 </div>
               </form>
             </div>
-          </div>
-        )}
-        {currentStep === 2 && (
-          <div className="p-5">
-            <form>
-              <div className="card ">
-                <form>
+          )}
+          {currentStep === 3 && (
+            <div>
+              <div className="p-5">
+                {/* Dropdown untuk memilih nama kandang dan target */}
+                <form className="grid grid-cols-3 gap-4 w-full">
+                  {/* Id Project */}
+                  <div className="mb-4 flex items-center">
+                    <label className="text-sm font-medium text-gray-700 mb-2 text-nowrap flex items-center mr-2">
+                      Nama Kandang
+                    </label>
+                    <select
+                      className="select select-bordered w-full"
+                      value={selectedKandang}
+                      onChange={(e) => setSelectedKandang(e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Pilih Nama Kandang
+                      </option>
+                      {kandangOptions.map((kandang, index) => (
+                        <option key={index} value={kandang.name}>
+                          {kandang.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="mb-4 flex items-center">
+                    <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
+                      Target VCR
+                    </label>
+                    <input
+                      type="number"
+                      className="input input-bordered w-full"
+                      value={targetVCR}
+                      onChange={(e) => setTargetVCR(e.target.value)}
+                      placeholder="Masukkan target VCR"
+                    />
+                  </div>
+                  <div className="mb-4 flex items-center">
+                    <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
+                      Target Mortalitas
+                    </label>
+                    <input
+                      type="number"
+                      className="input input-bordered w-full"
+                      value={targetMortalitas}
+                      onChange={(e) => setTargetMortalitas(e.target.value)}
+                      placeholder="Masukkan target mortalitas"
+                    />
+                  </div>
+                </form>
+              </div>
+              <form>
+                <div className="card">
                   {/* Table Container */}
-                  <div className="rounded-lg overflow-x-auto">
+                  <div className=" overflow-x-auto">
                     <table className="table w-full table-md">
                       {/* Table Head */}
-                      <thead className="">
+                      <thead className="bg-[#76A8D8BF] text-white">
                         <tr>
-                          <th className="p-2 text-center">No</th>
-                          <th className="p-2 text-center">Nama Kandang</th>
-                          <th className="p-2 text-center">Jenis Form</th>
-                          <th className="p-2 text-center">Periode</th>
-                          <th className="p-2 text-center">Penanggung Jawab</th>
+                          <th className="p-3 text-center">Item</th>
+                          <th className="p-3 text-center">Qty</th>
+                          <th className="p-3 text-center">Harga Satuan</th>
+                          <th className="p-3 text-center">Total Anggaran</th>
+                          <th className="p-3 text-center"></th>
                         </tr>
                       </thead>
 
                       {/* Table Body */}
-                      <tbody className="">
-                        {rowsFarm.map((row, index) => (
+                      <tbody>
+                        {rowsAnggaran.map((row: any, index) => (
                           <tr key={index}>
-                            <td className="p-2">{index + 1}</td>
-                            {/* nama_kandang */}
+                            {/* Item */}
                             <td className="p-2">
                               <input
                                 type="text"
                                 disabled={statusView}
-                                placeholder="Masukkan nama farm"
+                                placeholder="Masukkan item"
                                 className="input input-bordered w-full"
-                                value={row.nama_kandang}
+                                value={row.item}
                                 onChange={(e) =>
-                                  handleInputChangeFarm(
+                                  handleInputChangeAnggaran(
                                     index,
-                                    "nama_kandang",
+                                    "item",
                                     e.target.value
                                   )
                                 }
                               />
                             </td>
 
-                            {/*  jenis_form*/}
+                            {/* Quantity (Qty) */}
                             <td className="p-2">
                               <input
-                                type="text"
-                                placeholder="Masukkan nama blok"
+                                type="number"
                                 disabled={statusView}
+                                placeholder="Masukkan qty"
                                 className="input input-bordered w-full"
-                                value={row.jenis_form}
+                                value={row.qty}
                                 onChange={(e) =>
-                                  handleInputChangeFarm(
+                                  handleInputChangeAnggaran(
                                     index,
-                                    "jenis_form",
+                                    "qty",
                                     e.target.value
                                   )
                                 }
                               />
                             </td>
-                            {/* periode */}
+
+                            {/* Harga Satuan */}
                             <td className="p-2">
                               <input
-                                type="text"
+                                type="number"
                                 disabled={statusView}
-                                placeholder="Masukkan nama blok"
+                                placeholder="Masukkan harga satuan"
                                 className="input input-bordered w-full"
-                                value={row.periode}
+                                value={row.harga_satuan}
                                 onChange={(e) =>
-                                  handleInputChangeFarm(
+                                  handleInputChangeAnggaran(
                                     index,
-                                    "periode",
+                                    "harga_satuan",
                                     e.target.value
                                   )
                                 }
                               />
                             </td>
-                            {/* Tanggal Selesai Input */}
+
+                            {/* Total Anggaran */}
                             <td className="p-2">
                               <input
-                                type="text"
-                                placeholder="Masukkan nama blok"
+                                type="number"
                                 disabled={statusView}
+                                placeholder="Total anggaran"
                                 className="input input-bordered w-full"
-                                value={row.penanggung_jawab}
+                                value={row.total_anggaran}
                                 onChange={(e) =>
-                                  handleInputChangeFarm(
+                                  handleInputChangeAnggaran(
                                     index,
-                                    "penanggung_jawab",
+                                    "total_anggaran",
                                     e.target.value
                                   )
                                 }
                               />
                             </td>
+
                             {/* Delete Button */}
                             <td className="p-2">
-                              {rowsFarm.length > 1 && !statusView ? (
+                              {rowsAnggaran.length > 1 && !statusView ? (
                                 <button
                                   type="button"
                                   className="btn btn-ghost hover:bg-transparent text-center"
-                                  onClick={() => handleRemoveFarm(index)}
+                                  onClick={() => handleRemoveAnggaran(index)}
                                 >
                                   <iconMap.PiTrash
                                     size={28}
@@ -717,7 +916,7 @@ const CreateNewProject = () => {
                       className={`btn btn-ghost hover:bg-transparent text-center ${
                         statusView ? "hidden" : ""
                       }`}
-                      onClick={handleAddRowFarm}
+                      onClick={handleAddRowAnggaran}
                     >
                       <iconMap.IoMdAddCircleOutline
                         size={30}
@@ -726,161 +925,115 @@ const CreateNewProject = () => {
                       />
                     </button>
                   </div>
-                </form>
-              </div>
-            </form>
-          </div>
-        )}
-        {currentStep === 3 && (
-          <div>
-            <div className="p-5">
-              {/* Dropdown untuk memilih nama kandang dan target */}
-              <form className="grid grid-cols-3 gap-4 w-full">
-                {/* Id Project */}
-                <div className="mb-4 flex items-center">
-                  <label className="text-sm font-medium text-gray-700 mb-2 text-nowrap flex items-center mr-2">
-                    Nama Kandang
-                  </label>
-                  <select
-                    className="select select-bordered w-full"
-                    value={selectedKandang}
-                    onChange={(e) => setSelectedKandang(e.target.value)}
-                  >
-                    <option value="" disabled>
-                      Pilih Nama Kandang
-                    </option>
-                    {kandangOptions.map((kandang, index) => (
-                      <option key={index} value={kandang.name}>
-                        {kandang.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="mb-4 flex items-center">
-                  <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
-                    Target VCR
-                  </label>
-                  <input
-                    type="number"
-                    className="input input-bordered w-full"
-                    value={targetVCR}
-                    onChange={(e) => setTargetVCR(e.target.value)}
-                    placeholder="Masukkan target VCR"
-                  />
-                </div>
-                <div className="mb-4 flex items-center">
-                  <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
-                    Target Mortalitas
-                  </label>
-                  <input
-                    type="number"
-                    className="input input-bordered w-full"
-                    value={targetMortalitas}
-                    onChange={(e) => setTargetMortalitas(e.target.value)}
-                    placeholder="Masukkan target mortalitas"
-                  />
                 </div>
               </form>
             </div>
-            <form>
-              <div className="card">
+          )}
+          {currentStep === 4 && (
+            <div className="">
+              <form>
                 {/* Table Container */}
-                <div className=" overflow-x-auto">
+                <div className="rounded-lg overflow-x-auto">
                   <table className="table w-full table-md">
                     {/* Table Head */}
-                    <thead className="bg-[#76A8D8BF] text-white">
+                    <thead>
                       <tr>
-                        <th className="p-3 text-center">Item</th>
-                        <th className="p-3 text-center">Qty</th>
-                        <th className="p-3 text-center">Harga Satuan</th>
-                        <th className="p-3 text-center">Total Anggaran</th>
-                        <th className="p-3 text-center"></th>
+                        <th className="p-2 text-center">No</th>
+                        <th className="p-2 text-center">Item</th>
+                        <th className="p-2 text-center">Satuan</th>
+                        <th className="p-2 text-center">Interval Recording</th>
+                        <th className="p-2 text-center"></th>
                       </tr>
                     </thead>
 
                     {/* Table Body */}
                     <tbody>
-                      {rowsAnggaran.map((row: any, index) => (
+                      {rowsRecording.map((row, index) => (
                         <tr key={index}>
-                          {/* Item */}
+                          <td className="p-2 text-center">{index + 1}</td>
+
+                          {/* Item (Dropdown) */}
                           <td className="p-2">
-                            <input
-                              type="text"
+                            <select
                               disabled={statusView}
-                              placeholder="Masukkan item"
-                              className="input input-bordered w-full"
+                              className="select select-bordered w-full"
                               value={row.item}
                               onChange={(e) =>
-                                handleInputChangeAnggaran(
+                                handleInputChangeRecording(
                                   index,
                                   "item",
                                   e.target.value
                                 )
                               }
-                            />
+                            >
+                              <option value="" disabled>
+                                Pilih item
+                              </option>
+                              {itemOptions.map((item) => (
+                                <option key={item.id} value={item.name}>
+                                  {item.name}
+                                </option>
+                              ))}
+                            </select>
                           </td>
 
-                          {/* Quantity (Qty) */}
+                          {/* Satuan (Dropdown) */}
                           <td className="p-2">
-                            <input
-                              type="number"
+                            <select
                               disabled={statusView}
-                              placeholder="Masukkan qty"
-                              className="input input-bordered w-full"
-                              value={row.qty}
+                              className="select select-bordered w-full"
+                              value={row.satuan}
                               onChange={(e) =>
-                                handleInputChangeAnggaran(
+                                handleInputChangeRecording(
                                   index,
-                                  "qty",
+                                  "satuan",
                                   e.target.value
                                 )
                               }
-                            />
+                            >
+                              <option value="" disabled>
+                                Pilih satuan
+                              </option>
+                              {satuanOptions.map((satuan) => (
+                                <option key={satuan.id} value={satuan.name}>
+                                  {satuan.name}
+                                </option>
+                              ))}
+                            </select>
                           </td>
 
-                          {/* Harga Satuan */}
+                          {/* Interval Recording (Dropdown) */}
                           <td className="p-2">
-                            <input
-                              type="number"
+                            <select
                               disabled={statusView}
-                              placeholder="Masukkan harga satuan"
-                              className="input input-bordered w-full"
-                              value={row.harga_satuan}
+                              className="select select-bordered w-full"
+                              value={row.interval_recording}
                               onChange={(e) =>
-                                handleInputChangeAnggaran(
+                                handleInputChangeRecording(
                                   index,
-                                  "harga_satuan",
+                                  "interval_recording",
                                   e.target.value
                                 )
                               }
-                            />
-                          </td>
-
-                          {/* Total Anggaran */}
-                          <td className="p-2">
-                            <input
-                              type="number"
-                              disabled={statusView}
-                              placeholder="Total anggaran"
-                              className="input input-bordered w-full"
-                              value={row.total_anggaran}
-                              onChange={(e) =>
-                                handleInputChangeAnggaran(
-                                  index,
-                                  "total_anggaran",
-                                  e.target.value
-                                )
-                              }
-                            />
+                            >
+                              <option value="" disabled>
+                                Pilih interval
+                              </option>
+                              {intervalOptions.map((interval) => (
+                                <option key={interval.id} value={interval.name}>
+                                  {interval.name}
+                                </option>
+                              ))}
+                            </select>
                           </td>
 
                           {/* Delete Button */}
-                          <td className="p-2">
-                            {rowsAnggaran.length > 1 && !statusView ? (
+                          <td className="p-2 text-center">
+                            {rowsRecording.length > 1 && !statusView && (
                               <button
                                 type="button"
                                 className="btn btn-ghost hover:bg-transparent text-center"
-                                onClick={() => handleRemoveAnggaran(index)}
+                                onClick={() => handleRemoveRecording(index)}
                               >
                                 <iconMap.PiTrash
                                   size={28}
@@ -888,8 +1041,6 @@ const CreateNewProject = () => {
                                   className="mr-2"
                                 />
                               </button>
-                            ) : (
-                              <div className="w-20"></div>
                             )}
                           </td>
                         </tr>
@@ -897,13 +1048,15 @@ const CreateNewProject = () => {
                     </tbody>
                   </table>
                 </div>
+
+                {/* Tombol Tambah Baris */}
                 <div className="flex w-full justify-start m-2">
                   <button
                     type="button"
                     className={`btn btn-ghost hover:bg-transparent text-center ${
                       statusView ? "hidden" : ""
                     }`}
-                    onClick={handleAddRowAnggaran}
+                    onClick={handleAddRowRecording}
                   >
                     <iconMap.IoMdAddCircleOutline
                       size={30}
@@ -912,184 +1065,45 @@ const CreateNewProject = () => {
                     />
                   </button>
                 </div>
-              </div>
-            </form>
-          </div>
-        )}
-        {currentStep === 4 && (
-          <div className="">
-            <form>
-              {/* Table Container */}
-              <div className="rounded-lg overflow-x-auto">
-                <table className="table w-full table-md">
-                  {/* Table Head */}
-                  <thead>
-                    <tr>
-                      <th className="p-2 text-center">No</th>
-                      <th className="p-2 text-center">Item</th>
-                      <th className="p-2 text-center">Satuan</th>
-                      <th className="p-2 text-center">Interval Recording</th>
-                      <th className="p-2 text-center"></th>
-                    </tr>
-                  </thead>
-
-                  {/* Table Body */}
-                  <tbody>
-                    {rowsRecording.map((row, index) => (
-                      <tr key={index}>
-                        <td className="p-2 text-center">{index + 1}</td>
-
-                        {/* Item (Dropdown) */}
-                        <td className="p-2">
-                          <select
-                            disabled={statusView}
-                            className="select select-bordered w-full"
-                            value={row.item}
-                            onChange={(e) =>
-                              handleInputChangeRecording(
-                                index,
-                                "item",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="" disabled>
-                              Pilih item
-                            </option>
-                            {itemOptions.map((item) => (
-                              <option key={item.id} value={item.name}>
-                                {item.name}
-                              </option>
-                            ))}
-                          </select>
-                        </td>
-
-                        {/* Satuan (Dropdown) */}
-                        <td className="p-2">
-                          <select
-                            disabled={statusView}
-                            className="select select-bordered w-full"
-                            value={row.satuan}
-                            onChange={(e) =>
-                              handleInputChangeRecording(
-                                index,
-                                "satuan",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="" disabled>
-                              Pilih satuan
-                            </option>
-                            {satuanOptions.map((satuan) => (
-                              <option key={satuan.id} value={satuan.name}>
-                                {satuan.name}
-                              </option>
-                            ))}
-                          </select>
-                        </td>
-
-                        {/* Interval Recording (Dropdown) */}
-                        <td className="p-2">
-                          <select
-                            disabled={statusView}
-                            className="select select-bordered w-full"
-                            value={row.interval_recording}
-                            onChange={(e) =>
-                              handleInputChangeRecording(
-                                index,
-                                "interval_recording",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="" disabled>
-                              Pilih interval
-                            </option>
-                            {intervalOptions.map((interval) => (
-                              <option key={interval.id} value={interval.name}>
-                                {interval.name}
-                              </option>
-                            ))}
-                          </select>
-                        </td>
-
-                        {/* Delete Button */}
-                        <td className="p-2 text-center">
-                          {rowsRecording.length > 1 && !statusView && (
-                            <button
-                              type="button"
-                              className="btn btn-ghost hover:bg-transparent text-center"
-                              onClick={() => handleRemoveRecording(index)}
-                            >
-                              <iconMap.PiTrash
-                                size={28}
-                                color="red"
-                                className="mr-2"
-                              />
-                            </button>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Tombol Tambah Baris */}
-              <div className="flex w-full justify-start m-2">
-                <button
-                  type="button"
-                  className={`btn btn-ghost hover:bg-transparent text-center ${
-                    statusView ? "hidden" : ""
-                  }`}
-                  onClick={handleAddRowRecording}
-                >
-                  <iconMap.IoMdAddCircleOutline
-                    size={30}
-                    color="#00499E"
-                    className="mr-2"
-                  />
-                </button>
-              </div>
-            </form>{" "}
-          </div>
-        )}
-        {/* Navigation Buttons */}
-        <div className="mt-4 flex justify-end gap-5 mr-10">
-          <button
-            type="button"
-            className={`btn ${currentStep === 1 ? "btn-disabled" : ""}`}
-            onClick={handlePrevious}
-            disabled={currentStep === 1}
-          >
-            Sebelumnya
-          </button>
-          <button
-            type="button"
-            className={`btn ${
-              currentStep === 4
-                ? "btn-disabled" + statusView
-                  ? "hidden"
-                  : ""
-                : "bg-[#76A8D8] text-white"
-            }`}
-            onClick={handleNext}
-            disabled={currentStep === 4}
-          >
-            Selanjutnya
-          </button>
-          {currentStep === 4 && statusView && (
+              </form>{" "}
+            </div>
+          )}
+          {/* Navigation Buttons */}
+          <div className="mt-4 flex justify-end gap-5 mr-10">
             <button
               type="button"
-              className="btn bg-[#76A8D8] text-white"
-              onClick={() => handleShowModal()}
+              className={`btn ${currentStep === 1 ? "btn-disabled" : ""}`}
+              onClick={handlePrevious}
+              disabled={currentStep === 1}
             >
-              Approve Project
+              Sebelumnya
             </button>
-          )}
-        </div>
-      </form>
+            <button
+              type="button"
+              className={`btn ${
+                currentStep === 4
+                  ? "btn-disabled" + statusView
+                    ? "hidden"
+                    : ""
+                  : "bg-[#76A8D8] text-white"
+              }`}
+              onClick={handleNext}
+              disabled={currentStep === 4}
+            >
+              Selanjutnya
+            </button>
+            {currentStep === 4 && statusView && (
+              <button
+                type="button"
+                className="btn bg-[#76A8D8] text-white"
+                onClick={() => handleShowModal()}
+              >
+                Approve Project
+              </button>
+            )}
+          </div>
+        </form>
+      </LayoutProject>
     </div>
   );
 };

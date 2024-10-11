@@ -4,6 +4,13 @@ import SearchBar from "../../Components/searchBar";
 import DropdownFilter from "../../Components/filterDropdown";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import LayoutProject from "../../Layouts/layoutProject";
+import Breadcrumb from "../../Components/bread";
+const breadcrumbItems = [
+  { label: "Home", link: "/" },
+  { label: "Project" },
+  { label: "List Project", link: "/project" },
+];
 
 interface Item {
   id: string;
@@ -183,144 +190,150 @@ const ProjectPageNew = () => {
   };
   return (
     <div className="w-full block">
-      <div className="p-5">
-        <SearchBar
-          onSearch={handleSearch}
-          onAddClick={handleAddClick}
-          tittlePage="List Project"
-          styling=" grid-cols-3 grid-rows-2 gap-4"
-        >
-          <DropdownFilter
-            title="Lokasi"
-            options={["Pangandaran", "Lokasi 2", "Lokasi 3"]}
-            onChange={(value) => handleFilterChange("lokasi", value)}
-          />
-          <DropdownFilter
-            title="Unit Bisnis"
-            options={["Manbu", "Unit 2", "Unit 3"]}
-            onChange={(value) => handleFilterChange("unitBisnis", value)}
-          />
-          <DropdownFilter
-            title="Status Chick In"
-            options={["Sudah", "Belum"]}
-            onChange={(value) => handleFilterChange("statusChickIn", value)}
-          />
-          <DropdownFilter
-            title="Status Project"
-            options={[
-              "Seleksi",
-              "Selesai",
-              "Dalam Proses",
-              "Pengajuan",
-              "Aktif",
-            ]}
-            onChange={(value) => handleFilterChange("statusProject", value)}
-          />
-        </SearchBar>
-      </div>
-      <div className="overflow-x-auto rounded-md m-5  min-h-80">
-        <table className="table table-lg table-zebra ">
-          <thead className="bg-slate-100">
-            <tr>
-              <th className="text-center p-2">
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              {columns.map((column) => (
-                <th key={column.accessorKey} className="text-center">
-                  {column.header}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedData.map((item) => (
-              <tr key={item.id}>
-                <td className="text-center ">
+      <Breadcrumb items={breadcrumbItems} />
+      <LayoutProject>
+        <div className="p-5">
+          <SearchBar
+            onSearch={handleSearch}
+            onAddClick={handleAddClick}
+            tittlePage="List Project"
+            styling=" grid-cols-3 grid-rows-2 gap-4 "
+          >
+            <DropdownFilter
+              title="Lokasi"
+              options={["Pangandaran", "Lokasi 2", "Lokasi 3"]}
+              onChange={(value) => handleFilterChange("lokasi", value)}
+            />
+            <DropdownFilter
+              title="Unit Bisnis"
+              options={["Manbu", "Unit 2", "Unit 3"]}
+              onChange={(value) => handleFilterChange("unitBisnis", value)}
+            />
+            <DropdownFilter
+              title="Status Chick In"
+              options={["Sudah", "Belum"]}
+              onChange={(value) => handleFilterChange("statusChickIn", value)}
+            />
+            <DropdownFilter
+              title="Status Project"
+              options={[
+                "Seleksi",
+                "Selesai",
+                "Dalam Proses",
+                "Pengajuan",
+                "Aktif",
+              ]}
+              onChange={(value) => handleFilterChange("statusProject", value)}
+            />
+          </SearchBar>
+        </div>
+        <div className="overflow-x-auto rounded-md m-5  min-h-80">
+          <table className="table table-lg table-zebra ">
+            <thead className="bg-slate-100">
+              <tr>
+                <th className="text-center p-2">
                   <input
                     type="checkbox"
-                    checked={selectedItems.includes(item.id)}
-                    onChange={() => handleRowSelect(item.id)}
+                    checked={selectAll}
+                    onChange={handleSelectAll}
                   />
-                </td>
+                </th>
                 {columns.map((column) => (
-                  <td key={column.accessorKey} className="text-center">
-                    {column.accessorKey === "aksi" ? (
-                      <div>
-                        <div className="dropdown dropdown-left z-40 relative">
-                          <div
-                            tabIndex={0}
-                            role="button"
-                            className="btn btn-edit btn-ghost hover:bg-transparent text-center"
-                          >
-                            <iconMap.HiDotsVertical size={16} />
-                          </div>
-                          <ul
-                            tabIndex={0}
-                            className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow absolute"
-                          >
-                            <li onClick={() => handleEditClick(1, item)}>
-                              <a>Edit</a>
-                            </li>
-                            <li onClick={() => handleEditClick(2, item)}>
-                              <a>Delete</a>
-                            </li>
-                            <li onClick={() => handleEditClick(3, item)}>
-                              <a>Aprrove</a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    ) : column.accessorKey === "statusChickIn" ? (
-                      <span
-                        className={`rounded-md px-2 py-1 text-sm ${getStatusChickInClass(
-                          item.statusChickIn
-                        )}`}
-                      >
-                        {item.statusChickIn}
-                      </span>
-                    ) : column.accessorKey === "statusProject" ? (
-                      <span
-                        className={`rounded-md px-2 py-1 text-sm ${getStatusProjectClass(
-                          item.statusProject
-                        )}`}
-                      >
-                        {item.statusProject}
-                      </span>
-                    ) : (
-                      item[column.accessorKey as keyof Item]
-                    )}
-                  </td>
+                  <th key={column.accessorKey} className="text-center">
+                    {column.header}
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {paginatedData.map((item) => (
+                <tr key={item.id}>
+                  <td className="text-center ">
+                    <input
+                      type="checkbox"
+                      checked={selectedItems.includes(item.id)}
+                      onChange={() => handleRowSelect(item.id)}
+                    />
+                  </td>
+                  {columns.map((column) => (
+                    <td key={column.accessorKey} className="text-center">
+                      {column.accessorKey === "aksi" ? (
+                        <div>
+                          <div className="dropdown dropdown-left z-40 relative">
+                            <div
+                              tabIndex={0}
+                              role="button"
+                              className="btn btn-edit btn-ghost hover:bg-transparent text-center"
+                            >
+                              <iconMap.HiDotsVertical size={16} />
+                            </div>
+                            <ul
+                              tabIndex={0}
+                              className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow absolute"
+                            >
+                              <li onClick={() => handleEditClick(1, item)}>
+                                <a>Edit</a>
+                              </li>
+                              <li onClick={() => handleEditClick(2, item)}>
+                                <a>Delete</a>
+                              </li>
+                              <li onClick={() => handleEditClick(3, item)}>
+                                <a>Approve</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      ) : column.accessorKey === "statusChickIn" ? (
+                        <span
+                          className={`rounded-md px-2 py-1 text-sm ${getStatusChickInClass(
+                            item.statusChickIn
+                          )}`}
+                        >
+                          {item.statusChickIn}
+                        </span>
+                      ) : column.accessorKey === "statusProject" ? (
+                        <span
+                          className={`rounded-md px-2 py-1 text-sm ${getStatusProjectClass(
+                            item.statusProject
+                          )}`}
+                        >
+                          {item.statusProject}
+                        </span>
+                      ) : (
+                        item[column.accessorKey as keyof Item]
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-      {/* Pagination controls */}
-      <div className="flex justify-end m-4 items-center">
-        <button
-          disabled={currentPage === 1}
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-          className="btn btn-outline mx-2 btn-sm"
-        >
-          Previous
-        </button>
-        <span className="mx-2">{`${currentPage} of ${totalPages}`}</span>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-          }
-          className="btn btn-outline mx-2 btn-sm"
-        >
-          Next
-        </button>
-      </div>
+        {/* Pagination controls */}
+        {/* Pagination controls */}
+        <div className="flex justify-end m-4 items-center">
+          <button
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            className="mx-2 text-blue-400 flex items-center gap-5  hover:bg-transparent"
+          >
+            <iconMap.FaArrowLeft size={18} className=" text-blue-400" />
+            <div className="flex text-center">Prev</div>
+          </button>
+          <span className="mx-2 text-blue-400">{`${currentPage} of ${totalPages}`}</span>
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            className="mx-2 text-blue-400 flex items-center gap-5  hover:bg-transparent"
+          >
+            <div className="flex text-center">Next</div>
+            <iconMap.FaArrowRight size={18} className=" text-blue-400" />
+          </button>
+        </div>
+      </LayoutProject>
     </div>
   );
 };

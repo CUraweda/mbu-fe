@@ -5,12 +5,6 @@ import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
 import { logout } from "../api/AuthService";
-import Breadcrumb from "../Components/bread.tsx";
-const breadcrumbItems = [
-  { label: "Home", link: "/" },
-  { label: "Project", link: "/project" },
-  { label: "List Project" },
-];
 const Layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
     {}
@@ -93,10 +87,7 @@ const Layout = () => {
 
         {/* Main content card */}
         <div className="h-full mt-4">
-          <Breadcrumb items={breadcrumbItems} />
-          <div className="card bg-white text-slate-800 rounded-lg justify-between py-5">
-            <Outlet />
-          </div>
+          <Outlet />
         </div>
       </div>
 

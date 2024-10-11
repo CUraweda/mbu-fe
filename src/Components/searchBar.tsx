@@ -3,7 +3,7 @@ import iconMap from "../Data/iconMap";
 
 type SearchBarProps = {
   onSearch: (searchQuery: string) => void;
-  onAddClick: () => void;
+  onAddClick?: () => void;
   children?: React.ReactNode;
   exportFile?: () => void;
   tittlePage?: string;
@@ -37,24 +37,26 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <div className="block mb-5">
       <div className="w-full flex justify-between items-center gap-2">
         <div>
-          <div className="font-semibold text-2xl text-[#76A8D8]">
+          <div className="font-semibold text-2xl text-blue-400">
             {tittlePage}
           </div>
         </div>
         <div className="flex gap-2">
           <button
-            className="btn bg-transparent btn-outline text-[#00499E] rounded-md"
+            className="btn bg-transparent btn-outline text-blue-400 rounded-md"
             onClick={exportFile}
           >
             <iconMap.CiExport size={20} />
             Export
           </button>
-          <button
-            className="btn bg-[#00499E] text-white rounded-md"
-            onClick={onAddClick}
-          >
-            Tambah
-          </button>
+          {onAddClick && (
+            <button
+              className="btn bg-blue-400 text-white rounded-md"
+              onClick={onAddClick}
+            >
+              Tambah
+            </button>
+          )}
         </div>
       </div>
       <div className="border-b-2 border-gray-200 my-4 rounded-md" />

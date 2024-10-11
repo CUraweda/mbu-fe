@@ -1,11 +1,27 @@
-import { FaHome, FaInfoCircle, FaEnvelope } from "react-icons/fa";
+import {
+  FaHome,
+  FaInfoCircle,
+  FaEnvelope,
+  FaArrowRight,
+  FaArrowLeft,
+} from "react-icons/fa";
 import { MdExpandMore } from "react-icons/md";
 import { LuDatabase } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { IoCartOutline, IoPeople, IoHomeOutline,IoTimeOutline } from "react-icons/io5";
+import {
+  IoCartOutline,
+  IoPeople,
+  IoHomeOutline,
+  IoTimeOutline,
+} from "react-icons/io5";
 import { AiOutlineAudit } from "react-icons/ai";
 import { AiOutlineProject } from "react-icons/ai";
-import { IoMdEyeOff, IoMdEye, IoMdAddCircleOutline } from "react-icons/io";
+import {
+  IoMdEyeOff,
+  IoMdEye,
+  IoMdAddCircleOutline,
+  IoIosAdd,
+} from "react-icons/io";
 import { PiNotePencil, PiTrash } from "react-icons/pi";
 import { HiDotsVertical } from "react-icons/hi";
 import { CiExport, CiFilter } from "react-icons/ci";
@@ -31,7 +47,10 @@ const iconMap: any = {
   CiFilter,
   HiChevronRight,
   IoMdAddCircleOutline,
-  IoTimeOutline
+  IoTimeOutline,
+  FaArrowRight,
+  FaArrowLeft,
+  IoIosAdd,
 };
 
 export default iconMap;
