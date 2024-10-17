@@ -4,15 +4,15 @@ import sidebarLinks from "../Data/navNew.json";
 import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
-// import { logout } from "../api/AuthService";
+import { logout } from "../api/AuthService";
 const Layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
     {}
   );
 
-  // const handleLogout = () => {
-  //   logout();
-  // };
+  const handleLogout = () => {
+    logout();
+  };
 
   const toggleSubmenu = (name: string) => {
     setOpenSubmenus((prevState) => ({
@@ -74,7 +74,7 @@ const Layout = () => {
                 </summary>
                 <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                   <li>
-                    <div>Logout</div>
+                    <div onClick={handleLogout}>Logout</div>
                   </li>
                   <li>
                     <a>Item 2</a>

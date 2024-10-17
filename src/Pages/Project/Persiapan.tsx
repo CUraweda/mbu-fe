@@ -86,10 +86,10 @@ const Persiapan: React.FC = () => {
     console.log("Search query:", query);
   };
 
-  const handleAddClick = () => {
-    console.log("Add button clicked");
-    navigate(`/persiapan/add`);
-  };
+  // const handleAddClick = () => {
+  //   console.log("Add button clicked");
+  //   navigate(`/persiapan/add`);
+  // };
 
   const handleFilterChange = (filterName: string, value: string) => {
     setFilters((prevFilters) => ({ ...prevFilters, [filterName]: value }));
