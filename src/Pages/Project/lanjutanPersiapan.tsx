@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import iconMap from "../../Data/iconMap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LayoutProject from "../../Layouts/layoutProject";
 import Breadcrumb from "../../Components/bread";
 import Swal from "sweetalert2";
@@ -11,91 +11,93 @@ const breadcrumbItems = [
   { label: "Form Persiapan", link: "/project" },
 ];
 const LanjutanPersiapanPage = () => {
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
 
   // Check if we're editing or creating a new project
-  const isEditMode = !!location.state?.projectData;
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // const isEditMode = !!location.state?.projectData;
   const [statusView, setStatusView] = useState<boolean>(false);
-  const [approvalReason, setApprovalReason] = useState<string>("");
-  const [formData, setFormData] = useState({
-    unitBisnis: "",
-    produk: "",
-    area: "",
-    lokasi: "",
-    kandang: "",
-    kapasitas: 0,
-    periode: 0,
-    statusChickIn: "",
-    statusProject: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   unitBisnis: "",
+  //   produk: "",
+  //   area: "",
+  //   lokasi: "",
+  //   kandang: "",
+  //   kapasitas: 0,
+  //   periode: 0,
+  //   statusChickIn: "",
+  //   statusProject: "",
+  // });
 
-  const [persiapanData, setPersiapanData] = useState([
-    {
-      jenis_persiapan: "Pengadaan Bibit",
-      waktu_pelaksanaan: "2024-10-15 10:00 AM",
-      nama_pelaksanaan: "John Doe",
-      tempat_pelaksanaan: "Lahan Utama",
-      foto: "foto-bibit.jpg",
-    },
-    {
-      jenis_persiapan: "Persiapan Lahan",
-      waktu_pelaksanaan: "2024-10-18 12:30 PM",
-      nama_pelaksanaan: "Jane Smith",
-      tempat_pelaksanaan: "Lahan Selatan",
-      foto: "foto-lahan.jpg",
-    },
-    {
-      jenis_persiapan: "Penyiapan Kandang",
-      waktu_pelaksanaan: "2024-10-20 02:00 PM",
-      nama_pelaksanaan: "Robert Johnson",
-      tempat_pelaksanaan: "Kandang Utara",
-      foto: "foto-kandang.jpg",
-    },
-    {
-      jenis_persiapan: "Pemeriksaan Kesehatan",
-      waktu_pelaksanaan: "2024-10-22 09:00 AM",
-      nama_pelaksanaan: "Alice Davis",
-      tempat_pelaksanaan: "Pusat Kesehatan Hewan",
-      foto: "foto-pemeriksaan.jpg",
-    },
-  ]);
+  const [persiapanData, setPersiapanData] = useState<any>([]);
   // If we are editing, set the form data to the passed project data
   useEffect(() => {
-    if (isEditMode) {
-      setFormData(location.state.projectData);
-      if (location.state.Status === "approvalView") {
-        setStatusView(true);
-      }
-    }
-  }, [isEditMode]);
-  const handleSubmitApproval = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isEditMode) {
-      // Handle edit logic
-      console.log("Editing project with data:", formData);
-      // Call an API to update the project...
-    } else {
-      // Handle create logic
-      console.log("Creating new project with data:", formData);
-      // Call an API to create a new project...
-    }
-    navigate("/project"); // Navigate back to the project list after submission
-  };
-  const handleRejectApproval = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isEditMode) {
-      // Handle edit logic
-      console.log("Editing project with data:", formData);
-      // Call an API to update the project...
-    } else {
-      // Handle create logic
-      console.log("Creating new project with data:", formData);
-      // Call an API to create a new project...
-    }
-    navigate("/project"); // Navigate back to the project list after submission
-  };
+    setStatusView(false);
+    setPersiapanData([
+      {
+        jenis_persiapan: "Pengadaan Bibit",
+        waktu_pelaksanaan: "2024-10-15 10:00 AM",
+        nama_pelaksanaan: "John Doe",
+        tempat_pelaksanaan: "Lahan Utama",
+        foto: "foto-bibit.jpg",
+      },
+      {
+        jenis_persiapan: "Persiapan Lahan",
+        waktu_pelaksanaan: "2024-10-18 12:30 PM",
+        nama_pelaksanaan: "Jane Smith",
+        tempat_pelaksanaan: "Lahan Selatan",
+        foto: "foto-lahan.jpg",
+      },
+      {
+        jenis_persiapan: "Penyiapan Kandang",
+        waktu_pelaksanaan: "2024-10-20 02:00 PM",
+        nama_pelaksanaan: "Robert Johnson",
+        tempat_pelaksanaan: "Kandang Utara",
+        foto: "foto-kandang.jpg",
+      },
+      {
+        jenis_persiapan: "Pemeriksaan Kesehatan",
+        waktu_pelaksanaan: "2024-10-22 09:00 AM",
+        nama_pelaksanaan: "Alice Davis",
+        tempat_pelaksanaan: "Pusat Kesehatan Hewan",
+        foto: "foto-pemeriksaan.jpg",
+      },
+    ]);
+  }, []);
+  // useEffect(() => {
+  //   if (isEditMode) {
+  //     setFormData(location.state.projectData);
+  //     if (location.state.Status === "approvalView") {
+  //       setStatusView(true);
+  //     }
+  //   }
+  // }, [isEditMode]);
+  // const handleSubmitApproval = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (isEditMode) {
+  //     // Handle edit logic
+  //     console.log("Editing project with data:", formData);
+  //     // Call an API to update the project...
+  //   } else {
+  //     // Handle create logic
+  //     console.log("Creating new project with data:", formData);
+  //     // Call an API to create a new project...
+  //   }
+  //   navigate("/project"); // Navigate back to the project list after submission
+  // };
+  // const handleRejectApproval = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (isEditMode) {
+  //     // Handle edit logic
+  //     console.log("Editing project with data:", formData);
+  //     // Call an API to update the project...
+  //   } else {
+  //     // Handle create logic
+  //     console.log("Creating new project with data:", formData);
+  //     // Call an API to create a new project...
+  //   }
+  //   navigate("/project"); // Navigate back to the project list after submission
+  // };
   const handleShowModal = () => {
     //  setShowModal(true);
     Swal.fire({
@@ -131,15 +133,15 @@ const LanjutanPersiapanPage = () => {
       interval_recording: "",
     },
   ]);
-  const [rowsFarm, setRowsFarm] = useState([
-    {
-      nama_kandang: "",
-      kapasitas: "",
-      jenis_form: "",
-      periode: "",
-      penanggung_jawab: "",
-    },
-  ]);
+  // const [rowsFarm, setRowsFarm] = useState([
+  //   {
+  //     nama_kandang: "",
+  //     kapasitas: "",
+  //     jenis_form: "",
+  //     periode: "",
+  //     penanggung_jawab: "",
+  //   },
+  // ]);
   const [rowsPersiapan, setRowsPersiapan] = useState([
     {
       item_pekerjaan: "Pengadaan Bibit",
@@ -169,22 +171,22 @@ const LanjutanPersiapanPage = () => {
 
   const [selectedKandang, setSelectedKandang] = useState("");
   const [tanggalHabisAyam, setTanggalHabisAyam] = useState("");
-  const handleAddRow = () => {
-    setRows2([
-      ...rows2,
-      { fase: "", tanggal_mulai: "", tanggal_selesai: "", status: "" },
-    ]);
-  };
-  const handleInputChangeRecording = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const updatedRows = rowsRecording.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
-    );
-    setRowsRecording(updatedRows);
-  };
+  // const handleAddRow = () => {
+  //   setRows2([
+  //     ...rows2,
+  //     { fase: "", tanggal_mulai: "", tanggal_selesai: "", status: "" },
+  //   ]);
+  // };
+  // const handleInputChangeRecording = (
+  //   index: number,
+  //   field: string,
+  //   value: string
+  // ) => {
+  //   const updatedRows = rowsRecording.map((row, rowIndex) =>
+  //     rowIndex === index ? { ...row, [field]: value } : row
+  //   );
+  //   setRowsRecording(updatedRows);
+  // };
 
   // Fungsi untuk menambahkan baris baru
   const handleAddRowRecording = () => {
@@ -193,10 +195,10 @@ const LanjutanPersiapanPage = () => {
       { item: "", satuan: "", interval_recording: "" },
     ]);
   };
-  const handleRemoveRecording = (index: any) => {
-    const updatedRows = rowsRecording.filter((_, i) => i !== index);
-    setRowsRecording(updatedRows);
-  };
+  // const handleRemoveRecording = (index: any) => {
+  //   const updatedRows = rowsRecording.filter((_, i) => i !== index);
+  //   setRowsRecording(updatedRows);
+  // };
   const handleAddRowAnggaran = () => {
     setRowsPersiapan([
       ...rowsPersiapan,
@@ -208,18 +210,18 @@ const LanjutanPersiapanPage = () => {
       },
     ]);
   };
-  const handleAddRowFarm = () => {
-    setRowsFarm([
-      ...rowsFarm,
-      {
-        nama_kandang: "",
-        kapasitas: "",
-        jenis_form: "",
-        periode: "",
-        penanggung_jawab: "",
-      },
-    ]);
-  };
+  // const handleAddRowFarm = () => {
+  //   setRowsFarm([
+  //     ...rowsFarm,
+  //     {
+  //       nama_kandang: "",
+  //       kapasitas: "",
+  //       jenis_form: "",
+  //       periode: "",
+  //       penanggung_jawab: "",
+  //     },
+  //   ]);
+  // };
 
   //   const testsData = [
   //     {
@@ -282,41 +284,41 @@ const LanjutanPersiapanPage = () => {
     );
     setRows2(updatedRows);
   };
-  const handleInputChangeRows2 = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const updatedRows = rows2.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
-    );
-    setRows2(updatedRows);
-  };
+  // const handleInputChangeRows2 = (
+  //   index: number,
+  //   field: string,
+  //   value: string
+  // ) => {
+  //   const updatedRows = rows2.map((row, rowIndex) =>
+  //     rowIndex === index ? { ...row, [field]: value } : row
+  //   );
+  //   setRows2(updatedRows);
+  // };
 
-  const handleInputChangeFarm = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const updatedRows = rowsFarm.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
-    );
-    setRowsFarm(updatedRows);
-  };
+  // const handleInputChangeFarm = (
+  //   index: number,
+  //   field: string,
+  //   value: string
+  // ) => {
+  //   const updatedRows = rowsFarm.map((row, rowIndex) =>
+  //     rowIndex === index ? { ...row, [field]: value } : row
+  //   );
+  //   setRowsFarm(updatedRows);
+  // };
   const handleRemovePersiapan = (index: number) => {
     const updatedRows = rowsPersiapan.filter(
       (_, rowIndex) => rowIndex !== index
     );
     setRowsPersiapan(updatedRows);
   };
-  const handleRemoveRows2 = (index: number) => {
-    const updatedRows = rows2.filter((_, rowIndex) => rowIndex !== index);
-    setRows2(updatedRows);
-  };
-  const handleRemoveFarm = (index: number) => {
-    const updatedRows = rowsFarm.filter((_, rowIndex) => rowIndex !== index);
-    setRowsFarm(updatedRows);
-  };
+  // const handleRemoveRows2 = (index: number) => {
+  //   const updatedRows = rows2.filter((_, rowIndex) => rowIndex !== index);
+  //   setRows2(updatedRows);
+  // };
+  // const handleRemoveFarm = (index: number) => {
+  //   const updatedRows = rowsFarm.filter((_, rowIndex) => rowIndex !== index);
+  //   setRowsFarm(updatedRows);
+  // };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -750,7 +752,7 @@ const LanjutanPersiapanPage = () => {
 
                     {/* Table Body */}
                     <tbody className="text-gray-500">
-                      {persiapanData.map((item, index) => (
+                      {persiapanData?.map((item: any, index: any) => (
                         <tr key={index}>
                           <td className="p-2 text-center">
                             {item.jenis_persiapan}
