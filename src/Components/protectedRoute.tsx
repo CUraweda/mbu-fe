@@ -1,17 +1,15 @@
 // components/ProtectedRoute.tsx
 import { Navigate } from "react-router-dom";
-import { isTokenExpired } from "../api/AuthService";
 
 type ProtectedRouteProps = {
   children: JSX.Element;
 };
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const accessToken = sessionStorage.getItem("access_token"); // Ambil access token dari sessionStorage
-  const isAuth = accessToken && !isTokenExpired(); // Cek apakah ada token dan token tidak kedaluwarsa
-  // const isAuth = localStorage.getItem("Auth");
+  const isAuth = localStorage.getItem("auth") === "true"; // Cek status auth di localStorage
+
   if (!isAuth) {
-    // Jika user belum login atau token sudah expired, arahkan ke halaman login
+    // Jika user belum login, arahkan ke halaman login
     return <Navigate to="/auth/login" />;
   }
 
