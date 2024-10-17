@@ -1,7 +1,6 @@
 [
   {
     "name": "Dashboard",
-    "path": "/about",
     "icon": "FaHome",
     "children": [
       {
@@ -31,7 +30,6 @@
   },
   {
     "name": "Penjualan",
-    "path": "/about",
     "icon": "IoCartOutline",
     "children": [
       {
@@ -47,7 +45,6 @@
 
   {
     "name": "Pembelian",
-    "path": "/about",
     "icon": "RiMoneyDollarCircleLine",
     "children": [
       {
@@ -62,7 +59,6 @@
   },
   {
     "name": "Master Data",
-    "path": "/about",
     "icon": "LuDatabase",
     "children": [
       {

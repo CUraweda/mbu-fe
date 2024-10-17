@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Dashboard",
+    "path": "/dashboard",
+    "icon": "FaHome"
+  },
+  {
+    "name": "Project",
+    "icon": "IoTimeOutline",
+    "children": [
+      {
+        "name": "List Project",
+        "path": "/project"
+      },
+      {
+        "name": "Persiapan",
+        "path": "/persiapan"
+      },
+
+      {
+        "name": "Chickin",
+        "path": "/chickin"
+      },
+
+      {
+        "name": "Recording",
+        "path": "/recording"
+      }
+    ]
+  }
+]
