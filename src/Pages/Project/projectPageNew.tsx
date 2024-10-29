@@ -189,8 +189,8 @@ const ProjectPageNew = () => {
     return "";
   };
   return (
-    <div className="w-full block">
-      <Breadcrumb items={breadcrumbItems} />
+    <div className="block w-full">
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         <div className="p-5">
           <SearchBar
@@ -227,11 +227,11 @@ const ProjectPageNew = () => {
             />
           </SearchBar>
         </div>
-        <div className="overflow-x-auto rounded-md m-5  min-h-80">
+        <div className="m-5 overflow-x-auto rounded-md min-h-80">
           <table className="table table-lg table-zebra ">
             <thead className="bg-slate-100">
               <tr>
-                <th className="text-center p-2">
+                <th className="p-2 text-center">
                   <input
                     type="checkbox"
                     checked={selectAll}
@@ -259,11 +259,11 @@ const ProjectPageNew = () => {
                     <td key={column.accessorKey} className="text-center">
                       {column.accessorKey === "aksi" ? (
                         <div>
-                          <div className="dropdown dropdown-left z-40 relative">
+                          <div className="relative z-40 dropdown dropdown-left">
                             <div
                               tabIndex={0}
                               role="button"
-                              className="btn btn-edit btn-ghost hover:bg-transparent text-center"
+                              className="text-center btn btn-edit btn-ghost hover:bg-transparent"
                             >
                               <iconMap.HiDotsVertical size={16} />
                             </div>
@@ -312,13 +312,13 @@ const ProjectPageNew = () => {
 
         {/* Pagination controls */}
         {/* Pagination controls */}
-        <div className="flex justify-end m-4 items-center">
+        <div className="flex items-center justify-end m-4">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            className="mx-2 text-blue-400 flex items-center gap-5  hover:bg-transparent"
+            className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
           >
-            <iconMap.FaArrowLeft size={18} className=" text-blue-400" />
+            <iconMap.FaArrowLeft size={18} className="text-blue-400 " />
             <div className="flex text-center">Prev</div>
           </button>
           <span className="mx-2 text-blue-400">{`${currentPage} of ${totalPages}`}</span>
@@ -327,10 +327,10 @@ const ProjectPageNew = () => {
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
-            className="mx-2 text-blue-400 flex items-center gap-5  hover:bg-transparent"
+            className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
           >
             <div className="flex text-center">Next</div>
-            <iconMap.FaArrowRight size={18} className=" text-blue-400" />
+            <iconMap.FaArrowRight size={18} className="text-blue-400 " />
           </button>
         </div>
       </LayoutProject>

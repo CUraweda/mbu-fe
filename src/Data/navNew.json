@@ -27,5 +27,19 @@
         "path": "/recording"
       }
     ]
+  },
+  {
+    "name": "Pembelian",
+    "icon": "LuShoppingCart",
+    "children": [
+      {
+        "name": "List Pembelian",
+        "path": "/list-pembelian"
+      },
+      {
+        "name": "List Retur",
+        "path": "/list-retur"
+      }
+    ]
   }
 ]

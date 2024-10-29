@@ -293,13 +293,13 @@ const CreateNewProject = () => {
     }
   };
   return (
-    <div className="w-full block">
-      <Breadcrumb items={breadcrumbItems} />
+    <div className="block w-full">
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         {showModal && (
           <div className="modal modal-open">
             <div className="modal-box">
-              <h2 className="font-bold text-xl text-blue-300 ">
+              <h2 className="text-xl font-bold text-blue-300 ">
                 Apakah yakin pengajuan sudah sesuai?
               </h2>
               <h4 className="mb-5">
@@ -307,20 +307,20 @@ const CreateNewProject = () => {
               </h4>
               <label className="font-semibold ">Komentar/catatan :</label>
               <textarea
-                className="textarea textarea-bordered w-full mt-4"
+                className="w-full mt-4 textarea textarea-bordered"
                 placeholder="Enter reason for approval"
                 value={approvalReason}
                 onChange={(e) => setApprovalReason(e.target.value)}
               />
               <div className="modal-action">
                 <button
-                  className="btn bg-orange-200 text-orange-700"
+                  className="text-orange-700 bg-orange-200 btn"
                   onClick={handleRejectApproval}
                 >
                   Tolak
                 </button>
                 <button
-                  className="btn bg-blue-200 text-blue-700"
+                  className="text-blue-700 bg-blue-200 btn"
                   onClick={handleSubmitApproval}
                 >
                   Setuju
@@ -331,7 +331,7 @@ const CreateNewProject = () => {
         )}
         <form>
           {/* Step Indicators */}
-          <ul className="mb-4 w-full flex justify-left pl-10 gap-5 py-2">
+          <ul className="flex w-full gap-5 py-2 pl-10 mb-4 justify-left">
             <li className={`step flex items-center gap-5`}>
               <div className="flex">
                 <div
@@ -386,7 +386,7 @@ const CreateNewProject = () => {
               <div className="text-xl">Data Recording</div>
             </li>
           </ul>
-          <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+          <div className="my-4 border-b-2 border-gray-100 rounded-md" />
           {/* Step Content */}
           {currentStep === 1 && (
             <div className="card">
@@ -401,7 +401,7 @@ const CreateNewProject = () => {
                       disabled={statusView}
                       value={formOwnFarm.id_project}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Periode Proyek */}
@@ -413,7 +413,7 @@ const CreateNewProject = () => {
                       disabled={statusView}
                       value={formOwnFarm.unit_bisnis}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Nama Area */}
@@ -424,7 +424,7 @@ const CreateNewProject = () => {
                       name="nama_area"
                       value={formOwnFarm.nama_area}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Pilih Area</option>
                       <option value="Area 1">Area 1</option>
@@ -439,7 +439,7 @@ const CreateNewProject = () => {
                       disabled={statusView}
                       value={formOwnFarm.lokasi}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value={0}>Pilih Kandang</option>
                       <option value={1}>Kandang 1</option>
@@ -455,7 +455,7 @@ const CreateNewProject = () => {
                       disabled={statusView}
                       value={formOwnFarm.produk}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Parent Stock</option>
                       <option value="Farm 1">Stock 1</option>
@@ -465,13 +465,13 @@ const CreateNewProject = () => {
                 </form>
               </div>
 
-              <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+              <div className="my-4 border-b-2 border-gray-100 rounded-md" />
               <div className="p-5">
                 <form>
                   <div className="card ">
                     <form>
                       {/* Table Container */}
-                      <div className="rounded-lg overflow-x-auto">
+                      <div className="overflow-x-auto rounded-lg">
                         <table className="table w-full table-md">
                           {/* Table Head */}
                           <thead className="">
@@ -497,7 +497,7 @@ const CreateNewProject = () => {
                                     type="text"
                                     disabled={statusView}
                                     placeholder="Masukkan nama farm"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.fase}
                                     onChange={(e) =>
                                       handleInputChangeRows2(
@@ -515,7 +515,7 @@ const CreateNewProject = () => {
                                     type="text"
                                     disabled={statusView}
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.tanggal_mulai}
                                     onChange={(e) =>
                                       handleInputChangeRows2(
@@ -532,7 +532,7 @@ const CreateNewProject = () => {
                                     type="text"
                                     disabled={statusView}
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.tanggal_selesai}
                                     onChange={(e) =>
                                       handleInputChangeRows2(
@@ -549,7 +549,7 @@ const CreateNewProject = () => {
                                     type="text"
                                     disabled={statusView}
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.status}
                                     onChange={(e) =>
                                       handleInputChangeRows2(
@@ -585,7 +585,7 @@ const CreateNewProject = () => {
                           </tbody>
                         </table>
                       </div>
-                      <div className="flex w-full justify-start m-2">
+                      <div className="flex justify-start w-full m-2">
                         <button
                           type="button"
                           className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -612,7 +612,7 @@ const CreateNewProject = () => {
                 <div className="card ">
                   <form>
                     {/* Table Container */}
-                    <div className="rounded-lg overflow-x-auto">
+                    <div className="overflow-x-auto rounded-lg">
                       <table className="table w-full table-md">
                         {/* Table Head */}
                         <thead className="">
@@ -638,7 +638,7 @@ const CreateNewProject = () => {
                                   type="text"
                                   disabled={statusView}
                                   placeholder="Masukkan nama farm"
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.nama_kandang}
                                   onChange={(e) =>
                                     handleInputChangeFarm(
@@ -656,7 +656,7 @@ const CreateNewProject = () => {
                                   type="text"
                                   placeholder="Masukkan nama blok"
                                   disabled={statusView}
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.jenis_form}
                                   onChange={(e) =>
                                     handleInputChangeFarm(
@@ -673,7 +673,7 @@ const CreateNewProject = () => {
                                   type="text"
                                   disabled={statusView}
                                   placeholder="Masukkan nama blok"
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.periode}
                                   onChange={(e) =>
                                     handleInputChangeFarm(
@@ -690,7 +690,7 @@ const CreateNewProject = () => {
                                   type="text"
                                   placeholder="Masukkan nama blok"
                                   disabled={statusView}
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.penanggung_jawab}
                                   onChange={(e) =>
                                     handleInputChangeFarm(
@@ -706,7 +706,7 @@ const CreateNewProject = () => {
                                 {rowsFarm.length > 1 && !statusView ? (
                                   <button
                                     type="button"
-                                    className="btn btn-ghost hover:bg-transparent text-center"
+                                    className="text-center btn btn-ghost hover:bg-transparent"
                                     onClick={() => handleRemoveFarm(index)}
                                   >
                                     <iconMap.PiTrash
@@ -724,7 +724,7 @@ const CreateNewProject = () => {
                         </tbody>
                       </table>
                     </div>
-                    <div className="flex w-full justify-start m-2">
+                    <div className="flex justify-start w-full m-2">
                       <button
                         type="button"
                         className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -748,14 +748,14 @@ const CreateNewProject = () => {
             <div>
               <div className="p-5">
                 {/* Dropdown untuk memilih nama kandang dan target */}
-                <form className="grid grid-cols-3 gap-4 w-full">
+                <form className="grid w-full grid-cols-3 gap-4">
                   {/* Id Project */}
-                  <div className="mb-4 flex items-center">
-                    <label className="text-sm font-medium text-gray-700 mb-2 text-nowrap flex items-center mr-2">
+                  <div className="flex items-center mb-4">
+                    <label className="flex items-center mb-2 mr-2 text-sm font-medium text-gray-700 text-nowrap">
                       Nama Kandang
                     </label>
                     <select
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                       value={selectedKandang}
                       onChange={(e) => setSelectedKandang(e.target.value)}
                     >
@@ -769,25 +769,25 @@ const CreateNewProject = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="mb-4 flex items-center">
-                    <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
+                  <div className="flex items-center mb-4">
+                    <label className="flex items-center mt-4 mb-2 mr-2 text-sm font-medium text-gray-700  text-nowrap">
                       Target VCR
                     </label>
                     <input
                       type="number"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={targetVCR}
                       onChange={(e) => setTargetVCR(e.target.value)}
                       placeholder="Masukkan target VCR"
                     />
                   </div>
-                  <div className="mb-4 flex items-center">
-                    <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
+                  <div className="flex items-center mb-4">
+                    <label className="flex items-center mt-4 mb-2 mr-2 text-sm font-medium text-gray-700  text-nowrap">
                       Target Mortalitas
                     </label>
                     <input
                       type="number"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={targetMortalitas}
                       onChange={(e) => setTargetMortalitas(e.target.value)}
                       placeholder="Masukkan target mortalitas"
@@ -798,7 +798,7 @@ const CreateNewProject = () => {
               <form>
                 <div className="card">
                   {/* Table Container */}
-                  <div className=" overflow-x-auto">
+                  <div className="overflow-x-auto ">
                     <table className="table w-full table-md">
                       {/* Table Head */}
                       <thead className="bg-[#76A8D8BF] text-white">
@@ -821,7 +821,7 @@ const CreateNewProject = () => {
                                 type="text"
                                 disabled={statusView}
                                 placeholder="Masukkan item"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.item}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -839,7 +839,7 @@ const CreateNewProject = () => {
                                 type="number"
                                 disabled={statusView}
                                 placeholder="Masukkan qty"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.qty}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -857,7 +857,7 @@ const CreateNewProject = () => {
                                 type="number"
                                 disabled={statusView}
                                 placeholder="Masukkan harga satuan"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.harga_satuan}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -875,7 +875,7 @@ const CreateNewProject = () => {
                                 type="number"
                                 disabled={statusView}
                                 placeholder="Total anggaran"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.total_anggaran}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -892,7 +892,7 @@ const CreateNewProject = () => {
                               {rowsAnggaran.length > 1 && !statusView ? (
                                 <button
                                   type="button"
-                                  className="btn btn-ghost hover:bg-transparent text-center"
+                                  className="text-center btn btn-ghost hover:bg-transparent"
                                   onClick={() => handleRemoveAnggaran(index)}
                                 >
                                   <iconMap.PiTrash
@@ -910,7 +910,7 @@ const CreateNewProject = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="flex w-full justify-start m-2">
+                  <div className="flex justify-start w-full m-2">
                     <button
                       type="button"
                       className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -933,7 +933,7 @@ const CreateNewProject = () => {
             <div className="">
               <form>
                 {/* Table Container */}
-                <div className="rounded-lg overflow-x-auto">
+                <div className="overflow-x-auto rounded-lg">
                   <table className="table w-full table-md">
                     {/* Table Head */}
                     <thead>
@@ -956,7 +956,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <select
                               disabled={statusView}
-                              className="select select-bordered w-full"
+                              className="w-full select select-bordered"
                               value={row.item}
                               onChange={(e) =>
                                 handleInputChangeRecording(
@@ -981,7 +981,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <select
                               disabled={statusView}
-                              className="select select-bordered w-full"
+                              className="w-full select select-bordered"
                               value={row.satuan}
                               onChange={(e) =>
                                 handleInputChangeRecording(
@@ -1006,7 +1006,7 @@ const CreateNewProject = () => {
                           <td className="p-2">
                             <select
                               disabled={statusView}
-                              className="select select-bordered w-full"
+                              className="w-full select select-bordered"
                               value={row.interval_recording}
                               onChange={(e) =>
                                 handleInputChangeRecording(
@@ -1032,7 +1032,7 @@ const CreateNewProject = () => {
                             {rowsRecording.length > 1 && !statusView && (
                               <button
                                 type="button"
-                                className="btn btn-ghost hover:bg-transparent text-center"
+                                className="text-center btn btn-ghost hover:bg-transparent"
                                 onClick={() => handleRemoveRecording(index)}
                               >
                                 <iconMap.PiTrash
@@ -1050,7 +1050,7 @@ const CreateNewProject = () => {
                 </div>
 
                 {/* Tombol Tambah Baris */}
-                <div className="flex w-full justify-start m-2">
+                <div className="flex justify-start w-full m-2">
                   <button
                     type="button"
                     className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -1069,7 +1069,7 @@ const CreateNewProject = () => {
             </div>
           )}
           {/* Navigation Buttons */}
-          <div className="mt-4 flex justify-end gap-5 mr-10">
+          <div className="flex justify-end gap-5 mt-4 mr-10">
             <button
               type="button"
               className={`btn ${currentStep === 1 ? "btn-disabled" : ""}`}
