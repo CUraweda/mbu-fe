@@ -4,9 +4,10 @@ import {
   FaEnvelope,
   FaArrowRight,
   FaArrowLeft,
+  FaPlus,
 } from "react-icons/fa";
 import { MdExpandMore } from "react-icons/md";
-import { LuDatabase } from "react-icons/lu";
+import { LuDatabase, LuShoppingCart } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import {
   IoCartOutline,
@@ -30,9 +31,11 @@ const iconMap: any = {
   FaHome,
   FaInfoCircle,
   FaEnvelope,
+  FaPlus,
   IoHomeOutline,
   MdExpandMore,
   LuDatabase,
+  LuShoppingCart,
   RiMoneyDollarCircleLine,
   IoCartOutline,
   AiOutlineAudit,

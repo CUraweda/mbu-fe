@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
-const Persiapan = lazy(() => import("../Pages/Project/Persiapan"));
 const Home = lazy(() => import("../Pages/Home"));
-const LoginPage = lazy(() => import("../Pages/Auth/Login"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
+const Persiapan = lazy(() => import("../Pages/Project/Persiapan"));
+const LoginPage = lazy(() => import("../Pages/Auth/Login"));
 const Layout = lazy(() => import("../Layouts/layout"));
 const LoginLayout = lazy(() => import("../Layouts/loginLayout"));
 const ProtectedRoute = lazy(() => import("../Components/protectedRoute"));
@@ -18,6 +18,10 @@ const LanjutanPersiapanPage = lazy(
 const FormChickinPage = lazy(() => import("../Pages/Project/formchickinPage"));
 const CreateNewProject = lazy(
   () => import("../Pages/Project/createNewProject")
+);
+// pembelian
+const ListPembelianPage = lazy(
+  () => import("../Pages/Pembelian/ListPembelianPage")
 );
 
 const AppRoutes = () => {
@@ -42,6 +46,8 @@ const AppRoutes = () => {
                 </ProtectedRoute>
               }
             />
+
+            {/* project */}
             <Route
               path="/project"
               element={
@@ -123,7 +129,18 @@ const AppRoutes = () => {
                 </ProtectedRoute>
               }
             />
+
+            {/* pembelian */}
+            <Route
+              path="/list-pembelian"
+              element={
+                <ProtectedRoute>
+                  <ListPembelianPage />
+                </ProtectedRoute>
+              }
+            />
           </Route>
+
           <Route path="*" element={<NotFound />} />
           <Route path="/auth/login" element={<LoginLayout />}>
             <Route path="/auth/login" element={<LoginPage />} />

@@ -181,13 +181,13 @@ const FormChickinPage = () => {
   //   });
   // };
   return (
-    <div className="w-full block">
-      <Breadcrumb items={breadcrumbItems} />
+    <div className="block w-full">
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         {/* {showModal && (
           <div className="modal modal-open">
             <div className="modal-box">
-              <h2 className="font-bold text-xl text-blue-300 ">
+              <h2 className="text-xl font-bold text-blue-300 ">
                 Apakah yakin pengajuan sudah sesuai?
               </h2>
               <h4 className="mb-5">
@@ -195,20 +195,20 @@ const FormChickinPage = () => {
               </h4>
               <label className="font-semibold ">Komentar/catatan :</label>
               <textarea
-                className="textarea textarea-bordered w-full mt-4"
+                className="w-full mt-4 textarea textarea-bordered"
                 placeholder="Enter reason for approval"
                 value={approvalReason}
                 onChange={(e) => setApprovalReason(e.target.value)}
               />
               <div className="modal-action">
                 <button
-                  className="btn bg-orange-200 text-orange-700"
+                  className="text-orange-700 bg-orange-200 btn"
                   onClick={handleRejectApproval}
                 >
                   Tolak
                 </button>
                 <button
-                  className="btn bg-blue-200 text-blue-700"
+                  className="text-blue-700 bg-blue-200 btn"
                   onClick={handleSubmitApproval}
                 >
                   Setuju
@@ -219,14 +219,14 @@ const FormChickinPage = () => {
         )} */}
         <form>
           {/* Step Indicators */}
-          <div className="text-2xl text-blue-200 mx-10">Form Chick in</div>
+          <div className="mx-10 text-2xl text-blue-200">Form Chick in</div>
 
-          <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+          <div className="my-4 border-b-2 border-gray-100 rounded-md" />
           {/* Step Content */}
           <div className="card">
             <div className="p-8">
-              <form className="w-full block">
-                <div className="grid grid-cols-5 gap-2 w-full mb-5">
+              <form className="block w-full">
+                <div className="grid w-full grid-cols-5 gap-2 mb-5">
                   {/* Id Project */}
                   <div className="mb-4">
                     <label className="label">Id Project</label>
@@ -236,7 +236,7 @@ const FormChickinPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.id_project}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Periode Proyek */}
@@ -248,7 +248,7 @@ const FormChickinPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.unit_bisnis}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Nama Area */}
@@ -259,7 +259,7 @@ const FormChickinPage = () => {
                       name="nama_area"
                       value={formOwnFarm.nama_area}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Pilih Area</option>
                       <option value="Area 1">Area 1</option>
@@ -274,7 +274,7 @@ const FormChickinPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.lokasi}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value={0}>Pilih Lokasi</option>
                       <option value={1}>Lokasi 1</option>
@@ -290,7 +290,7 @@ const FormChickinPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.produk}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Parent Stock</option>
                       <option value="Farm 1">Stock 1</option>
@@ -304,7 +304,7 @@ const FormChickinPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.nama_kandang}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value={0}>Pilih Kandang</option>
                       <option value={1}>Kandang 1</option>
@@ -314,10 +314,10 @@ const FormChickinPage = () => {
                 </div>
                 <div className="card">
                   {/* Table Container */}
-                  <div className=" overflow-x-auto">
+                  <div className="overflow-x-auto ">
                     <table className="table w-full table-md">
                       {/* Table Head */}
-                      <thead className=" text-gray-400">
+                      <thead className="text-gray-400 ">
                         <tr>
                           <th className="p-3 text-left">No Surat Jalan</th>
                           <th className="p-3 text-left">Tanggal Chick in</th>
@@ -343,7 +343,7 @@ const FormChickinPage = () => {
                                 type="text"
                                 disabled={statusView}
                                 placeholder="Masukkan item pekerjaan"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.no_surat}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -361,7 +361,7 @@ const FormChickinPage = () => {
                                 type="date"
                                 disabled={statusView}
                                 placeholder="Masukkan tanggal"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.tanggal_chickin}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -377,7 +377,7 @@ const FormChickinPage = () => {
                             <td className="p-2">
                               <select
                                 disabled={statusView}
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.doc}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -399,7 +399,7 @@ const FormChickinPage = () => {
                               </select>
                             </td>
 
-                            <td className="p-2 px-auto text-center">
+                            <td className="p-2 text-center px-auto">
                               {statusView ? (
                                 <span
                                   className={` shadow-md rounded-md w-full p-2 ${
@@ -416,7 +416,7 @@ const FormChickinPage = () => {
                                 <input
                                   disabled
                                   type="text"
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.supplier}
                                   onChange={(e) =>
                                     handleInputChangeAnggaran(
@@ -430,7 +430,7 @@ const FormChickinPage = () => {
                             </td>
                             <td className="p-2">
                               <select
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.hatchery}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -457,7 +457,7 @@ const FormChickinPage = () => {
                               <td className="p-2">
                                 <button
                                   type="button"
-                                  className="btn btn-ghost hover:bg-transparent text-center"
+                                  className="text-center btn btn-ghost hover:bg-transparent"
                                   onClick={() => handleRemovePersiapan(index)}
                                 >
                                   <iconMap.PiTrash
@@ -475,7 +475,7 @@ const FormChickinPage = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="flex w-full justify-start m-2">
+                  <div className="flex justify-start w-full m-2">
                     <button
                       type="button"
                       className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -496,7 +496,7 @@ const FormChickinPage = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="mt-4 flex justify-end gap-5 mr-10">
+          <div className="flex justify-end gap-5 mt-4 mr-10">
             <button
               type="button"
               className={`btn ${"bg-orange-400 text-white"}`}
@@ -506,7 +506,7 @@ const FormChickinPage = () => {
             </button>
             <button
               type="button"
-              className="btn bg-green-500 text-white"
+              className="text-white bg-green-500 btn"
               onClick={() => handleShowModal()}
             >
               Simpan

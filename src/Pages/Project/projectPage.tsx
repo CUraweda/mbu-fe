@@ -192,13 +192,13 @@ const ProjectPage = () => {
     setModal(!modal);
   };
   return (
-    <div className="w-full block">
-      <Breadcrumb items={breadcrumbItems} />
+    <div className="block w-full">
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         <SearchBar onSearch={handleSearch} onAddClick={handleAddClick}>
           <div className="mb-4">
             <select
-              className="select select-bordered w-full"
+              className="w-full select select-bordered"
               value={area}
               onChange={(e) => setArea(e.target.value)}
             >
@@ -210,7 +210,7 @@ const ProjectPage = () => {
           </div>
           <div className="mb-4">
             <select
-              className="select select-bordered w-full"
+              className="w-full select select-bordered"
               value={area}
               onChange={(e) => setArea(e.target.value)}
             >
@@ -222,7 +222,7 @@ const ProjectPage = () => {
           </div>
           <div className="mb-4">
             <select
-              className="select select-bordered w-full"
+              className="w-full select select-bordered"
               value={area}
               onChange={(e) => setArea(e.target.value)}
             >
@@ -282,7 +282,7 @@ const ProjectPage = () => {
             >
               <form>
                 {/* Step Indicators */}
-                <ul className="steps mb-4 w-full">
+                <ul className="w-full mb-4 steps">
                   <li
                     className={`step ${
                       currentStep >= 1 ? "step-primary " : ""
@@ -314,8 +314,8 @@ const ProjectPage = () => {
 
                 {/* Step Content */}
                 {currentStep === 1 && (
-                  <div className="card p-5">
-                    <div className="card bg-gray-100 p-5">
+                  <div className="p-5 card">
+                    <div className="p-5 bg-gray-100 card">
                       <h6 className="font-bold">Informasi Project</h6>
                       <form className="grid grid-cols-2 gap-4">
                         {/* Tanggal Mulai */}
@@ -326,7 +326,7 @@ const ProjectPage = () => {
                             name="tanggal_mulai"
                             value={formOwnFarm.tanggal_mulai}
                             onChange={handleInputChange}
-                            className="input input-bordered w-full"
+                            className="w-full input input-bordered"
                           />
                         </div>
 
@@ -337,7 +337,7 @@ const ProjectPage = () => {
                             name="nama_farm"
                             value={formOwnFarm.nama_farm}
                             onChange={handleInputChange}
-                            className="select select-bordered w-full"
+                            className="w-full select select-bordered"
                           >
                             <option value="">Pilih Farm</option>
                             <option value="Farm 1">Farm 1</option>
@@ -351,7 +351,7 @@ const ProjectPage = () => {
                             name="kategori_proyek"
                             value={formOwnFarm.kategori_proyek}
                             onChange={handleInputChange}
-                            className="select select-bordered w-full"
+                            className="w-full select select-bordered"
                           >
                             <option value="">Pilih Kategori Proyek</option>
                             <option value="Kategori 1">Kategori 1</option>
@@ -367,7 +367,7 @@ const ProjectPage = () => {
                             name="periode_projek"
                             value={formOwnFarm.periode_projek}
                             onChange={handleInputChange}
-                            className="input input-bordered w-full"
+                            className="w-full input input-bordered"
                           />
                         </div>
 
@@ -378,7 +378,7 @@ const ProjectPage = () => {
                             name="nama_area"
                             value={formOwnFarm.nama_area}
                             onChange={handleInputChange}
-                            className="select select-bordered w-full"
+                            className="w-full select select-bordered"
                           >
                             <option value="">Pilih Area</option>
                             <option value="Area 1">Area 1</option>
@@ -392,7 +392,7 @@ const ProjectPage = () => {
                             name="nama_kandang"
                             value={formOwnFarm.nama_kandang}
                             onChange={handleInputChange}
-                            className="select select-bordered w-full"
+                            className="w-full select select-bordered"
                           >
                             <option value={0}>Pilih Kandang</option>
                             <option value={1}>Kandang 1</option>
@@ -402,10 +402,10 @@ const ProjectPage = () => {
                       </form>
                     </div>
 
-                    <div className="card bg-gray-100 p-5 mt-5">
+                    <div className="p-5 mt-5 bg-gray-100 card">
                       <h6 className="font-bold">Setting Project</h6>
 
-                      <form className=" gap-4 ">
+                      <form className="gap-4 ">
                         {/* FCR */}
                         <div className="mb-4">
                           <label className="label">Standarisasi FCR</label>
@@ -414,18 +414,18 @@ const ProjectPage = () => {
                             name="fcr"
                             value={formOwnFarm.fcr}
                             onChange={handleInputChange}
-                            className="input input-bordered w-full"
+                            className="w-full input input-bordered"
                           />
                         </div>
 
                         {/* Mortalitas Calculation */}
-                        <div className="mb-4 grid grid-cols-2">
+                        <div className="grid grid-cols-2 mb-4">
                           <div className="mb-4">
                             <label className="label">
                               Perhitungan Mortalitas (Closing)
                             </label>
                             <div className="block gap-4 mx-2">
-                              <label className="flex items-center my-2 bg-white p-5 rounded-lg">
+                              <label className="flex items-center p-5 my-2 bg-white rounded-lg">
                                 <input
                                   type="radio"
                                   name="mortalitas_calculation"
@@ -441,7 +441,7 @@ const ProjectPage = () => {
                                   Data Recording Harian
                                 </span>
                               </label>
-                              <label className="flex items-center my-2 bg-white p-5 rounded-lg">
+                              <label className="flex items-center p-5 my-2 bg-white rounded-lg">
                                 <input
                                   type="radio"
                                   name="mortalitas_calculation"
@@ -466,7 +466,7 @@ const ProjectPage = () => {
                               Closing
                             </label>
                             <div className="block gap-4">
-                              <label className="flex items-center my-2 bg-white p-5 rounded-lg">
+                              <label className="flex items-center p-5 my-2 bg-white rounded-lg">
                                 <input
                                   type="radio"
                                   name="closing_calculation"
@@ -480,7 +480,7 @@ const ProjectPage = () => {
                                 />
                                 <span className="ml-2">Jumlah Culling</span>
                               </label>
-                              <label className="flex items-center my-2 bg-white p-5 rounded-lg">
+                              <label className="flex items-center p-5 my-2 bg-white rounded-lg">
                                 <input
                                   type="radio"
                                   name="closing_calculation"
@@ -505,35 +505,35 @@ const ProjectPage = () => {
                   </div>
                 )}
                 {currentStep === 2 && (
-                  <div className="card bg-gray-100 p-5 grid grid-cols-2">
+                  <div className="grid grid-cols-2 p-5 bg-gray-100 card">
                     <div className="">
                       <h3>Test (1)</h3>
-                      <div className="my-2 border-dashed border-b-2" />
-                      <form className="grid grid-cols-2 gap-4 bg-white rounded-md p-4">
+                      <div className="my-2 border-b-2 border-dashed" />
+                      <form className="grid grid-cols-2 gap-4 p-4 bg-white rounded-md">
                         {/* Checkbox "Select All" */}
-                        <div className="col-span-2 flex items-center bg-white rounded-md w-full p-4 shadow-md">
+                        <div className="flex items-center w-full col-span-2 p-4 bg-white rounded-md shadow-md">
                           <input
                             type="checkbox"
-                            className="checkbox checkbox-primary mr-4"
+                            className="mr-4 checkbox checkbox-primary"
                             onChange={handleSelectAllChange}
                             checked={selectedItems.length === formData.length}
                           />
-                          <label className="label font-bold">Select All</label>
+                          <label className="font-bold label">Select All</label>
                         </div>
 
                         {/* Render Textarea dan Checkbox Dinamis */}
                         {formData.map((item) => (
                           <div
                             key={item.id}
-                            className="col-span-2 flex items-center "
+                            className="flex items-center col-span-2 "
                           >
                             <input
                               type="checkbox"
-                              className="checkbox checkbox-primary mr-4"
+                              className="mr-4 checkbox checkbox-primary"
                               checked={selectedItems.includes(item.id)}
                               onChange={() => handleCheckboxChange(item.id)}
                             />
-                            <div className="w-full border-2 border-gray-200 rounded-xl p-2">
+                            <div className="w-full p-2 border-2 border-gray-200 rounded-xl">
                               <label className="label">{item.name}</label>
                               <textarea
                                 name={`textarea-${item.id}`}
@@ -541,7 +541,7 @@ const ProjectPage = () => {
                                 onChange={(event) =>
                                   handleInputStep2Change(item.id, event)
                                 }
-                                className="textarea textarea-bordered w-full"
+                                className="w-full textarea textarea-bordered"
                               />
                             </div>
                           </div>
@@ -562,10 +562,10 @@ const ProjectPage = () => {
                       </form>
                     </div>
                     {/* Select All */}
-                    <div className="px-5 w-full h-full">
+                    <div className="w-full h-full px-5">
                       <h2 className="font-bold uppercase">Keterangan</h2>
-                      <div className="border-l-8 border-blue-400 my-5">
-                        <h3 className="font-semibold uppercase text-xl pl-2  text-gray-500">
+                      <div className="my-5 border-l-8 border-blue-400">
+                        <h3 className="pl-2 text-xl font-semibold text-gray-500 uppercase">
                           Ketentuan Persiapan Kandang Ayam Sebelum Penggunaan
                         </h3>
                       </div>
@@ -604,13 +604,13 @@ const ProjectPage = () => {
                   </div>
                 )}
                 {currentStep === 3 && (
-                  <div className="card bg-gray-100 p-5">
+                  <div className="p-5 bg-gray-100 card">
                     <form>
                       {/* Area Dropdown */}
                       <div className="mb-4">
                         <form>
                           {/* Table Container */}
-                          <div className="rounded-lg overflow-x-auto">
+                          <div className="overflow-x-auto rounded-lg">
                             <table className="table w-full table-md">
                               {/* Table Head */}
                               <thead className="bg-gray-200">
@@ -670,7 +670,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
 
@@ -686,7 +686,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
 
@@ -702,7 +702,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -716,7 +716,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -730,7 +730,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -744,7 +744,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -758,7 +758,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -772,7 +772,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -786,7 +786,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                     <td className="p-2">
@@ -800,7 +800,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
 
@@ -816,7 +816,7 @@ const ProjectPage = () => {
                                             e.target.value
                                           )
                                         }
-                                        className="input input-bordered w-full"
+                                        className="w-full input input-bordered"
                                       />
                                     </td>
                                   </tr>
@@ -830,14 +830,14 @@ const ProjectPage = () => {
                   </div>
                 )}
                 {currentStep === 4 && (
-                  <div className="card bg-gray-100">
+                  <div className="bg-gray-100 card">
                     <form className="p-5">
                       <h3 className="font-bold">Data Persiapan Anak Kandang</h3>
                       {/* Grid dengan 2 kolom */}
                       <button
                         type="button"
                         onClick={handleSkip}
-                        className="btn btn-warning w-full my-5 "
+                        className="w-full my-5 btn btn-warning "
                       >
                         Skip Step
                       </button>
@@ -845,9 +845,9 @@ const ProjectPage = () => {
                         {testsData.map((test) => (
                           <div
                             key={test.id}
-                            className="card bg-gray-100 rounded-lg"
+                            className="bg-gray-100 rounded-lg card"
                           >
-                            <h2 className="font-bold text-lg mb-4 bg-gray-200 p-5 rounded-md">
+                            <h2 className="p-5 mb-4 text-lg font-bold bg-gray-200 rounded-md">
                               {test.title}
                             </h2>
 
@@ -855,7 +855,7 @@ const ProjectPage = () => {
                               {test.options.map((option) => (
                                 <label
                                   key={option.value}
-                                  className="flex items-center bg-white p-5 rounded-md my-2"
+                                  className="flex items-center p-5 my-2 bg-white rounded-md"
                                 >
                                   <input
                                     type="radio"
@@ -866,7 +866,7 @@ const ProjectPage = () => {
                                     onChange={() =>
                                       handleRadioChange(test.id, option.value)
                                     }
-                                    className="radio radio-primary mr-2"
+                                    className="mr-2 radio radio-primary"
                                   />
                                   <span>{option.label}</span>
                                 </label>
@@ -889,10 +889,10 @@ const ProjectPage = () => {
                   </div>
                 )}
                 {currentStep === 5 && (
-                  <div className="card bg-gray-100 p-5">
+                  <div className="p-5 bg-gray-100 card">
                     <form>
                       {/* Table Container */}
-                      <div className="rounded-lg overflow-x-auto">
+                      <div className="overflow-x-auto rounded-lg">
                         <table className="table w-full table-md">
                           {/* Table Head */}
                           <thead className="bg-gray-200">
@@ -953,7 +953,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -969,7 +969,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -985,7 +985,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1001,7 +1001,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1017,7 +1017,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1033,7 +1033,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1049,7 +1049,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1065,7 +1065,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1081,7 +1081,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1097,7 +1097,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1113,7 +1113,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1129,7 +1129,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
 
@@ -1145,7 +1145,7 @@ const ProjectPage = () => {
                                         e.target.value
                                       )
                                     }
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                   />
                                 </td>
                               </tr>
@@ -1157,7 +1157,7 @@ const ProjectPage = () => {
                   </div>
                 )}
                 {/* Navigation Buttons */}
-                <div className="mt-4 flex justify-between">
+                <div className="flex justify-between mt-4">
                   <button
                     type="button"
                     className={`btn ${currentStep === 1 ? "btn-disabled" : ""}`}

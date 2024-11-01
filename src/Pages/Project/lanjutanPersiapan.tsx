@@ -359,13 +359,13 @@ const LanjutanPersiapanPage = () => {
     });
   };
   return (
-    <div className="w-full block">
-      <Breadcrumb items={breadcrumbItems} />
+    <div className="block w-full">
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         {/* {showModal && (
           <div className="modal modal-open">
             <div className="modal-box">
-              <h2 className="font-bold text-xl text-blue-300 ">
+              <h2 className="text-xl font-bold text-blue-300 ">
                 Apakah yakin pengajuan sudah sesuai?
               </h2>
               <h4 className="mb-5">
@@ -373,20 +373,20 @@ const LanjutanPersiapanPage = () => {
               </h4>
               <label className="font-semibold ">Komentar/catatan :</label>
               <textarea
-                className="textarea textarea-bordered w-full mt-4"
+                className="w-full mt-4 textarea textarea-bordered"
                 placeholder="Enter reason for approval"
                 value={approvalReason}
                 onChange={(e) => setApprovalReason(e.target.value)}
               />
               <div className="modal-action">
                 <button
-                  className="btn bg-orange-200 text-orange-700"
+                  className="text-orange-700 bg-orange-200 btn"
                   onClick={handleRejectApproval}
                 >
                   Tolak
                 </button>
                 <button
-                  className="btn bg-blue-200 text-blue-700"
+                  className="text-blue-700 bg-blue-200 btn"
                   onClick={handleSubmitApproval}
                 >
                   Setuju
@@ -397,7 +397,7 @@ const LanjutanPersiapanPage = () => {
         )} */}
         <form>
           {/* Step Indicators */}
-          <ul className="mb-4 w-full flex justify-left pl-10 gap-5 py-2">
+          <ul className="flex w-full gap-5 py-2 pl-10 mb-4 justify-left">
             <li className={`step flex items-center gap-5`}>
               <div className="flex">
                 <div
@@ -438,7 +438,7 @@ const LanjutanPersiapanPage = () => {
               <div className="text-xl">Pelakasana Persiapan</div>
             </li>
           </ul>
-          <div className="border-b-2 border-gray-100 my-4 rounded-md" />
+          <div className="my-4 border-b-2 border-gray-100 rounded-md" />
           {/* Step Content */}
           {currentStep === 1 && (
             <div className="card">
@@ -453,7 +453,7 @@ const LanjutanPersiapanPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.id_project}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Periode Proyek */}
@@ -465,7 +465,7 @@ const LanjutanPersiapanPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.unit_bisnis}
                       onChange={handleInputChange}
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                     />
                   </div>
                   {/* Nama Area */}
@@ -476,7 +476,7 @@ const LanjutanPersiapanPage = () => {
                       name="nama_area"
                       value={formOwnFarm.nama_area}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Pilih Area</option>
                       <option value="Area 1">Area 1</option>
@@ -491,7 +491,7 @@ const LanjutanPersiapanPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.lokasi}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value={0}>Pilih Lokasi</option>
                       <option value={1}>Lokasi 1</option>
@@ -507,7 +507,7 @@ const LanjutanPersiapanPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.produk}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value="">Parent Stock</option>
                       <option value="Farm 1">Stock 1</option>
@@ -521,7 +521,7 @@ const LanjutanPersiapanPage = () => {
                       disabled={statusView}
                       value={formOwnFarm.nama_kandang}
                       onChange={handleInputChange}
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                     >
                       <option value={0}>Pilih Kandang</option>
                       <option value={1}>Kandang 1</option>
@@ -536,14 +536,14 @@ const LanjutanPersiapanPage = () => {
             <div>
               <div className="p-5">
                 {/* Dropdown untuk memilih nama kandang dan target */}
-                <form className="grid grid-cols-3 gap-4 w-full">
+                <form className="grid w-full grid-cols-3 gap-4">
                   {/* Id Project */}
-                  <div className="mb-4 flex items-center">
-                    <label className="text-sm font-medium text-gray-700 mb-2 text-nowrap flex items-center mr-2">
+                  <div className="flex items-center mb-4">
+                    <label className="flex items-center mb-2 mr-2 text-sm font-medium text-gray-700 text-nowrap">
                       Jenis Persiapan
                     </label>
                     <select
-                      className="select select-bordered w-full"
+                      className="w-full select select-bordered"
                       value={selectedKandang}
                       onChange={(e) => setSelectedKandang(e.target.value)}
                     >
@@ -557,13 +557,13 @@ const LanjutanPersiapanPage = () => {
                       ))}
                     </select>
                   </div>
-                  <div className="mb-4 flex items-center">
-                    <label className=" text-sm font-medium text-gray-700 mt-4 mb-2 text-nowrap flex items-center mr-2">
+                  <div className="flex items-center mb-4">
+                    <label className="flex items-center mt-4 mb-2 mr-2 text-sm font-medium text-gray-700  text-nowrap">
                       Tanggal Habis Ayam
                     </label>
                     <input
                       type="date"
-                      className="input input-bordered w-full"
+                      className="w-full input input-bordered"
                       value={tanggalHabisAyam}
                       onChange={(e) => setTanggalHabisAyam(e.target.value)}
                       placeholder="Masukkan Tanggal"
@@ -574,7 +574,7 @@ const LanjutanPersiapanPage = () => {
               <form>
                 <div className="card">
                   {/* Table Container */}
-                  <div className=" overflow-x-auto">
+                  <div className="overflow-x-auto ">
                     <table className="table w-full table-md">
                       {/* Table Head */}
                       <thead className="bg-[#76A8D8BF] text-white">
@@ -605,7 +605,7 @@ const LanjutanPersiapanPage = () => {
                                 type="text"
                                 disabled={statusView}
                                 placeholder="Masukkan item pekerjaan"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.item_pekerjaan}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -623,7 +623,7 @@ const LanjutanPersiapanPage = () => {
                                 type="date"
                                 disabled={statusView}
                                 placeholder="Masukkan tanggal"
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.tanggal_selesai}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -640,7 +640,7 @@ const LanjutanPersiapanPage = () => {
                               <input
                                 type="number"
                                 disabled={statusView}
-                                className="input input-bordered w-full"
+                                className="w-full input input-bordered"
                                 value={row.waktu}
                                 onChange={(e) =>
                                   handleInputChangeAnggaran(
@@ -652,7 +652,7 @@ const LanjutanPersiapanPage = () => {
                               />
                             </td>
 
-                            <td className="p-2 px-auto text-center">
+                            <td className="p-2 text-center px-auto">
                               {statusView ? (
                                 <span
                                   className={` shadow-md rounded-md w-full p-2 ${
@@ -668,7 +668,7 @@ const LanjutanPersiapanPage = () => {
                               ) : (
                                 <input
                                   type="text"
-                                  className="input input-bordered w-full"
+                                  className="w-full input input-bordered"
                                   value={row.hasil}
                                   onChange={(e) =>
                                     handleInputChangeAnggaran(
@@ -686,7 +686,7 @@ const LanjutanPersiapanPage = () => {
                               <td className="p-2">
                                 <button
                                   type="button"
-                                  className="btn btn-ghost hover:bg-transparent text-center"
+                                  className="text-center btn btn-ghost hover:bg-transparent"
                                   onClick={() => handleRemovePersiapan(index)}
                                 >
                                   <iconMap.PiTrash
@@ -704,7 +704,7 @@ const LanjutanPersiapanPage = () => {
                       </tbody>
                     </table>
                   </div>
-                  <div className="flex w-full justify-start m-2">
+                  <div className="flex justify-start w-full m-2">
                     <button
                       type="button"
                       className={`btn btn-ghost hover:bg-transparent text-center ${
@@ -726,7 +726,7 @@ const LanjutanPersiapanPage = () => {
           {currentStep === 3 && (
             <div className="">
               <form>
-                <div className="justify-end flex ">
+                <div className="flex justify-end ">
                   <button
                     type="button"
                     className={`btn text-white bg-blue-300 hover:bg-transparent text-center flexbox shadow-xs m-3 `}
@@ -738,8 +738,8 @@ const LanjutanPersiapanPage = () => {
                     </div>
                   </button>
                 </div>
-                <div className=" overflow-x-auto">
-                  <table className="table table-lg w-full">
+                <div className="overflow-x-auto ">
+                  <table className="table w-full table-lg">
                     <thead className="bg-[#76A8D8BF] text-white">
                       <tr>
                         <th className="p-3 text-center">Jenis Persiapan</th>
@@ -766,11 +766,11 @@ const LanjutanPersiapanPage = () => {
                           <td className="p-2 text-center">
                             {item.tempat_pelaksanaan}
                           </td>
-                          <td className="p-2 text-center underline text-blue-300">
+                          <td className="p-2 text-center text-blue-300 underline">
                             {/* <img
                               src={item.foto}
                               alt={`Foto ${item.jenis_persiapan}`}
-                              className="w-12 h-12 object-cover"
+                              className="object-cover w-12 h-12"
                             /> */}
                             {item.foto}
                           </td>
@@ -783,7 +783,7 @@ const LanjutanPersiapanPage = () => {
             </div>
           )}
           {/* Navigation Buttons */}
-          <div className="mt-4 flex justify-end gap-5 mr-10">
+          <div className="flex justify-end gap-5 mt-4 mr-10">
             <button
               type="button"
               className={`btn bg-[#76A8D8] text-white ${
@@ -821,7 +821,7 @@ const LanjutanPersiapanPage = () => {
             {currentStep === 3 && statusView && (
               <button
                 type="button"
-                className="btn bg-green-500 text-white"
+                className="text-white bg-green-500 btn"
                 onClick={() => handleShowModal()}
               >
                 Submit Project
