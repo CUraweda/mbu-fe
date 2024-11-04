@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import FormPembelianPage from "../Pages/Pembelian/FormPembelianPage";
 const Home = lazy(() => import("../Pages/Home"));
 const NotFound = lazy(() => import("../Pages/NotFound"));
 const Persiapan = lazy(() => import("../Pages/Project/Persiapan"));
@@ -136,6 +137,14 @@ const AppRoutes = () => {
               element={
                 <ProtectedRoute>
                   <ListPembelianPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/form-pembelian"
+              element={
+                <ProtectedRoute>
+                  <FormPembelianPage />
                 </ProtectedRoute>
               }
             />
