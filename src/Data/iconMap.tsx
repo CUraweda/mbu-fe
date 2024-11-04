@@ -25,7 +25,7 @@ import {
 } from "react-icons/io";
 import { PiNotePencil, PiTrash } from "react-icons/pi";
 import { HiDotsVertical } from "react-icons/hi";
-import { CiExport, CiFilter } from "react-icons/ci";
+import { CiExport, CiFilter, CiCirclePlus } from "react-icons/ci";
 import { HiChevronRight } from "react-icons/hi";
 const iconMap: any = {
   FaHome,
@@ -48,6 +48,7 @@ const iconMap: any = {
   HiDotsVertical,
   CiExport,
   CiFilter,
+  CiCirclePlus,
   HiChevronRight,
   IoMdAddCircleOutline,
   IoTimeOutline,

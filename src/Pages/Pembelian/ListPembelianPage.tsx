@@ -6,6 +6,7 @@ import PembelianList from "../../Components/pembelian/PembelianList";
 import SearchBar from "../../Components/pembelian/SearchBar";
 import iconMap from "../../Data/iconMap";
 import LayoutProject from "../../Layouts/layoutProject";
+import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -48,13 +49,19 @@ const items: Pembelian[] = [
 ];
 
 const ListPembelianPage = () => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
   };
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
+  };
+
+  const handleNavigateToFormPembelian = () => {
+    navigate("/form-pembelian");
   };
 
   return (
@@ -64,7 +71,7 @@ const ListPembelianPage = () => {
         <div className="flex flex-col justify-between gap-3 m-5 md:items-center md:flex-row">
           <h1 className="text-2xl text-primary">List Pembelian</h1>
           <div className="flex gap-4">
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-start">
               <div
                 tabIndex={0}
                 role="button"
@@ -86,7 +93,10 @@ const ListPembelianPage = () => {
                 </li>
               </ul>
             </div>
-            <button className="text-white rounded-md bg-primary btn">
+            <button
+              className="flex items-center gap-2 text-white rounded-md bg-primary btn"
+              onClick={handleNavigateToFormPembelian}
+            >
               <iconMap.FaPlus size={10} />
               Tambah
             </button>
@@ -100,7 +110,7 @@ const ListPembelianPage = () => {
           />
           <div className="flex items-center">
             <SearchBar onSearch={handleSearch} />
-            <Filter></Filter>
+            <Filter />
           </div>
         </div>
 
@@ -114,13 +124,16 @@ const ListPembelianPage = () => {
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
             >
-              <iconMap.FaArrowLeft size={18} className="text-blue-400 " />
+              <iconMap.FaArrowLeft size={18} className="text-blue-400" />
               <div className="flex text-center">Prev</div>
             </button>
             <span className="mx-2 text-blue-400">1 of 2</span>
-            <button className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent">
+            <button
+              onClick={() => setCurrentPage((prev) => prev + 1)}
+              className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
+            >
               <div className="flex text-center">Next</div>
-              <iconMap.FaArrowRight size={18} className="text-blue-400 " />
+              <iconMap.FaArrowRight size={18} className="text-blue-400" />
             </button>
           </div>
         </div>
