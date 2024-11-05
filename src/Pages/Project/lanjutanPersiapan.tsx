@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import iconMap from "../../Data/iconMap";
 import { useNavigate } from "react-router-dom";
 import LayoutProject from "../../Layouts/layoutProject";
-import Breadcrumb from "../../Components/bread";
+import Breadcrumb from "../../Components/Breadcrumb";
 import Swal from "sweetalert2";
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -558,7 +558,7 @@ const LanjutanPersiapanPage = () => {
                     </select>
                   </div>
                   <div className="flex items-center mb-4">
-                    <label className="flex items-center mt-4 mb-2 mr-2 text-sm font-medium text-gray-700  text-nowrap">
+                    <label className="flex items-center mt-4 mb-2 mr-2 text-sm font-medium text-gray-700 text-nowrap">
                       Tanggal Habis Ayam
                     </label>
                     <input

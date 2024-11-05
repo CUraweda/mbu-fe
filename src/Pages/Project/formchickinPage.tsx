@@ -3,7 +3,7 @@ import iconMap from "../../Data/iconMap";
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import LayoutProject from "../../Layouts/layoutProject";
-import Breadcrumb from "../../Components/bread";
+import Breadcrumb from "../../Components/Breadcrumb";
 import Swal from "sweetalert2";
 const breadcrumbItems = [
   { label: "Home", link: "/" },

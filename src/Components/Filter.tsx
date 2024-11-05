@@ -1,5 +1,5 @@
 import React from "react";
-import iconMap from "../../Data/iconMap";
+import iconMap from "../Data/iconMap";
 
 interface FilterProps {
   children?: React.ReactNode;

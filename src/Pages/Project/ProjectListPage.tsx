@@ -1,57 +1,27 @@
-import { useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
-import DataSelector from "../../Components/DataSelector";
-import Filter from "../../Components/Filter";
-import PembelianList from "../../Components/pembelian/PembelianList";
-import SearchBar from "../../Components/SearchBar";
-import iconMap from "../../Data/iconMap";
 import LayoutProject from "../../Layouts/layoutProject";
+import DataSelector from "../../Components/DataSelector";
+import SearchBar from "../../Components/SearchBar";
+import Filter from "../../Components/Filter";
+import ProjectList from "../../Components/project/ProjectList";
+import projectData from "../../Data/projectData";
+
+// icons
+import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
+import { CiExport } from "react-icons/ci";
+import { MdExpandMore } from "react-icons/md";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
-  { label: "Pembelian", link: "/pembelian" },
-  { label: "List Pembelian" },
+  { label: "Project", link: "/" },
+  { label: "List Project" },
 ];
 
-interface Pembelian {
-  id: string;
-  noPR: string;
-  vendor: string;
-  namaPengaju: string;
-  departemen: string;
-  tanggal: string;
-  status: string;
-  total: number;
-}
-
-const items: Pembelian[] = [
-  {
-    id: "1",
-    noPR: "PR-MAN-00001",
-    vendor: "PT Malindo Feedmill Tbk",
-    namaPengaju: "Rifaldi",
-    departemen: "Operasional - MANBU",
-    tanggal: "25/10/2024",
-    status: "Dibayar",
-    total: 10000000,
-  },
-  {
-    id: "2",
-    noPR: "PR-MBU-00002",
-    vendor: "PT Malindo Feedmill Tbk",
-    namaPengaju: "Brian",
-    departemen: "Operasional - MBU",
-    tanggal: "30/10/2024",
-    status: "Produk Diterima",
-    total: 2000000,
-  },
-];
-
-const ListPembelianPage = () => {
+const ProjectListPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
   };
@@ -60,16 +30,16 @@ const ListPembelianPage = () => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
-  const handleNavigateToFormPembelian = () => {
-    navigate("/form-pembelian");
+  const handleNavigate = () => {
+    navigate("/project/add");
   };
 
   return (
     <div>
-      <Breadcrumb title="Pembelian" items={breadcrumbItems} />
+      <Breadcrumb title="Project Form" items={breadcrumbItems} />
       <LayoutProject>
         <div className="flex flex-col justify-between gap-3 m-5 md:items-center md:flex-row">
-          <h1 className="text-2xl text-primary">List Pembelian</h1>
+          <h1 className="text-2xl text-primary">List Project</h1>
           <div className="flex gap-4">
             <div className="dropdown dropdown-start">
               <div
@@ -77,9 +47,9 @@ const ListPembelianPage = () => {
                 role="button"
                 className="text-gray-500 bg-transparent rounded-md btn btn-outline"
               >
-                <iconMap.CiExport size={20} />
+                <CiExport size={20} />
                 Export
-                <iconMap.MdExpandMore size={24} />
+                <MdExpandMore size={24} />
               </div>
               <ul
                 tabIndex={0}
@@ -95,9 +65,9 @@ const ListPembelianPage = () => {
             </div>
             <button
               className="flex items-center gap-2 text-white rounded-md bg-primary btn hover:bg-secondary"
-              onClick={handleNavigateToFormPembelian}
+              onClick={handleNavigate}
             >
-              <iconMap.FaPlus size={10} />
+              <FaPlus size={10} />
               Tambah
             </button>
           </div>
@@ -113,27 +83,24 @@ const ListPembelianPage = () => {
             <Filter />
           </div>
         </div>
-
-        <PembelianList items={items} />
-
-        <div className="flex flex-col items-center justify-between gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
-          <div className="font-semibold">TOTAL : Rp.499,055,000.00</div>
+        <ProjectList items={projectData} />
+        <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
+              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
             >
-              <iconMap.FaArrowLeft size={18} className="text-blue-400" />
+              <FaArrowLeft size={18} className="text-primary" />
               <div className="flex text-center">Prev</div>
             </button>
-            <span className="mx-2 text-blue-400">1 of 2</span>
+            <span className="mx-2 text-primary">1 of 2</span>
             <button
               onClick={() => setCurrentPage((prev) => prev + 1)}
-              className="flex items-center gap-5 mx-2 text-blue-400 hover:bg-transparent"
+              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
             >
               <div className="flex text-center">Next</div>
-              <iconMap.FaArrowRight size={18} className="text-blue-400" />
+              <FaArrowRight size={18} className="text-primary" />
             </button>
           </div>
         </div>
@@ -142,4 +109,4 @@ const ListPembelianPage = () => {
   );
 };
 
-export default ListPembelianPage;
+export default ProjectListPage;
