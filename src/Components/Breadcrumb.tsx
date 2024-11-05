@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 type BreadcrumbProps = {
   title: string;
@@ -14,8 +15,8 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, items }) => {
         {items.map((item, index) => (
           <li key={index}>
             {item.link ? (
-              <a
-                href={item.link}
+              <Link
+                to={item.link}
                 className={
                   index === items.length - 1
                     ? "text-slate-600"
@@ -23,7 +24,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, items }) => {
                 }
               >
                 {item.label}
-              </a>
+              </Link>
             ) : (
               <span
                 className={

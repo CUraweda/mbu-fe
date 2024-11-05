@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import iconMap from "../../Data/iconMap";
 import { useLocation, useNavigate } from "react-router-dom";
 import LayoutProject from "../../Layouts/layoutProject";
-import Breadcrumb from "../../Components/bread";
+import Breadcrumb from "../../Components/Breadcrumb";
 const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Project" },

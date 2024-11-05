@@ -1,20 +1,23 @@
-// components/ProtectedRoute.tsx
-import { Navigate } from "react-router-dom";
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-type ProtectedRouteProps = {
-  children: JSX.Element;
-};
+interface ProtectedRouteProps {
+  allowedRoles: string[];
+}
 
-const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const isAuth = localStorage.getItem("auth") === "true"; // Cek status auth di localStorage
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) => {
+  const isLoggedIn = window.localStorage.getItem("auth") === "true";
+  const userRole = window.localStorage.getItem("role");
 
-  if (!isAuth) {
-    // Jika user belum login, arahkan ke halaman login
+  if (!isLoggedIn) {
     return <Navigate to="/auth/login" />;
   }
 
-  // Jika sudah login, render halaman yang di-protect
-  return children;
+  if (allowedRoles && !allowedRoles.includes(userRole || "")) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

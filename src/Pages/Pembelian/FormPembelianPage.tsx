@@ -1,4 +1,4 @@
-import Breadcrumb from "../../Components/bread";
+import Breadcrumb from "../../Components/Breadcrumb";
 import ProductList from "../../Components/pembelian/ProductList";
 import LayoutProject from "../../Layouts/layoutProject";
 

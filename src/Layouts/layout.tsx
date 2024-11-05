@@ -1,6 +1,6 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import sidebarLinks from "../Data/navNew.json";
+import sidebarLinks from "../Data/sidebar.json";
 import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
