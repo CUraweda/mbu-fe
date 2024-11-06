@@ -9,6 +9,8 @@ import ProjectListPage from "./Pages/Project/ProjectListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
+import PersiapanListPage from "./Pages/Project/PersiapanListPage";
+import LanjutanPersiapanPage from "./Pages/Project/lanjutanPersiapan";
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
             {/* project */}
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
+
+            {/* persiapan */}
+            <Route path="/persiapan" element={<PersiapanListPage />} />
+            <Route path="/lanjutanpersiapanpage" element={<LanjutanPersiapanPage />} />
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
