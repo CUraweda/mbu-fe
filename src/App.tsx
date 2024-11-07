@@ -9,6 +9,7 @@ import ProjectListPage from "./Pages/Project/ProjectListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
+import Recording from "./Pages/Project/recordingPage";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             {/* project */}
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
+
+            <Route path="/recording" element={<Recording />} /> 
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
