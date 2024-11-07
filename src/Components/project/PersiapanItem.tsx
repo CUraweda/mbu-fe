@@ -2,8 +2,9 @@ import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 // import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
-interface ProjectItemProps {
+interface PersiapanItemProps {
   id: number;
   unitBisnis: string;
   produk: string;
@@ -17,7 +18,7 @@ interface ProjectItemProps {
   onCheckboxChange: () => void;
 }
 
-const ProjectItem: React.FC<ProjectItemProps> = ({
+const PersiapanItem: React.FC<PersiapanItemProps> = ({
   id,
   unitBisnis,
   produk,
@@ -30,6 +31,8 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
+  const navigate = useNavigate();
+
   const getStatusProject = () => {
     switch (statusProject) {
       case "Persiapan":
@@ -38,6 +41,8 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         return "bg-[#F9E5FF] text-[#E308E6]";
       case "Selesai":
         return "bg-[#D0F0FF] text-[#15B5FF]";
+      default:
+        return "";
     }
   };
 
@@ -51,7 +56,13 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
         return "bg-[#FFDADB] text-[#BE0407]";
       case "Menunggu Persetujuan":
         return "bg-[#FFF7C7] text-[#C9C311]";
+      default:
+        return "";
     }
+  };
+
+  const handleNavigate = () => {
+    navigate("/form-persiapan");
   };
 
   return (
@@ -93,7 +104,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             tabIndex={0}
             className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200"
           >
-            <li>
+            <li onClick={handleNavigate}>
               <a>
                 <span>
                   <MdOutlineEdit />
@@ -110,7 +121,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
               </a>
             </li>
             <li>
-              <a>
+              <a onClick={handleNavigate}>
                 <span>
                   <FiCheckCircle size={17} />
                 </span>
@@ -132,4 +143,4 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   );
 };
 
-export default ProjectItem;
+export default PersiapanItem;
