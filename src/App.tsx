@@ -33,7 +33,6 @@ function App() {
 
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
-            <Route path="/lanjutanpersiapanpage" element={<LanjutanPersiapanPage />} />
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
