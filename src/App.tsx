@@ -6,11 +6,12 @@ import LoginPage from "./Pages/Auth/Login";
 import LoginLayout from "./Layouts/loginLayout";
 import Home from "./Pages/Home";
 import ProjectListPage from "./Pages/Project/ProjectListPage";
+import ChickinListPage from "./Pages/Project/ChickinListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
-import LanjutanPersiapanPage from "./Pages/Project/lanjutanPersiapan";
+import Recording from "./Pages/Project/recordingPage";
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
             <Route path="/lanjutanpersiapanpage" element={<LanjutanPersiapanPage />} />
+
+            {/* Chick in */}
+            <Route path="/chickin" element={<ChickinListPage />} />
+        
+            <Route path="/recording" element={<Recording />} /> 
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
