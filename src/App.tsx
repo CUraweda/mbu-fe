@@ -6,6 +6,7 @@ import LoginPage from "./Pages/Auth/Login";
 import LoginLayout from "./Layouts/loginLayout";
 import Home from "./Pages/Home";
 import ProjectListPage from "./Pages/Project/ProjectListPage";
+import ChickinListPage from "./Pages/Project/ChickinListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
@@ -29,6 +30,10 @@ function App() {
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
 
+\
+            {/* Chick in */}
+            <Route path="/chickin" element={<ChickinListPage />} />
+        
             <Route path="/recording" element={<Recording />} /> 
 
             {/* pembelian */}
