@@ -10,6 +10,7 @@ import ChickinListPage from "./Pages/Project/ChickinListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
+import Recording from "./Pages/Project/recordingPage";
 
 function App() {
   return (
@@ -29,8 +30,11 @@ function App() {
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
 
+\
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
+        
+            <Route path="/recording" element={<Recording />} /> 
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
