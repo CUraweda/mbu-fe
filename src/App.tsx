@@ -11,6 +11,7 @@ import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
+import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import Recording from "./Pages/Project/recordingPage";
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
 
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
+            <Route path="/form-persiapan" element={<PersiapanFormPage />} />
+
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
