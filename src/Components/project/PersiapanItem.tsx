@@ -104,7 +104,7 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
             tabIndex={0}
             className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200"
           >
-            <li onClick={handleNavigate}>
+            <li>
               <a>
                 <span>
                   <MdOutlineEdit />
