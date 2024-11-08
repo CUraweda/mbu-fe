@@ -19,8 +19,8 @@ const FarmInfoForm = () => {
   };
 
   const handleAddRow = () => {
-    const newId = items.length > 0 ? items[items.length - 1].id + 1 : 1;
     const newItem: Farm = {
+      id: items.length > 0 ? items[items.length - 1].id + 1 : 1,
       namaKandang: "",
       kapasitas: 0,
       jenisFarm: "",
