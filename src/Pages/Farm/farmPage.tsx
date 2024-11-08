@@ -1,7 +1,7 @@
 import iconMap from "../../Data/iconMap.tsx";
-import SearchBar from "../../Components/SearchBar.tsx";
+import SearchBar from "../../Components/Search.tsx";
 import { useState } from "react";
-const farmPage = () => {
+const FarmPage = () => {
   const [modal, setModal] = useState<false | true>(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [rows, setRows] = useState([{ farmName: "", blockName: "" }]);
@@ -75,10 +75,10 @@ const farmPage = () => {
       setCurrentStep(currentStep - 1);
     }
   };
-  const handleAddClick = () => {
-    console.log("Tambah button clicked");
-    setModal(!modal);
-  };
+  // const handleAddClick = () => {
+  //   console.log("Tambah button clicked");
+  //   setModal(!modal);
+  // };
   const [area, setArea] = useState("");
   const [farmName, setFarmName] = useState("");
   const [address, setAddress] = useState("");
@@ -87,8 +87,8 @@ const farmPage = () => {
   const [farmHead, setFarmHead] = useState("");
   const [status, setStatus] = useState("milikPribadi");
   return (
-    <div className="w-full block">
-      <div className="breadcrumbs text-sm w-full">
+    <div className="block w-full">
+      <div className="w-full text-sm breadcrumbs">
         <ul>
           <li>
             <a>Master Data</a>
@@ -98,7 +98,7 @@ const farmPage = () => {
           </li>
         </ul>
       </div>
-      <SearchBar onSearch={handleSearch} onAddClick={handleAddClick} />
+      <SearchBar onSearch={handleSearch} />
       <div className="overflow-x-auto rounded-lg">
         <table className="table table-lg ">
           <thead className="bg-gray-200 ">
@@ -142,7 +142,7 @@ const farmPage = () => {
           >
             <form>
               {/* Step Indicators */}
-              <ul className="steps mb-4 w-full">
+              <ul className="w-full mb-4 steps">
                 <li
                   className={`step ${currentStep >= 1 ? "step-primary " : ""}`}
                 >
@@ -162,13 +162,13 @@ const farmPage = () => {
 
               {/* Step Content */}
               {currentStep === 1 && (
-                <div className="card bg-gray-100 p-5">
+                <div className="p-5 bg-gray-100 card">
                   <form>
                     {/* Area Dropdown */}
                     <div className="mb-4">
                       <label className="label">Nama Area</label>
                       <select
-                        className="select select-bordered w-full"
+                        className="w-full select select-bordered"
                         value={area}
                         onChange={(e) => setArea(e.target.value)}
                       >
@@ -185,7 +185,7 @@ const farmPage = () => {
                       <input
                         type="text"
                         placeholder="Masukkan nama farm"
-                        className="input input-bordered w-full"
+                        className="w-full input input-bordered"
                         value={farmName}
                         onChange={(e) => setFarmName(e.target.value)}
                       />
@@ -196,7 +196,7 @@ const farmPage = () => {
                       <label className="label">Alamat Farm</label>
                       <textarea
                         placeholder="Masukkan alamat farm"
-                        className="textarea textarea-bordered w-full"
+                        className="w-full textarea textarea-bordered"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                       />
@@ -234,7 +234,7 @@ const farmPage = () => {
                       <div className="mb-4">
                         <label className="label">Kemitraan</label>
                         <select
-                          className="select select-bordered w-full"
+                          className="w-full select select-bordered"
                           value={partnership}
                           onChange={(e) => setPartnership(e.target.value)}
                         >
@@ -252,7 +252,7 @@ const farmPage = () => {
                       <input
                         type="text"
                         placeholder="Masukkan nama kepala farm"
-                        className="input input-bordered w-full"
+                        className="w-full input input-bordered"
                         value={farmHead}
                         onChange={(e) => setFarmHead(e.target.value)}
                       />
@@ -286,7 +286,7 @@ const farmPage = () => {
                     </div>
 
                     {/* Navigation Buttons */}
-                    {/* <div className="mt-4 flex justify-between">
+                    {/* <div className="flex justify-between mt-4">
                       <button
                         type="button"
                         className="btn bg-[#00499E] text-white"
@@ -300,7 +300,7 @@ const farmPage = () => {
               )}
               {currentStep === 2 && (
                 <div>
-                  <div className="flex w-full justify-end">
+                  <div className="flex justify-end w-full">
                     <button
                       type="button"
                       className="btn bg-[#00499E] text-white mb-4"
@@ -309,10 +309,10 @@ const farmPage = () => {
                       Tambah
                     </button>
                   </div>
-                  <div className="card bg-gray-100 ">
+                  <div className="bg-gray-100 card ">
                     <form>
                       {/* Table Container */}
-                      <div className="rounded-lg overflow-x-auto">
+                      <div className="overflow-x-auto rounded-lg">
                         <table className="table w-full table-md">
                           {/* Table Head */}
                           <thead className="bg-gray-200">
@@ -332,7 +332,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama farm"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.farmName}
                                     onChange={(e) =>
                                       handleInputChange(
@@ -349,7 +349,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.blockName}
                                     onChange={(e) =>
                                       handleInputChange(
@@ -366,7 +366,7 @@ const farmPage = () => {
                                   {rows.length > 1 ? (
                                     <button
                                       type="button"
-                                      className="btn btn-error text-white"
+                                      className="text-white btn btn-error"
                                       onClick={() => handleRemoveRow(index)}
                                     >
                                       Hapus
@@ -386,7 +386,7 @@ const farmPage = () => {
               )}
               {currentStep === 3 && (
                 <div>
-                  <div className="flex w-full justify-end">
+                  <div className="flex justify-end w-full">
                     <button
                       type="button"
                       className="btn bg-[#00499E] text-white mb-4"
@@ -395,10 +395,10 @@ const farmPage = () => {
                       Tambah
                     </button>
                   </div>
-                  <div className="card bg-gray-100">
+                  <div className="bg-gray-100 card">
                     <form>
                       {/* Table Container */}
-                      <div className="rounded-lg overflow-x-auto ">
+                      <div className="overflow-x-auto rounded-lg ">
                         <table className="table w-full table-md">
                           {/* Table Head */}
                           <thead className="bg-gray-200">
@@ -423,7 +423,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama farm"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.namaBlok}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -441,7 +441,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.kodeKandang}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -456,7 +456,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.namaKandang}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -471,7 +471,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.Luas}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -486,7 +486,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.Populasi}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -501,7 +501,7 @@ const farmPage = () => {
                                   <input
                                     type="number"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.MaxPopulasi}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -516,7 +516,7 @@ const farmPage = () => {
                                   <input
                                     type="text"
                                     placeholder="Masukkan nama blok"
-                                    className="input input-bordered w-full"
+                                    className="w-full input input-bordered"
                                     value={row.Keterangan}
                                     onChange={(e) =>
                                       handleRowStep3Change(
@@ -532,7 +532,7 @@ const farmPage = () => {
                                   {rowsStep3.length > 1 ? (
                                     <button
                                       type="button"
-                                      className="btn btn-error text-white"
+                                      className="text-white btn btn-error"
                                       onClick={() =>
                                         handleRemoveRowStep3(index)
                                       }
@@ -554,7 +554,7 @@ const farmPage = () => {
               )}
 
               {/* Navigation Buttons */}
-              <div className="mt-4 flex justify-between">
+              <div className="flex justify-between mt-4">
                 <button
                   type="button"
                   className={`btn ${currentStep === 1 ? "btn-disabled" : ""}`}
@@ -582,4 +582,4 @@ const farmPage = () => {
     </div>
   );
 };
-export default farmPage;
+export default FarmPage;

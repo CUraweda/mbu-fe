@@ -12,6 +12,7 @@ import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import Recording from "./Pages/Project/recordingPage";
+import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
 
 function App() {
   return (
@@ -30,15 +31,15 @@ function App() {
             {/* project */}
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
+            <Route path="/project/approval" element={<ProjectApprovalPage />} />
 
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
-            <Route path="/lanjutanpersiapanpage" element={<LanjutanPersiapanPage />} />
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
-        
-            <Route path="/recording" element={<Recording />} /> 
+
+            <Route path="/recording" element={<Recording />} />
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
@@ -49,6 +50,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
