@@ -15,7 +15,7 @@ interface PersiapanListProps {
   }[];
 }
 
-const ProjectList: React.FC<PersiapanListProps> = ({ items }) => {
+const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
     Array(items.length).fill(false)
   );
@@ -75,4 +75,4 @@ const ProjectList: React.FC<PersiapanListProps> = ({ items }) => {
   );
 };
 
-export default ProjectList;
+export default PersiapanList;
