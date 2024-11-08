@@ -1,5 +1,7 @@
-import React from "react";
-import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
+import React, { useState } from "react";
+import { MdDeleteOutline, MdOutlineDetails, MdOutlineEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import DetailRecording from "../../Pages/Project/recordingDetail";
 
 interface RecordingItemProps {
   projectId: number;
@@ -11,7 +13,7 @@ interface RecordingItemProps {
   onCheckboxChange: () => void;
 }
 
-const ProjectItem: React.FC<RecordingItemProps> = ({
+const RecordingItem: React.FC<RecordingItemProps> = ({
   projectId,
   waktuRecording,
   lokasi,
@@ -20,16 +22,28 @@ const ProjectItem: React.FC<RecordingItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
-  const getstatus = () => {
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
+
+  const handleNavigate = () => {
+    setIsDetailVisible(true);
+  };
+
+  const closeDetail = () => {
+    setIsDetailVisible(false);
+  };
+
+  const getStatusClass = () => {
     switch (status) {
       case "Sudah":
         return "bg-[#E4FFBD] text-[#12B906]";
       case "Belum":
         return "bg-[#FFDFBE] text-[#EC8917]";
+      default:
+        return "";
     }
   };
 
-  const getkecepatanWaktu = () => {
+  const getKecepatanWaktuClass = () => {
     switch (kecepatanWaktu) {
       case "Pengajuan":
         return "bg-[#FFF7C7] text-[#C9C311]";
@@ -39,65 +53,92 @@ const ProjectItem: React.FC<RecordingItemProps> = ({
         return "bg-[#F9E5FF] text-[#E308E6]";
       case "Selesai":
         return "bg-[#D0F0FF] text-[#15B5FF]";
+      default:
+        return "";
     }
   };
 
   return (
-    <tr className="overflow-x-auto text-base text-center border-b">
-      <td>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={onCheckboxChange}
-        />
-      </td>
-      <td className="px-4 py-2">{projectId}</td>
-      <td className="px-4 py-2">{waktuRecording}</td>
-      <td className="px-4 py-2">{lokasi}</td>
-      <td className="px-4 py-2">
-        <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getstatus()}`}
-        >
-          {status}
-        </div>
-      </td>
-      <td className="px-4 py-2">
-        <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getkecepatanWaktu()}`}
-        >
-          {kecepatanWaktu}
-        </div>
-      </td>
-      <td className="px-4 py-2 text-center">
-        <div className="dropdown dropdown-left dropdown-end">
-          <div tabIndex={0} role="button" className="m-1 rotate-90">
-            ...
-          </div>
-          <ul
-            tabIndex={0}
-            className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200"
+    <>
+      <tr className="overflow-x-auto text-base text-center border-b">
+        <td>
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={onCheckboxChange}
+          />
+        </td>
+        <td className="px-4 py-2">{projectId}</td>
+        <td className="px-4 py-2">{waktuRecording}</td>
+        <td className="px-4 py-2">{lokasi}</td>
+        <td className="px-4 py-2">
+          <div
+            className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusClass()}`}
           >
-            <li>
-              <a>
-                <span>
-                  <MdOutlineEdit />
-                </span>
-                Edit
-              </a>
-            </li>
-            <li>
-              <a>
-                <span>
-                  <MdDeleteOutline size={17} />
-                </span>
-                Hapus
-              </a>
-            </li>
-          </ul>
+            {status}
+          </div>
+        </td>
+        <td className="px-4 py-2">
+          <div
+            className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getKecepatanWaktuClass()}`}
+          >
+            {kecepatanWaktu}
+          </div>
+        </td>
+        <td className="px-4 py-2 text-center">
+          <div className="dropdown dropdown-left dropdown-end">
+            <div tabIndex={0} role="button" className="m-1 rotate-90">
+              ...
+            </div>
+            <ul
+              tabIndex={0}
+              className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200"
+            >
+              <li>
+                <a>
+                  <span>
+                    <MdOutlineEdit />
+                  </span>
+                  Edit
+                </a>
+              </li>
+              <li>
+                <a onClick={handleNavigate}>
+                  <span>
+                    <MdOutlineDetails />
+                  </span>
+                  Lihat Details
+                </a>
+              </li>
+              <li>
+                <a>
+                  <span>
+                    <MdDeleteOutline size={17} />
+                  </span>
+                  Hapus
+                </a>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+
+      {/* Conditionally render the DetailRecording component as an overlay/modal */}
+      {isDetailVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl relative">
+            <button
+              className="absolute top-5 right-5 text-gray-500"
+              onClick={closeDetail}
+            >
+              X
+            </button>
+            <DetailRecording />
+          </div>
         </div>
-      </td>
-    </tr>
+      )}
+    </>
   );
 };
 
-export default ProjectItem;
+export default RecordingItem;
