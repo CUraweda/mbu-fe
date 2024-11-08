@@ -2,6 +2,7 @@ import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 interface ProjectItemProps {
   id: number;
@@ -32,6 +33,17 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/chickin/add");
+  };
+
+  const editNavigate = () => {
+    navigate("/chickin/edit");
+  };
+
   const getStatusChickin = () => {
     switch (statusChickin) {
       case "Sudah":
@@ -95,7 +107,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200"
           >
             <li>
-              <a>
+              <a onClick={editNavigate}>
                 <span>
                   <MdOutlineEdit />
                 </span>
@@ -119,7 +131,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
               </a>
             </li>
             <li>
-              <a>
+              <a onClick={handleNavigate}>
                 <span>
                   <GiChicken size={17} />
                 </span>

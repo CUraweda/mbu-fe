@@ -7,12 +7,14 @@ import LoginLayout from "./Layouts/loginLayout";
 import Home from "./Pages/Home";
 import ProjectListPage from "./Pages/Project/ProjectListPage";
 import ChickinListPage from "./Pages/Project/ChickinListPage";
+import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import Recording from "./Pages/Project/recordingPage";
+import FormChickinPage from "./Pages/Project/formchickinPage";
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
+            <Route path="/chickin/add" element={<FormChickinPage />} />
+            <Route path="/chickin/edit" element={<FormEditChickinPage />} />
         
             <Route path="/recording" element={<Recording />} /> 
 
