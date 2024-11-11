@@ -13,12 +13,9 @@ import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import Recording from "./Pages/Project/recordingPage";
-<<<<<<< HEAD
 import FormChickinPage from "./Pages/Project/formchickinPage";
 import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
-=======
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
->>>>>>> origin/feat/project
 
 function App() {
   return (
