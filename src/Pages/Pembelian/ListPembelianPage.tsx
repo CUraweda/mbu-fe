@@ -3,7 +3,7 @@ import Breadcrumb from "../../Components/Breadcrumb";
 import DataSelector from "../../Components/DataSelector";
 import Filter from "../../Components/Filter";
 import PembelianList from "../../Components/pembelian/PembelianList";
-import SearchBar from "../../Components/searchBar";
+import SearchBar from "../../Components/Search";
 import iconMap from "../../Data/iconMap";
 import LayoutProject from "../../Layouts/layoutProject";
 import { useNavigate } from "react-router-dom";

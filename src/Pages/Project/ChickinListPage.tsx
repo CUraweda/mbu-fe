@@ -1,17 +1,17 @@
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/SearchBar";
+import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import Chickinlist from "../../Components/project/ChickinList";
 import ChickinData from "../../Data/ChickinData";
 
 // icons
-import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -20,7 +20,7 @@ const breadcrumbItems = [
 ];
 
 const ProjectListPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
@@ -30,9 +30,9 @@ const ProjectListPage = () => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
-  const handleNavigate = () => {
-    navigate("/project/add");
-  };
+  // const handleNavigate = () => {
+  //   navigate("/project/add");
+  // };
 
   return (
     <div>

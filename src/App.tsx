@@ -13,8 +13,12 @@ import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import Recording from "./Pages/Project/recordingPage";
+<<<<<<< HEAD
 import FormChickinPage from "./Pages/Project/formchickinPage";
 import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
+=======
+import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
+>>>>>>> origin/feat/project
 
 function App() {
   return (
@@ -33,6 +37,7 @@ function App() {
             {/* project */}
             <Route path="/project" element={<ProjectListPage />} />
             <Route path="/project/add" element={<ProjectFormPage />} />
+            <Route path="/project/approval" element={<ProjectApprovalPage />} />
 
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
@@ -47,6 +52,8 @@ function App() {
             {/* recording */}        
             <Route path="/recording" element={<Recording />} /> 
 
+            <Route path="/recording" element={<Recording />} />
+
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
             <Route path="/form-pembelian" element={<FormPembelianPage />} />
@@ -56,6 +63,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

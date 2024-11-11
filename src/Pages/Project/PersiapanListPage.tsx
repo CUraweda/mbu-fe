@@ -1,7 +1,7 @@
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/searchBar";
+import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import PersiapanList from "../../Components/project/PersiapanList";
 import persiapanData from "../../Data/persiapanData";
@@ -20,7 +20,7 @@ const breadcrumbItems = [
 ];
 
 const PersiapanListPage = () => {
-//   const navigate = useNavigate();
+  //   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
@@ -30,9 +30,9 @@ const PersiapanListPage = () => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
-//   const handleNavigate = () => {
-//     navigate("/project/add");
-//   };
+  //   const handleNavigate = () => {
+  //     navigate("/project/add");
+  //   };
 
   return (
     <div>
