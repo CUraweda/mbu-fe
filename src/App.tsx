@@ -49,7 +49,6 @@ function App() {
             {/* recording */}        
             <Route path="/recording" element={<Recording />} /> 
 
-            <Route path="/recording" element={<Recording />} />
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
