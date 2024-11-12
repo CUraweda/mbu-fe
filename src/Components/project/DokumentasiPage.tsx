@@ -1,8 +1,6 @@
 import React from "react";
 import { useState } from 'react';
-import { FaRegTrashAlt } from "react-icons/fa";
 import dokumentasi from "../../Data/dokumentasiData";
-import { FiPlusCircle } from "react-icons/fi";
 
 import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
 import dokumentasiData from "../../Data/dokumentasiData";

@@ -1,10 +1,8 @@
 import React from "react";
 import { useState } from 'react';
-import { FaRegTrashAlt } from "react-icons/fa";
 import ceklisPersiapan from "../../Data/ceklisPersiapanData";
-import { FiPlusCircle } from "react-icons/fi";
 
-import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
 
 interface Ceklis {
@@ -16,6 +14,7 @@ interface Ceklis {
 
 const CeklisPersiapanForm: React.FC = () => {
   const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapan);
+  setItems(ceklisPersiapan)
   const [currentPage, setCurrentPage] = useState(1);
 
   const getstatusCeklis = (statusCeklis: string) => {
