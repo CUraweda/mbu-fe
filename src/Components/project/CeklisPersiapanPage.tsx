@@ -1,7 +1,9 @@
 import React from "react";
-import { FaRegTrashAlt } from "react-icons/fa";
+import { useState } from 'react';
 import ceklisPersiapan from "../../Data/ceklisPersiapanData";
-import { FiPlusCircle } from "react-icons/fi";
+
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
 
 interface Ceklis {
   itemPekerjaanPersiapan: string;
@@ -12,6 +14,8 @@ interface Ceklis {
 
 const CeklisPersiapanForm: React.FC = () => {
   const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapan);
+  setItems(ceklisPersiapan)
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getstatusCeklis = (statusCeklis: string) => {
     switch (statusCeklis) {
@@ -24,6 +28,10 @@ const CeklisPersiapanForm: React.FC = () => {
       default:
         return "bg-[#D0F0FF] text-[#15B5FF]";
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
 //   const handleDelete = (id: number) => {
@@ -116,6 +124,27 @@ const CeklisPersiapanForm: React.FC = () => {
             ))}
           </tbody>
         </table>
+        <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
+          <div className="flex items-center justify-center md:justify-end">
+            <button
+              disabled={currentPage === 1}
+              onClick={() => handlePageChange(currentPage - 1)}
+              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
+            >
+              <FaArrowLeft size={18} className="text-primary" />
+              <div className="flex text-center">Prev</div>
+            </button>
+            <span className="mx-2 text-primary">{currentPage} of {Math.ceil(ceklisPersiapanData.length / 10)}</span>
+            <button
+              disabled={Math.ceil(ceklisPersiapanData.length / 10) === 1}
+              onClick={() => handlePageChange(currentPage + 1)}
+              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
+            >
+              <div className="flex text-center">Next</div>
+              <FaArrowRight size={18} className="text-primary" />
+            </button>
+          </div>
+        </div>
         {/* <button
           onClick={handleAddRow}
           className="px-4 py-2 ml-14 xl:ml-20 text-primary"

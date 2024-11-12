@@ -4,6 +4,8 @@ import LayoutProject from "../../Layouts/layoutProject";
 import Tabs from "../../Components/Tabs";
 import InformasiUmumPersiapanPage from "../../Components/project/InformasiUmumPersiapanPage";
 import CeklisPersiapanForm from "../../Components/project/CeklisPersiapanPage";
+import DokumentasiForm from "../../Components/project/DokumentasiPage";
+import PelaksanaForm from "../../Components/project/PelaksanaPersiapanPage";
 // import FarmInfoForm from "../../Components/project/FarmInfoForm";
 // import ProjectBudgetForm from "../../Components/project/ProjectBudgetForm";
 // import DataRecordingForm from "../../Components/project/DataRecordingForm";
@@ -31,10 +33,10 @@ const PersiapanFormPage = () => {
         return <InformasiUmumPersiapanPage />;
       case 2:
         return <CeklisPersiapanForm />;
-    //   case 3:
-    //     return <ProjectBudgetForm />;
-    //   case 4:
-    //     return <DataRecordingForm />;
+      case 3:
+        return <DokumentasiForm />;
+      case 4:
+        return <PelaksanaForm />;
       default:
         return null;
     }
