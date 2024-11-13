@@ -13,6 +13,8 @@ import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import Recording from "./Pages/Project/recordingPage";
+import FormChickinPage from "./Pages/Project/formchickinPage";
+import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
 
 function App() {
@@ -40,8 +42,12 @@ function App() {
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
+            <Route path="/chickin/add" element={<FormChickinPage />} />
+            <Route path="/chickin/edit" element={<FormEditChickinPage />} />
+        
+            {/* recording */}        
+            <Route path="/recording" element={<Recording />} /> 
 
-            <Route path="/recording" element={<Recording />} />
 
             {/* pembelian */}
             <Route path="/list-pembelian" element={<ListPembelianPage />} />
