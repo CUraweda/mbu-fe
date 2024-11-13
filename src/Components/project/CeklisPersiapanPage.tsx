@@ -1,20 +1,20 @@
 import React from "react";
-import { useState } from 'react';
-import ceklisPersiapan from "../../Data/ceklisPersiapanData";
+import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
 
-interface Ceklis {
-  itemPekerjaanPersiapan: string;
-  tanggalSelesai: string;
-  aktual: number;
-  hasil: string;
-}
+// interface Ceklis {
+//   itemPekerjaanPersiapan: string;
+//   tanggalSelesai: string;
+//   aktual: number;
+//   hasil: string;
+// }
 
 const CeklisPersiapanForm: React.FC = () => {
-  const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapan);
-  setItems(ceklisPersiapan)
+  // const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapanData);
+  // setItems(ceklisPersiapan);
+  const items = ceklisPersiapanData;
   const [currentPage, setCurrentPage] = useState(1);
 
   const getstatusCeklis = (statusCeklis: string) => {
@@ -34,26 +34,10 @@ const CeklisPersiapanForm: React.FC = () => {
     setCurrentPage(page);
   };
 
-//   const handleDelete = (id: number) => {
-//     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-//   };
-
-//   const handleAddRow = () => {
-//     const newId = items.length > 0 ? items[items.length - 1].id + 1 : 1;
-//     const newItem: Ceklis = {
-//       id: newId,
-//       fase: "",
-//       tanggalMulai: "",
-//       tanggalSelesai: "",
-//       statusFase: "Belum Mulai",
-//     };
-//     setItems((prevItems) => [...prevItems, newItem]);
-//   };
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pb-3 m-5 md:grid-cols-3 xl:grid-cols-5">
-      <div>
+        <div>
           <label htmlFor="area">Jenis Persiapan</label>
           <select
             id="area"
@@ -82,11 +66,15 @@ const CeklisPersiapanForm: React.FC = () => {
         <table className="min-w-full" style={{ border: "none" }}>
           <thead className="text-center bg-blue-100 ">
             <tr>
-              <th className="px-4 py-2 text-gray-600">Item Pekerjaan Persiapan</th>
+              <th className="px-4 py-2 text-gray-600">
+                Item Pekerjaan Persiapan
+              </th>
               <th className="px-4 py-2 text-gray-600">
                 Estimasi Tanggal Selesai
               </th>
-              <th className="px-4 py-2 text-gray-600">Aktual Waktu Persiapan (Hari)</th>
+              <th className="px-4 py-2 text-gray-600">
+                Aktual Waktu Persiapan (Hari)
+              </th>
               <th className="px-4 py-2 text-gray-600">Hasil</th>
               <th className="px-4 py-2 text-gray-600"></th>
             </tr>
@@ -94,7 +82,9 @@ const CeklisPersiapanForm: React.FC = () => {
           <tbody className="text-center ">
             {items.map((item) => (
               <tr key={item.itemPekerjaanPersiapan}>
-                <td className="px-4 text-gray-700">{item.itemPekerjaanPersiapan}</td>
+                <td className="px-4 text-gray-700">
+                  {item.itemPekerjaanPersiapan}
+                </td>
                 <td className="p-2 text-gray-700">
                   <input
                     type="date"
@@ -112,14 +102,6 @@ const CeklisPersiapanForm: React.FC = () => {
                     {item.hasil}{" "}
                   </div>
                 </td>
-                {/* <td className="p-2">
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="px-3 py-1"
-                  >
-                    <FaRegTrashAlt className="text-red-500" />
-                  </button>
-                </td> */}
               </tr>
             ))}
           </tbody>
@@ -134,7 +116,9 @@ const CeklisPersiapanForm: React.FC = () => {
               <FaArrowLeft size={18} className="text-primary" />
               <div className="flex text-center">Prev</div>
             </button>
-            <span className="mx-2 text-primary">{currentPage} of {Math.ceil(ceklisPersiapanData.length / 10)}</span>
+            <span className="mx-2 text-primary">
+              {currentPage} of {Math.ceil(ceklisPersiapanData.length / 10)}
+            </span>
             <button
               disabled={Math.ceil(ceklisPersiapanData.length / 10) === 1}
               onClick={() => handlePageChange(currentPage + 1)}
@@ -145,12 +129,6 @@ const CeklisPersiapanForm: React.FC = () => {
             </button>
           </div>
         </div>
-        {/* <button
-          onClick={handleAddRow}
-          className="px-4 py-2 ml-14 xl:ml-20 text-primary"
-        >
-          <FiPlusCircle size={24} />
-        </button> */}
       </div>
     </div>
   );

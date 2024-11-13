@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import LayoutProject from "../../Layouts/layoutProject";
 import Breadcrumb from "../../Components/Breadcrumb";
@@ -10,13 +9,11 @@ const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Project", link: "/project" },
   { label: "Recording", link: "/recording" },
-  { label: "Form Recording", link: "/" },
 ];
 
 const Recording: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const Data = recordingListData;
-
 
   return (
     <div>
@@ -38,7 +35,7 @@ const Recording: React.FC = () => {
                   {item.label}
                 </label>
                 <select className="px-4 py-2 border border-gray-300 rounded">
-                  <option value={item.option}>{item.option}</option>
+                  <option>{item.option}</option>
                 </select>
               </div>
             ))}
@@ -50,23 +47,20 @@ const Recording: React.FC = () => {
             </button>
           </div>
         </div>
-
-        <RecordingList items={recordingData} />
-
+        <RecordingList items={Data} />
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button
               disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
             >
               <FaArrowLeft size={18} className="text-primary" />
               <div className="flex text-center">Prev</div>
             </button>
-            <span className="mx-2 text-primary">{currentPage} of {Math.ceil(recordingData.length / 10)}</span>
+            <span className="mx-2 text-primary">{currentPage} of 2</span>
             <button
-              disabled={Math.ceil(recordingData.length / 10) === 1}
-              onClick={() => handlePageChange(currentPage + 1)}
+              onClick={() => setCurrentPage((prev) => prev + 1)}
               className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
             >
               <div className="flex text-center">Next</div>
@@ -75,9 +69,6 @@ const Recording: React.FC = () => {
           </div>
         </div>
       </LayoutProject>
-
-      {/* Conditionally render the form component */}
-      {isFormVisible && <FormRecording onClose={() => setIsFormVisible(false)} />}
     </div>
   );
 };

@@ -6,9 +6,6 @@ import InformasiUmumPersiapanPage from "../../Components/project/InformasiUmumPe
 import CeklisPersiapanForm from "../../Components/project/CeklisPersiapanPage";
 import DokumentasiForm from "../../Components/project/DokumentasiPage";
 import PelaksanaForm from "../../Components/project/PelaksanaPersiapanPage";
-// import FarmInfoForm from "../../Components/project/FarmInfoForm";
-// import ProjectBudgetForm from "../../Components/project/ProjectBudgetForm";
-// import DataRecordingForm from "../../Components/project/DataRecordingForm";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

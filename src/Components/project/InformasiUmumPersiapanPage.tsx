@@ -1,34 +1,17 @@
-import { FaRegTrashAlt } from "react-icons/fa";
-import { FiPlusCircle } from "react-icons/fi";
 import informasiUmum from "../../Data/informasiUmumPersiapan";
-import React from "react";
 
-interface Info {
-  id: number;
-  unitBisnis: string;
-  area: string;
-  lokasi: string;
-  produk: string;
-  namaKandang: string;
-}
+// interface Info {
+//   id: number;
+//   unitBisnis: string;
+//   area: string;
+//   lokasi: string;
+//   produk: string;
+//   namaKandang: string;
+// }
 
 const InformasiUmumForm = () => {
-  const [items, setItems] = React.useState<Info[]>(informasiUmum);
-//   const handleDelete = (id: number) => {
-//     setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-//   };
-
-//   const handleAddRow = () => {
-//     const newId = items.length > 0 ? items[items.length - 1].id + 1 : 1;
-//     const newItem: Info = {
-//       unitBisnis: "",
-//       area: "",
-//       lokasi: "",
-//       produk: "",
-//       namaKandang: "",
-//     };
-//     setItems((prevItems) => [...prevItems, newItem]);
-//   };
+  // const [items, setItems] = React.useState<Info[]>(informasiUmum);
+  const items = informasiUmum;
 
   return (
     <div>
@@ -36,7 +19,7 @@ const InformasiUmumForm = () => {
         <table className="min-w-full" style={{ border: "none" }}>
           <thead className="text-left ">
             <tr>
-            <th className="px-3 py-2 text-gray-600">Id Persiapan</th>
+              <th className="px-3 py-2 text-gray-600">Id Persiapan</th>
               <th className="px-3 py-2 text-gray-600">Unit Bisnis</th>
               <th className="px-3 py-2 text-gray-600">Area</th>
               <th className="px-3 py-2 text-gray-600">Lokasi</th>
@@ -60,8 +43,12 @@ const InformasiUmumForm = () => {
                     value={item.unitBisnis}
                     className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                   >
-                    <option value="PT Mitra Berlian Unggas 1">PT Mitra Berlian Unggas 1</option>
-                    <option value="PT Mitra Berlian Unggas 2">PT Mitra Berlian Unggas 2</option>
+                    <option value="PT Mitra Berlian Unggas 1">
+                      PT Mitra Berlian Unggas 1
+                    </option>
+                    <option value="PT Mitra Berlian Unggas 2">
+                      PT Mitra Berlian Unggas 2
+                    </option>
                     {/* Add other options here */}
                   </select>
                 </td>
