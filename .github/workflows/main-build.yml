@@ -1,4 +1,5 @@
-name: Build checking for production area
+
+name: Checking for deploy staging area
 
 on:
   pull_request:
