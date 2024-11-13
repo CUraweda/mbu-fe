@@ -37,6 +37,8 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
 
   const getStatusClass = () => {
     switch (status) {
+      case "Pengajuan":
+        return "bg-[#FFF7C7] text-[#C9C311]";
       case "Sudah":
         return "bg-[#E4FFBD] text-[#12B906]";
       case "Belum":
@@ -48,14 +50,14 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
 
   const getKecepatanWaktuClass = () => {
     switch (kecepatanWaktu) {
-      case "Pengajuan":
-        return "bg-[#FFF7C7] text-[#C9C311]";
-      case "Persiapan":
-        return "bg-[#FFDADB] text-[#BE0407]";
+      case "Terlambat":
+        return "bg-[#FFDFBE] text-[#EC8917]";
       case "Aktif":
         return "bg-[#F9E5FF] text-[#E308E6]";
       case "Selesai":
         return "bg-[#D0F0FF] text-[#15B5FF]";
+      case "Sudah":
+        return "bg-[#E4FFBD] text-[#12B906]";
       default:
         return "";
     }

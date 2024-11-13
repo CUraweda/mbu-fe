@@ -4,6 +4,7 @@ import Breadcrumb from "../../Components/Breadcrumb";
 import RecordingList from "../../Components/project/RecordingList";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import recordingListData from "../../Data/recordingListData";
+import FormRecording from "./recordingForm";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -14,6 +15,15 @@ const breadcrumbItems = [
 const Recording: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const Data = recordingListData;
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  const handleNavigate = () => {
+    setIsFormVisible(true);
+  };
+
+  const closeForm = () => {
+    setIsFormVisible(false);
+  };
 
   return (
     <div>
@@ -21,6 +31,9 @@ const Recording: React.FC = () => {
       <LayoutProject>
         <div className="p-10">
           <h2 className="mb-5 text-2xl text-primary">List Recording</h2>
+
+          {/* Garis penuh di bawah teks "List Recording" */}
+          <hr className="border-t-2 border-gray-300 mb-5 w-full" />
 
           <div className="flex flex-wrap mb-10 gap-7">
             {[
@@ -42,7 +55,7 @@ const Recording: React.FC = () => {
           </div>
 
           <div className="mb-5">
-            <button className="px-4 py-2 text-white rounded bg-secondary">
+            <button className="px-4 py-2 text-white rounded bg-secondary" onClick={handleNavigate}>
               + Tambah Data
             </button>
           </div>
@@ -69,6 +82,7 @@ const Recording: React.FC = () => {
           </div>
         </div>
       </LayoutProject>
+      {isFormVisible && <FormRecording onClose={closeForm} />}
     </div>
   );
 };
