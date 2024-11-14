@@ -6,6 +6,7 @@ import {
   MdOutlinePayment,
 } from "react-icons/md";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 interface PembelianItemProps {
   id: string;
@@ -31,6 +32,10 @@ const PembelianItem: React.FC<PembelianItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
+  const navigate = useNavigate();
+  const handleNavigateToDetail = () => {
+    navigate("/purchase-list/detail");
+  };
   const getStatusClass = () => {
     switch (status) {
       case "Dibayar":
@@ -92,7 +97,7 @@ const PembelianItem: React.FC<PembelianItemProps> = ({
               </a>
             </li>
             <li>
-              <a>
+              <a onClick={handleNavigateToDetail}>
                 <span>
                   <MdOutlineRemoveRedEye size={17} />
                 </span>

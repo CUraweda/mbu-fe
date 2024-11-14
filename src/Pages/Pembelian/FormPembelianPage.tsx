@@ -5,7 +5,7 @@ import LayoutProject from "../../Layouts/layoutProject";
 const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Pembelian", link: "/pembelian" },
-  { label: "List Pembelian", link: "/list-pembelian" },
+  { label: "List Pembelian", link: "/purchase-list" },
   { label: "Form Pengajuan Pembelian" },
 ];
 
