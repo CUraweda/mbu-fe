@@ -61,7 +61,7 @@ const ListPembelianPage = () => {
   };
 
   const handleNavigateToFormPembelian = () => {
-    navigate("/form-pembelian");
+    navigate("/purchase-list/add");
   };
 
   return (
