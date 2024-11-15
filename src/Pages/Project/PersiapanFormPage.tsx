@@ -6,6 +6,9 @@ import InformasiUmumPersiapanPage from "../../Components/project/InformasiUmumPe
 import CeklisPersiapanForm from "../../Components/project/CeklisPersiapanPage";
 import DokumentasiForm from "../../Components/project/DokumentasiPage";
 import PelaksanaForm from "../../Components/project/PelaksanaPersiapanPage";
+// import FarmInfoForm from "../../Components/project/FarmInfoForm";
+// import ProjectBudgetForm from "../../Components/project/ProjectBudgetForm";
+// import DataRecordingForm from "../../Components/project/DataRecordingForm";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -23,6 +26,7 @@ const tabs = [
 
 const PersiapanFormPage = () => {
   const [currentTab, setCurrentTab] = useState(1);
+  const [role, setRole] = useState("staff"); // Set default role, ganti dengan cara mendapatkan role yang sesuai
 
   const renderForm = () => {
     switch (currentTab) {

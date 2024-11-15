@@ -8,13 +8,12 @@ interface Pelaksana {
   
   const pelaksanaData: Pelaksana[] = [
     {
-      jenisPersiapan: "",
-      waktuPelaksana: "",
-      namaPelaksana: "",
-      tempatPelaksana: "",
-      foto: "",
+      jenisPersiapan: "Broiler Fermentasi",
+      waktuPelaksana: "10-03-2024 10:00",
+      namaPelaksana: "Firdaus",
+      tempatPelaksana: "H6R5+VMC ilham, Mekar Jaya, Kec.Cimarga, Kabupaten Lebak, Banten 42361",
+      foto: "Lihat Foto",
     },
   ];
   
   export default pelaksanaData;
-  

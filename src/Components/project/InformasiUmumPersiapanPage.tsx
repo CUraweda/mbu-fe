@@ -34,7 +34,7 @@ const InformasiUmumForm = () => {
                 <td className="p-2 text-gray-700">
                   <input
                     type="text"
-                    value={item.id}
+                    id="idpersiapan"
                     className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </td>

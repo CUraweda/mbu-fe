@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-// import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +15,8 @@ interface PersiapanItemProps {
   aktual: number;
   isChecked: boolean;
   onCheckboxChange: () => void;
+  onUpdateStatusProject: (id: number, newStatus: string) => void;
+  onUpdateStatusPersiapan: (id: number, newStatus: string) => void;
 }
 
 const PersiapanItem: React.FC<PersiapanItemProps> = ({
@@ -30,10 +31,14 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
   aktual,
   isChecked,
   onCheckboxChange,
+  onUpdateStatusProject,
+  onUpdateStatusPersiapan,
 }) => {
   const navigate = useNavigate();
+  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
+  const [showPersiapanDropdown, setShowPersiapanDropdown] = useState(false);
 
-  const getStatusProject = () => {
+  const getStatusProjectClass = () => {
     switch (statusProject) {
       case "Persiapan":
         return "bg-[#FFDADB] text-[#BE0407]";
@@ -41,12 +46,14 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
         return "bg-[#F9E5FF] text-[#E308E6]";
       case "Selesai":
         return "bg-[#D0F0FF] text-[#15B5FF]";
+      case "Pengajuan":
+        return "bg-[#FFF7C7] text-[#C9C311]";
       default:
         return "";
     }
   };
 
-  const getStatusPersiapan = () => {
+  const getStatusPersiapanClass = () => {
     switch (statusPersiapan) {
       case "Belum Selesai":
         return "bg-[#FFDFBE] text-[#EC8917]";
@@ -54,8 +61,6 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
         return "bg-[#E4FFBD] text-[#12B906]";
       case "Tidak Tercapai":
         return "bg-[#FFDADB] text-[#BE0407]";
-      case "Menunggu Persetujuan":
-        return "bg-[#FFF7C7] text-[#C9C311]";
       default:
         return "";
     }
@@ -65,13 +70,34 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
     navigate("/form-persiapan");
   };
 
+  const handleProjectStatusClick = () => {
+    setShowProjectDropdown(!showProjectDropdown);
+    setShowPersiapanDropdown(false);
+  };
+
+  const handlePersiapanStatusClick = () => {
+    setShowPersiapanDropdown(!showPersiapanDropdown);
+    setShowProjectDropdown(false);
+  };
+
+  const handleProjectStatusChange = (newStatus: string) => {
+    onUpdateStatusProject(id, newStatus);
+    setShowProjectDropdown(false);
+  };
+
+  const handlePersiapanStatusChange = (newStatus: string) => {
+    onUpdateStatusPersiapan(id, newStatus);
+    setShowPersiapanDropdown(false);
+  };
+
   return (
-    <tr className="overflow-x-auto text-base text-center border-b">
-      <td>
+    <tr className="text-base text-center border-b">
+      <td className="px-4 py-2">
         <input
           type="checkbox"
           checked={isChecked}
           onChange={onCheckboxChange}
+          className="h-4 w-4 cursor-pointer"
         />
       </td>
       <td className="px-4 py-2">{id}</td>
@@ -80,20 +106,63 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
       <td className="px-4 py-2">{lokasi}</td>
       <td className="px-4 py-2">{kandang}</td>
       <td className="px-4 py-2">{periode}</td>
-      <td className="px-4 py-2">
+
+      {/* Status Project Dropdown */}
+      <td className="px-4 py-2 relative">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProject()}`}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()} cursor-pointer`}
+          onClick={handleProjectStatusClick}
         >
           {statusProject}
         </div>
+        {showProjectDropdown && (
+          <div className="absolute mt-2 w-48 bg-white border rounded shadow-lg z-20">
+            <ul className="p-2">
+              {["Pengajuan", "Persiapan", "Aktif", "Selesai"].map((status) => (
+                <li key={status} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
+                  <input
+                    type="radio"
+                    name="statusProject"
+                    checked={statusProject === status}
+                    onChange={() => handleProjectStatusChange(status)}
+                    className="mr-2"
+                  />
+                  {status}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </td>
-      <td className="px-4 py-2">
+
+      {/* Status Persiapan Dropdown */}
+      <td className="px-4 py-2 relative">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapan()}`}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()} cursor-pointer`}
+          onClick={handlePersiapanStatusClick}
         >
           {statusPersiapan}
         </div>
+        {showPersiapanDropdown && (
+          <div className="absolute mt-2 w-48 bg-white border rounded shadow-lg z-20">
+            <ul className="p-2">
+              {["Tercapai", "Tidak Tercapai", "Belum Selesai"].map((status) => (
+                <li key={status} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
+                  <input
+                    type="radio"
+                    name="statusPersiapan"
+                    checked={statusPersiapan === status}
+                    onChange={() => handlePersiapanStatusChange(status)}
+                    className="mr-2"
+                  />
+                  {status}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </td>
+
       <td className="px-4 py-2">{aktual}</td>
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">
@@ -128,14 +197,6 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
                 Lanjutan Persiapan
               </a>
             </li>
-            {/* <li>
-              <a>
-                <span>
-                  <GiChicken size={17} />
-                </span>
-                Chick in
-              </a>
-            </li> */}
           </ul>
         </div>
       </td>

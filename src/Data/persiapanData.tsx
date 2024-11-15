@@ -18,7 +18,7 @@ interface Persiapan {
       lokasi: "Pangandaran",
       kandang: "Pangandaran 1",
       periode: 3,
-      statusProject: "Persiapan",
+      statusProject: "Pengajuan",
       statusPersiapan: "Belum Selesai",
       aktual: 10
     },
@@ -74,7 +74,7 @@ interface Persiapan {
         kandang: "Cimarga 2",
         periode: 10,
         statusProject: "Persiapan",
-        statusPersiapan: "Menunggu Persetujuan",
+        statusPersiapan: "Belum Selesai",
         aktual: 18
       },
       {
@@ -102,4 +102,3 @@ interface Persiapan {
   ];
   
   export default persiapanData;
-  
