@@ -36,6 +36,18 @@ const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
     setSelectedRows(Array(items.length).fill(newIsAllSelected));
   };
 
+  // Fungsi untuk memperbarui status project
+  const handleUpdateStatusProject = (id: number, newStatus: string) => {
+    console.log(`Update status project ID ${id} ke ${newStatus}`);
+    // Tambahkan logika untuk mengubah status di backend atau state jika diperlukan
+  };
+
+  // Fungsi untuk memperbarui status persiapan
+  const handleUpdateStatusPersiapan = (id: number, newStatus: string) => {
+    console.log(`Update status persiapan ID ${id} ke ${newStatus}`);
+    // Tambahkan logika untuk mengubah status di backend atau state jika diperlukan
+  };
+
   return (
     <div>
       <table className="min-w-full bg-white border">
@@ -63,10 +75,12 @@ const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
         <tbody>
           {items.map((item, index) => (
             <PersiapanItem
-              key={index}
+              key={item.id}
               {...item}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}
+              onUpdateStatusProject={handleUpdateStatusProject}
+              onUpdateStatusPersiapan={handleUpdateStatusPersiapan}
             />
           ))}
         </tbody>

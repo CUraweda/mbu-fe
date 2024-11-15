@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
+import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
 
 // interface Ceklis {
 //   itemPekerjaanPersiapan: string;
@@ -11,7 +11,7 @@ import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
 //   hasil: string;
 // }
 
-const CeklisPersiapanForm: React.FC = () => {
+const CeklisPersiapanApproval: React.FC = () => {
   // const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapanData);
   // setItems(ceklisPersiapan);
   const items = ceklisPersiapanData;
@@ -140,4 +140,4 @@ const CeklisPersiapanForm: React.FC = () => {
   );
 };
 
-export default CeklisPersiapanForm;
+export default CeklisPersiapanApproval;
