@@ -12,8 +12,15 @@ import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
+import PersiapanApprovalPage from "./Pages/Project/PersiapanApprovalPage";
 import Recording from "./Pages/Project/recordingPage";
+import FormChickinPage from "./Pages/Project/formchickinPage";
+import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
+import PurchaseDetailPage from "./Pages/Pembelian/PurchaseDetailPage";
+import OtherCostDetailPage from "./Pages/Pembelian/OtherCostDetailPage";
+import PaymentInfoPage from "./Pages/Pembelian/PaymentInfoPage";
+import ReceiptReturnPage from "./Pages/Pembelian/ReceiptReturnPage";
 
 function App() {
   return (
@@ -37,15 +44,35 @@ function App() {
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
             <Route path="/form-persiapan" element={<PersiapanFormPage />} />
+            <Route path="/persiapan/approval" element={<PersiapanApprovalPage />} />
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
+            <Route path="/chickin/add" element={<FormChickinPage />} />
+            <Route path="/chickin/edit" element={<FormEditChickinPage />} />
 
+            {/* recording */}
             <Route path="/recording" element={<Recording />} />
 
             {/* pembelian */}
-            <Route path="/list-pembelian" element={<ListPembelianPage />} />
-            <Route path="/form-pembelian" element={<FormPembelianPage />} />
+            <Route path="/purchase-list" element={<ListPembelianPage />} />
+            <Route path="/purchase-list/add" element={<FormPembelianPage />} />
+            <Route
+              path="/purchase-list/detail"
+              element={<PurchaseDetailPage />}
+            />
+            <Route
+              path="/purchase-list/other-cost-details"
+              element={<OtherCostDetailPage />}
+            />
+            <Route
+              path="/purchase-list/payment-info"
+              element={<PaymentInfoPage />}
+            />
+            <Route
+              path="/purchase-list/receipt-return"
+              element={<ReceiptReturnPage />}
+            />
           </Route>
         </Route>
       </Routes>

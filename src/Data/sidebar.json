@@ -34,11 +34,11 @@
     "children": [
       {
         "name": "List Pembelian",
-        "path": "/list-pembelian"
+        "path": "/purchase-list"
       },
       {
         "name": "List Retur",
-        "path": "/list-retur"
+        "path": "/return-list"
       }
     ]
   }
