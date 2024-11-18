@@ -26,7 +26,6 @@ const tabs = [
 
 const PersiapanFormPage = () => {
   const [currentTab, setCurrentTab] = useState(1);
-  const [role, setRole] = useState("staff"); // Set default role, ganti dengan cara mendapatkan role yang sesuai
 
   const renderForm = () => {
     switch (currentTab) {
