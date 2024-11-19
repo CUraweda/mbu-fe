@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaCalendarAlt } from "react-icons/fa"; // Ikon kalender dari react-icons
+import { FaCalendarAlt } from "react-icons/fa";
 
 interface FilterBarProps {
   onFilterChange: (filters: Record<string, any>) => void;

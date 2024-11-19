@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
@@ -5,7 +6,6 @@ import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import PersiapanList from "../../Components/project/PersiapanList";
 import persiapanData from "../../Data/persiapanData";
-import { useState, useEffect } from "react";
 
 // icons
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
@@ -20,60 +20,56 @@ const breadcrumbItems = [
 
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>([]); // Status project yang dipilih
-  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<string[]>([]); // Status persiapan yang dipilih
-  const [filteredData, setFilteredData] = useState(persiapanData); // Data yang sudah difilter
+  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>([]);
+  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [filteredData, setFilteredData] = useState(persiapanData);
 
+  // Fungsi untuk menangani pencarian
   const handleSearch = (query: string) => {
-    console.log("Search query:", query);
+    setSearchQuery(query.toLowerCase()); // Konversi ke huruf kecil agar pencarian tidak case-sensitive
   };
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
-  // Fungsi untuk menangani perubahan filter status project
   const handleProjectFilterChange = (selectedStatuses: string[]) => {
     setFilterProjectStatuses(selectedStatuses);
   };
 
-  // Fungsi untuk menangani perubahan filter status persiapan
   const handlePersiapanFilterChange = (selectedStatuses: string[]) => {
     setFilterPersiapanStatuses(selectedStatuses);
   };
 
-  // Fungsi untuk menyaring data berdasarkan status yang dipilih
   const filterData = () => {
     let filtered = persiapanData;
 
-    // Filter data jika salah satu status project atau status persiapan dipilih
+    // Filter data berdasarkan status
     if (filterProjectStatuses.length > 0 || filterPersiapanStatuses.length > 0) {
       filtered = filtered.filter((item) => {
         const projectMatch =
           filterProjectStatuses.length === 0 || filterProjectStatuses.includes(item.statusProject);
-
         const persiapanMatch =
           filterPersiapanStatuses.length === 0 || filterPersiapanStatuses.includes(item.statusPersiapan);
-
-        // Data tetap ditampilkan jika salah satu filter cocok
         return projectMatch && persiapanMatch;
       });
     }
 
-    // Set filtered data setelah diterapkan filter
+    // Filter data berdasarkan query pencarian
+    if (searchQuery) {
+      filtered = filtered.filter((item) => {
+        const valuesToSearch = Object.values(item).join(" ").toLowerCase(); // Gabungkan semua nilai dalam objek ke string
+        return valuesToSearch.includes(searchQuery);
+      });
+    }
+
     setFilteredData(filtered);
   };
 
-  // Effect untuk memfilter data setiap kali status berubah
   useEffect(() => {
     filterData();
-  }, [filterProjectStatuses, filterPersiapanStatuses]);
-
-  // Reset filter untuk menampilkan seluruh data
-  const resetFilters = () => {
-    setFilterProjectStatuses([]);
-    setFilterPersiapanStatuses([]);
-  };
+  }, [filterProjectStatuses, filterPersiapanStatuses, searchQuery]);
 
   return (
     <div>
@@ -165,7 +161,6 @@ const PersiapanListPage = () => {
                   </div>
                 </div>
 
-                {/* Garis pemisah antara persiapan dan project */}
                 <div className="border-t border-gray-300 my-4"></div>
 
                 {/* Filter untuk status project */}
@@ -234,7 +229,6 @@ const PersiapanListPage = () => {
             </Filter>
           </div>
         </div>
-        {/* Menampilkan daftar persiapan yang sudah difilter */}
         <PersiapanList items={filteredData} />
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">

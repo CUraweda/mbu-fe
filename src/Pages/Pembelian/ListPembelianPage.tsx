@@ -38,7 +38,7 @@ const items: Pembelian[] = [
     vendor: "PT Malindo Feedmill Tbk",
     namaPengaju: "Rifaldi",
     departemen: "Operations - MANBU",
-    tanggal: "2024-10-25",
+    tanggal: "25-10-2024",
     status: "Draft",
     total: 50000000,
   },
