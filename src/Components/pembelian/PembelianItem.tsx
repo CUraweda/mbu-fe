@@ -38,9 +38,21 @@ const PembelianItem: React.FC<PembelianItemProps> = ({
   };
   const getStatusClass = () => {
     switch (status) {
-      case "Dibayar":
+      case "Approval Manager":
+        return "bg-blue-100 text-blue-500";
+      case "Approval Purchasing":
+        return "bg-green-100 text-green-500";
+      case "Approval Finance":
+        return "bg-blue-100 text-blue-500";
+      case "Approval Dir Finance":
+        return "bg-green-100 text-green-500";
+      case "PO Release":
         return "bg-blue-100 text-blue-500";
       case "Produk Diterima":
+        return "bg-green-100 text-green-500";
+      case "Dibayar":
+        return "bg-blue-100 text-blue-500";
+      case "Dibayar Sebagian":
         return "bg-green-100 text-green-500";
       default:
         return "bg-gray-100 text-gray-500";
