@@ -29,13 +29,13 @@ const ProductItem: React.FC<ProductItemProps> = ({
   onDelete,
 }) => {
   return (
-    <tr className="border-b border-gray-200">
+    <tr className="bg-white border-b border-gray-200">
       <td className="px-4 text-gray-700">{id}</td>
       <td className="p-2 text-gray-700">
         <select
           value={product}
           onChange={(e) => onChange("gudang", e.target.value)}
-          className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+          className="w-full px-2 py-1 text-gray-700 border rounded focus:outline-none focus:ring-2 focus:ring-primary"
         >
           <option value="DOC CP Vaksin">DOC CP Vaksin</option>
           <option value="Pakan Starter">Pakan Starter</option>
@@ -94,3 +94,4 @@ const ProductItem: React.FC<ProductItemProps> = ({
 };
 
 export default ProductItem;
+
