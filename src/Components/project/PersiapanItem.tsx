@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +15,6 @@ interface PersiapanItemProps {
   aktual: number;
   isChecked: boolean;
   onCheckboxChange: () => void;
-  onUpdateStatusProject: (id: number, newStatus: string) => void;
-  onUpdateStatusPersiapan: (id: number, newStatus: string) => void;
 }
 
 const PersiapanItem: React.FC<PersiapanItemProps> = ({
@@ -31,12 +29,8 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
   aktual,
   isChecked,
   onCheckboxChange,
-  onUpdateStatusProject,
-  onUpdateStatusPersiapan,
 }) => {
   const navigate = useNavigate();
-  const [showProjectDropdown, setShowProjectDropdown] = useState(false);
-  const [showPersiapanDropdown, setShowPersiapanDropdown] = useState(false);
 
   const getStatusProjectClass = () => {
     switch (statusProject) {
@@ -70,26 +64,6 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
     navigate("/form-persiapan");
   };
 
-  const handleProjectStatusClick = () => {
-    setShowProjectDropdown(!showProjectDropdown);
-    setShowPersiapanDropdown(false);
-  };
-
-  const handlePersiapanStatusClick = () => {
-    setShowPersiapanDropdown(!showPersiapanDropdown);
-    setShowProjectDropdown(false);
-  };
-
-  const handleProjectStatusChange = (newStatus: string) => {
-    onUpdateStatusProject(id, newStatus);
-    setShowProjectDropdown(false);
-  };
-
-  const handlePersiapanStatusChange = (newStatus: string) => {
-    onUpdateStatusPersiapan(id, newStatus);
-    setShowPersiapanDropdown(false);
-  };
-
   return (
     <tr className="text-base text-center border-b">
       <td className="px-4 py-2">
@@ -107,60 +81,22 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
       <td className="px-4 py-2">{kandang}</td>
       <td className="px-4 py-2">{periode}</td>
 
-      {/* Status Project Dropdown */}
-      <td className="px-4 py-2 relative">
+      {/* Status Project Display */}
+      <td className="px-4 py-2">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()} cursor-pointer`}
-          onClick={handleProjectStatusClick}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()}`}
         >
           {statusProject}
         </div>
-        {showProjectDropdown && (
-          <div className="absolute mt-2 w-48 bg-white border rounded shadow-lg z-20">
-            <ul className="p-2">
-              {["Pengajuan", "Persiapan", "Aktif", "Selesai"].map((status) => (
-                <li key={status} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
-                  <input
-                    type="radio"
-                    name="statusProject"
-                    checked={statusProject === status}
-                    onChange={() => handleProjectStatusChange(status)}
-                    className="mr-2"
-                  />
-                  {status}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </td>
 
-      {/* Status Persiapan Dropdown */}
-      <td className="px-4 py-2 relative">
+      {/* Status Persiapan Display */}
+      <td className="px-4 py-2">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()} cursor-pointer`}
-          onClick={handlePersiapanStatusClick}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()}`}
         >
           {statusPersiapan}
         </div>
-        {showPersiapanDropdown && (
-          <div className="absolute mt-2 w-48 bg-white border rounded shadow-lg z-20">
-            <ul className="p-2">
-              {["Tercapai", "Tidak Tercapai", "Belum Selesai"].map((status) => (
-                <li key={status} className="flex items-center p-2 cursor-pointer hover:bg-gray-100">
-                  <input
-                    type="radio"
-                    name="statusPersiapan"
-                    checked={statusPersiapan === status}
-                    onChange={() => handlePersiapanStatusChange(status)}
-                    className="mr-2"
-                  />
-                  {status}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </td>
 
       <td className="px-4 py-2">{aktual}</td>
