@@ -1,6 +1,5 @@
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
-import PurchaseSidebarLayout from "../../Layouts/PurchaseSidebarLayout";
 import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
 
 const breadcrumbItems = [
@@ -15,11 +14,10 @@ const PaymentInfoPage = () => {
     <div>
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
       <LayoutProject>
-        <PurchaseSidebarLayout>
+        
           <PurchaseDetailLayout>
             <h1>info pembayaran</h1>
           </PurchaseDetailLayout>
-        </PurchaseSidebarLayout>
       </LayoutProject>
     </div>
   );
