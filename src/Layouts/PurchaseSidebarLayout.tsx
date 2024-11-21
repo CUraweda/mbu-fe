@@ -9,37 +9,32 @@ const PurchaseSidebarLayout: React.FC<PurchaseSidebarLayoutProps> = ({
   children,
 }) => {
   return (
-    <div className="h-screen drawer lg:drawer-open">
-      {/* Sidebar toggle input */}
-      <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-
-      {/* Main content */}
-      <div className="drawer-content flex flex-col bg-[#F0F0F0F0] h-screen">
-        {/* Main content card */}
-        <div className="flex flex-col mx-2 overflow-y-auto">{children}</div>
-      </div>
-
-      {/* Sidebar */}
-      <div className="h-screen drawer-side md:bg-transparent">
-        <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="min-h-full shadow-md menu text-md bg-[#F0F0F0F0]">
+    <div className="h-screen flex flex-col">
+      {/* Horizontal Tabs */}
+      <div className="bg-[#F0F0F0F0] shadow-md">
+        <ul className="flex">
           {/* Sidebar links */}
-          {sidebarLinks.map((link) => {
-            return (
-              <li key={link.name} className="flex flex-col text-lg">
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) =>
-                    isActive ? "bg-primary  text-white" : "text-black"
-                  }
-                >
-                  {link.name}
-                </NavLink>
-              </li>
-            );
-          })}
+          {sidebarLinks.map((link) => (
+            <li key={link.name} className="flex-1">
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  `block text-center py-3 ${
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-100 text-black hover:bg-gray-200"
+                  }`
+                }
+              >
+                {link.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </div>
+
+      {/* Main content */}
+      <div className="flex-1 bg-[#F0F0F0F0] p-4 overflow-y-auto">{children}</div>
     </div>
   );
 };
