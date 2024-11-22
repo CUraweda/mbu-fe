@@ -19,7 +19,7 @@ const PurchaseDetailLayout: React.FC<Props> = ({ children }) => {
             to={tab.path}
             className={({ isActive }) =>
               isActive
-                ? [baseStyle, "text-white bg-[#76A8D8]"].join(" ")
+                ? [baseStyle, "text-white bg-primary-dark"].join(" ")
                 : [baseStyle, "text-gray-500 bg-white"].join(" ")
             }
           >

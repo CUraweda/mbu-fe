@@ -2,6 +2,7 @@ import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 
 import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
+import TimelineApproval from "../../Components/pembelian/TimelineApproval";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -133,7 +134,9 @@ const PurchaseDetailPage = () => {
             </div>
           </div>
 
-          {/* Buttons */}
+          <TimelineApproval currentApprovalStep={3} />
+
+          {/* Buttons::START */}
           <div className="mt-6 flex gap-4">
             <button className="bg-red-500 text-white py-2 px-4 rounded-md">
               Tolak
@@ -142,36 +145,7 @@ const PurchaseDetailPage = () => {
               Setuju
             </button>
           </div>
-
-          {/* Status Bar */}
-          <div className="mt-6 flex items-center">
-            {[
-              "Draft",
-              "Approval Manager",
-              "Approval Poltry Health",
-              "Approval Mgr. Purchasing",
-              "Approval Mgr. Finance",
-              "Approval Dir. Finance",
-              "PD Dibuat",
-              "Produk Diterima Pengaju",
-              "Dibayar Sebagian",
-              "Dibayar Penuh",
-            ].map((status, index) => (
-              <div
-                key={index}
-                className={`flex items-center gap-2 ${
-                  index < 3 ? "text-blue-500" : "text-gray-500"
-                }`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full ${
-                    index < 3 ? "bg-blue-500" : "bg-gray-300"
-                  }`}
-                />
-                <p>{status}</p>
-              </div>
-            ))}
-          </div>
+          {/* Buttons::END */}
         </PurchaseDetailLayout>
       </LayoutProject>
     </>
