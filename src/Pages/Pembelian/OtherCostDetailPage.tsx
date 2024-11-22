@@ -12,16 +12,14 @@ const breadcrumbItems = [
 
 const OtherCostDetailPage = () => {
   return (
-    <div>
+    <>
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
-      <LayoutProject>
-       
-          <PurchaseDetailLayout>
-            <h1>rincian biaya lainnya</h1>
-          </PurchaseDetailLayout>
-       
+      <LayoutProject bgColor="bg-transparent">
+        <PurchaseDetailLayout>
+          <h1>rincian biaya lainnya</h1>
+        </PurchaseDetailLayout>
       </LayoutProject>
-    </div>
+    </>
   );
 };
 

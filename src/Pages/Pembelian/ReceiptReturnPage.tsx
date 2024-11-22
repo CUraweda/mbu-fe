@@ -12,16 +12,14 @@ const breadcrumbItems = [
 
 const ReceiptReturnPage = () => {
   return (
-    <div>
+    <>
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
-      <LayoutProject>
-        
-          <PurchaseDetailLayout>
-            <h1>Penerimaan/retur</h1>
-          </PurchaseDetailLayout>
-       
+      <LayoutProject bgColor="bg-transparent">
+        <PurchaseDetailLayout>
+          <h1>Penerimaan/retur</h1>
+        </PurchaseDetailLayout>
       </LayoutProject>
-    </div>
+    </>
   );
 };
 
