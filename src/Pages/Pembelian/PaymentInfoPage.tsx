@@ -1,7 +1,6 @@
 import React from "react";
 import Breadcrumb from "../../Components/Breadcrumb"; // Pastikan komponen ini ada
 import LayoutProject from "../../Layouts/layoutProject";
-import PurchaseSidebarLayout from "../../Layouts/PurchaseSidebarLayout";
 import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
 import { FaRegFileAlt } from "react-icons/fa";
 
@@ -19,7 +18,7 @@ const PaymentInfoPage = () => {
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
 
       <LayoutProject>
-        <PurchaseSidebarLayout>
+        
           <PurchaseDetailLayout>
             {/* Vendor Info */}
             <div className="my-4 flex justify-between">
@@ -122,7 +121,6 @@ const PaymentInfoPage = () => {
               <button className="btn btn-success w-32 text-white">Setujui</button>
             </div>
           </PurchaseDetailLayout>
-        </PurchaseSidebarLayout>
       </LayoutProject>
     </div>
   );

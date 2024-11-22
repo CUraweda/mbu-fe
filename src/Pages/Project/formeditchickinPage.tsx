@@ -324,6 +324,7 @@ const FormEditChickinPage = () => {
                           <th className="p-3 text-left">Jenis DOC</th>
                           <th className="p-3 text-left">Supplier</th>
                           <th className="p-3 text-left">Hatchery</th>
+                          <th className="p-3 text-left">Jumlah(ekor)</th>
 
                           {rowsPersiapan.length > 1 && !statusView ? (
                             <th className="p-3 text-left">Aksi</th>
@@ -502,7 +503,7 @@ const FormEditChickinPage = () => {
               className={`btn ${"bg-orange-400 text-white"}`}
               onClick={handleRejectApproval}
             >
-              Selanjutnya
+              Edit
             </button>
             <button
               type="button"
