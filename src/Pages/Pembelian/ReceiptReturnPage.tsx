@@ -1,6 +1,7 @@
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
+import TimelineApproval from "../../Components/pembelian/TimelineApproval";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -39,13 +40,13 @@ const ReceiptReturnPage = () => {
                 {/* No. PR */}
                 <div className="flex items-center">
                   <p className="text-sm font-medium mr-2">No. PR:</p>
-                  <span className="font-semibold text-blue-400">PR-MAN-00005</span>
+                  <span className="font-bold text-blue-300">PR-MAN-00005</span>
                 </div>
 
                 {/* No. PO */}
                 <div className="flex items-center">
                   <p className="text-sm font-medium mr-2">No. PO:</p>
-                  <span className="font-semibold text-blue-400">PO-MAN-00005</span>
+                  <span className="font-bold text-blue-300">PO-MAN-00005</span>
                 </div>
               </div>
 
@@ -54,7 +55,7 @@ const ReceiptReturnPage = () => {
                 <p className="text-sm font-medium whitespace-nowrap text-slate-400">Tanggal Dibutuhkan:</p>
                 <input
                   type="date"
-                  className="input input-bordered bg-blue-200"/>
+                  className="input input-bordered bg-blue-300"/>
               </div>
             </div>
 
@@ -63,8 +64,8 @@ const ReceiptReturnPage = () => {
             <div className="my-4 overflow-x-auto">
               <h3>Penerimaan/Retur</h3>
               <table className="table w-full table-zebra">
-                <thead className="bg-blue-200">
-                  <tr className="text-center">
+                <thead className="bg-blue-300">
+                  <tr className="text-center text-white">
                     <th>#</th>
                     <th>Nama Produk</th>
                     <th>Qty <br/> Dipesan</th>
@@ -101,7 +102,7 @@ const ReceiptReturnPage = () => {
               </div>
             </div>
 
-          
+            <TimelineApproval currentApprovalStep={2} />
 
 
             {/* Action Buttons */}
