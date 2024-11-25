@@ -20,7 +20,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, items }) => {
                 className={
                   index === items.length - 1
                     ? "text-slate-600"
-                    : "text-[#76A8D8]"
+                    : "text-primary-dark"
                 }
               >
                 {item.label}
@@ -30,7 +30,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ title, items }) => {
                 className={
                   index === items.length - 1
                     ? "text-slate-600"
-                    : "text-[#76A8D8]"
+                    : "text-primary-dark"
                 }
               >
                 {item.label}

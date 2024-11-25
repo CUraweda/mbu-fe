@@ -1,14 +1,14 @@
 [
   {
-    "name": "Detail Pembelian",
+    "name": "Detail",
     "path": "/purchase-list/detail"
   },
   {
-    "name": "Rincian Biaya Lainnya",
+    "name": "Biaya Lain",
     "path": "/purchase-list/other-cost-details"
   },
   {
-    "name": "Info Pembayaran",
+    "name": "Pembayaran",
     "path": "/purchase-list/payment-info"
   },
   {
