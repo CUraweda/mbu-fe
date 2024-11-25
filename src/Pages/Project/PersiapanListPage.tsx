@@ -11,7 +11,8 @@ import persiapanData from "../../Data/persiapanData";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
-import FilterSection from "../../Components/FilterSection";
+import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
+import { FilterField } from "../../Data/dataTypes";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -19,67 +20,46 @@ const breadcrumbItems = [
   { label: "Persiapan" },
 ];
 
+const filterFields: FilterField[] = [
+  {
+    name: "statusPersiapan",
+    label: "Status Persiapan",
+    options: ["Tercapai", "Tidak Tercapai", "Belum Selesai"],
+  },
+  {
+    name: "statusProject",
+    label: "Status Project",
+    options: ["Pengajuan", "Persiapan", "Aktif", "Selesai"],
+  },
+];
+
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>(
-    [],
-  );
-  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<
-    string[]
-  >([]);
   const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {},
+  );
   const [filteredData, setFilteredData] = useState(persiapanData);
 
-  // Fungsi untuk menangani pencarian
-  const handleSearch = (query: string) => {
-    setSearchQuery(query.toLowerCase()); // Konversi ke huruf kecil agar pencarian tidak case-sensitive
-  };
-
   const handleDataChange = (value: number) => {
-    console.log(`Jumlah data yang dipilih: ${value}`);
+    // TODO: apply data limiting
+    console.log(`Jumlah data yang dipilih: `, value);
   };
 
-  const handleProjectFilterChange = (selectedStatuses: string[]) => {
-    setFilterProjectStatuses(selectedStatuses);
-  };
+  // Fungsi untuk menangani pencarian
+  const handleFilters = () => {
+    const result = applyFilterByStateAndQuery(
+      persiapanData,
+      filterStates,
+      searchQuery,
+    );
 
-  const handlePersiapanFilterChange = (selectedStatuses: string[]) => {
-    setFilterPersiapanStatuses(selectedStatuses);
-  };
-
-  const filterData = () => {
-    let filtered = persiapanData;
-
-    // Filter data berdasarkan status
-    if (
-      filterProjectStatuses.length > 0 ||
-      filterPersiapanStatuses.length > 0
-    ) {
-      filtered = filtered.filter((item) => {
-        const projectMatch =
-          filterProjectStatuses.length === 0 ||
-          filterProjectStatuses.includes(item.statusProject);
-        const persiapanMatch =
-          filterPersiapanStatuses.length === 0 ||
-          filterPersiapanStatuses.includes(item.statusPersiapan);
-        return projectMatch && persiapanMatch;
-      });
-    }
-
-    // Filter data berdasarkan query pencarian
-    if (searchQuery) {
-      filtered = filtered.filter((item) => {
-        const valuesToSearch = Object.values(item).join(" ").toLowerCase(); // Gabungkan semua nilai dalam objek ke string
-        return valuesToSearch.includes(searchQuery);
-      });
-    }
-
-    setFilteredData(filtered);
+    setFilteredData(result);
   };
 
   useEffect(() => {
-    filterData();
-  }, [filterProjectStatuses, filterPersiapanStatuses, searchQuery]);
+    handleFilters();
+  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -119,26 +99,8 @@ const PersiapanListPage = () => {
             onChange={handleDataChange}
           />
           <div className="flex items-center">
-            <SearchBar onSearch={handleSearch} />
-            <Filter>
-              <div className="flex flex-col">
-                {/* Filter untuk status persiapan */}
-                <FilterSection
-                  filterStatuses={filterPersiapanStatuses}
-                  handleFilterChange={handlePersiapanFilterChange}
-                  fields={["Tercapai", "Tidak Tercapai", "Belum Selesai"]}
-                />
-
-                <div className="border-t border-gray-300 my-4"></div>
-
-                {/* Filter untuk status project */}
-                <FilterSection
-                  filterStatuses={filterProjectStatuses}
-                  handleFilterChange={handleProjectFilterChange}
-                  fields={["Pengajuan", "Persiapan", "Aktif", "Selesai"]}
-                />
-              </div>
-            </Filter>
+            <SearchBar onSearchChange={setSearchQuery} />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
         <PersiapanList items={filteredData} />

@@ -4,13 +4,15 @@ import DataSelector from "../../Components/DataSelector";
 import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import Chickinlist from "../../Components/project/ChickinList";
-import ChickinData from "../../Data/ChickinData";
+import chickinData from "../../Data/ChickinData";
 
 // icons
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
+import { FilterField } from "../../Data/dataTypes";
 // import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
@@ -19,11 +21,37 @@ const breadcrumbItems = [
   { label: "List Project" },
 ];
 
+const filterFields: FilterField[] = [
+  {
+    name: "statusChickin",
+    label: "Status Chick-IN",
+    options: ["Sudah", "Belum"],
+  },
+  {
+    name: "statusProject",
+    label: "Status Project",
+    options: ["Pengajuan", "Persiapan", "Aktif", "Selesai"],
+  },
+];
+
 const ProjectListPage = () => {
   // const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const handleSearch = (query: string) => {
-    console.log("Search query:", query);
+  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {},
+  );
+  const [filteredData, setFilteredData] = useState(chickinData);
+
+  // Fungsi untuk menangani pencarian
+  const handleFilters = () => {
+    const result = applyFilterByStateAndQuery(
+      chickinData,
+      filterStates,
+      searchQuery,
+    );
+
+    setFilteredData(result);
   };
 
   const handleDataChange = (value: number) => {
@@ -33,6 +61,10 @@ const ProjectListPage = () => {
   // const handleNavigate = () => {
   //   navigate("/project/add");
   // };
+
+  useEffect(() => {
+    handleFilters();
+  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -72,11 +104,11 @@ const ProjectListPage = () => {
             onChange={handleDataChange}
           />
           <div className="flex items-center">
-            <SearchBar onSearch={handleSearch} />
-            <Filter />
+            <SearchBar onSearchChange={setSearchQuery} />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        <Chickinlist items={ChickinData} />
+        <Chickinlist items={filteredData} />
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button
