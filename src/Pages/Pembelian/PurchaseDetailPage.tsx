@@ -134,7 +134,7 @@ const PurchaseDetailPage = () => {
             </div>
           </div>
 
-          <TimelineApproval currentApprovalStep={3} />
+          <TimelineApproval currentApprovalStep={2} />
 
           {/* Buttons::START */}
           <div className="mt-6 flex gap-4">

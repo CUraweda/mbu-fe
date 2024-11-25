@@ -11,6 +11,7 @@ import persiapanData from "../../Data/persiapanData";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
+import FilterSection from "../../Components/FilterSection";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -20,8 +21,12 @@ const breadcrumbItems = [
 
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>([]);
-  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<string[]>([]);
+  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>(
+    [],
+  );
+  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<
+    string[]
+  >([]);
   const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
   const [filteredData, setFilteredData] = useState(persiapanData);
 
@@ -46,12 +51,17 @@ const PersiapanListPage = () => {
     let filtered = persiapanData;
 
     // Filter data berdasarkan status
-    if (filterProjectStatuses.length > 0 || filterPersiapanStatuses.length > 0) {
+    if (
+      filterProjectStatuses.length > 0 ||
+      filterPersiapanStatuses.length > 0
+    ) {
       filtered = filtered.filter((item) => {
         const projectMatch =
-          filterProjectStatuses.length === 0 || filterProjectStatuses.includes(item.statusProject);
+          filterProjectStatuses.length === 0 ||
+          filterProjectStatuses.includes(item.statusProject);
         const persiapanMatch =
-          filterPersiapanStatuses.length === 0 || filterPersiapanStatuses.includes(item.statusPersiapan);
+          filterPersiapanStatuses.length === 0 ||
+          filterPersiapanStatuses.includes(item.statusPersiapan);
         return projectMatch && persiapanMatch;
       });
     }
@@ -113,118 +123,20 @@ const PersiapanListPage = () => {
             <Filter>
               <div className="flex flex-col">
                 {/* Filter untuk status persiapan */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Persiapan</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tercapai")
-                              : [...filterPersiapanStatuses, "Tercapai"]
-                          )
-                        }
-                      />
-                      Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tidak Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tidak Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tidak Tercapai")
-                              : [...filterPersiapanStatuses, "Tidak Tercapai"]
-                          )
-                        }
-                      />
-                      Tidak Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Belum Selesai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Belum Selesai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Belum Selesai")
-                              : [...filterPersiapanStatuses, "Belum Selesai"]
-                          )
-                        }
-                      />
-                      Belum Selesai
-                    </label>
-                  </div>
-                </div>
+                <FilterSection
+                  filterStatuses={filterPersiapanStatuses}
+                  handleFilterChange={handlePersiapanFilterChange}
+                  fields={["Tercapai", "Tidak Tercapai", "Belum Selesai"]}
+                />
 
                 <div className="border-t border-gray-300 my-4"></div>
 
                 {/* Filter untuk status project */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Project</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Pengajuan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Pengajuan")
-                              ? filterProjectStatuses.filter(status => status !== "Pengajuan")
-                              : [...filterProjectStatuses, "Pengajuan"]
-                          )
-                        }
-                      />
-                      Pengajuan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Persiapan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Persiapan")
-                              ? filterProjectStatuses.filter(status => status !== "Persiapan")
-                              : [...filterProjectStatuses, "Persiapan"]
-                          )
-                        }
-                      />
-                      Persiapan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Aktif")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Aktif")
-                              ? filterProjectStatuses.filter(status => status !== "Aktif")
-                              : [...filterProjectStatuses, "Aktif"]
-                          )
-                        }
-                      />
-                      Aktif
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Selesai")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Selesai")
-                              ? filterProjectStatuses.filter(status => status !== "Selesai")
-                              : [...filterProjectStatuses, "Selesai"]
-                          )
-                        }
-                      />
-                      Selesai
-                    </label>
-                  </div>
-                </div>
+                <FilterSection
+                  filterStatuses={filterProjectStatuses}
+                  handleFilterChange={handleProjectFilterChange}
+                  fields={["Pengajuan", "Persiapan", "Aktif", "Selesai"]}
+                />
               </div>
             </Filter>
           </div>
