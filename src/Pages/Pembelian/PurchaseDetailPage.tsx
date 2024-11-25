@@ -17,7 +17,7 @@ const PurchaseDetailPage = () => {
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
       <LayoutProject bgColor="bg-transparent">
         <PurchaseDetailLayout>
-          {/* Vendor Details */}
+          {/* Vendor Details::START */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
               <p className="font-bold">Nama Vendor</p>
@@ -46,8 +46,9 @@ const PurchaseDetailPage = () => {
               />
             </div>
           </div>
+          {/* Vendor Details::END */}
 
-          {/* List Item Table */}
+          {/* List Item Table::START */}
           <div className="overflow-auto">
             <table className="w-full border-collapse border border-gray-300">
               <thead className="bg-gray-100">
@@ -109,6 +110,7 @@ const PurchaseDetailPage = () => {
               </tbody>
             </table>
           </div>
+          {/* List Item Table::END */}
 
           {/* Summary */}
           <div className="mt-6 flex flex-col gap-2">
@@ -134,7 +136,7 @@ const PurchaseDetailPage = () => {
             </div>
           </div>
 
-          <TimelineApproval currentApprovalStep={3} />
+          <TimelineApproval currentApprovalStep={2} />
 
           {/* Buttons::START */}
           <div className="mt-6 flex gap-4">
