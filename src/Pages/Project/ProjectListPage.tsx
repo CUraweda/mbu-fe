@@ -10,8 +10,10 @@ import projectData from "../../Data/projectData";
 import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
+import { FilterField } from "../../Data/dataTypes";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -19,20 +21,49 @@ const breadcrumbItems = [
   { label: "List Project" },
 ];
 
+const filterFields: FilterField[] = [
+  {
+    name: "statusChickin",
+    label: "Status Chick-IN",
+    options: ["Sudah", "Belum"],
+  },
+  {
+    name: "statusProject",
+    label: "Status Project",
+    options: ["Pengajuan", "Persiapan", "Aktif", "Selesai"],
+  },
+];
+
 const ProjectListPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const handleSearch = (query: string) => {
-    console.log("Search query:", query);
-  };
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {},
+  );
+  const [filteredData, setFilteredData] = useState(projectData);
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
+  const handleFilter = () => {
+    const result = applyFilterByStateAndQuery(
+      projectData,
+      filterStates,
+      searchQuery,
+    );
+
+    setFilteredData(result);
+  };
+
   const handleNavigate = () => {
     navigate("/project/add");
   };
+
+  useEffect(() => {
+    handleFilter();
+  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -79,11 +110,11 @@ const ProjectListPage = () => {
             onChange={handleDataChange}
           />
           <div className="flex items-center">
-            <SearchBar onSearch={handleSearch} />
-            <Filter />
+            <SearchBar onSearchChange={setSearchQuery} />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        <ProjectList items={projectData} />
+        <ProjectList items={filteredData} />
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button

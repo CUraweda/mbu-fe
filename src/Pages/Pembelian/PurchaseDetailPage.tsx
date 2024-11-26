@@ -28,7 +28,7 @@ const PurchaseDetailPage = () => {
 
       <LayoutProject bgColor="bg-transparent">
         <PurchaseDetailLayout>
-          {/* Vendor Info */}
+          {/* Vendor Details::START */}
           <div className="my-4 flex justify-between">
             <div>
               <p className="text-slate-400">Nama Vendor</p>
@@ -67,10 +67,11 @@ const PurchaseDetailPage = () => {
               <input type="date" className="input input-bordered bg-blue-200" />
             </div>
           </div>
+          {/* Vendor Details::END */}
 
-          {/* Payment Info Table */}
+           {/* List Item Table::START */}
           <div className="my-4 overflow-x-auto">
-            <h3 className="text-lg font-bold mb-2">Info Pembayaran</h3>
+            <h3 className="text-lg font-bold mb-2">List Item</h3>
             <table className="table w-full border border-gray-300 rounded-lg">
               <thead className="bg-blue-200">
                 <tr className="text-center">
@@ -83,7 +84,6 @@ const PurchaseDetailPage = () => {
                   <th className="p-2">Harga Satuan(Rp)</th>
                   <th className="p-2">Pajak</th>
                   <th className="p-2">Total(Rp)</th>
-
                 </tr>
               </thead>
               <tbody>
@@ -101,6 +101,7 @@ const PurchaseDetailPage = () => {
               </tbody>
             </table>
           </div>
+          {/* List Item Table::END */}
 
           {/* Total Pembayaran */}
           <div className="my-4 p-4 border rounded-lg bg-gray-100 flex justify-end">
@@ -150,6 +151,7 @@ const PurchaseDetailPage = () => {
 
           {/* Timeline Approval */}
           <TimelineApproval currentApprovalStep={3} />
+
 
           {/* Action Buttons */}
           <div className="my-4 flex justify-end gap-4">
