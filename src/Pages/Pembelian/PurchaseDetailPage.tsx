@@ -28,7 +28,7 @@ const PurchaseDetailPage = () => {
 
       <LayoutProject bgColor="bg-transparent">
         <PurchaseDetailLayout>
-          {/* Vendor Info */}
+          {/* Vendor Details::START */}
           <div className="my-4 flex justify-between">
             <div>
               <p className="text-slate-400">Nama Vendor</p>
@@ -67,27 +67,41 @@ const PurchaseDetailPage = () => {
               <input type="date" className="input input-bordered bg-blue-200" />
             </div>
           </div>
+          {/* Vendor Details::END */}
 
-          {/* Payment Info Table */}
+          {/* List Item Table::START */}
           <div className="my-4 overflow-x-auto">
-            <h3 className="text-lg font-bold mb-2">Info Pembayaran</h3>
+            <h3 className="text-lg font-bold mb-2">List Item</h3>
             <table className="table w-full border border-gray-300 rounded-lg">
               <thead className="bg-blue-200">
                 <tr className="text-center">
                   <th className="p-2">#</th>
-                  <th className="p-2">Nama Biaya</th>
-                  <th className="p-2">Nominal</th>
+                  <th className="p-2">Produk</th>
+                  <th className="p-2">Jenis Produk</th>
+                  <th className="p-2">Gudang/Tempat Pengiriman</th>
+                  <th className="p-2">Jumlah</th>
+                  <th className="p-2">Satuan</th>
+                  <th className="p-2">Harga Satuan(Rp)</th>
+                  <th className="p-2">Pajak</th>
+                  <th className="p-2">Total(Rp)</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="text-center">
                   <td className="p-2">1</td>
-                  <td className="p-2">Contoh Biaya</td>
-                  <td className="p-2">Rp 10,000,000</td>
+                  <td className="p-2">Contoh Produk</td>
+                  <td className="p-2">Jenis A</td>
+                  <td className="p-2">Gudang Jakarta</td>
+                  <td className="p-2">100</td>
+                  <td className="p-2">Kg</td>
+                  <td className="p-2">Rp 100,000</td>
+                  <td className="p-2">10%</td>
+                  <td className="p-2">Rp 11,000,000</td>
                 </tr>
               </tbody>
             </table>
           </div>
+          {/* List Item Table::END */}
 
           {/* Total Pembayaran */}
           <div className="my-4 p-4 border rounded-lg bg-gray-100 flex justify-end">
