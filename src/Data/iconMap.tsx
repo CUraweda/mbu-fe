@@ -28,7 +28,9 @@ import { HiDotsVertical } from "react-icons/hi";
 import { CiExport, CiFilter, CiCirclePlus } from "react-icons/ci";
 import { HiChevronRight } from "react-icons/hi";
 import { FaCheck } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
 const iconMap: any = {
+  FaRegTrashAlt,
   FaCheck,
   FaHome,
   FaInfoCircle,

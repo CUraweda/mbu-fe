@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import pelaksanaData from "../../../Data/pelaksanaPersiapanData";
-import persiapanData from "../../../Data/persiapanData";
+import PaginationBottom from "../../PaginationBottom";
 
 const PelaksanaForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isFilePopupVisible, setIsFilePopupVisible] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  // const handlePageChange = (page: number) => {
+  //   setCurrentPage(page);
+  // };
 
   const handleFileClick = (fileUrl: string) => {
     setSelectedFile(fileUrl);
@@ -34,7 +33,11 @@ const PelaksanaForm: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-96">
             <h2 className="text-xl font-bold mb-4 text-center">Lihat Foto</h2>
-            <img src={selectedFile} alt="Uploaded File" className="w-full h-auto" />
+            <img
+              src={selectedFile}
+              alt="Uploaded File"
+              className="w-full h-auto"
+            />
             <div className="flex justify-end gap-3 mt-4">
               <button
                 className="bg-orange-500 text-white px-4 py-2 rounded"
@@ -80,27 +83,10 @@ const PelaksanaForm: React.FC = () => {
           </tbody>
         </table>
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
-          <div className="flex items-center justify-center md:justify-end">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <FaArrowLeft size={18} className="text-primary" />
-              <div className="flex text-center">Prev</div>
-            </button>
-            <span className="mx-2 text-primary">
-              {currentPage} of {Math.ceil(persiapanData.length / 10)}
-            </span>
-            <button
-              disabled={Math.ceil(persiapanData.length / 10) === 1}
-              onClick={() => handlePageChange(currentPage + 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <div className="flex text-center">Next</div>
-              <FaArrowRight size={18} className="text-primary" />
-            </button>
-          </div>
+          <PaginationBottom
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>
