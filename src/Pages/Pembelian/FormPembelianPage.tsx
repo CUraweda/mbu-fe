@@ -4,7 +4,6 @@ import LayoutProject from "../../Layouts/layoutProject";
 import { BiMessageDetail } from "react-icons/bi";
 import AddItem from "../../Components/pembelian/addItem";
 import AddNote from "../../Components/pembelian/addNote";
-import Notes from "../../Components/pembelian/notes";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -38,13 +37,6 @@ const FormPembelianPage = () => {
     closeNote();
   };
 
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const sampleNotes =
-    "Belum Ada Catatan";
-
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
 
   return (
     <div>
@@ -114,7 +106,7 @@ const FormPembelianPage = () => {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">List Item</h2>
             <button>
-              <BiMessageDetail className="inline-block mr-2" onClick={openModal} />
+              <BiMessageDetail className="inline-block mr-2" onClick={handleAddNote} />
             </button>
           </div>
           <hr className="my-2" />
@@ -160,12 +152,6 @@ const FormPembelianPage = () => {
             <button className="px-5 py-2 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white">
               Delete Item
             </button>
-            <button
-              className="px-5 py-2 text-blue-500 bg-white border border-blue-500 rounded hover:bg-blue-500 hover:text-white"
-              onClick={handleAddNote}
-            >
-              Add Note
-            </button>
           </div>
 
           <div className="m-5 mt-0 flex justify-end">
@@ -203,7 +189,6 @@ const FormPembelianPage = () => {
           <AddItem isOpen={addItemVisible} onClose={closeAdd} />
         )}
         {addNoteVisible && <AddNote onClose={closeNote} onConfirm={handleConfirmNote} />}
-        <Notes isOpen={isModalOpen} onClose={closeModal} notes={sampleNotes} />
       </LayoutProject>
     </div>
   );
