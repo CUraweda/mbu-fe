@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaCloudUploadAlt, FaPlus } from "react-icons/fa";
+import { FaCloudUploadAlt, FaPlus } from "react-icons/fa";
 import pelaksanaData from "../../Data/pelaksanaPersiapanData";
-import persiapanData from "../../Data/persiapanData";
+import PaginationBottom from "../PaginationBottom";
 
 const PelaksanaForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -10,9 +10,9 @@ const PelaksanaForm: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  // const handlePageChange = (page: number) => {
+  //   setCurrentPage(page);
+  // };
 
   const handleUploadClick = () => {
     setIsPopupVisible(true);
@@ -28,7 +28,7 @@ const PelaksanaForm: React.FC = () => {
   };
 
   const handleFileClick = (fileUrl: string) => {
-    setSelectedFile(fileUrl);  // Set selected file URL to show in the pop-up
+    setSelectedFile(fileUrl); // Set selected file URL to show in the pop-up
     setIsFilePopupVisible(true); // Show pop-up for the selected file
   };
 
@@ -57,7 +57,9 @@ const PelaksanaForm: React.FC = () => {
       {isPopupVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4 text-center">Tambah Foto Pelaksana</h2>
+            <h2 className="text-xl font-bold mb-4 text-center">
+              Tambah Foto Pelaksana
+            </h2>
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center ">
               <input
                 type="file"
@@ -75,9 +77,7 @@ const PelaksanaForm: React.FC = () => {
                 <span className="mt-2 text-gray-600 text-sm">Upload</span>
               </label>
               {/* Menampilkan nama file yang dipilih (jika ada) */}
-              {file && (
-                <p className="mt-2 text-gray-600">{file.name}</p>
-              )}
+              {file && <p className="mt-2 text-gray-600">{file.name}</p>}
             </div>
             <div className="flex justify-end gap-3 mt-4">
               <button
@@ -86,7 +86,9 @@ const PelaksanaForm: React.FC = () => {
               >
                 Batal
               </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
+              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+                Simpan
+              </button>
             </div>
           </div>
         </div>
@@ -96,7 +98,11 @@ const PelaksanaForm: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="bg-white p-8 rounded-lg shadow-lg w-96">
             <h2 className="text-xl font-bold mb-4 text-center">Lihat Foto</h2>
-            <img src={selectedFile} alt="Uploaded File" className="w-full h-auto" />
+            <img
+              src={selectedFile}
+              alt="Uploaded File"
+              className="w-full h-auto"
+            />
             <div className="flex justify-end gap-3 mt-4">
               <button
                 className="bg-orange-500 text-white px-4 py-2 rounded"
@@ -131,7 +137,7 @@ const PelaksanaForm: React.FC = () => {
                 <td className="p-2 text-gray-700">
                   <a
                     href="#"
-                    onClick={() => handleFileClick(item.foto)}  // Menangani klik pada foto/dokumen
+                    onClick={() => handleFileClick(item.foto)} // Menangani klik pada foto/dokumen
                     className="text-blue-500 hover:underline"
                   >
                     {item.foto}
@@ -142,27 +148,10 @@ const PelaksanaForm: React.FC = () => {
           </tbody>
         </table>
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
-          <div className="flex items-center justify-center md:justify-end">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <FaArrowLeft size={18} className="text-primary" />
-              <div className="flex text-center">Prev</div>
-            </button>
-            <span className="mx-2 text-primary">
-              {currentPage} of {Math.ceil(persiapanData.length / 10)}
-            </span>
-            <button
-              disabled={Math.ceil(persiapanData.length / 10) === 1}
-              onClick={() => handlePageChange(currentPage + 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <div className="flex text-center">Next</div>
-              <FaArrowRight size={18} className="text-primary" />
-            </button>
-          </div>
+          <PaginationBottom
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>
