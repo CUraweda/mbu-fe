@@ -12,7 +12,7 @@ const breadcrumbItems = [
 
 const ReceiptReturnPage = () => {
   return (
-    <div className="container mx-auto p-6">
+    <div className="min-h-screen">
       {/* Breadcrumb Component */}
       <Breadcrumb title="Pembelian" items={breadcrumbItems} />
 
@@ -55,7 +55,7 @@ const ReceiptReturnPage = () => {
                 <p className="text-sm font-medium whitespace-nowrap text-slate-400">Tanggal Dibutuhkan:</p>
                 <input
                   type="date"
-                  className="input input-bordered bg-blue-300"/>
+                  className="input input-bordered bg-blue-300 text-white"/>
               </div>
             </div>
 
@@ -104,12 +104,6 @@ const ReceiptReturnPage = () => {
 
             <TimelineApproval currentApprovalStep={2} />
 
-
-            {/* Action Buttons */}
-            <div className="my-4 flex justify-end gap-4">
-              <button className="btn bg-orange-500 text-white w-32 hover:bg-orange-600">Tolak</button>
-              <button className="btn btn-success w-32 text-white">Setujui</button>
-            </div>
           </PurchaseDetailLayout>
       </LayoutProject>
     </div>
