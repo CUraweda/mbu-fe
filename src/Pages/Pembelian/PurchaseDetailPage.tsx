@@ -75,27 +75,14 @@ const PurchaseDetailPage = () => {
               <thead className="bg-blue-200">
                 <tr className="text-center">
                   <th className="p-2">#</th>
-                  <th className="p-2">Produk</th>
-                  <th className="p-2">Jenis Produk</th>
-                  <th className="p-2">Gudang/Tempat Pengiriman</th>
-                  <th className="p-2">Jumlah</th>
-                  <th className="p-2">Satuan</th>
-                  <th className="p-2">Harga Satuan(Rp)</th>
-                  <th className="p-2">Pajak</th>
-                  <th className="p-2">Total(Rp)</th>
-
+                  <th className="p-2">Nama Biaya</th>
+                  <th className="p-2">Nominal</th>
                 </tr>
               </thead>
               <tbody>
                 <tr className="text-center">
                   <td className="p-2">1</td>
                   <td className="p-2">Contoh Biaya</td>
-                  <td className="p-2">Rp 10,000,000</td>
-                  <td className="p-2">Rp 10,000,000</td>
-                  <td className="p-2">Rp 10,000,000</td>
-                  <td className="p-2">Rp 10,000,000</td>
-                  <td className="p-2">Rp 10,000,000</td>
-                  <td className="p-2">Rp 10,000,000</td>
                   <td className="p-2">Rp 10,000,000</td>
                 </tr>
               </tbody>
@@ -107,7 +94,7 @@ const PurchaseDetailPage = () => {
             <div>
               <div className="flex justify-between items-center mb-2 gap-6">
                 <p className="text-sm font-medium text-gray-600">
-                  Total Pajak:{" "}
+                  Total Pembayaran:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
                   Rp 10,000,000
@@ -115,33 +102,17 @@ const PurchaseDetailPage = () => {
               </div>
               <div className="flex justify-between items-center mb-2 gap-6">
                 <p className="text-sm font-medium text-gray-600">
-                  Pajak:{" "}
-                </p>
-                <span className="text-sm font-semibold text-gray-800">
-                  Rp 12,000,000
-                </span>
-              </div>
-              <div className="flex justify-between items-center mb-2 gap-6">
-                <p className="text-sm font-medium text-gray-600">
-                  Diskon:{" "}
-                </p>
-                <span className="text-sm font-semibold text-gray-800">
-                  Rp 12,000,000
-                </span>
-              </div>
-              <div className="flex justify-between items-center mb-2 gap-6">
-                <p className="text-sm font-medium text-gray-600">
-                  Total Biaya Lainnya:{" "}
+                  Nominal Pembelian:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
                   Rp 12,000,000
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <p className="text-sm font-bold text-gray-800 mb-2 gap-6">
-                  Total:{" "}
+                <p className="text-sm font-medium text-gray-600 mb-2 gap-6">
+                  Sisa Belum Dibayar:{" "}
                 </p>
-                <span className="text-sm font-bold text-gray-800">
+                <span className="text-sm font-semibold text-red-500">
                   Rp 2,000,000
                 </span>
               </div>

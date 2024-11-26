@@ -11,6 +11,8 @@ import persiapanData from "../../Data/persiapanData";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
+import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
+import { FilterField } from "../../Data/dataTypes";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -18,58 +20,46 @@ const breadcrumbItems = [
   { label: "Persiapan" },
 ];
 
+const filterFields: FilterField[] = [
+  {
+    name: "statusPersiapan",
+    label: "Status Persiapan",
+    options: ["Tercapai", "Tidak Tercapai", "Belum Selesai"],
+  },
+  {
+    name: "statusProject",
+    label: "Status Project",
+    options: ["Pengajuan", "Persiapan", "Aktif", "Selesai"],
+  },
+];
+
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>([]);
-  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {},
+  );
   const [filteredData, setFilteredData] = useState(persiapanData);
 
-  // Fungsi untuk menangani pencarian
-  const handleSearch = (query: string) => {
-    setSearchQuery(query.toLowerCase()); // Konversi ke huruf kecil agar pencarian tidak case-sensitive
-  };
-
   const handleDataChange = (value: number) => {
-    console.log(`Jumlah data yang dipilih: ${value}`);
+    // TODO: apply data limiting
+    console.log(`Jumlah data yang dipilih: `, value);
   };
 
-  const handleProjectFilterChange = (selectedStatuses: string[]) => {
-    setFilterProjectStatuses(selectedStatuses);
-  };
+  // Fungsi untuk menangani pencarian
+  const handleFilters = () => {
+    const result = applyFilterByStateAndQuery(
+      persiapanData,
+      filterStates,
+      searchQuery,
+    );
 
-  const handlePersiapanFilterChange = (selectedStatuses: string[]) => {
-    setFilterPersiapanStatuses(selectedStatuses);
-  };
-
-  const filterData = () => {
-    let filtered = persiapanData;
-
-    // Filter data berdasarkan status
-    if (filterProjectStatuses.length > 0 || filterPersiapanStatuses.length > 0) {
-      filtered = filtered.filter((item) => {
-        const projectMatch =
-          filterProjectStatuses.length === 0 || filterProjectStatuses.includes(item.statusProject);
-        const persiapanMatch =
-          filterPersiapanStatuses.length === 0 || filterPersiapanStatuses.includes(item.statusPersiapan);
-        return projectMatch && persiapanMatch;
-      });
-    }
-
-    // Filter data berdasarkan query pencarian
-    if (searchQuery) {
-      filtered = filtered.filter((item) => {
-        const valuesToSearch = Object.values(item).join(" ").toLowerCase(); // Gabungkan semua nilai dalam objek ke string
-        return valuesToSearch.includes(searchQuery);
-      });
-    }
-
-    setFilteredData(filtered);
+    setFilteredData(result);
   };
 
   useEffect(() => {
-    filterData();
-  }, [filterProjectStatuses, filterPersiapanStatuses, searchQuery]);
+    handleFilters();
+  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -109,124 +99,8 @@ const PersiapanListPage = () => {
             onChange={handleDataChange}
           />
           <div className="flex items-center">
-            <SearchBar onSearch={handleSearch} />
-            <Filter>
-              <div className="flex flex-col">
-                {/* Filter untuk status persiapan */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Persiapan</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tercapai")
-                              : [...filterPersiapanStatuses, "Tercapai"]
-                          )
-                        }
-                      />
-                      Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tidak Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tidak Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tidak Tercapai")
-                              : [...filterPersiapanStatuses, "Tidak Tercapai"]
-                          )
-                        }
-                      />
-                      Tidak Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Belum Selesai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Belum Selesai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Belum Selesai")
-                              : [...filterPersiapanStatuses, "Belum Selesai"]
-                          )
-                        }
-                      />
-                      Belum Selesai
-                    </label>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-300 my-4"></div>
-
-                {/* Filter untuk status project */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Project</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Pengajuan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Pengajuan")
-                              ? filterProjectStatuses.filter(status => status !== "Pengajuan")
-                              : [...filterProjectStatuses, "Pengajuan"]
-                          )
-                        }
-                      />
-                      Pengajuan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Persiapan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Persiapan")
-                              ? filterProjectStatuses.filter(status => status !== "Persiapan")
-                              : [...filterProjectStatuses, "Persiapan"]
-                          )
-                        }
-                      />
-                      Persiapan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Aktif")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Aktif")
-                              ? filterProjectStatuses.filter(status => status !== "Aktif")
-                              : [...filterProjectStatuses, "Aktif"]
-                          )
-                        }
-                      />
-                      Aktif
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Selesai")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Selesai")
-                              ? filterProjectStatuses.filter(status => status !== "Selesai")
-                              : [...filterProjectStatuses, "Selesai"]
-                          )
-                        }
-                      />
-                      Selesai
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </Filter>
+            <SearchBar onSearchChange={setSearchQuery} />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
         <PersiapanList items={filteredData} />
