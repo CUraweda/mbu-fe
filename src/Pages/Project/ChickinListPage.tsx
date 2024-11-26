@@ -25,7 +25,7 @@ const filterFields: FilterField[] = [
   {
     name: "statusChickin",
     label: "Status Chick-IN",
-    options: ["Sudah", "Belum"],
+    options: ["Masuk", "Keluar"],
   },
   {
     name: "statusProject",

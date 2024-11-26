@@ -1,7 +1,6 @@
 import Breadcrumb from "../../Components/Breadcrumb"; // Pastikan komponen ini ada
 import LayoutProject from "../../Layouts/layoutProject";
 import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
-import { FaRegFileAlt } from "react-icons/fa";
 import TimelineApproval from "../../Components/pembelian/TimelineApproval";
 
 const breadcrumbItems = [
@@ -11,7 +10,7 @@ const breadcrumbItems = [
   { label: "Detail Pembelian" },
 ];
 
-const PaymentInfoPage = () => {
+const OtherCostDetail = () => {
   return (
     <div className="min-h-screen">
       {/* Breadcrumb Component */}
@@ -40,16 +39,16 @@ const PaymentInfoPage = () => {
             <div className="flex gap-4 items-center">
               {/* No. PR */}
               <div className="flex items-center">
-                <p className="text-sm font-medium mr-2">No. PR:</p>
-                <span className="font-semibold text-blue-400">
+                <p className="text-sm font-bold mr-2">NO. PR:</p>
+                <span className="font-bold text-blue-300">
                   PR-MAN-00005
                 </span>
               </div>
 
               {/* No. PO */}
               <div className="flex items-center">
-                <p className="text-sm font-medium mr-2">No. PO:</p>
-                <span className="font-semibold text-blue-400">
+                <p className="text-sm font-bold mr-2">NO. PO:</p>
+                <span className="font-bold text-blue-300">
                   PO-MAN-00005
                 </span>
               </div>
@@ -57,29 +56,29 @@ const PaymentInfoPage = () => {
 
             {/* Tanggal Dibutuhkan */}
             <div className="flex items-center gap-4">
-              <p className="text-sm font-medium whitespace-nowrap text-slate-400">
+              <p className="text-sm font-medium  whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-200" />
+              <input type="date" className="input input-bordered bg-blue-300" />
             </div>
           </div>
 
           {/* Payment Info Table */}
           <div className="my-4 overflow-x-auto">
-            <h3>Info Pembayaran</h3>
+          <h3 className="text-lg font-bold mb-2">Rincian Biaya Lainnya</h3>
             <table className="table w-full table-zebra">
-              <thead className="bg-blue-200">
-                <tr className="text-center">
+              <thead className="bg-blue-300">
+                <tr className="text-center text-white text-bold">
                   <th>#</th>
                   <th>Nama Biaya</th>
                   <th>Nominal</th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-center">
+                <tr className="text-center  ">
                   <td>1</td>
-                  <td>xxxxxx</td>
-                  <td>xxxxxx</td>         
+                  <td></td>
+                  <td></td>         
                 </tr>
               </tbody>
             </table>
@@ -100,19 +99,12 @@ const PaymentInfoPage = () => {
             </div>
           </div>
 
-          <TimelineApproval currentApprovalStep={3} />
+          <TimelineApproval currentApprovalStep={2} />
 
-          {/* Action Buttons */}
-          <div className="my-4 flex justify-end gap-4">
-            <button className="btn bg-orange-500 text-white w-32 hover:bg-orange-600">
-              Tolak
-            </button>
-            <button className="btn btn-success w-32 text-white">Setujui</button>
-          </div>
         </PurchaseDetailLayout>
       </LayoutProject>
     </div>
   );
 };
 
-export default PaymentInfoPage;
+export default OtherCostDetail;

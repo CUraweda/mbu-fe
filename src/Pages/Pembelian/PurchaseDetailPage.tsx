@@ -47,24 +47,24 @@ const PurchaseDetailPage = () => {
           <div className="my-4 flex justify-between gap-4 items-center border p-4 rounded-lg">
             <div className="flex gap-4 items-center">
               <div className="flex items-center">
-                <p className="text-sm font-medium mr-2">No. PR:</p>
-                <span className="font-semibold text-blue-400">
+                <p className="text-sm font-bold mr-2">NO. PR:</p>
+                <span className="font-bold text-blue-300">
                   PR-MAN-00005
                 </span>
               </div>
               <div className="flex items-center">
-                <p className="text-sm font-medium mr-2">No. PO:</p>
-                <span className="font-semibold text-blue-400">
-                  PO-MAN-00005
+                <p className="text-sm font-bold mr-2">NO. PO:</p>
+                <span className="font-bold text-blue-300">
+                  -
                 </span>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
-              <p className="text-sm font-medium whitespace-nowrap text-slate-400">
+              <p className="text-sm text font-medium whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-200" />
+              <input type="date" className="input input-bordered bg-blue-300" />
             </div>
           </div>
           {/* Vendor Details::END */}
@@ -73,8 +73,8 @@ const PurchaseDetailPage = () => {
           <div className="my-4 overflow-x-auto">
             <h3 className="text-lg font-bold mb-2">List Item</h3>
             <table className="table w-full border border-gray-300 rounded-lg">
-              <thead className="bg-blue-200">
-                <tr className="text-center">
+              <thead className="bg-blue-300">
+                <tr className="text-center text-white">
                   <th className="p-2">#</th>
                   <th className="p-2">Produk</th>
                   <th className="p-2">Jenis Produk</th>
@@ -89,14 +89,27 @@ const PurchaseDetailPage = () => {
               <tbody>
                 <tr className="text-center">
                   <td className="p-2">1</td>
-                  <td className="p-2">Contoh Produk</td>
-                  <td className="p-2">Jenis A</td>
-                  <td className="p-2">Gudang Jakarta</td>
-                  <td className="p-2">100</td>
+                  <td className="p-2">DOC CP Vaksin</td>
+                  <td className="p-2">Sapronak</td>
+                  <td className="p-2">Gudang Pangandaran</td>
+                  <td className="p-2">50,000</td>
+                  <td className="p-2">Ekor</td>
+                  <td className="p-2">Rp 7,000.00</td>
+                  <td className="p-2">11%</td>
+                  <td className="p-2">Rp 350,000,000,00</td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr className="text-center">
+                  <td className="p-2">2</td>
+                  <td className="p-2">Pakan Starter</td>
+                  <td className="p-2">Sapronak</td>
+                  <td className="p-2">Gudang Pangandaran</td>
+                  <td className="p-2">1,000</td>
                   <td className="p-2">Kg</td>
-                  <td className="p-2">Rp 100,000</td>
-                  <td className="p-2">10%</td>
-                  <td className="p-2">Rp 11,000,000</td>
+                  <td className="p-2">Rp 500.00</td>
+                  <td className="p-2">11%</td>
+                  <td className="p-2">Rp 500,000.00</td>
                 </tr>
               </tbody>
             </table>
@@ -108,43 +121,61 @@ const PurchaseDetailPage = () => {
             <div>
               <div className="flex justify-between items-center mb-2 gap-6">
                 <p className="text-sm font-medium text-gray-600">
-                  Total Pembayaran:{" "}
+                  Total Sebelum Pajak:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
-                  Rp 10,000,000
+                350,500,000.00
                 </span>
               </div>
               <div className="flex justify-between items-center mb-2 gap-6">
                 <p className="text-sm font-medium text-gray-600">
-                  Nominal Pembelian:{" "}
+                  Pajak:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
-                  Rp 12,000,000
+                38,555,000.00
+                </span>
+              </div>
+              <div className="flex justify-between items-center mb-2 gap-6">
+                <p className="text-sm font-medium text-gray-600">
+                  Diskon:{" "}
+                </p>
+                <span className="text-sm font-semibold text-gray-800">
+                -0.00
+                </span>
+              </div>
+              <div className="flex justify-between items-center mb-2 gap-6">
+                <p className="text-sm font-medium text-gray-600">
+                  Total Biaya Lainnya:{" "}
+                </p>
+                <span className="text-sm font-semibold text-gray-800">
+                0.00
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <p className="text-sm font-medium text-gray-600 mb-2 gap-6">
-                  Sisa Belum Dibayar:{" "}
+                <p className="text-sm font-bold mb-2 gap-6">
+                  Total:{" "}
                 </p>
-                <span className="text-sm font-semibold text-red-500">
-                  Rp 2,000,000
+                <span className="text-sm font-bold">
+                389,055,000.00
                 </span>
               </div>
             </div>
           </div>
 
           {/* Timeline Approval */}
-          <TimelineApproval currentApprovalStep={3} />
+          <TimelineApproval currentApprovalStep={2} />
 
           {/* Action Buttons */}
           <div className="my-4 flex justify-end gap-4">
             <button
-              className="btn bg-orange-500 text-white w-32 hover:bg-orange-600"
+              className="btn btn-success w-32 text-white"
               onClick={() => setRejectModalOpen(true)}
             >
-              Tolak
+              Edit
             </button>
-            <button className="btn btn-success w-32 text-white">Setujui</button>
+            <button className="btn bg-blue-300 text-white w-32 ">
+              Submit
+              </button>
           </div>
         </PurchaseDetailLayout>
       </LayoutProject>
@@ -160,38 +191,25 @@ const PurchaseDetailPage = () => {
             >
               &times;
             </button>
-            <h3 className="text-lg font-bold text-blue-600">
-              Anda yakin memilih opsi Tolak?
+            <h3 className="text-lg font-bold text-blue-300">
+              Catatan
             </h3>
             <p className="text-sm text-gray-500 mt-2">
-              Tolong berikan komentar/catatan jika Anda menolak
+             Komentar/Catatan 
             </p>
             <textarea
               className="w-full mt-4 p-2 border rounded-lg"
               rows={4}
-              placeholder="Komentar/Catatan"
+              placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
+              nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+              cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <div className="flex justify-end gap-4 mt-4">
-              <button
-                className="btn bg-gray-400 text-white hover:bg-gray-500"
-                onClick={() => setRejectModalOpen(false)}
-              >
-                Batal
-              </button>
-              <button
-                className={`btn ${
-                  comment.trim()
-                    ? "bg-blue-500 hover:bg-blue-600"
-                    : "bg-gray-300 cursor-not-allowed"
-                } text-white`}
-                onClick={handleReject}
-                disabled={!comment.trim()} // Disabled jika komentar kosong
-              >
-                Simpan
-              </button>
-            </div>
+            
+              
           </div>
         </div>
       )}
