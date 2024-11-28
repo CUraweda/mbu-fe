@@ -1,18 +1,17 @@
+import { useState, useEffect, useCallback } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
 import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import PersiapanList from "../../Components/project/PersiapanList";
-// import persiapanData from "../../Data/persiapanData";
+import persiapanData from "../../Data/persiapanData";
 
 // icons
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { CiExport } from "react-icons/ci";
-import { MdExpandMore } from "react-icons/md";
-import { useState } from "react";
-// import projectApi from "../../Data/api/projectApi";
-// import persiapanApi from "../../Data/api/persiapanApi";
+import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
+import { FilterField } from "../../Data/dataTypes";
+import ExportButton from "../../Components/ExportButton";
+import PaginationBottom from "../../Components/PaginationBottom";
 import { ProjectPreparation } from "../../Data/types/projectType";
 
 const breadcrumbItems = [
@@ -21,54 +20,48 @@ const breadcrumbItems = [
   { label: "Persiapan" },
 ];
 
+const filterFields: FilterField[] = [
+  {
+    name: "statusPersiapan",
+    label: "Status Persiapan",
+    options: ["Tercapai", "Tidak Tercapai", "Belum Selesai"],
+  },
+  {
+    name: "statusProject",
+    label: "Status Project",
+    options: ["Pengajuan", "Persiapan", "Aktif", "Selesai"],
+  },
+];
+
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {}
+  );
+  const [, setFilteredData] = useState(persiapanData);
   const [preparations] = useState<ProjectPreparation[]>([]);
   const [loading] = useState(true);
-  const handleSearch = (query: string) => {
-    console.log("Search query:", query);
-  };
 
   const handleDataChange = (value: number) => {
-    console.log(`Jumlah data yang dipilih: ${value}`);
+    // TODO: apply data limiting
+    console.log(`Jumlah data yang dipilih: `, value);
   };
 
-  // useEffect(() => {
-  //   const fetchProjects = async () => {
-  //     setLoading(true);
-  //     try {
-  //       const submissions: Project[] = await projectApi.getAllProject();
-  //       const preparations: ProjectPreparation[] =
-  //         await persiapanApi.getAllPersiapan();
+  // Fungsi untuk menangani pencarian
+  const handleFilters = useCallback(() => {
+    const result = applyFilterByStateAndQuery(
+      persiapanData,
+      filterStates,
+      searchQuery
+    );
 
-  //       const combinedData = submissions.map((submission: Project) => {
-  //         const preparation = preparations.find(
-  //           (prep: ProjectPreparation) =>
-  //             prep.id_project === submission.id_project
-  //         );
-  //         return {
-  //           // id: (submission.id_project),
-  //           id_project: submission.id_project,
-  //           bussines_unit: submission.bussines_unit,
-  //           product: submission.product,
-  //           area: submission.area,
-  //           location: submission.location,
-  //           project_farms: submission.project_farms,
-  //           status: submission.status,
-  //           project_preparation: preparation?.project_preparation || null,
-  //         };
-  //       });
+    setFilteredData(result);
+  }, [filterStates, searchQuery]);
 
-  //       setPreparations(combinedData);
-  //     } catch (error) {
-  //       console.error("Error fetching projects:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchProjects();
-  // }, []);
+  useEffect(() => {
+    handleFilters();
+  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -77,28 +70,7 @@ const PersiapanListPage = () => {
         <div className="flex flex-col justify-between gap-3 m-5 md:items-center md:flex-row">
           <h1 className="text-2xl text-primary">Persiapan</h1>
           <div className="flex gap-4">
-            <div className="dropdown dropdown-start">
-              <div
-                tabIndex={0}
-                role="button"
-                className="text-gray-500 bg-transparent rounded-md btn btn-outline"
-              >
-                <CiExport size={20} />
-                Export
-                <MdExpandMore size={24} />
-              </div>
-              <ul
-                tabIndex={0}
-                className="dropdown-content menu border-slate-200 border mt-1 bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-              >
-                <li>
-                  <a>Export PDF</a>
-                </li>
-                <li>
-                  <a>Export Excel</a>
-                </li>
-              </ul>
-            </div>
+            <ExportButton />
           </div>
         </div>
         <hr />
@@ -108,8 +80,8 @@ const PersiapanListPage = () => {
             onChange={handleDataChange}
           />
           <div className="flex items-center">
-            <SearchBar onSearch={handleSearch} />
-            <Filter />
+            <SearchBar onSearchChange={setSearchQuery} />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
         {/* <PersiapanList items={persiapanData} /> */}
@@ -119,24 +91,10 @@ const PersiapanListPage = () => {
           <PersiapanList preparations={preparations} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
-          <div className="flex items-center justify-center md:justify-end">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <FaArrowLeft size={18} className="text-primary" />
-              <div className="flex text-center">Prev</div>
-            </button>
-            <span className="mx-2 text-primary">1 of 2</span>
-            <button
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <div className="flex text-center">Next</div>
-              <FaArrowRight size={18} className="text-primary" />
-            </button>
-          </div>
+          <PaginationBottom
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </LayoutProject>
     </div>

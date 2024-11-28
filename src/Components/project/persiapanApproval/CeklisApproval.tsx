@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
+import PaginationBottom from "../../PaginationBottom";
 
 // interface Ceklis {
 //   itemPekerjaanPersiapan: string;
@@ -69,9 +70,7 @@ const CeklisPersiapanApproval: React.FC = () => {
               <th className="px-4 py-2 text-gray-600">
                 Item Pekerjaan Persiapan
               </th>
-              <th className="px-4 py-2 text-gray-600">
-                Tanggal Selesai
-              </th>
+              <th className="px-4 py-2 text-gray-600">Tanggal Selesai</th>
               <th className="px-4 py-2 text-gray-600">
                 Aktual Waktu Persiapan (Hari)
               </th>
@@ -102,7 +101,7 @@ const CeklisPersiapanApproval: React.FC = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusCeklis(
-                      item.hasil
+                      item.hasil,
                     )}`}
                   >
                     {item.hasil}{" "}
@@ -113,27 +112,10 @@ const CeklisPersiapanApproval: React.FC = () => {
           </tbody>
         </table>
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
-          <div className="flex items-center justify-center md:justify-end">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => handlePageChange(currentPage - 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <FaArrowLeft size={18} className="text-primary" />
-              <div className="flex text-center">Prev</div>
-            </button>
-            <span className="mx-2 text-primary">
-              {currentPage} of {Math.ceil(ceklisPersiapanData.length / 10)}
-            </span>
-            <button
-              disabled={Math.ceil(ceklisPersiapanData.length / 10) === 1}
-              onClick={() => handlePageChange(currentPage + 1)}
-              className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-            >
-              <div className="flex text-center">Next</div>
-              <FaArrowRight size={18} className="text-primary" />
-            </button>
-          </div>
+          <PaginationBottom
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       </div>
     </div>

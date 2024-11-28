@@ -21,7 +21,7 @@ const PurchaseSidebarLayout: React.FC<PurchaseSidebarLayoutProps> = ({
                 className={({ isActive }) =>
                   `block text-center py-3 ${
                     isActive
-                      ? "bg-blue-500 text-white"
+                      ? "bg-blue-300 text-white"
                       : "bg-gray-100 text-black hover:bg-gray-200"
                   }`
                 }

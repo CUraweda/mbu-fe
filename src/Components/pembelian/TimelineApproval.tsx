@@ -27,7 +27,7 @@ const TimelineApproval: FC<Props> = ({ radius = 20, currentApprovalStep }) => {
       <div className="relative mt-6 mx-auto flex align-top items-center w-full max-w-screen-2xl">
         {/* Line Across::START */}
         <div
-          className={`absolute h-[3px] bg-gray-400/80 left-[calc(100%_/_10_/_2)] right-[calc(100%_/_10_/_2)]`}
+          className="absolute h-[3px] bg-gray-400/80 left-[calc(100%_/_10_/_2)] right-[calc(100%_/_10_/_2)]"
           style={{
             top: radius / 2,
           }}
