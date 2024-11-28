@@ -59,7 +59,7 @@ const OtherCostDetail = () => {
               <p className="text-sm font-medium  whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-300" />
+              <input type="date" className="text-white input input-bordered bg-blue-300" />
             </div>
           </div>
 
