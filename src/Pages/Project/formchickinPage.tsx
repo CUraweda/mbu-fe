@@ -79,19 +79,6 @@ const FormChickinPage = () => {
       }
     }
   }, [isEditMode]);
-  // const handleSubmitApproval = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (isEditMode) {
-  //     // Handle edit logic
-  //     console.log("Editing project with data:", formData);
-  //     // Call an API to update the project...
-  //   } else {
-  //     // Handle create logic
-  //     console.log("Creating new project with data:", formData);
-  //     // Call an API to create a new project...
-  //   }
-  //   navigate("/project"); // Navigate back to the project list after submission
-  // };
   const handleRejectApproval = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEditMode) {

@@ -1,7 +1,5 @@
 import React from "react";
 import { useState } from "react";
-
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
 import PaginationBottom from "../../PaginationBottom";
 
@@ -31,9 +29,9 @@ const CeklisPersiapanApproval: React.FC = () => {
     }
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  // const handlePageChange = (page: number) => {
+  //   setCurrentPage(page);
+  // };
 
   return (
     <div>
@@ -101,7 +99,7 @@ const CeklisPersiapanApproval: React.FC = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusCeklis(
-                      item.hasil,
+                      item.hasil
                     )}`}
                   >
                     {item.hasil}{" "}

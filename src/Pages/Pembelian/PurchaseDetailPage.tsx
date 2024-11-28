@@ -15,12 +15,6 @@ const PurchaseDetailPage = () => {
   const [isRejectModalOpen, setRejectModalOpen] = useState(false);
   const [comment, setComment] = useState("");
 
-  const handleReject = () => {
-    console.log("Komentar Ditolak:", comment);
-    setRejectModalOpen(false);
-    setComment(""); // Reset komentar setelah menyimpan
-  };
-
   return (
     <div className="min-h-screen">
       {/* Breadcrumb */}
@@ -29,7 +23,7 @@ const PurchaseDetailPage = () => {
       <LayoutProject bgColor="bg-transparent">
         <PurchaseDetailLayout>
           {/* Vendor Details::START */}
-          <div className="my-4 flex justify-between">
+          <div className="flex justify-between my-4">
             <div>
               <p className="text-slate-400">Nama Vendor</p>
               <b className="font-bold">PT Charoen Pokphand Indonesia Tbk</b>
@@ -44,34 +38,30 @@ const PurchaseDetailPage = () => {
           </div>
 
           {/* No. PR, No. PO, and Tanggal Dibutuhkan */}
-          <div className="my-4 flex justify-between gap-4 items-center border p-4 rounded-lg">
-            <div className="flex gap-4 items-center">
+          <div className="flex items-center justify-between gap-4 p-4 my-4 border rounded-lg">
+            <div className="flex items-center gap-4">
               <div className="flex items-center">
-                <p className="text-sm font-bold mr-2">NO. PR:</p>
-                <span className="font-bold text-blue-300">
-                  PR-MAN-00005
-                </span>
+                <p className="mr-2 text-sm font-bold">NO. PR:</p>
+                <span className="font-bold text-blue-300">PR-MAN-00005</span>
               </div>
               <div className="flex items-center">
-                <p className="text-sm font-bold mr-2">NO. PO:</p>
-                <span className="font-bold text-blue-300">
-                  -
-                </span>
+                <p className="mr-2 text-sm font-bold">NO. PO:</p>
+                <span className="font-bold text-blue-300">-</span>
               </div>
             </div>
 
             <div className="flex items-center gap-4">
-              <p className="text-sm text font-medium whitespace-nowrap text-slate-400">
+              <p className="text-sm font-medium text whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-300" />
+              <input type="date" className="bg-blue-300 input input-bordered" />
             </div>
           </div>
           {/* Vendor Details::END */}
 
           {/* List Item Table::START */}
           <div className="my-4 overflow-x-auto">
-            <h3 className="text-lg font-bold mb-2">List Item</h3>
+            <h3 className="mb-2 text-lg font-bold">List Item</h3>
             <table className="table w-full border border-gray-300 rounded-lg">
               <thead className="bg-blue-300">
                 <tr className="text-center text-white">
@@ -117,47 +107,39 @@ const PurchaseDetailPage = () => {
           {/* List Item Table::END */}
 
           {/* Total Pembayaran */}
-          <div className="my-4 p-4 border rounded-lg bg-gray-100 flex justify-end">
+          <div className="flex justify-end p-4 my-4 bg-gray-100 border rounded-lg">
             <div>
-              <div className="flex justify-between items-center mb-2 gap-6">
+              <div className="flex items-center justify-between gap-6 mb-2">
                 <p className="text-sm font-medium text-gray-600">
                   Total Sebelum Pajak:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
-                350,500,000.00
+                  350,500,000.00
                 </span>
               </div>
-              <div className="flex justify-between items-center mb-2 gap-6">
-                <p className="text-sm font-medium text-gray-600">
-                  Pajak:{" "}
-                </p>
+              <div className="flex items-center justify-between gap-6 mb-2">
+                <p className="text-sm font-medium text-gray-600">Pajak: </p>
                 <span className="text-sm font-semibold text-gray-800">
-                38,555,000.00
+                  38,555,000.00
                 </span>
               </div>
-              <div className="flex justify-between items-center mb-2 gap-6">
-                <p className="text-sm font-medium text-gray-600">
-                  Diskon:{" "}
-                </p>
+              <div className="flex items-center justify-between gap-6 mb-2">
+                <p className="text-sm font-medium text-gray-600">Diskon: </p>
                 <span className="text-sm font-semibold text-gray-800">
-                -0.00
+                  -0.00
                 </span>
               </div>
-              <div className="flex justify-between items-center mb-2 gap-6">
+              <div className="flex items-center justify-between gap-6 mb-2">
                 <p className="text-sm font-medium text-gray-600">
                   Total Biaya Lainnya:{" "}
                 </p>
                 <span className="text-sm font-semibold text-gray-800">
-                0.00
+                  0.00
                 </span>
               </div>
-              <div className="flex justify-between items-center">
-                <p className="text-sm font-bold mb-2 gap-6">
-                  Total:{" "}
-                </p>
-                <span className="text-sm font-bold">
-                389,055,000.00
-                </span>
+              <div className="flex items-center justify-between">
+                <p className="gap-6 mb-2 text-sm font-bold">Total: </p>
+                <span className="text-sm font-bold">389,055,000.00</span>
               </div>
             </div>
           </div>
@@ -166,39 +148,33 @@ const PurchaseDetailPage = () => {
           <TimelineApproval currentApprovalStep={2} />
 
           {/* Action Buttons */}
-          <div className="my-4 flex justify-end gap-4">
+          <div className="flex justify-end gap-4 my-4">
             <button
-              className="btn btn-success w-32 text-white"
+              className="w-32 text-white btn btn-success"
               onClick={() => setRejectModalOpen(true)}
             >
               Edit
             </button>
-            <button className="btn bg-blue-300 text-white w-32 ">
-              Submit
-              </button>
+            <button className="w-32 text-white bg-blue-300 btn ">Submit</button>
           </div>
         </PurchaseDetailLayout>
       </LayoutProject>
 
       {/* Reject Modal */}
       {isRejectModalOpen && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg w-96 relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="relative p-6 bg-white rounded-lg w-96">
             {/* Close Button */}
             <button
-              className="absolute top-2 right-2 text-xl font-bold text-gray-600"
+              className="absolute text-xl font-bold text-gray-600 top-2 right-2"
               onClick={() => setRejectModalOpen(false)}
             >
               &times;
             </button>
-            <h3 className="text-lg font-bold text-blue-300">
-              Catatan
-            </h3>
-            <p className="text-sm text-gray-500 mt-2">
-             Komentar/Catatan 
-            </p>
+            <h3 className="text-lg font-bold text-blue-300">Catatan</h3>
+            <p className="mt-2 text-sm text-gray-500">Komentar/Catatan</p>
             <textarea
-              className="w-full mt-4 p-2 border rounded-lg"
+              className="w-full p-2 mt-4 border rounded-lg"
               rows={4}
               placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
               sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
@@ -208,8 +184,6 @@ const PurchaseDetailPage = () => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            
-              
           </div>
         </div>
       )}

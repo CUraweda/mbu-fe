@@ -30,10 +30,6 @@ const CeklisPersiapanForm: React.FC = () => {
     }
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pb-3 m-5 md:grid-cols-3 xl:grid-cols-5">
@@ -100,7 +96,7 @@ const CeklisPersiapanForm: React.FC = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusCeklis(
-                      item.hasil,
+                      item.hasil
                     )}`}
                   >
                     {item.hasil}{" "}
