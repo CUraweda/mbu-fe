@@ -4,9 +4,9 @@ import LayoutProject from "../../Layouts/layoutProject";
 import Tabs from "../../Components/Tabs";
 import ProjectApproval from "../../Components/project/projectApproval/GeneralApproval";
 import FarmApproval from "../../Components/project/projectApproval/FarmApproval";
-import BudgetApproval from "../../Components/project/projectApproval/BudgetApproval";
 import RecordingApproval from "../../Components/project/projectApproval/RecordingApproval";
 import ApprovalModal from "../../Components/project/projectApproval/ApprovalModal";
+import BudgetApprovalList from "../../Components/project/projectApproval/BudgetApprovalList";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -33,7 +33,7 @@ const ProjectApprovalPage = () => {
       case 2:
         return <FarmApproval />;
       case 3:
-        return <BudgetApproval />;
+        return <BudgetApprovalList />;
       case 4:
         return <RecordingApproval />;
       default:

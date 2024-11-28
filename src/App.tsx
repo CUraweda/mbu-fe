@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layouts/layout";
-// import ProtectedRoute from "./Components/protectedRoute";
+import ProtectedRoute from "./Components/protectedRoute";
 import NotFound from "./Pages/NotFound";
 import LoginPage from "./Pages/Auth/Login";
 import LoginLayout from "./Layouts/loginLayout";
@@ -31,8 +31,10 @@ function App() {
           <Route path="/auth/login" element={<LoginPage />} />
         </Route>
 
-        {/* <Route element={<ProtectedRoute />}> */}
-        <Route>
+        <Route
+          element={<ProtectedRoute allowedRoles={["Super Admin", "manager"]} />}
+        >
+          {/* <Route> */}
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
 
@@ -44,7 +46,10 @@ function App() {
             {/* persiapan */}
             <Route path="/persiapan" element={<PersiapanListPage />} />
             <Route path="/form-persiapan" element={<PersiapanFormPage />} />
-            <Route path="/persiapan/approval" element={<PersiapanApprovalPage />} />
+            <Route
+              path="/persiapan/approval"
+              element={<PersiapanApprovalPage />}
+            />
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />

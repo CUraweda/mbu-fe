@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
@@ -12,6 +12,7 @@ import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
 import { FilterField } from "../../Data/dataTypes";
 import ExportButton from "../../Components/ExportButton";
 import PaginationBottom from "../../Components/PaginationBottom";
+import { ProjectPreparation } from "../../Data/types/projectType";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -36,9 +37,11 @@ const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {},
+    {}
   );
-  const [filteredData, setFilteredData] = useState(persiapanData);
+  const [, setFilteredData] = useState(persiapanData);
+  const [preparations] = useState<ProjectPreparation[]>([]);
+  const [loading] = useState(true);
 
   const handleDataChange = (value: number) => {
     // TODO: apply data limiting
@@ -46,15 +49,15 @@ const PersiapanListPage = () => {
   };
 
   // Fungsi untuk menangani pencarian
-  const handleFilters = () => {
+  const handleFilters = useCallback(() => {
     const result = applyFilterByStateAndQuery(
       persiapanData,
       filterStates,
-      searchQuery,
+      searchQuery
     );
 
     setFilteredData(result);
-  };
+  }, [filterStates, searchQuery]);
 
   useEffect(() => {
     handleFilters();
@@ -81,7 +84,12 @@ const PersiapanListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        <PersiapanList items={filteredData} />
+        {/* <PersiapanList items={persiapanData} /> */}
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <PersiapanList preparations={preparations} />
+        )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom
             currentPage={currentPage}

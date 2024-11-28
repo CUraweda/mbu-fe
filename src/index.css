@@ -3,15 +3,15 @@
 @tailwind utilities;
 
 .custom-checkbox {
-    @apply appearance-none;
-    @apply text-current;
-    @apply h-5 w-5;
-    @apply border border-gray-300;
-    @apply rounded-full;
-    @apply transition-colors;
+  @apply appearance-none;
+  @apply text-current;
+  @apply w-5 h-5;
+  @apply border border-gray-300;
+  @apply rounded-full;
+  @apply transition-colors;
 }
 
 .custom-checkbox:checked {
-    @apply border-primary-dark;
-    @apply bg-primary-dark;
+  @apply border-primary-dark;
+  @apply bg-primary-dark;
 }

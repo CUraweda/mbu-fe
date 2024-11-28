@@ -1,7 +1,7 @@
 import { useState } from "react";
-import iconMap from "../../Data/iconMap";
-import dataRecordingData from "../../Data/dataRecording";
-import PaginationBottom from "../PaginationBottom";
+import dataRecordingData from "../../../Data/dataRecording";
+import iconMap from "../../../Data/iconMap";
+import PaginationBottom from "../../PaginationBottom";
 
 interface DataRecording {
   id: number;

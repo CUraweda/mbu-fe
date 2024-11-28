@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import ProjectItem from "./ProjectItem";
+import { Project } from "../../Data/types/projectType"; // Import tipe data yang sesuai
 
 interface ProjectListProps {
-  items: {
-    id: number;
-    unitBisnis: string;
-    produk: string;
-    area: string;
-    lokasi: string;
-    kandang: string;
-    kapasitas: number;
-    periode: number;
-    statusChickin: string;
-    statusProject: string;
-  }[];
+  projects: Project[];
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
+const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(items.length).fill(false)
+    Array(projects.length).fill(false)
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -34,7 +24,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
   const handleSelectAll = () => {
     const newIsAllSelected = !isAllSelected;
     setIsAllSelected(newIsAllSelected);
-    setSelectedRows(Array(items.length).fill(newIsAllSelected));
+    setSelectedRows(Array(projects.length).fill(newIsAllSelected));
   };
 
   return (
@@ -63,10 +53,10 @@ const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
+          {projects.map((project, index) => (
             <ProjectItem
-              key={index}
-              {...item}
+              {...project}
+              key={project.id}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}
             />
