@@ -64,7 +64,7 @@ const PurchaseDetailPage = () => {
               <p className="text-sm text font-medium whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-300" />
+              <input type="date" className="text-white input input-bordered bg-blue-300" />
             </div>
           </div>
           {/* Vendor Details::END */}
