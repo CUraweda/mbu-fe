@@ -1,81 +1,42 @@
-import { useEffect, useState } from "react";
-import iconMap from "../../Data/iconMap";
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LayoutProject from "../../Layouts/layoutProject";
 import Breadcrumb from "../../Components/Breadcrumb";
 import Swal from "sweetalert2";
+import { IoMdAddCircleOutline } from "react-icons/io";
+
 const breadcrumbItems = [
   { label: "Home", link: "/" },
-  { label: "Project" },
+  { label: "Project", link: "/project" },
   { label: "Chick in", link: "/chickin" },
   { label: "Form Chick in" },
 ];
-const FormChickinPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const itemPekerjaanOptions = [
-    // Replace with your actual array of options
-    { value: "option1", label: "Option 1" },
-    { value: "option2", label: "Option 2" },
-    // ... add more options as needed
-  ];
 
-  // const [rows2, setRows2] = useState([]); // Assuming rows2 is managed in state
+const FormChickinPage = () => {
+  const navigate = useNavigate();
 
   const [rows, setRows] = useState([
-    {
-      no_surat: "",
-      tanggal_chickin: "",
-      doc: "",
-      supplier: "",
-      hatchery: "",
-      jumlah: "",
-    },
+    { no_surat: "SJ001", tanggal_chickin: "", doc: "", supplier: "", hatchery: "", jumlah: "" },
+    { no_surat: "SJ002", tanggal_chickin: "", doc: "", supplier: "", hatchery: "", jumlah: "" },
   ]);
-  //? ... other component logic
 
-  const [rowsPersiapan, setRowsPersiapan] = useState([
-    {
-      item_pekerjaan: "",
-      tanggal_selesai: "",
-      waktu: "",
-      hasil: "",
-      hatchery: "",
-    },
-  ]);
-  const handleInputChangeAnggaran = (
-    index: number,
-    field: string,
-    value: string
-  ) => {
-    const updatedRows = rows.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
-    );
-    setRows(updatedRows);
-  };
-
-  // Check if we're editing or creating a new project
-  const isEditMode = !!location.state?.projectData;
-  const [statusView, setStatusView] = useState<boolean>(false);
   const [formData, setFormData] = useState({
-    unitBisnis: "",
-    produk: "",
+    project_id: "",
+    unit_bisnis: "PT Mandiri Berlian Unggas",
     area: "",
     lokasi: "",
-    kandang: "",
-    kapasitas: 0,
-    periode: 0,
-    statusChickIn: "",
-    statusProject: "",
+    produk: "",
+    nama_kandang: "",
   });
 
-  // If we are editing, set the form data to the passed project data
-  useEffect(() => {
-    if (isEditMode) {
-      setFormData(location.state.projectData);
-      if (location.state.Status === "approvalView") {
-        setStatusView(true);
+  const handleInputChange = (index: number, field: string, value: string) => {
+    const updatedRows = rows.map((row, rowIndex) => {
+      if (rowIndex === index) {
+        if (field === "jumlah" && (isNaN(Number(value)) || Number(value) < 0)) {
+          Swal.fire("Error", "Jumlah harus berupa angka positif!", "error");
+          return row;
+        }
+        return { ...row, [field]: value };
       }
     }
   }, [isEditMode]);
@@ -92,210 +53,112 @@ const FormChickinPage = () => {
     }
     navigate("/project"); // Navigate back to the project list after submission
   };
-  const handleShowModal = () => {
-    //  setShowModal(true);
+
+  const handleSave = () => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "Check your data again!",
+      title: "Simpan Data?",
+      text: "Pastikan semua data telah diisi dengan benar.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, submit!",
+      confirmButtonText: "Ya, Simpan",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate("/persiapan");
-        Swal.fire("Submitted!", "Your data has been submitted.", "success");
+        // Simulate saving data...
+        Swal.fire("Berhasil!", "Data telah disimpan.", "success");
+        navigate("/chickin");
       }
     });
   };
 
-  const handleAddRowAnggaran = () => {
-    setRows([
-      ...rows,
-      {
-        no_surat: "",
-        tanggal_chickin: "",
-        doc: "",
-        supplier: "",
-        hatchery: "",
-        jumlah: "",
-      },
-    ]);
-  };
-  const [formOwnFarm, setFormOwnFarm] = useState({
-    id_project: "",
-    nama_area: "",
-    produk: "",
-    nama_kandang: "",
-    unit_bisnis: "PT MANDIRI BERLIAN UNGGAS",
-    lokasi: "",
-    fcr: "",
-    mortalitas_calculation: "",
-    closing_calculation: "",
-  });
-  const handleRemovePersiapan = (index: number) => {
-    const updatedRows = rowsPersiapan.filter(
-      (_, rowIndex) => rowIndex !== index
-    );
-    setRowsPersiapan(updatedRows);
-  };
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormOwnFarm({
-      ...formOwnFarm,
-      [name]: value,
-    });
-    ``;
-  };
-  // const handleSubmit = () => {
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "Check your data again!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, submit!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       navigate("/persiapan");
-  //       Swal.fire("Submitted!", "Your data has been submitted.", "success");
-  //     }
-  //   });
-  // };
   return (
     <div className="block w-full">
-      <Breadcrumb title="Project Form" items={breadcrumbItems} />
+      <Breadcrumb title="Form Chick In" items={breadcrumbItems} />
       <LayoutProject>
-        {/* {showModal && (
-          <div className="modal modal-open">
-            <div className="modal-box">
-              <h2 className="text-xl font-bold text-blue-300 ">
-                Apakah yakin pengajuan sudah sesuai?
-              </h2>
-              <h4 className="mb-5">
-                Klik “setuju” jika sudah sesuai, klik “tolak” jika belum
-              </h4>
-              <label className="font-semibold ">Komentar/catatan :</label>
-              <textarea
-                className="w-full mt-4 textarea textarea-bordered"
-                placeholder="Enter reason for approval"
-                value={approvalReason}
-                onChange={(e) => setApprovalReason(e.target.value)}
-              />
-              <div className="modal-action">
-                <button
-                  className="text-orange-700 bg-orange-200 btn"
-                  onClick={handleRejectApproval}
-                >
-                  Tolak
-                </button>
-                <button
-                  className="text-blue-700 bg-blue-200 btn"
-                  onClick={handleSubmitApproval}
-                >
-                  Setuju
-                </button>
+        <div className="px-10 py-6">
+          <h2 className="text-2xl text-primary mb-4">Form Chick in</h2>
+          <div className="grid grid-cols-5 gap-4 mb-8">
+            {[ // Input fields for form data
+              { label: "Project ID", name: "project_id", value: formData.project_id },
+              { label: "Unit Bisnis", name: "unit_bisnis", value: formData.unit_bisnis, disabled: true },
+              { label: "Area", name: "area", value: formData.area },
+              { label: "Lokasi", name: "lokasi", value: formData.lokasi },
+              { label: "Produk", name: "produk", value: formData.produk },
+              { label: "Nama Kandang", name: "nama_kandang", value: formData.nama_kandang },
+            ].map((field, index) => (
+              <div key={index} className="col-span-1">
+                <label className="block text-sm text-gray-400 font-medium mb-2">{field.label}</label>
+                <input
+                  type="text"
+                  name={field.name}
+                  value={field.value}
+                  onChange={(e) => setFormData({ ...formData, [field.name]: e.target.value })}
+                  disabled={field.disabled}
+                  className="w-full input input-bordered"
+                />
               </div>
-            </div>
+            ))}
           </div>
-        )} */}
-        <form>
-          {/* Step Indicators */}
-          <div className="mx-10 text-2xl text-blue-200">Form Chick in</div>
 
-          <div className="my-4 border-b-2 border-gray-100 rounded-md" />
-          {/* Step Content */}
-          <div className="card">
-            <div className="p-8">
-              <form className="block w-full">
-                <div className="grid w-full grid-cols-5 gap-2 mb-5">
-                  {/* Id Project */}
-                  <div className="mb-4">
-                    <label className="label">Id Project</label>
+          <table className="table table-bordered w-full mb-6">
+            <thead className="text-gray-400 bg-gray-100">
+              <tr>
+                <th>No Surat Jalan</th>
+                <th>Tanggal Chick in</th>
+                <th>Jenis DOC</th>
+                <th>Supplier</th>
+                <th>Hatchery</th>
+                <th>Jumlah (ekor)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={index}>
+                  <td>
                     <input
                       type="text"
-                      name="id_project"
-                      disabled={statusView}
-                      value={formOwnFarm.id_project}
-                      onChange={handleInputChange}
-                      className="w-full input input-bordered"
+                      className="input input-bordered w-full"
+                      value={row.no_surat}
+                      onChange={(e) => handleInputChange(index, "no_surat", e.target.value)}
                     />
-                  </div>
-                  {/* Periode Proyek */}
-                  <div className="mb-4">
-                    <label className="label">Unit Bisnis</label>
+                  </td>
+                  <td>
+                    <input
+                      type="date"
+                      className="input input-bordered w-full"
+                      value={row.tanggal_chickin}
+                      onChange={(e) => handleInputChange(index, "tanggal_chickin", e.target.value)}
+                    />
+                  </td>
+                  <td>
+                    <select
+                      className="select select-bordered w-full"
+                      value={row.doc}
+                      onChange={(e) => handleInputChange(index, "doc", e.target.value)}
+                    >
+                      <option value="">Pilih Jenis</option>
+                      <option value="CP Vaksin">CP Vaksin</option>
+                      <option value="Non Vaksin">Non Vaksin</option>
+                    </select>
+                  </td>
+                  <td>
                     <input
                       type="text"
-                      name="unit_bisnis"
-                      disabled={statusView}
-                      value={formOwnFarm.unit_bisnis}
-                      onChange={handleInputChange}
-                      className="w-full input input-bordered"
+                      className="input input-bordered w-full"
+                      value={row.supplier}
+                      onChange={(e) => handleInputChange(index, "supplier", e.target.value)}
                     />
-                  </div>
-                  {/* Nama Area */}
-                  <div className="mb-4">
-                    <label className="label">Area</label>
+                  </td>
+                  <td>
                     <select
-                      disabled={statusView}
-                      name="nama_area"
-                      value={formOwnFarm.nama_area}
-                      onChange={handleInputChange}
-                      className="w-full select select-bordered"
+                      className="select select-bordered w-full"
+                      value={row.hatchery}
+                      onChange={(e) => handleInputChange(index, "hatchery", e.target.value)}
                     >
-                      <option value="">Pilih Area</option>
-                      <option value="Area 1">Area 1</option>
-                      <option value="Area 2">Area 2</option>
-                    </select>
-                  </div>
-                  {/* Lokasi */}
-                  <div className="mb-4">
-                    <label className="label">Lokasi</label>
-                    <select
-                      name="lokasi"
-                      disabled={statusView}
-                      value={formOwnFarm.lokasi}
-                      onChange={handleInputChange}
-                      className="w-full select select-bordered"
-                    >
-                      <option value={0}>Pilih Lokasi</option>
-                      <option value={1}>Lokasi 1</option>
-                      <option value={2}>Lokasi 2</option>
-                    </select>
-                  </div>
-
-                  {/* Produk */}
-                  <div className="mb-4">
-                    <label className="label">Produk</label>
-                    <select
-                      name="produk"
-                      disabled={statusView}
-                      value={formOwnFarm.produk}
-                      onChange={handleInputChange}
-                      className="w-full select select-bordered"
-                    >
-                      <option value="">Parent Stock</option>
-                      <option value="Farm 1">Stock 1</option>
-                      <option value="Farm 2">Stock 2</option>
-                    </select>
-                  </div>
-                  <div className="mb-4">
-                    <label className="label">Nama Kandang</label>
-                    <select
-                      name="nama_kandang"
-                      disabled={statusView}
-                      value={formOwnFarm.nama_kandang}
-                      onChange={handleInputChange}
-                      className="w-full select select-bordered"
-                    >
-                      <option value={0}>Pilih Kandang</option>
-                      <option value={1}>Kandang 1</option>
-                      <option value={2}>Kandang 2</option>
+                      <option value="">Pilih Hatchery</option>
+                      <option value="KOPO">KOPO</option>
+                      <option value="Other">Other</option>
                     </select>
                   </div>
                 </div>
@@ -484,26 +347,30 @@ const FormChickinPage = () => {
             </div>
           </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-end gap-5 mt-4 mr-10">
+
+          <div className="flex justify-start w-full m-2">
             <button
               type="button"
-              className={`btn ${"bg-orange-400 text-white"}`}
-              onClick={handleRejectApproval}
+              className="btn btn-ghost hover:bg-transparent text-center"
+              onClick={handleAddRowAnggaran}
             >
-              Batal
-            </button>
-            <button
-              type="button"
-              className="text-white bg-green-500 btn"
-              onClick={() => handleShowModal()}
-            >
-              Simpan
+              <IoMdAddCircleOutline size={30} color="#00499E" className="mr-2" />
             </button>
           </div>
-        </form>
+          <div className="my-4 flex justify-end gap-4">
+            <button
+              className="btn bg-orange-500 w-32 text-white"
+              onClick={() => navigate("")}>
+              Batal
+            </button>
+            <button className="btn bg-blue-300 text-white w-32 ">
+              Simpan
+              </button>
+          </div>
+        </div>
       </LayoutProject>
     </div>
   );
 };
+
 export default FormChickinPage;
