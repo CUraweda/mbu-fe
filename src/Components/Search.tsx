@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 interface SearchBarProps {
-  onSearch: (searchQuery: string) => void;
+  onSearchChange: (searchQuery: string) => void;
   placeholder?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearchChange,
+  placeholder = "",
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    onSearch(searchQuery);
-  }, [searchQuery, onSearch]);
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    onSearchChange(query);
   };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch(searchQuery);
+    onSearchChange(searchQuery);
   };
 
   return (
@@ -32,7 +33,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           type="text"
           className=""
           value={searchQuery}
-          onChange={handleSearch}
+          onChange={handleSearchInput}
+          placeholder={placeholder}
         />
       </form>
     </div>

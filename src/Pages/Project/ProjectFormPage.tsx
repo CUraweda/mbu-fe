@@ -2,10 +2,10 @@ import { useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import Tabs from "../../Components/Tabs";
-import GeneralInfoForm from "../../Components/project/GeneralInfoForm";
-import FarmInfoForm from "../../Components/project/FarmInfoForm";
-import ProjectBudgetForm from "../../Components/project/ProjectBudgetForm";
-import DataRecordingForm from "../../Components/project/DataRecordingForm";
+import GeneralInfoForm from "../../Components/project/projectForm/GeneralInfoForm";
+import FarmInfoForm from "../../Components/project/projectForm/FarmInfoForm";
+import DataRecordingForm from "../../Components/project/projectForm/DataRecordingForm";
+import ProjectBudgetList from "../../Components/project/projectForm/ProjectBudgetList";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -31,7 +31,8 @@ const ProjectFormPage = () => {
       case 2:
         return <FarmInfoForm />;
       case 3:
-        return <ProjectBudgetForm />;
+        // return <ProjectBudgetForm />;
+        return <ProjectBudgetList />;
       case 4:
         return <DataRecordingForm />;
       default:

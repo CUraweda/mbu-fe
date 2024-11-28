@@ -11,7 +11,7 @@ const breadcrumbItems = [
   { label: "Chick in", link: "/chickin" },
   { label: "Form Chick in" },
 ];
-const FormEditChickinPage = () => {
+const FormChickinPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const itemPekerjaanOptions = [
@@ -79,19 +79,6 @@ const FormEditChickinPage = () => {
       }
     }
   }, [isEditMode]);
-  // const handleSubmitApproval = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (isEditMode) {
-  //     // Handle edit logic
-  //     console.log("Editing project with data:", formData);
-  //     // Call an API to update the project...
-  //   } else {
-  //     // Handle create logic
-  //     console.log("Creating new project with data:", formData);
-  //     // Call an API to create a new project...
-  //   }
-  //   navigate("/project"); // Navigate back to the project list after submission
-  // };
   const handleRejectApproval = (e: React.FormEvent) => {
     e.preventDefault();
     if (isEditMode) {
@@ -324,6 +311,7 @@ const FormEditChickinPage = () => {
                           <th className="p-3 text-left">Jenis DOC</th>
                           <th className="p-3 text-left">Supplier</th>
                           <th className="p-3 text-left">Hatchery</th>
+                          <th className="p-3 text-left">Jumlah(ekor)</th>
 
                           {rowsPersiapan.length > 1 && !statusView ? (
                             <th className="p-3 text-left">Aksi</th>
@@ -452,6 +440,7 @@ const FormEditChickinPage = () => {
                                 ))}
                               </select>
                             </td>
+
                             {/* Delete Button */}
                             {rowsPersiapan.length > 1 && !statusView ? (
                               <td className="p-2">
@@ -502,7 +491,7 @@ const FormEditChickinPage = () => {
               className={`btn ${"bg-orange-400 text-white"}`}
               onClick={handleRejectApproval}
             >
-              Selanjutnya
+              Batal
             </button>
             <button
               type="button"
@@ -517,4 +506,4 @@ const FormEditChickinPage = () => {
     </div>
   );
 };
-export default FormEditChickinPage;
+export default FormChickinPage;

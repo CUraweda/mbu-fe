@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-checkbox {
+  @apply appearance-none;
+  @apply text-current;
+  @apply w-5 h-5;
+  @apply border border-gray-300;
+  @apply rounded-full;
+  @apply transition-colors;
+}
+
+.custom-checkbox:checked {
+  @apply border-primary-dark;
+  @apply bg-primary-dark;
+}

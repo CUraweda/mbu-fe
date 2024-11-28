@@ -1,7 +1,10 @@
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useState } from "react";
 import dataRecordingData from "../../../Data/dataRecording";
+import PaginationBottom from "../../PaginationBottom";
 
 const RecordingApproval = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const items = dataRecordingData;
   return (
     <div>
@@ -46,25 +49,11 @@ const RecordingApproval = () => {
           </tbody>
         </table>
       </div>
-      <div className="mx-4 my-5">
-        <div className="flex items-center justify-center md:justify-end">
-          <button
-            //   disabled={currentPage === 1}
-            //   onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-          >
-            <FaArrowLeft size={18} className="text-primary" />
-            <div className="flex text-center">Prev</div>
-          </button>
-          <span className="mx-2 text-primary">1 of 2</span>
-          <button
-            //   onClick={() => setCurrentPage((prev) => prev + 1)}
-            className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
-          >
-            <div className="flex text-center">Next</div>
-            <FaArrowRight size={18} className="text-primary" />
-          </button>
-        </div>
+      <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
+        <PaginationBottom
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );
