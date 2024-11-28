@@ -17,7 +17,7 @@ import PaginationBottom from "../../Components/PaginationBottom";
 const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Project", link: "/" },
-  { label: "List Project" },
+  { label: "Chick in" },
 ];
 
 const filterFields: FilterField[] = [

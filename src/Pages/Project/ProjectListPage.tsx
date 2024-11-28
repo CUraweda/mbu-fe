@@ -10,6 +10,7 @@ import projectData from "../../Data/projectData";
 import { FaPlus } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import projectApi from "../../Data/api/projectApi";
 import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
 import { FilterField } from "../../Data/dataTypes";
 import ExportButton from "../../Components/ExportButton";
@@ -37,11 +38,13 @@ const filterFields: FilterField[] = [
 const ProjectListPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {},
+    {}
   );
-  const [filteredData, setFilteredData] = useState(projectData);
+  const [, setFilteredData] = useState(projectData);
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
@@ -51,7 +54,7 @@ const ProjectListPage = () => {
     const result = applyFilterByStateAndQuery(
       projectData,
       filterStates,
-      searchQuery,
+      searchQuery
     );
 
     setFilteredData(result);
@@ -62,7 +65,20 @@ const ProjectListPage = () => {
   };
 
   useEffect(() => {
-    handleFilter();
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const result = await projectApi.getAllProject();
+        setProjects(result);
+        handleFilter();
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
   }, [searchQuery, filterStates]);
 
   return (
@@ -93,7 +109,12 @@ const ProjectListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        <ProjectList items={filteredData} />
+        {/* <ProjectList items={projects} /> */}
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <ProjectList projects={projects} />
+        )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom
             currentPage={currentPage}

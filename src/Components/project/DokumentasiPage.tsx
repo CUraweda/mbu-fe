@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaCloudUploadAlt,
-  FaPlus,
-} from "react-icons/fa";
+import { FaCloudUploadAlt, FaPlus } from "react-icons/fa";
 import dokumentasiData from "../../Data/dokumentasiData";
 import PaginationBottom from "../PaginationBottom";
 
@@ -61,16 +56,16 @@ const DokumentasiForm: React.FC = () => {
 
       {isPopupVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4 text-center">
+          <div className="p-8 bg-white rounded-lg shadow-lg w-96">
+            <h2 className="mb-4 text-xl font-bold text-center">
               Upload Foto & Dokumen
             </h2>
             <input
               type="text"
               placeholder="Masukkan judul"
-              className="w-full p-2 border border-gray-300 rounded mb-4"
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
             />
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 flex flex-col items-center ">
+            <div className="flex flex-col items-center p-4 border-2 border-gray-300 border-dashed rounded-lg ">
               <input
                 type="file"
                 id="fileInput"
@@ -81,22 +76,22 @@ const DokumentasiForm: React.FC = () => {
                 htmlFor="fileInput"
                 className="flex flex-col items-center justify-center w-full h-full p-4 cursor-pointer"
               >
-                <div className="bg-gray-200 px-6 py-3 rounded-md flex items-center justify-center">
+                <div className="flex items-center justify-center px-6 py-3 bg-gray-200 rounded-md">
                   <FaCloudUploadAlt size={30} />
                 </div>
-                <span className="mt-2 text-gray-600 text-sm">Upload</span>
+                <span className="mt-2 text-sm text-gray-600">Upload</span>
               </label>
               {/* Menampilkan nama file yang dipilih (jika ada) */}
               {file && <p className="mt-2 text-gray-600">{file.name}</p>}
             </div>
             <div className="flex justify-end gap-3 mt-4">
               <button
-                className="bg-orange-500 text-white px-4 py-2 rounded"
+                className="px-4 py-2 text-white bg-orange-500 rounded"
                 onClick={handleClosePopup}
               >
                 Batal
               </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
+              <button className="px-4 py-2 text-white bg-blue-500 rounded">
                 Simpan
               </button>
             </div>
@@ -106,8 +101,8 @@ const DokumentasiForm: React.FC = () => {
 
       {isFilePopupVisible && selectedFile && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4 text-center">
+          <div className="p-8 bg-white rounded-lg shadow-lg w-96">
+            <h2 className="mb-4 text-xl font-bold text-center">
               Lihat Foto/Dokumen
             </h2>
             <img
@@ -117,7 +112,7 @@ const DokumentasiForm: React.FC = () => {
             />
             <div className="flex justify-end gap-3 mt-4">
               <button
-                className="bg-orange-500 text-white px-4 py-2 rounded"
+                className="px-4 py-2 text-white bg-orange-500 rounded"
                 onClick={handleCloseFilePopup}
               >
                 Tutup

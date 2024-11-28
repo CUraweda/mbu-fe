@@ -1,23 +1,15 @@
 import React, { useState } from "react";
 import PersiapanItem from "./PersiapanItem";
+import { ProjectPreparation } from "../../Data/types/projectType";
+// import { Preparation } from "../../Data/types/persiapanType";
 
-interface PersiapanListProps {
-  items: {
-    id: number;
-    unitBisnis: string;
-    produk: string;
-    lokasi: string;
-    kandang: string;
-    periode: number;
-    statusProject: string;
-    statusPersiapan: string;
-    aktual: number;
-  }[];
+interface PreparationListProps {
+  preparations: ProjectPreparation[];
 }
 
-const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
+const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(items.length).fill(false)
+    Array(preparations.length).fill(false)
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -33,7 +25,7 @@ const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
   const handleSelectAll = () => {
     const newIsAllSelected = !isAllSelected;
     setIsAllSelected(newIsAllSelected);
-    setSelectedRows(Array(items.length).fill(newIsAllSelected));
+    setSelectedRows(Array(preparations.length).fill(newIsAllSelected));
   };
 
   return (
@@ -51,19 +43,22 @@ const PersiapanList: React.FC<PersiapanListProps> = ({ items }) => {
             <th className="px-4 py-2 font-semibold">Id Persiapan</th>
             <th className="px-4 py-2 font-semibold">Unit Bisnis</th>
             <th className="px-4 py-2 font-semibold">Produk</th>
+            <th className="px-4 py-2 font-semibold">Area</th>
             <th className="px-4 py-2 font-semibold">Lokasi</th>
             <th className="px-4 py-2 font-semibold">Kandang</th>
             <th className="px-4 py-2 font-semibold">Periode</th>
             <th className="px-4 py-2 font-semibold">Status Project</th>
             <th className="px-4 py-2 font-semibold">Status Persiapan</th>
-            <th className="px-4 py-2 font-semibold">Aktual Waktu Persiapan (hari)</th>
+            <th className="px-4 py-2 font-semibold">
+              Aktual Waktu Persiapan (hari)
+            </th>
             <th className="px-4 py-2 font-semibold">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
+          {preparations.map((item, index) => (
             <PersiapanItem
-              key={item.id}
+              // key={item.id}
               {...item}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}

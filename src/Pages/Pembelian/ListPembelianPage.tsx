@@ -45,7 +45,7 @@ const ListPembelianPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState<Record<string, any>>({});
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [, setItemsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilterStates, setStatusFilterStates] = useState<
     Record<string, string[]>
@@ -56,7 +56,7 @@ const ListPembelianPage = () => {
     const result = applyFilterByStateAndQuery(
       pembelianData,
       statusFilterStates,
-      searchQuery,
+      searchQuery
     );
 
     setFilteredData(result);
@@ -92,7 +92,7 @@ const ListPembelianPage = () => {
     // TODO: IMPLEMENT AND COMBINE THIS FILTER WITH THE ACTIVE ONE
   });
 
-  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+  // const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
   //! NOTE: PAGINATION BY BACKEND
   // const paginatedItems = filteredItems.slice(
   //   (currentPage - 1) * itemsPerPage,
@@ -128,7 +128,7 @@ const ListPembelianPage = () => {
 
         <hr />
 
-        <div className="flex flex-wrap items-center justify-between px-5 py-4 gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-5 px-5 py-4">
           <div className="flex-shrink-0">
             <DataSelector
               options={[10, 25, 50, 100]}
@@ -140,7 +140,7 @@ const ListPembelianPage = () => {
             <FilterBar onFilterChange={handleFilterChange} />
           </div>
 
-          <div className="flex items-center gap-0 relative">
+          <div className="relative flex items-center gap-0">
             <SearchBar onSearchChange={setSearchQuery} />
             <Filter
               fields={filterFields}

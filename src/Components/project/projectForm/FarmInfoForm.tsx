@@ -1,6 +1,6 @@
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FiPlusCircle } from "react-icons/fi";
-import farmData from "../../Data/farmInfoData";
+import farmData from "../../../Data/farmInfoData";
 import React from "react";
 
 interface Farm {

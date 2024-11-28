@@ -38,13 +38,20 @@ const FormChickinPage = () => {
         }
         return { ...row, [field]: value };
       }
-      return row;
-    });
-    setRows(updatedRows);
-  };
-
-  const handleAddRowAnggaran = () => {
-    setRows([...rows, { no_surat: "", tanggal_chickin: "", doc: "", supplier: "", hatchery: "", jumlah: "" }]);
+    }
+  }, [isEditMode]);
+  const handleRejectApproval = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isEditMode) {
+      // Handle edit logic
+      console.log("Editing project with data:", formData);
+      // Call an API to update the project...
+    } else {
+      // Handle create logic
+      console.log("Creating new project with data:", formData);
+      // Call an API to create a new project...
+    }
+    navigate("/project"); // Navigate back to the project list after submission
   };
 
   const handleSave = () => {
@@ -153,19 +160,193 @@ const FormChickinPage = () => {
                       <option value="KOPO">KOPO</option>
                       <option value="Other">Other</option>
                     </select>
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      className="input input-bordered w-full"
-                      value={row.jumlah}
-                      onChange={(e) => handleInputChange(index, "jumlah", e.target.value)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </div>
+                </div>
+                <div className="card">
+                  {/* Table Container */}
+                  <div className="overflow-x-auto ">
+                    <table className="table w-full table-md">
+                      {/* Table Head */}
+                      <thead className="text-gray-400 ">
+                        <tr>
+                          <th className="p-3 text-left">No Surat Jalan</th>
+                          <th className="p-3 text-left">Tanggal Chick in</th>
+                          <th className="p-3 text-left">Jenis DOC</th>
+                          <th className="p-3 text-left">Supplier</th>
+                          <th className="p-3 text-left">Hatchery</th>
+                          <th className="p-3 text-left">Jumlah(ekor)</th>
+
+                          {rowsPersiapan.length > 1 && !statusView ? (
+                            <th className="p-3 text-left">Aksi</th>
+                          ) : (
+                            <></>
+                          )}
+                        </tr>
+                      </thead>
+
+                      {/* Table Body */}
+                      <tbody>
+                        {rows.map((row: any, index) => (
+                          <tr key={index}>
+                            {/* Item */}
+                            <td className="p-2">
+                              <input
+                                type="text"
+                                disabled={statusView}
+                                placeholder="Masukkan item pekerjaan"
+                                className="w-full input input-bordered"
+                                value={row.no_surat}
+                                onChange={(e) =>
+                                  handleInputChangeAnggaran(
+                                    index,
+                                    "no_surat",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </td>
+
+                            {/* Quantity (Qty) */}
+                            <td className="p-2">
+                              <input
+                                type="date"
+                                disabled={statusView}
+                                placeholder="Masukkan tanggal"
+                                className="w-full input input-bordered"
+                                value={row.tanggal_chickin}
+                                onChange={(e) =>
+                                  handleInputChangeAnggaran(
+                                    index,
+                                    "tanggal_chickin",
+                                    e.target.value
+                                  )
+                                }
+                              />
+                            </td>
+
+                            {/* Harga Satuan */}
+                            <td className="p-2">
+                              <select
+                                disabled={statusView}
+                                className="w-full input input-bordered"
+                                value={row.doc}
+                                onChange={(e) =>
+                                  handleInputChangeAnggaran(
+                                    index,
+                                    "doc",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value={""}>Pilih DOC</option>
+                                {itemPekerjaanOptions.map((option) => (
+                                  <option
+                                    value={option.value}
+                                    key={option.value}
+                                  >
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </td>
+
+                            <td className="p-2 text-center px-auto">
+                              {statusView ? (
+                                <span
+                                  className={` shadow-md rounded-md w-full p-2 ${
+                                    row.hasil === "Selesai"
+                                      ? "bg-green-300 text-green-800"
+                                      : row.hasil === "Belum Selesai"
+                                      ? "bg-yellow-300 text-yellow-800"
+                                      : "bg-red-300 text-red-800"
+                                  }`}
+                                >
+                                  {row.hasil}
+                                </span>
+                              ) : (
+                                <input
+                                  disabled
+                                  type="text"
+                                  className="w-full input input-bordered"
+                                  value={row.supplier}
+                                  onChange={(e) =>
+                                    handleInputChangeAnggaran(
+                                      index,
+                                      "supplier",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              )}
+                            </td>
+                            <td className="p-2">
+                              <select
+                                className="w-full input input-bordered"
+                                value={row.hatchery}
+                                onChange={(e) =>
+                                  handleInputChangeAnggaran(
+                                    index,
+                                    "hatchery",
+                                    e.target.value
+                                  )
+                                }
+                              >
+                                <option value="">Pilih Hatchery</option>{" "}
+                                {/* Default option */}
+                                {itemPekerjaanOptions.map((option) => (
+                                  <option
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            </td>
+
+                            {/* Delete Button */}
+                            {rowsPersiapan.length > 1 && !statusView ? (
+                              <td className="p-2">
+                                <button
+                                  type="button"
+                                  className="text-center btn btn-ghost hover:bg-transparent"
+                                  onClick={() => handleRemovePersiapan(index)}
+                                >
+                                  <iconMap.PiTrash
+                                    size={28}
+                                    color="red"
+                                    className="mr-2"
+                                  />
+                                </button>
+                              </td>
+                            ) : (
+                              <></>
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="flex justify-start w-full m-2">
+                    <button
+                      type="button"
+                      className={`btn btn-ghost hover:bg-transparent text-center ${
+                        statusView ? "hidden" : ""
+                      }`}
+                      onClick={handleAddRowAnggaran}
+                    >
+                      <iconMap.IoMdAddCircleOutline
+                        size={30}
+                        color="#00499E"
+                        className="mr-2"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
 
           <div className="flex justify-start w-full m-2">
             <button
