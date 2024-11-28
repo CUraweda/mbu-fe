@@ -2,59 +2,50 @@ import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { ProjectPreparation } from "../../Data/types/projectType";
 
-interface PersiapanItemProps {
-  id: number;
-  unitBisnis: string;
-  produk: string;
-  lokasi: string;
-  kandang: string;
-  periode: number;
-  statusProject: string;
-  statusPersiapan: string;
-  aktual: number;
+interface PreparationItemProps extends ProjectPreparation {
   isChecked: boolean;
   onCheckboxChange: () => void;
 }
 
-const PersiapanItem: React.FC<PersiapanItemProps> = ({
-  id,
-  unitBisnis,
-  produk,
-  lokasi,
-  kandang,
-  periode,
-  statusProject,
-  statusPersiapan,
-  aktual,
+const PersiapanItem: React.FC<PreparationItemProps> = ({
+  id_project,
+  bussines_unit,
+  product,
+  area,
+  location,
+  project_farms,
+  status,
+  project_preparation,
   isChecked,
   onCheckboxChange,
 }) => {
   const navigate = useNavigate();
 
   const getStatusProjectClass = () => {
-    switch (statusProject) {
-      case "Persiapan":
-        return "bg-[#FFDADB] text-[#BE0407]";
-      case "Aktif":
-        return "bg-[#F9E5FF] text-[#E308E6]";
-      case "Selesai":
-        return "bg-[#D0F0FF] text-[#15B5FF]";
-      case "Pengajuan":
-        return "bg-[#FFF7C7] text-[#C9C311]";
+    switch (status) {
+      // case "Persiapan":
+      //   return "bg-[#FFDADB] text-[#BE0407]";
+      // case "Aktif":
+      //   return "bg-[#F9E5FF] text-[#E308E6]";
+      // case "Selesai":
+      //   return "bg-[#D0F0FF] text-[#15B5FF]";
+      // case "Pengajuan":
+      //   return "bg-[#FFF7C7] text-[#C9C311]";
       default:
         return "";
     }
   };
 
   const getStatusPersiapanClass = () => {
-    switch (statusPersiapan) {
-      case "Belum Selesai":
-        return "bg-[#FFDFBE] text-[#EC8917]";
-      case "Tercapai":
-        return "bg-[#E4FFBD] text-[#12B906]";
-      case "Tidak Tercapai":
-        return "bg-[#FFDADB] text-[#BE0407]";
+    switch (project_preparation) {
+      // case "Belum Selesai":
+      //   return "bg-[#FFDFBE] text-[#EC8917]";
+      // case "Tercapai":
+      //   return "bg-[#E4FFBD] text-[#12B906]";
+      // case "Tidak Tercapai":
+      //   return "bg-[#FFDADB] text-[#BE0407]";
       default:
         return "";
     }
@@ -71,35 +62,36 @@ const PersiapanItem: React.FC<PersiapanItemProps> = ({
           type="checkbox"
           checked={isChecked}
           onChange={onCheckboxChange}
-          className="h-4 w-4 cursor-pointer"
+          className="w-4 h-4 cursor-pointer"
         />
       </td>
-      <td className="px-4 py-2">{id}</td>
-      <td className="px-4 py-2">{unitBisnis}</td>
-      <td className="px-4 py-2">{produk}</td>
-      <td className="px-4 py-2">{lokasi}</td>
-      <td className="px-4 py-2">{kandang}</td>
-      <td className="px-4 py-2">{periode}</td>
+      <td className="px-4 py-2">{id_project}</td>
+      <td className="px-4 py-2">{bussines_unit.name}</td>
+      <td className="px-4 py-2">{product.name}</td>
+      <td className="px-4 py-2">{area.name}</td>
+      <td className="px-4 py-2">{location.name}</td>
+      <td className="px-4 py-2">{project_farms[0]?.farms.name}</td>
+      <td className="px-4 py-2">{project_farms[0]?.farms.capacity}</td>
+      <td className="px-4 py-2">{project_farms[0]?.farms.period}</td>
 
-      {/* Status Project Display */}
-      <td className="px-4 py-2">
+      {/* Status Project Dropdown */}
+      <td className="relative px-4 py-2">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()}`}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()} cursor-pointer`}
         >
-          {statusProject}
+          {/* {status} */}
         </div>
       </td>
 
-      {/* Status Persiapan Display */}
-      <td className="px-4 py-2">
+      {/* Status Persiapan Dropdown */}
+      <td className="relative px-4 py-2">
         <div
-          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()}`}
+          className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()} cursor-pointer`}
         >
-          {statusPersiapan}
+          {/* {statusPersiapan} */}
         </div>
       </td>
 
-      <td className="px-4 py-2">{aktual}</td>
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">
           <div tabIndex={0} role="button" className="m-1 rotate-90">

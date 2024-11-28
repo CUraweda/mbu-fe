@@ -9,7 +9,7 @@ const PurchaseSidebarLayout: React.FC<PurchaseSidebarLayoutProps> = ({
   children,
 }) => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex flex-col h-screen">
       {/* Horizontal Tabs */}
       <div className="bg-[#F0F0F0F0] shadow-md">
         <ul className="flex">
@@ -34,7 +34,9 @@ const PurchaseSidebarLayout: React.FC<PurchaseSidebarLayoutProps> = ({
       </div>
 
       {/* Main content */}
-      <div className="flex-1 bg-[#F0F0F0F0] p-4 overflow-y-auto">{children}</div>
+      <div className="flex-1 bg-[#F0F0F0F0] p-4 overflow-y-auto">
+        {children}
+      </div>
     </div>
   );
 };

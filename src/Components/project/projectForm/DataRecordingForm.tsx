@@ -1,6 +1,6 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight, FaRegTrashAlt } from "react-icons/fa";
-import dataRecordingData from "../../Data/dataRecording";
+import dataRecordingData from "../../../Data/dataRecording";
 
 interface DataRecording {
   id: number;

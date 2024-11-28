@@ -453,7 +453,7 @@ const FormChickinPage = () => {
                                 ))}
                               </select>
                             </td>
-                            
+
                             {/* Delete Button */}
                             {rowsPersiapan.length > 1 && !statusView ? (
                               <td className="p-2">

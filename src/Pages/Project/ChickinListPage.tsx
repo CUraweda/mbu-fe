@@ -16,7 +16,7 @@ import { useState } from "react";
 const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Project", link: "/" },
-  { label: "List Project" },
+  { label: "Chick in" },
 ];
 
 const ProjectListPage = () => {

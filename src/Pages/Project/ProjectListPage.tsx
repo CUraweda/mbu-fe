@@ -4,14 +4,15 @@ import DataSelector from "../../Components/DataSelector";
 import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import ProjectList from "../../Components/project/ProjectList";
-import projectData from "../../Data/projectData";
+// import projectData from "../../Data/projectData";
 
 // icons
 import { FaArrowLeft, FaArrowRight, FaPlus } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import projectApi from "../../Data/api/projectApi";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -22,6 +23,9 @@ const breadcrumbItems = [
 const ProjectListPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
   };
@@ -33,6 +37,22 @@ const ProjectListPage = () => {
   const handleNavigate = () => {
     navigate("/project/add");
   };
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const result = await projectApi.getAllProject();
+        setProjects(result);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
 
   return (
     <div>
@@ -83,7 +103,12 @@ const ProjectListPage = () => {
             <Filter />
           </div>
         </div>
-        <ProjectList items={projectData} />
+        {/* <ProjectList items={projects} /> */}
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <ProjectList projects={projects} />
+        )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button

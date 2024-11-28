@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
 import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import PersiapanList from "../../Components/project/PersiapanList";
-import persiapanData from "../../Data/persiapanData";
+// import persiapanData from "../../Data/persiapanData";
 
 // icons
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { CiExport } from "react-icons/ci";
 import { MdExpandMore } from "react-icons/md";
+import { useState } from "react";
+// import projectApi from "../../Data/api/projectApi";
+// import persiapanApi from "../../Data/api/persiapanApi";
+import { ProjectPreparation } from "../../Data/types/projectType";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -20,56 +23,52 @@ const breadcrumbItems = [
 
 const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProjectStatuses, setFilterProjectStatuses] = useState<string[]>([]);
-  const [filterPersiapanStatuses, setFilterPersiapanStatuses] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
-  const [filteredData, setFilteredData] = useState(persiapanData);
-
-  // Fungsi untuk menangani pencarian
+  const [preparations] = useState<ProjectPreparation[]>([]);
+  const [loading] = useState(true);
   const handleSearch = (query: string) => {
-    setSearchQuery(query.toLowerCase()); // Konversi ke huruf kecil agar pencarian tidak case-sensitive
+    console.log("Search query:", query);
   };
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
 
-  const handleProjectFilterChange = (selectedStatuses: string[]) => {
-    setFilterProjectStatuses(selectedStatuses);
-  };
+  // useEffect(() => {
+  //   const fetchProjects = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const submissions: Project[] = await projectApi.getAllProject();
+  //       const preparations: ProjectPreparation[] =
+  //         await persiapanApi.getAllPersiapan();
 
-  const handlePersiapanFilterChange = (selectedStatuses: string[]) => {
-    setFilterPersiapanStatuses(selectedStatuses);
-  };
+  //       const combinedData = submissions.map((submission: Project) => {
+  //         const preparation = preparations.find(
+  //           (prep: ProjectPreparation) =>
+  //             prep.id_project === submission.id_project
+  //         );
+  //         return {
+  //           // id: (submission.id_project),
+  //           id_project: submission.id_project,
+  //           bussines_unit: submission.bussines_unit,
+  //           product: submission.product,
+  //           area: submission.area,
+  //           location: submission.location,
+  //           project_farms: submission.project_farms,
+  //           status: submission.status,
+  //           project_preparation: preparation?.project_preparation || null,
+  //         };
+  //       });
 
-  const filterData = () => {
-    let filtered = persiapanData;
+  //       setPreparations(combinedData);
+  //     } catch (error) {
+  //       console.error("Error fetching projects:", error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    // Filter data berdasarkan status
-    if (filterProjectStatuses.length > 0 || filterPersiapanStatuses.length > 0) {
-      filtered = filtered.filter((item) => {
-        const projectMatch =
-          filterProjectStatuses.length === 0 || filterProjectStatuses.includes(item.statusProject);
-        const persiapanMatch =
-          filterPersiapanStatuses.length === 0 || filterPersiapanStatuses.includes(item.statusPersiapan);
-        return projectMatch && persiapanMatch;
-      });
-    }
-
-    // Filter data berdasarkan query pencarian
-    if (searchQuery) {
-      filtered = filtered.filter((item) => {
-        const valuesToSearch = Object.values(item).join(" ").toLowerCase(); // Gabungkan semua nilai dalam objek ke string
-        return valuesToSearch.includes(searchQuery);
-      });
-    }
-
-    setFilteredData(filtered);
-  };
-
-  useEffect(() => {
-    filterData();
-  }, [filterProjectStatuses, filterPersiapanStatuses, searchQuery]);
+  //   fetchProjects();
+  // }, []);
 
   return (
     <div>
@@ -110,126 +109,15 @@ const PersiapanListPage = () => {
           />
           <div className="flex items-center">
             <SearchBar onSearch={handleSearch} />
-            <Filter>
-              <div className="flex flex-col">
-                {/* Filter untuk status persiapan */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Persiapan</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tercapai")
-                              : [...filterPersiapanStatuses, "Tercapai"]
-                          )
-                        }
-                      />
-                      Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Tidak Tercapai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Tidak Tercapai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Tidak Tercapai")
-                              : [...filterPersiapanStatuses, "Tidak Tercapai"]
-                          )
-                        }
-                      />
-                      Tidak Tercapai
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterPersiapanStatuses.includes("Belum Selesai")}
-                        onChange={() =>
-                          handlePersiapanFilterChange(
-                            filterPersiapanStatuses.includes("Belum Selesai")
-                              ? filterPersiapanStatuses.filter(status => status !== "Belum Selesai")
-                              : [...filterPersiapanStatuses, "Belum Selesai"]
-                          )
-                        }
-                      />
-                      Belum Selesai
-                    </label>
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-300 my-4"></div>
-
-                {/* Filter untuk status project */}
-                <div className="mb-2">
-                  <label className="text-sm font-semibold">Status Project</label>
-                  <div className="flex flex-col gap-2 mt-2">
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Pengajuan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Pengajuan")
-                              ? filterProjectStatuses.filter(status => status !== "Pengajuan")
-                              : [...filterProjectStatuses, "Pengajuan"]
-                          )
-                        }
-                      />
-                      Pengajuan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Persiapan")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Persiapan")
-                              ? filterProjectStatuses.filter(status => status !== "Persiapan")
-                              : [...filterProjectStatuses, "Persiapan"]
-                          )
-                        }
-                      />
-                      Persiapan
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Aktif")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Aktif")
-                              ? filterProjectStatuses.filter(status => status !== "Aktif")
-                              : [...filterProjectStatuses, "Aktif"]
-                          )
-                        }
-                      />
-                      Aktif
-                    </label>
-                    <label className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        checked={filterProjectStatuses.includes("Selesai")}
-                        onChange={() =>
-                          handleProjectFilterChange(
-                            filterProjectStatuses.includes("Selesai")
-                              ? filterProjectStatuses.filter(status => status !== "Selesai")
-                              : [...filterProjectStatuses, "Selesai"]
-                          )
-                        }
-                      />
-                      Selesai
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </Filter>
+            <Filter />
           </div>
         </div>
-        <PersiapanList items={filteredData} />
+        {/* <PersiapanList items={persiapanData} /> */}
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <PersiapanList preparations={preparations} />
+        )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <div className="flex items-center justify-center md:justify-end">
             <button

@@ -4,16 +4,11 @@ import sidebarLinks from "../Data/sidebar.json";
 import iconMap from "../Data/iconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
-// import { logout } from "../api/AuthService";
 
 const Layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
     {}
   );
-
-  // const handleLogout = () => {
-  //   logout();
-  // };
 
   const toggleSubmenu = (name: string) => {
     setOpenSubmenus((prevState) => ({
