@@ -11,8 +11,8 @@ import KomentarPelaksanaPersiapanApproval from "../../Components/project/persiap
 const breadcrumbItems = [
   { label: "Home", link: "/" },
   { label: "Project", link: "/" },
-  { label: "List Persiapan", link: "/persiapan" },
-  { label: "Persetujuan" },
+  { label: "Persiapan", link: "/persiapan" },
+  { label: "Form Persiapan" },
 ];
 
 const tabs = [
@@ -41,14 +41,6 @@ const PersiapanApprovalPage = () => {
     }
   };
 
-  // const handleApprove = () => {
-  //   alert("Disetujui oleh supervisor!");
-  // };
-
-  // const handleRejectClick = () => {
-  //   setIsRejectPopupOpen(true); // Membuka pop-up komentar
-  // };
-
   const handleRejectConfirm = (comment: string) => {
     alert(`Ditolak dengan komentar: ${comment}`);
     setIsRejectPopupOpen(false);
@@ -60,7 +52,7 @@ const PersiapanApprovalPage = () => {
 
   return (
     <div>
-      <Breadcrumb title="Persetujuan" items={breadcrumbItems} />
+      <Breadcrumb title="Persiapan" items={breadcrumbItems} />
       <LayoutProject>
         <Tabs
           currentTab={currentTab}
@@ -72,7 +64,7 @@ const PersiapanApprovalPage = () => {
 
         {/* buttons */}
         <div className="flex items-center justify-end w-full gap-6 p-5">
-                  {currentTab === 4 ? (
+          {currentTab === 4 ? (
             <>
               <button
                 className="px-4 py-2 text-white bg-blue-500 rounded shadow-md hover:bg-blue-600 focus:outline-none"

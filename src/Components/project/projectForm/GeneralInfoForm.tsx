@@ -1,44 +1,6 @@
 import React from "react";
-// import faseData from "../../Data/faseData";
-
-// interface Fase {
-//   id: number;
-//   fase: string;
-//   tanggalMulai: string;
-//   tanggalSelesai: string;
-//   statusFase: string;
-// }
 
 const GeneralInfoForm: React.FC = () => {
-  // const [items, setItems] = React.useState<Fase[]>(faseData);
-
-  // const getstatusFaseFase = (statusFase: string) => {
-  //   switch (statusFase) {
-  //     case "Dalam Proses":
-  //       return "bg-[#E4FFBD] text-[#12B906]";
-  //     case "Belum Mulai":
-  //       return "bg-[#FFDFBE] text-[#EC8917]";
-  //     default:
-  //       return "bg-[#D0F0FF] text-[#15B5FF]";
-  //   }
-  // };
-
-  // const handleDelete = (id: number) => {
-  //   setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  // };
-
-  // const handleAddRow = () => {
-  //   const newId = items.length > 0 ? items[items.length - 1].id + 1 : 1;
-  //   const newItem: Fase = {
-  //     id: newId,
-  //     fase: "",
-  //     tanggalMulai: "",
-  //     tanggalSelesai: "",
-  //     statusFase: "Belum Mulai",
-  //   };
-  //   setItems((prevItems) => [...prevItems, newItem]);
-  // };
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pb-3 m-5 md:grid-cols-3 xl:grid-cols-5">

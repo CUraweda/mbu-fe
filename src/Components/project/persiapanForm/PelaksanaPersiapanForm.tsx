@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { FaCloudUploadAlt, FaPlus } from "react-icons/fa";
-import dokumentasiData from "../../Data/dokumentasiData";
-import PaginationBottom from "../PaginationBottom";
+import pelaksanaData from "../../../Data/pelaksanaPersiapanData";
+import PaginationBottom from "../../PaginationBottom";
 
-const DokumentasiForm: React.FC = () => {
+const PelaksanaForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [isFilePopupVisible, setIsFilePopupVisible] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
-
-  // const handlePageChange = (page: number) => {
-  //   setCurrentPage(page);
-  // };
 
   const handleUploadClick = () => {
     setIsPopupVisible(true);
@@ -42,14 +38,14 @@ const DokumentasiForm: React.FC = () => {
       <hr />
 
       <div className="flex flex-col justify-between gap-3 m-5 md:items-center md:flex-row">
-        <h1 className="text-2xl text-primary">Foto & Dokumen</h1>
+        <h1 className="text-2xl text-primary"></h1>
         <div className="flex items-center justify-center md:justify-start">
           <button
             className="flex items-center gap-2 text-white rounded-md bg-primary btn hover:bg-secondary"
             onClick={handleUploadClick}
           >
             <FaPlus size={10} />
-            Upload
+            Tambah Foto Pelaksana
           </button>
         </div>
       </div>
@@ -58,13 +54,8 @@ const DokumentasiForm: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="p-8 bg-white rounded-lg shadow-lg w-96">
             <h2 className="mb-4 text-xl font-bold text-center">
-              Upload Foto & Dokumen
+              Tambah Foto Pelaksana
             </h2>
-            <input
-              type="text"
-              placeholder="Masukkan judul"
-              className="w-full p-2 mb-4 border border-gray-300 rounded"
-            />
             <div className="flex flex-col items-center p-4 border-2 border-gray-300 border-dashed rounded-lg ">
               <input
                 type="file"
@@ -102,9 +93,7 @@ const DokumentasiForm: React.FC = () => {
       {isFilePopupVisible && selectedFile && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div className="p-8 bg-white rounded-lg shadow-lg w-96">
-            <h2 className="mb-4 text-xl font-bold text-center">
-              Lihat Foto/Dokumen
-            </h2>
+            <h2 className="mb-4 text-xl font-bold text-center">Lihat Foto</h2>
             <img
               src={selectedFile}
               alt="Uploaded File"
@@ -126,30 +115,30 @@ const DokumentasiForm: React.FC = () => {
         <table className="min-w-full" style={{ border: "none" }}>
           <thead className="text-center bg-blue-100">
             <tr>
-              <th className="px-4 py-2 text-gray-600">#</th>
-              <th className="px-4 py-2 text-gray-600">Nama</th>
-              <th className="px-4 py-2 text-gray-600">Foto/Dokumen</th>
-              <th className="px-4 py-2 text-gray-600">Diupload Oleh</th>
-              <th className="px-4 py-2 text-gray-600">Waktu Upload</th>
+              <th className="px-4 py-2 text-gray-600">Jenis Persiapan</th>
+              <th className="px-4 py-2 text-gray-600">Waktu Pelaksanaan</th>
+              <th className="px-4 py-2 text-gray-600">Nama Pelaksana</th>
+              <th className="px-4 py-2 text-gray-600">Tempat Pelaksana</th>
+              <th className="px-4 py-2 text-gray-600">Foto</th>
               <th className="px-4 py-2 text-gray-600"></th>
             </tr>
           </thead>
           <tbody className="text-center">
-            {dokumentasiData.map((item) => (
-              <tr key={item.id}>
-                <td className="px-4 text-gray-700">{item.id}</td>
-                <td className="p-2 text-gray-700">{item.nama}</td>
+            {pelaksanaData.map((item) => (
+              <tr key={item.jenisPersiapan}>
+                <td className="px-4 text-gray-700">{item.jenisPersiapan}</td>
+                <td className="p-2 text-gray-700">{item.waktuPelaksana}</td>
+                <td className="p-2 text-gray-700">{item.namaPelaksana}</td>
+                <td className="p-2 text-gray-700">{item.tempatPelaksana}</td>
                 <td className="p-2 text-gray-700">
                   <a
                     href="#"
-                    onClick={() => handleFileClick(item.fotoDokumen)} // Menangani klik pada foto/dokumen
+                    onClick={() => handleFileClick(item.foto)} // Menangani klik pada foto/dokumen
                     className="text-blue-500 hover:underline"
                   >
-                    {item.fotoDokumen}
+                    {item.foto}
                   </a>
                 </td>
-                <td className="p-2 text-gray-700">{item.upload}</td>
-                <td className="p-2 text-gray-700">{item.waktuUpload}</td>
               </tr>
             ))}
           </tbody>
@@ -165,4 +154,4 @@ const DokumentasiForm: React.FC = () => {
   );
 };
 
-export default DokumentasiForm;
+export default PelaksanaForm;

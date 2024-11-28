@@ -3,16 +3,7 @@ import { useState } from "react";
 import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
 import PaginationBottom from "../../PaginationBottom";
 
-// interface Ceklis {
-//   itemPekerjaanPersiapan: string;
-//   tanggalSelesai: string;
-//   aktual: number;
-//   hasil: string;
-// }
-
 const CeklisPersiapanApproval: React.FC = () => {
-  // const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapanData);
-  // setItems(ceklisPersiapan);
   const items = ceklisPersiapanData;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -29,32 +20,28 @@ const CeklisPersiapanApproval: React.FC = () => {
     }
   };
 
-  // const handlePageChange = (page: number) => {
-  //   setCurrentPage(page);
-  // };
-
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pb-3 m-5 md:grid-cols-3 xl:grid-cols-5">
         <div>
-          <label htmlFor="area">Jenis Persiapan</label>
-          <select
-            id="area"
-            className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
-          >
-            <option value="">Pilih Jenis Persiapan</option>
-            <option value="Broiler Fermentasi 1">Broiler Fermentasi 1</option>
-            <option value="Broiler Fermentasi 2">Broiler Fermentasi 2</option>
-            <option value="Broiler Fermentasi 3">Broiler Fermentasi 3</option>
-          </select>
+          <label htmlFor="jenisPersiapan">Jenis Persiapan</label>
+          <input
+            type="text"
+            id="jenisPersiapan"
+            className="block w-full px-2 py-1 mt-1 bg-gray-100 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
+            disabled
+            value="Broiler Fermentasi"
+          />
         </div>
 
         <div>
-          <label htmlFor="unitBisnis">Tanggal Habis Ayam</label>
+          <label htmlFor="tanggalHabisAyam">Tanggal Habis Ayam</label>
           <input
-            type="date"
-            id="unitBisnis"
-            className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
+            type="text"
+            id="tanggalHabisAyam"
+            className="block w-full px-2 py-1 mt-1 bg-gray-100 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
+            disabled
+            value="10-03-2024"
           />
         </div>
       </div>

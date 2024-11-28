@@ -2,13 +2,10 @@ import { useState } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import Tabs from "../../Components/Tabs";
-import InformasiUmumPersiapanPage from "../../Components/project/InformasiUmumPersiapanPage";
-import CeklisPersiapanForm from "../../Components/project/CeklisPersiapanPage";
-import DokumentasiForm from "../../Components/project/DokumentasiPage";
-import PelaksanaForm from "../../Components/project/PelaksanaPersiapanPage";
-// import FarmInfoForm from "../../Components/project/FarmInfoForm";
-// import ProjectBudgetForm from "../../Components/project/ProjectBudgetForm";
-// import DataRecordingForm from "../../Components/project/DataRecordingForm";
+import CeklisPersiapanForm from "../../Components/project/persiapanForm/CeklisPersiapanForm";
+import DokumentasiForm from "../../Components/project/persiapanForm/DokumentasiForm";
+import PelaksanaForm from "../../Components/project/persiapanForm/PelaksanaPersiapanForm";
+import InformasiUmumForm from "../../Components/project/persiapanForm/InformasiUmumPersiapanForm";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -30,7 +27,7 @@ const PersiapanFormPage = () => {
   const renderForm = () => {
     switch (currentTab) {
       case 1:
-        return <InformasiUmumPersiapanPage />;
+        return <InformasiUmumForm />;
       case 2:
         return <CeklisPersiapanForm />;
       case 3:
