@@ -1,5 +1,5 @@
 import iconMap from "../../Data/iconMap.tsx";
-import SearchBar from "../../Components/Search.tsx";
+// import SearchBar from "../../Components/Search.tsx";
 import { useState } from "react";
 const FarmPage = () => {
   const [modal, setModal] = useState<false | true>(false);
@@ -60,9 +60,9 @@ const FarmPage = () => {
     setRows(updatedRows);
   };
 
-  const handleSearch = (searchQuery: string) => {
-    console.log("Search Query:", searchQuery);
-  };
+  // const handleSearch = (searchQuery: string) => {
+  //   console.log("Search Query:", searchQuery);
+  // };
 
   const handleNext = () => {
     if (currentStep < 3) {
@@ -98,7 +98,7 @@ const FarmPage = () => {
           </li>
         </ul>
       </div>
-      <SearchBar onSearch={handleSearch} />
+      {/* <SearchBar onSearch={handleSearch} /> */}
       <div className="overflow-x-auto rounded-lg">
         <table className="table table-lg ">
           <thead className="bg-gray-200 ">
