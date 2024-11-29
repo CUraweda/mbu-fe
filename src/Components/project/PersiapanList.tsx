@@ -56,10 +56,10 @@ const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
           </tr>
         </thead>
         <tbody>
-          {preparations.map((item, index) => (
+          {preparations.map((preparation, index) => (
             <PersiapanItem
-              // key={item.id}
-              {...item}
+              {...preparation}
+              key={preparation.id}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}
             />

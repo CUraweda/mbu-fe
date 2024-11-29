@@ -104,7 +104,7 @@ export type Project = {
   submitted_at: string;
   status: Status;
   bussines_unit: BusinessUnit;
-  product: Product;
+  product: string;
   location: Location;
   area: Area;
   project_phase: ProjectPhase[];
@@ -126,11 +126,11 @@ export type ProjectSubmissionResponse = {
 };
 
 export type ProjectPreparation = {
-  // id?: number;
+  id: number;
   id_project: string;
   status: Status;
   bussines_unit: BusinessUnit;
-  product: Product;
+  product: string;
   location: Location;
   area: Area;
   project_farms: ProjectFarm[];
