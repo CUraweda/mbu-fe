@@ -58,7 +58,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       </td>
       <td className="px-4 py-2">{id_project}</td>
       <td className="px-4 py-2">{bussines_unit.name}</td>
-      <td className="px-4 py-2">{product.name}</td>
+      <td className="px-4 py-2">{product}</td>
       <td className="px-4 py-2">{area.name}</td>
       <td className="px-4 py-2">{location.name}</td>
       <td className="px-4 py-2">{project_farms[0]?.farms.name}</td>

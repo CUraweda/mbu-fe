@@ -1,4 +1,4 @@
-const InformasiUmumApproval = () => {
+const InformasiUmumForm = () => {
   return (
     <div>
       <div className="grid grid-cols-2 gap-4 pb-3 m-5 md:grid-cols-3 xl:grid-cols-5">
@@ -73,4 +73,4 @@ const InformasiUmumApproval = () => {
   );
 };
 
-export default InformasiUmumApproval;
+export default InformasiUmumForm;

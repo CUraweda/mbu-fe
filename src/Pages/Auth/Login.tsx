@@ -15,13 +15,24 @@ const LoginPage = () => {
 
   const setToken = useAuthStore((state) => state.setToken);
   const setRole = useAuthStore((state) => state.setRole);
+  const setBussinesUnitId = useAuthStore((state) => state.setBussinesUnitId);
+  const setBussinesUnit = useAuthStore((state) => state.setBussinesUnit);
+  const setLocationId = useAuthStore((state) => state.setLocationId);
+  const setLocation = useAuthStore((state) => state.setLocation);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      const { access_token, access_role } = await api.login({
+      const {
+        access_token,
+        access_role,
+        bussines_unit_id,
+        bussines_unit,
+        location_id,
+        location,
+      } = await api.login({
         email,
         password,
       });
@@ -29,6 +40,10 @@ const LoginPage = () => {
 
       setToken(access_token);
       setRole(access_role);
+      setBussinesUnitId(bussines_unit_id);
+      setBussinesUnit(bussines_unit);
+      setLocationId(location_id);
+      setLocation(location);
       navigate("/");
 
       Swal.fire({

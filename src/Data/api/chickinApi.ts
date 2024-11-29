@@ -1,19 +1,19 @@
 import authApi from "./authApi";
 
-const persiapanApi = (() => {
+const chickinApi = (() => {
   const BASE_URL = "http://api-prmn.curaweda.com:3050/api";
 
-  async function getAllPersiapan() {
+  async function getAllChickin() {
     const { data } = await authApi._fetchWithAuth(
-      `${BASE_URL}/projects/preparations`
+      `${BASE_URL}/projects/chickins`
     );
 
     return data.result;
   }
 
   return {
-    getAllPersiapan,
+    getAllChickin,
   };
 })();
 
-export default persiapanApi;
+export default chickinApi;

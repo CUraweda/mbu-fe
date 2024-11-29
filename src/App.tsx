@@ -14,13 +14,15 @@ import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import PersiapanApprovalPage from "./Pages/Project/PersiapanApprovalPage";
 import Recording from "./Pages/Project/recordingPage";
-import FormChickinPage from "./Pages/Project/formchickinPage";
-import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
+// import FormChickinPage from "./Pages/Project/formchickinPage";
+// import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
 import PurchaseDetailPage from "./Pages/Pembelian/PurchaseDetailPage";
 import OtherCostDetailPage from "./Pages/Pembelian/OtherCostDetailPage";
 import PaymentInfoPage from "./Pages/Pembelian/PaymentInfoPage";
 import ReceiptReturnPage from "./Pages/Pembelian/ReceiptReturnPage";
+import AddChickinFormPage from "./Pages/Project/AddChickinFormPage";
+import EditChickinFormPage from "./Pages/Project/EditChickinFormPage";
 
 function App() {
   return (
@@ -53,8 +55,10 @@ function App() {
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
-            <Route path="/chickin/add" element={<FormChickinPage />} />
-            <Route path="/chickin/edit" element={<FormEditChickinPage />} />
+            {/* <Route path="/chickin/add" element={<FormChickinPage />} />
+            <Route path="/chickin/edit" element={<FormEditChickinPage />} /> */}
+            <Route path="/chickin/add" element={<AddChickinFormPage />} />
+            <Route path="/chickin/edit" element={<EditChickinFormPage />} />
 
             {/* recording */}
             <Route path="/recording" element={<Recording />} />

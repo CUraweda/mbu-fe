@@ -3,9 +3,10 @@ import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import Tabs from "../../Components/Tabs";
 import GeneralInfoForm from "../../Components/project/projectForm/GeneralInfoForm";
-import FarmInfoForm from "../../Components/project/projectForm/FarmInfoForm";
+// import FarmInfoForm from "../../Components/project/projectForm/FarmInfoItem";
 import DataRecordingForm from "../../Components/project/projectForm/DataRecordingForm";
 import ProjectBudgetList from "../../Components/project/projectForm/ProjectBudgetList";
+import FarmInfoList from "../../Components/project/projectForm/FarmInfoList";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -29,9 +30,8 @@ const ProjectFormPage = () => {
       case 1:
         return <GeneralInfoForm />;
       case 2:
-        return <FarmInfoForm />;
+        return <FarmInfoList />;
       case 3:
-        // return <ProjectBudgetForm />;
         return <ProjectBudgetList />;
       case 4:
         return <DataRecordingForm />;

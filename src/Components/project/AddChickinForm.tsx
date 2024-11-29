@@ -1,6 +1,5 @@
-import { FaRegTrashAlt } from "react-icons/fa";
 import { FiPlusCircle } from "react-icons/fi";
-import farmData from "../../../Data/farmInfoData";
+import farmData from "../../Data/farmInfoData";
 import React from "react";
 
 interface Farm {
@@ -12,11 +11,8 @@ interface Farm {
   penanggungJawab: string;
 }
 
-const FarmInfoForm = () => {
+const AddChickinForm = () => {
   const [items, setItems] = React.useState<Farm[]>(farmData);
-  const handleDelete = (id: number) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
 
   const handleAddRow = () => {
     const newItem: Farm = {
@@ -36,30 +32,27 @@ const FarmInfoForm = () => {
         <table className="min-w-full" style={{ border: "none" }}>
           <thead className="text-left ">
             <tr>
-              <th className="px-3 py-2 text-gray-600">Nama Kandang</th>
-              <th className="px-3 py-2 text-gray-600">Kapasitas</th>
-              <th className="px-3 py-2 text-gray-600">Jenis Farm</th>
-              <th className="px-3 py-2 text-gray-600">Periode</th>
-              <th className="px-3 py-2 text-gray-600">Penanggung Jawab</th>
-              <th className="px-3 py-2 text-gray-600"></th>
+              <th className="px-3 py-2 text-gray-600">No Surat Jalan</th>
+              <th className="px-3 py-2 text-gray-600">Tanggal Chick in</th>
+              <th className="px-3 py-2 text-gray-600">Jenis DOC</th>
+              <th className="px-3 py-2 text-gray-600">Supplier</th>
+              <th className="px-3 py-2 text-gray-600">Hatchery</th>
+              <th className="px-3 py-2 text-gray-600">Jumlah (ekor)</th>
             </tr>
           </thead>
           <tbody className="text-center ">
             {items.map((item) => (
               <tr key={item.id}>
                 <td className="p-2 text-gray-700">
-                  <select
-                    value={item.namaKandang}
+                  <input
+                    type="text"
+                    value={item.kapasitas}
                     className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="Pangandaran 1">Pangandaran 1</option>
-                    <option value="Pangandaran 2">Pangandaran 2</option>
-                    {/* Add other options here */}
-                  </select>
+                  />
                 </td>
                 <td className="p-2 text-gray-700">
                   <input
-                    type="text"
+                    type="date"
                     value={item.kapasitas}
                     className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                   />
@@ -78,7 +71,8 @@ const FarmInfoForm = () => {
                   <input
                     type="text"
                     value={item.periode}
-                    className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-2 py-1 text-gray-700 bg-gray-100 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    disabled
                   />
                 </td>
                 <td className="p-2 text-gray-700">
@@ -92,23 +86,22 @@ const FarmInfoForm = () => {
                   </select>
                 </td>
                 <td className="p-2">
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="px-3 py-1"
-                  >
-                    <FaRegTrashAlt className="text-red-500" />
-                  </button>
+                  <input
+                    type="text"
+                    value={item.periode}
+                    className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
         <button onClick={handleAddRow} className="px-4 py-2 text-primary">
-          <FiPlusCircle size={24} />
+          <FiPlusCircle className="text-primary-dark" size={24} />
         </button>
       </div>
     </div>
   );
 };
 
-export default FarmInfoForm;
+export default AddChickinForm;

@@ -1,7 +1,7 @@
 import authApi from "./authApi";
 
 const projectApi = (() => {
-  const BASE_URL = "http://localhost:8080/api";
+  const BASE_URL = "http://api-prmn.curaweda.com:3050/api";
 
   async function getAllProject() {
     const { data } = await authApi._fetchWithAuth(
@@ -14,13 +14,13 @@ const projectApi = (() => {
   async function submissionStep1({
     area_id,
     location_id,
-    product_id,
+    product,
   }: {
     area_id: number;
     location_id: number;
-    product_id: number;
+    product: string;
   }) {
-    const response = await authApi._fetchWithAuth(
+    const data = await authApi._fetchWithAuth(
       `${BASE_URL}/projects/submissions/step-1`,
       {
         method: "POST",
@@ -30,24 +30,16 @@ const projectApi = (() => {
         body: JSON.stringify({
           area_id,
           location_id,
-          product_id,
+          product,
         }),
       }
     );
-
-    const responseJson = await response.json();
-    const { data, errors } = responseJson;
-
-    if (!response.ok) {
-      const message = errors?.error?.message;
-      throw new Error(message);
-    }
 
     return data;
   }
 
   async function submissionStep2({ farms }: { farms: { farm_id: number }[] }) {
-    const response = await authApi._fetchWithAuth(
+    const data = await authApi._fetchWithAuth(
       `${BASE_URL}/projects/submissions/step-2`,
       {
         method: "POST",
@@ -60,13 +52,67 @@ const projectApi = (() => {
       }
     );
 
-    const responseJson = await response.json();
-    const { data, errors } = responseJson;
+    return data;
+  }
 
-    if (!response.ok) {
-      const message = errors?.error?.message;
-      throw new Error(message);
-    }
+  async function submissionStep3({
+    budgets,
+  }: {
+    budgets: {
+      farm_id: number;
+      budget_items: {
+        id?: number;
+        item: string;
+        qty: number;
+        price: number;
+        total_price?: number;
+      }[];
+      phase: {
+        id?: number;
+        name: string;
+        start_date: string;
+        end_date: string;
+        status_id: number;
+      }[];
+    }[];
+  }) {
+    const data = await authApi._fetchWithAuth(
+      `${BASE_URL}/projects/submissions/step-3`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          budgets,
+        }),
+      }
+    );
+
+    return data;
+  }
+
+  async function submissionStep4({
+    data_recordings,
+  }: {
+    data_recordings: {
+      item: string;
+      unit: string;
+      interval: string;
+    }[];
+  }) {
+    const data = await authApi._fetchWithAuth(
+      `${BASE_URL}/projects/submissions/step-4`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data_recordings,
+        }),
+      }
+    );
 
     return data;
   }
@@ -75,6 +121,8 @@ const projectApi = (() => {
     getAllProject,
     submissionStep1,
     submissionStep2,
+    submissionStep3,
+    submissionStep4,
   };
 })();
 
