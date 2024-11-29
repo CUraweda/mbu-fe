@@ -11,7 +11,11 @@ const authApi = (() => {
       Authorization: token ? `Bearer ${token}` : "",
     };
 
-    const response = await fetch(url, { ...options, headers });
+    const response = await fetch(url, {
+      ...options,
+      headers,
+      referrerPolicy: "unsafe-url",
+    });
 
     if (!response.ok) {
       throw new Error(`Request failed with status: ${response.status}`);
