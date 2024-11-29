@@ -12,6 +12,7 @@ import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
 import { FilterField } from "../../Data/dataTypes";
 import ExportButton from "../../Components/ExportButton";
 import PaginationBottom from "../../Components/PaginationBottom";
+import chickinApi from "../../Data/api/chickinApi";
 // import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
@@ -36,34 +37,46 @@ const filterFields: FilterField[] = [
 const ProjectListPage = () => {
   // const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {},
+    {}
   );
-  const [filteredData, setFilteredData] = useState(chickinData);
+  const [, setFilteredData] = useState(chickinData);
+  const [chickins, setChickins] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Fungsi untuk menangani pencarian
-  const handleFilters = () => {
+  const handleFilter = () => {
     const result = applyFilterByStateAndQuery(
       chickinData,
       filterStates,
-      searchQuery,
+      searchQuery
     );
 
     setFilteredData(result);
   };
 
+  useEffect(() => {
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const result = await chickinApi.getAllChickin();
+        setChickins(result);
+        handleFilter();
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, [searchQuery, filterStates]);
+
+  // Fungsi untuk menangani pencarian
+
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
   };
-
-  // const handleNavigate = () => {
-  //   navigate("/project/add");
-  // };
-
-  useEffect(() => {
-    handleFilters();
-  }, [searchQuery, filterStates]);
 
   return (
     <div>
@@ -86,7 +99,13 @@ const ProjectListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        <Chickinlist items={filteredData} />
+        {/* <Chickinlist items={filteredData} />
+         */}
+        {loading ? (
+          <p className="text-center">Loading...</p>
+        ) : (
+          <Chickinlist chickins={chickins} />
+        )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom
             currentPage={currentPage}

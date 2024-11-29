@@ -1,43 +1,36 @@
-import React from "react";
-// import faseData from "../../Data/faseData";
-
-// interface Fase {
-//   id: number;
-//   fase: string;
-//   tanggalMulai: string;
-//   tanggalSelesai: string;
-//   statusFase: string;
-// }
+import React, { useEffect, useState } from "react";
+import masterApi from "../../../Data/api/masterApi";
+import {
+  MasterAreas,
+  MasterLocations,
+  MasterProducts,
+} from "../../../Data/types/allTypes";
 
 const GeneralInfoForm: React.FC = () => {
-  // const [items, setItems] = React.useState<Fase[]>(faseData);
+  const [areas, setAreas] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  // const getstatusFaseFase = (statusFase: string) => {
-  //   switch (statusFase) {
-  //     case "Dalam Proses":
-  //       return "bg-[#E4FFBD] text-[#12B906]";
-  //     case "Belum Mulai":
-  //       return "bg-[#FFDFBE] text-[#EC8917]";
-  //     default:
-  //       return "bg-[#D0F0FF] text-[#15B5FF]";
-  //   }
-  // };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [fetchedAreas, fetchedLocations, fetchedProducts] =
+          await Promise.all([
+            masterApi.getAllAreas(),
+            masterApi.getAllLocations(),
+            masterApi.getAllProducts(),
+          ]);
 
-  // const handleDelete = (id: number) => {
-  //   setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  // };
+        setAreas(fetchedAreas || []);
+        setLocations(fetchedLocations || []);
+        setProducts(fetchedProducts || []);
+      } catch (error) {
+        console.error("Failed to fetch master data:", error);
+      }
+    };
 
-  // const handleAddRow = () => {
-  //   const newId = items.length > 0 ? items[items.length - 1].id + 1 : 1;
-  //   const newItem: Fase = {
-  //     id: newId,
-  //     fase: "",
-  //     tanggalMulai: "",
-  //     tanggalSelesai: "",
-  //     statusFase: "Belum Mulai",
-  //   };
-  //   setItems((prevItems) => [...prevItems, newItem]);
-  // };
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -49,6 +42,7 @@ const GeneralInfoForm: React.FC = () => {
             id="idProject"
             className="block w-full px-2 py-1 mt-1 bg-gray-100 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
             disabled
+            value="1"
           />
         </div>
 
@@ -59,6 +53,7 @@ const GeneralInfoForm: React.FC = () => {
             id="unitBisnis"
             className="block w-full px-2 py-1 mt-1 bg-gray-100 border border-gray-300 focus:ring-primary"
             disabled
+            value={localStorage.getItem("bussinesUnit") || ""}
           />
         </div>
 
@@ -66,12 +61,15 @@ const GeneralInfoForm: React.FC = () => {
           <label htmlFor="area">Area</label>
           <select
             id="area"
+            required
             className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
           >
             <option value="">Pilih Area</option>
-            <option value="Priangan">Priangan</option>
-            <option value="Sunda">Sunda</option>
-            <option value="Jawa">Jawa</option>
+            {areas.map((area: MasterAreas) => (
+              <option key={area.id} value={area.name}>
+                {area.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -79,12 +77,15 @@ const GeneralInfoForm: React.FC = () => {
           <label htmlFor="lokasi">Lokasi</label>
           <select
             id="lokasi"
+            required
             className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
           >
             <option value="">Pilih Lokasi</option>
-            <option value="Pangandaran">Pangandaran</option>
-            <option value="Bandung">Bandung</option>
-            <option value="Jakarta">Jakarta</option>
+            {locations.map((location: MasterLocations) => (
+              <option key={location.id} value={location.name}>
+                {location.name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -92,12 +93,15 @@ const GeneralInfoForm: React.FC = () => {
           <label htmlFor="produk">Produk</label>
           <select
             id="produk"
+            required
             className="block w-full px-2 py-1 mt-1 border border-gray-300 rounded-sm shadow-sm focus:ring-primary"
           >
             <option value="">Pilih Produk</option>
-            <option value="Parent Stock">DOC</option>
-            <option value="Broiler">Broiler</option>
-            <option value="Layer">Telur</option>
+            {products.map((product: MasterProducts) => (
+              <option key={product.id} value={product.name}>
+                {product.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>

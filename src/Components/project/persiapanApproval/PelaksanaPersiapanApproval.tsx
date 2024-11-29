@@ -7,10 +7,6 @@ const PelaksanaForm: React.FC = () => {
   const [isFilePopupVisible, setIsFilePopupVisible] = useState(false);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
-  // const handlePageChange = (page: number) => {
-  //   setCurrentPage(page);
-  // };
-
   const handleFileClick = (fileUrl: string) => {
     setSelectedFile(fileUrl);
     setIsFilePopupVisible(true);
@@ -31,16 +27,18 @@ const PelaksanaForm: React.FC = () => {
 
       {isFilePopupVisible && selectedFile && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-            <h2 className="text-xl font-bold mb-4 text-center">Lihat Foto</h2>
-            <img
-              src={selectedFile}
-              alt="Uploaded File"
-              className="w-full h-auto"
-            />
+          <div className="p-8 bg-white rounded-lg shadow-lg w-96">
+            <h2 className="mb-4 text-xl text-primary-dark">Lihat Foto</h2>
+            <div className="border-2 border-gray-300">
+              <img
+                src={selectedFile}
+                alt="Uploaded File"
+                className="w-full h-auto"
+              />
+            </div>
             <div className="flex justify-end gap-3 mt-4">
               <button
-                className="bg-orange-500 text-white px-4 py-2 rounded"
+                className="px-4 py-2 text-white bg-orange-500 rounded"
                 onClick={handleCloseFilePopup}
               >
                 Tutup

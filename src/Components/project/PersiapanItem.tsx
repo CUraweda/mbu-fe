@@ -24,28 +24,28 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
   const navigate = useNavigate();
 
   const getStatusProjectClass = () => {
-    switch (status) {
-      // case "Persiapan":
-      //   return "bg-[#FFDADB] text-[#BE0407]";
-      // case "Aktif":
-      //   return "bg-[#F9E5FF] text-[#E308E6]";
-      // case "Selesai":
-      //   return "bg-[#D0F0FF] text-[#15B5FF]";
-      // case "Pengajuan":
-      //   return "bg-[#FFF7C7] text-[#C9C311]";
+    switch (status.name) {
+      case "Persiapan":
+        return "bg-[#FFDADB] text-[#BE0407]";
+      case "Aktif":
+        return "bg-[#F9E5FF] text-[#E308E6]";
+      case "Selesai":
+        return "bg-[#D0F0FF] text-[#15B5FF]";
+      case "Pengajuan":
+        return "bg-[#FFF7C7] text-[#C9C311]";
       default:
         return "";
     }
   };
 
   const getStatusPersiapanClass = () => {
-    switch (project_preparation) {
-      // case "Belum Selesai":
-      //   return "bg-[#FFDFBE] text-[#EC8917]";
-      // case "Tercapai":
-      //   return "bg-[#E4FFBD] text-[#12B906]";
-      // case "Tidak Tercapai":
-      //   return "bg-[#FFDADB] text-[#BE0407]";
+    switch (project_preparation.status.name) {
+      case "Belum Selesai":
+        return "bg-[#FFDFBE] text-[#EC8917]";
+      case "Tercapai":
+        return "bg-[#E4FFBD] text-[#12B906]";
+      case "Tidak Tercapai":
+        return "bg-[#FFDADB] text-[#BE0407]";
       default:
         return "";
     }
@@ -67,7 +67,7 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
       </td>
       <td className="px-4 py-2">{id_project}</td>
       <td className="px-4 py-2">{bussines_unit.name}</td>
-      <td className="px-4 py-2">{product.name}</td>
+      <td className="px-4 py-2">{product}</td>
       <td className="px-4 py-2">{area.name}</td>
       <td className="px-4 py-2">{location.name}</td>
       <td className="px-4 py-2">{project_farms[0]?.farms.name}</td>
@@ -79,7 +79,7 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()} cursor-pointer`}
         >
-          {/* {status} */}
+          {status.name}
         </div>
       </td>
 
@@ -88,7 +88,7 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()} cursor-pointer`}
         >
-          {/* {statusPersiapan} */}
+          {project_preparation.status.name}
         </div>
       </td>
 

@@ -1,5 +1,5 @@
 const authApi = (() => {
-  const BASE_URL = "http://localhost:8080/api";
+  const BASE_URL = "http://api-prmn.curaweda.com:3050/api";
 
   async function _fetchWithAuth(url: string, options: RequestInit = {}) {
     const token = getAccessToken();
@@ -54,8 +54,19 @@ const authApi = (() => {
 
     const { access_token } = data.token;
     const access_role = data.user.user_roles[0].roles.name;
+    const bussines_unit_id = data.user.bussines_unit.id;
+    const bussines_unit = data.user.bussines_unit.name;
+    const location_id = data.user.location.id;
+    const location = data.user.location.name;
 
-    return { access_token, access_role };
+    return {
+      access_token,
+      access_role,
+      bussines_unit_id,
+      bussines_unit,
+      location_id,
+      location,
+    };
   }
 
   return {

@@ -1,18 +1,15 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Breadcrumb from "../../Components/Breadcrumb";
 import LayoutProject from "../../Layouts/layoutProject";
 import DataSelector from "../../Components/DataSelector";
 import SearchBar from "../../Components/Search";
 import Filter from "../../Components/Filter";
 import PersiapanList from "../../Components/project/PersiapanList";
-import persiapanData from "../../Data/persiapanData";
-
-// icons
-import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
 import { FilterField } from "../../Data/dataTypes";
 import ExportButton from "../../Components/ExportButton";
 import PaginationBottom from "../../Components/PaginationBottom";
 import { ProjectPreparation } from "../../Data/types/projectType";
+import persiapanApi from "../../Data/api/persiapanApi";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -39,9 +36,8 @@ const PersiapanListPage = () => {
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
     {}
   );
-  const [, setFilteredData] = useState(persiapanData);
-  const [preparations] = useState<ProjectPreparation[]>([]);
-  const [loading] = useState(true);
+  const [preparations, setPreparations] = useState<ProjectPreparation[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const handleDataChange = (value: number) => {
     // TODO: apply data limiting
@@ -49,18 +45,31 @@ const PersiapanListPage = () => {
   };
 
   // Fungsi untuk menangani pencarian
-  const handleFilters = useCallback(() => {
-    const result = applyFilterByStateAndQuery(
-      persiapanData,
-      filterStates,
-      searchQuery
-    );
+  // const handleFilters = useCallback(() => {
+  //   const result = applyFilterByStateAndQuery(
+  //     persiapanData,
+  //     filterStates,
+  //     searchQuery
+  //   );
 
-    setFilteredData(result);
-  }, [filterStates, searchQuery]);
+  //   setFilteredData(result);
+  // }, [filterStates, searchQuery]);
 
   useEffect(() => {
-    handleFilters();
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const result = await persiapanApi.getAllPersiapan();
+        setPreparations(result);
+        // handleFilter();
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
   }, [searchQuery, filterStates]);
 
   return (

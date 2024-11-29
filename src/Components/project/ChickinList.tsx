@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import ProjectItem from "./ChickinItem";
+import { Project } from "../../Data/types/projectType";
 
 interface ProjectListProps {
-  items: {
-    id: number;
-    unitBisnis: string;
-    produk: string;
-    area: string;
-    lokasi: string;
-    kandang: string;
-    kapasitas: number;
-    periode: number;
-    statusChickin: string;
-    statusProject: string;
-  }[];
+  chickins: Project[];
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
+const ProjectList: React.FC<ProjectListProps> = ({ chickins }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(items.length).fill(false)
+    Array(chickins.length).fill(false)
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -34,7 +24,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
   const handleSelectAll = () => {
     const newIsAllSelected = !isAllSelected;
     setIsAllSelected(newIsAllSelected);
-    setSelectedRows(Array(items.length).fill(newIsAllSelected));
+    setSelectedRows(Array(chickins.length).fill(newIsAllSelected));
   };
 
   return (
@@ -63,10 +53,10 @@ const ProjectList: React.FC<ProjectListProps> = ({ items }) => {
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
+          {chickins.map((chickin, index) => (
             <ProjectItem
               key={index}
-              {...item}
+              {...chickin}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}
             />

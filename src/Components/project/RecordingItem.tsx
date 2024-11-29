@@ -1,10 +1,7 @@
-import React, { useState } from "react";
 import {
   MdDeleteOutline,
-  MdOutlineDetails,
   MdOutlineEdit,
 } from "react-icons/md";
-import DetailRecording from "../../Pages/Project/recordingDetail";
 
 interface RecordingItemProps {
   projectId: number;
@@ -25,15 +22,6 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
-  const [isDetailVisible, setIsDetailVisible] = useState(false);
-
-  const handleNavigate = () => {
-    setIsDetailVisible(true);
-  };
-
-  const closeDetail = () => {
-    setIsDetailVisible(false);
-  };
 
   const getStatusClass = () => {
     switch (status) {
@@ -108,14 +96,6 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
                 </a>
               </li>
               <li>
-                <a onClick={handleNavigate}>
-                  <span>
-                    <MdOutlineDetails />
-                  </span>
-                  Lihat Details
-                </a>
-              </li>
-              <li>
                 <a>
                   <span>
                     <MdDeleteOutline size={17} />
@@ -129,19 +109,6 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
       </tr>
 
       {/* Conditionally render the DetailRecording component as an overlay/modal */}
-      {isDetailVisible && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="relative w-full max-w-3xl p-6 bg-white rounded-lg shadow-lg">
-            <button
-              className="absolute text-gray-500 top-5 right-5"
-              onClick={closeDetail}
-            >
-              X
-            </button>
-            <DetailRecording />
-          </div>
-        </div>
-      )}
     </>
   );
 };

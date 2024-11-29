@@ -1,19 +1,9 @@
 import React from "react";
 import { useState } from "react";
-
-import ceklisPersiapanData from "../../Data/ceklisPersiapanData";
-import PaginationBottom from "../PaginationBottom";
-
-// interface Ceklis {
-//   itemPekerjaanPersiapan: string;
-//   tanggalSelesai: string;
-//   aktual: number;
-//   hasil: string;
-// }
+import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
+import PaginationBottom from "../../PaginationBottom";
 
 const CeklisPersiapanForm: React.FC = () => {
-  // const [items, setItems] = React.useState<Ceklis[]>(ceklisPersiapanData);
-  // setItems(ceklisPersiapan);
   const items = ceklisPersiapanData;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -82,7 +72,6 @@ const CeklisPersiapanForm: React.FC = () => {
                 <td className="p-2 text-gray-700">
                   <input
                     type="date"
-                    // value={item.tanggalSelesai}
                     className="w-full px-2 py-1 text-gray-700 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
                   />
                 </td>
