@@ -3,17 +3,17 @@ import RecordingItem from "./RecordingItem";
 
 interface RecordingListProps {
   items: {
-  projectId: number;
-  waktuRecording: string;
-  lokasi: string;
-  status: string;
-  kecepatanWaktu: string;
+    projectId: number;
+    waktuRecording: string;
+    lokasi: string;
+    status: string;
+    kecepatanWaktu: string;
   }[];
 }
 
 const RecordingList: React.FC<RecordingListProps> = ({ items }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(items.length).fill(false)
+    Array(items.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

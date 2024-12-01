@@ -94,4 +94,3 @@ const ProductItem: React.FC<ProductItemProps> = ({
 };
 
 export default ProductItem;
-

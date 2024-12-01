@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import Tabs from "../../Components/Tabs";
-import PersiapanApproval from "../../Components/project/persiapanApproval/InformasiUmumPersiapanApproval";
-import CeklisApproval from "../../Components/project/persiapanApproval/CeklisApproval";
-import DokumentasiApproval from "../../Components/project/persiapanApproval/DokumentasiApproval";
-import PelaksanaPersiapanApproval from "../../Components/project/persiapanApproval/PelaksanaPersiapanApproval";
-import KomentarPelaksanaPersiapanApproval from "../../Components/project/persiapanApproval/KomentarPelaksanaPersiapanApproval"; // Import komponen baru
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import Tabs from "@/Components/Tabs";
+import PersiapanApproval from "@/Components/project/persiapanApproval/InformasiUmumPersiapanApproval";
+import CeklisApproval from "@/Components/project/persiapanApproval/CeklisApproval";
+import DokumentasiApproval from "@/Components/project/persiapanApproval/DokumentasiApproval";
+import PelaksanaPersiapanApproval from "@/Components/project/persiapanApproval/PelaksanaPersiapanApproval";
+import KomentarPelaksanaPersiapanApproval from "@/Components/project/persiapanApproval/KomentarPelaksanaPersiapanApproval"; // Import komponen baru
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

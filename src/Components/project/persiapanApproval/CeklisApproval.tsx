@@ -86,7 +86,7 @@ const CeklisPersiapanApproval: React.FC = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusCeklis(
-                      item.hasil
+                      item.hasil,
                     )}`}
                   >
                     {item.hasil}{" "}

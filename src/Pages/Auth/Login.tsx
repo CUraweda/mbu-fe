@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import api from "../../Data/api/authApi";
+import FetchApi from "@/helpers/FetchApi";
 import useAuthStore from "../../store/useAuthStore";
-import iconMap from "../../Data/iconMap";
+import IconMap from "../../Data/IconMap";
 import Loading from "../../Components/loading";
 
 const LoginPage = () => {
@@ -20,11 +20,11 @@ const LoginPage = () => {
   const setLocationId = useAuthStore((state) => state.setLocationId);
   const setLocation = useAuthStore((state) => state.setLocation);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setIsLoading(true);
 
     try {
+      const api = new FetchApi();
       const {
         access_token,
         access_role,
@@ -32,21 +32,18 @@ const LoginPage = () => {
         bussines_unit,
         location_id,
         location,
-      } = await api.login({
-        email,
-        password,
-      });
+      } = await api.login(email, password);
       setIsLoading(false);
 
       setToken(access_token);
       setRole(access_role);
-      setBussinesUnitId(bussines_unit_id);
+      setBussinesUnitId(bussines_unit_id.toString());
       setBussinesUnit(bussines_unit);
-      setLocationId(location_id);
+      setLocationId(location_id.toString());
       setLocation(location);
       navigate("/");
 
-      Swal.fire({
+      void Swal.fire({
         icon: "success",
         title: "Login Berhasil",
         text: "Login Berhasil",
@@ -54,7 +51,7 @@ const LoginPage = () => {
     } catch (error) {
       setIsLoading(false);
 
-      Swal.fire({
+      void Swal.fire({
         icon: "error",
         title: "Login Gagal",
         text: error instanceof Error ? error.message : "Terjadi kesalahan",
@@ -65,7 +62,12 @@ const LoginPage = () => {
   return (
     <div>
       {isLoading && <Loading />}
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          void handleSubmit();
+        }}
+      >
         <div>
           <div className="mt-3 label">
             <span className="label-text">Email</span>
@@ -103,9 +105,9 @@ const LoginPage = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <iconMap.IoMdEyeOff className="text-2xl" />
+                <IconMap.IoMdEyeOff className="text-2xl" />
               ) : (
-                <iconMap.IoMdEye className="text-2xl" />
+                <IconMap.IoMdEye className="text-2xl" />
               )}
             </button>
           </label>

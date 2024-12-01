@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import iconMap from "../../Data/iconMap";
+import IconMap from "../../Data/IconMap";
 
 const approvalSteps = [
   "Draft",
@@ -34,7 +34,7 @@ const TimelineApproval: FC<Props> = ({ radius = 20, currentApprovalStep }) => {
         />
         {/* Line Across::END */}
         {approvalSteps.map((status, index) => (
-          <div className="flex flex-col flex-1 self-start">
+          <div key={status + index} className="flex flex-col flex-1 self-start">
             <div
               key={status}
               className={`items-center text-center h-full ${
@@ -73,7 +73,7 @@ const TimelineApproval: FC<Props> = ({ radius = 20, currentApprovalStep }) => {
                     />
                   )}
                   {currentApprovalStep - 1 > index && (
-                    <iconMap.FaCheck className="text-xs text-white" />
+                    <IconMap.FaCheck className="text-xs text-white" />
                   )}
                 </div>
               </div>

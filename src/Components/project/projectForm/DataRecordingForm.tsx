@@ -1,7 +1,7 @@
 import { useState } from "react";
-import dataRecordingData from "../../../Data/dataRecording";
-import iconMap from "../../../Data/iconMap";
-import PaginationBottom from "../../PaginationBottom";
+import dataRecordingData from "@/Data/dataRecording";
+import IconMap from "@/Data/IconMap";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 interface DataRecording {
   id: number;
@@ -86,7 +86,7 @@ const DataRecordingForm = () => {
                   onClick={() => handleDelete(item.id)}
                   className="px-3 py-1"
                 >
-                  <iconMap.FaRegTrashAlt className="text-red-500" />
+                  <IconMap.FaRegTrashAlt className="text-red-500" />
                 </button>
               </td>
             </tr>

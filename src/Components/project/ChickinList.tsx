@@ -8,7 +8,7 @@ interface ProjectListProps {
 
 const ProjectList: React.FC<ProjectListProps> = ({ chickins }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(chickins.length).fill(false)
+    Array(chickins.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

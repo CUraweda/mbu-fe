@@ -1,6 +1,6 @@
-import Breadcrumb from "../../Components/Breadcrumb";
-import AddChickinForm from "../../Components/project/AddChickinForm";
-import LayoutProject from "../../Layouts/layoutProject";
+import Breadcrumb from "@/Components/Breadcrumb";
+import AddChickinForm from "@/Components/project/AddChickinForm";
+import LayoutProject from "@/Layouts/LayoutProject";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import LayoutProject from "../../Layouts/layoutProject";
-import Breadcrumb from "../../Components/Breadcrumb";
-import RecordingList from "../../Components/project/RecordingList";
-import recordingListData from "../../Data/recordingListData";
+import LayoutProject from "@/Layouts/LayoutProject";
+import Breadcrumb from "@/Components/Breadcrumb";
+import RecordingList from "@/Components/project/RecordingList";
+import recordingListData from "@/Data/recordingListData";
 import FormRecording from "./recordingForm";
-import PaginationBottom from "../../Components/PaginationBottom";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

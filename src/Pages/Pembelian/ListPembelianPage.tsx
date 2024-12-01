@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import DataSelector from "../../Components/DataSelector";
-import FilterBar from "../../Components/FilterPembelian";
-import PembelianList from "../../Components/pembelian/PembelianList";
-import SearchBar from "../../Components/Search";
-import iconMap from "../../Data/iconMap";
-import LayoutProject from "../../Layouts/layoutProject";
+import { useState, useEffect, useCallback } from "react";
+import Breadcrumb from "@/Components/Breadcrumb";
+import DataSelector from "@/Components/DataSelector";
+import FilterBar from "@/Components/FilterPembelian";
+import PembelianList from "@/Components/pembelian/PembelianList";
+import SearchBar from "@/Components/Search";
+import IconMap from "@/Data/IconMap";
+import LayoutProject from "@/Layouts/LayoutProject";
 import { useNavigate } from "react-router-dom";
-import pembelianData from "../../Data/pembelianData";
+import pembelianData from "@/Data/pembelianData";
 
 // icons
-import type { FilterField } from "../../Data/dataTypes";
-import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
-import Filter from "../../Components/Filter";
-import ExportButton from "../../Components/ExportButton";
-import PaginationBottom from "../../Components/PaginationBottom";
+import type { FilterField } from "@/Data/dataTypes";
+import HFilter from "@/helpers/HFilter";
+import Filter from "@/Components/Filter";
+import ExportButton from "@/Components/ExportButton";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 // Sample breadcrumb items
 const breadcrumbItems = [
@@ -44,56 +44,54 @@ const filterFields: FilterField[] = [
 const ListPembelianPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<Record<string, any>>({});
+  // const [filters, setFilters] = useState<Record<string, string | any>>({});
   const [, setItemsPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilterStates, setStatusFilterStates] = useState<
-    Record<string, string[]>
-  >({});
+  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
+    {},
+  );
   const [filteredData, setFilteredData] = useState(pembelianData);
 
-  const handleStatusAndSearchFilters = () => {
-    const result = applyFilterByStateAndQuery(
-      pembelianData,
-      statusFilterStates,
-      searchQuery
-    );
+  const handleFilter = useCallback(() => {
+    let result = HFilter.byState(pembelianData, filterStates);
+
+    result = HFilter.byQuery(pembelianData, searchQuery);
 
     setFilteredData(result);
-  };
+  }, [searchQuery, filterStates]);
 
-  const handleFilterChange = (newFilters: Record<string, any>) => {
-    setFilters(newFilters);
-  };
+  // const handleFilterChange = (newFilters: Record<string, any>) => {
+  //   setFilters(newFilters);
+  // };
 
   const handleDataChange = (value: number) => {
     setItemsPerPage(value);
   };
 
-  const filteredItems = pembelianData.filter((item) => {
-    const matchesDateRange =
-      filters.range && filters.range.start && filters.range.end
-        ? item.tanggal >= filters.range.start &&
-          item.tanggal <= filters.range.end
-        : true;
-
-    const matchesVendor =
-      filters.vendor && filters.vendor.length > 0
-        ? filters.vendor.includes(item.vendor)
-        : true;
-
-    const matchesDepartment =
-      filters.department && filters.department.length > 0
-        ? filters.department.includes(item.departemen)
-        : true;
-
-    return matchesDateRange && matchesVendor && matchesDepartment;
-
-    // TODO: IMPLEMENT AND COMBINE THIS FILTER WITH THE ACTIVE ONE
-  });
+  // const filteredItems = pembelianData.filter((item) => {
+  //   const matchesDateRange =
+  //     filters.range && filters.range.start && filters.range.end
+  //       ? item.tanggal >= filters.range.start &&
+  //         item.tanggal <= filters.range.end
+  //       : true;
+  //
+  //   const matchesVendor =
+  //     filters.vendor && filters.vendor.length > 0
+  //       ? filters.vendor.includes(item.vendor)
+  //       : true;
+  //
+  //   const matchesDepartment =
+  //     filters.department && filters.department.length > 0
+  //       ? filters.department.includes(item.departemen)
+  //       : true;
+  //
+  //   return matchesDateRange && matchesVendor && matchesDepartment;
+  //
+  //   // TODO: IMPLEMENT AND COMBINE THIS FILTER WITH THE ACTIVE ONE
+  // });
 
   // const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-  //! NOTE: PAGINATION BY BACKEND
+  // NOTE: PAGINATION BY BACKEND
   // const paginatedItems = filteredItems.slice(
   //   (currentPage - 1) * itemsPerPage,
   //   currentPage * itemsPerPage,
@@ -104,8 +102,8 @@ const ListPembelianPage = () => {
   };
 
   useEffect(() => {
-    handleStatusAndSearchFilters();
-  }, [searchQuery, statusFilterStates]);
+    handleFilter();
+  }, [handleFilter]);
 
   return (
     <div>
@@ -120,7 +118,7 @@ const ListPembelianPage = () => {
               className="flex items-center gap-2 text-white rounded-md bg-primary btn hover:bg-secondary"
               onClick={handleNavigateToFormPembelian}
             >
-              <iconMap.FaPlus size={10} />
+              <IconMap.FaPlus size={10} />
               Tambah
             </button>
           </div>
@@ -137,15 +135,14 @@ const ListPembelianPage = () => {
           </div>
 
           <div className="flex-grow">
-            <FilterBar onFilterChange={handleFilterChange} />
+            <FilterBar
+              onFilterChange={() => console.log("To be implemented")}
+            />
           </div>
 
           <div className="relative flex items-center gap-0">
             <SearchBar onSearchChange={setSearchQuery} />
-            <Filter
-              fields={filterFields}
-              onFilterChange={setStatusFilterStates}
-            />
+            <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
 
@@ -154,9 +151,12 @@ const ListPembelianPage = () => {
         <div className="flex flex-col items-center justify-between gap-5 m-5 mt-10 md:items-end md:flex-row">
           <span className="font-semibold">
             TOTAL: Rp.
-            {filteredItems
+            {filteredData
               .reduce((total, item) => total + item.total, 0)
               .toLocaleString()}
+            {/* {filteredItems */}
+            {/*   .reduce((total, item) => total + item.total, 0) */}
+            {/*   .toLocaleString()} */}
             ,00
           </span>
           <PaginationBottom

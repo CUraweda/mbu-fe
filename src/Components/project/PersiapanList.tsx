@@ -9,7 +9,7 @@ interface PreparationListProps {
 
 const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(preparations.length).fill(false)
+    Array(preparations.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

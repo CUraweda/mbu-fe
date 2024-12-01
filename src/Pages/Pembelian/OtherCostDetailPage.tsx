@@ -1,7 +1,7 @@
-import Breadcrumb from "../../Components/Breadcrumb"; // Pastikan komponen ini ada
-import LayoutProject from "../../Layouts/layoutProject";
-import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
-import TimelineApproval from "../../Components/pembelian/TimelineApproval";
+import Breadcrumb from "@/Components/Breadcrumb"; // Pastikan komponen ini ada
+import LayoutProject from "@/Layouts/LayoutProject";
+import PurchaseDetailLayout from "@/Layouts/PurchaseDetailLayout";
+import TimelineApproval from "@/Components/pembelian/TimelineApproval";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -40,17 +40,13 @@ const OtherCostDetail = () => {
               {/* No. PR */}
               <div className="flex items-center">
                 <p className="text-sm font-bold mr-2">NO. PR:</p>
-                <span className="font-bold text-blue-300">
-                  PR-MAN-00005
-                </span>
+                <span className="font-bold text-blue-300">PR-MAN-00005</span>
               </div>
 
               {/* No. PO */}
               <div className="flex items-center">
                 <p className="text-sm font-bold mr-2">NO. PO:</p>
-                <span className="font-bold text-blue-300">
-                  PO-MAN-00005
-                </span>
+                <span className="font-bold text-blue-300">PO-MAN-00005</span>
               </div>
             </div>
 
@@ -59,13 +55,16 @@ const OtherCostDetail = () => {
               <p className="text-sm font-medium  whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="text-white input input-bordered bg-blue-300" />
+              <input
+                type="date"
+                className="text-white input input-bordered bg-blue-300"
+              />
             </div>
           </div>
 
           {/* Payment Info Table */}
           <div className="my-4 overflow-x-auto">
-          <h3 className="text-lg font-bold mb-2">Rincian Biaya Lainnya</h3>
+            <h3 className="text-lg font-bold mb-2">Rincian Biaya Lainnya</h3>
             <table className="table w-full table-zebra">
               <thead className="bg-blue-300">
                 <tr className="text-center text-white text-bold">
@@ -78,7 +77,7 @@ const OtherCostDetail = () => {
                 <tr className="text-center  ">
                   <td>1</td>
                   <td></td>
-                  <td></td>         
+                  <td></td>
                 </tr>
               </tbody>
             </table>
@@ -100,7 +99,6 @@ const OtherCostDetail = () => {
           </div>
 
           <TimelineApproval currentApprovalStep={2} />
-
         </PurchaseDetailLayout>
       </LayoutProject>
     </div>

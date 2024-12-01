@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import Tabs from "../../Components/Tabs";
-import GeneralInfoForm from "../../Components/project/projectForm/GeneralInfoForm";
-// import FarmInfoForm from "../../Components/project/projectForm/FarmInfoItem";
-import DataRecordingForm from "../../Components/project/projectForm/DataRecordingForm";
-import ProjectBudgetList from "../../Components/project/projectForm/ProjectBudgetList";
-import FarmInfoList from "../../Components/project/projectForm/FarmInfoList";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import Tabs from "@/Components/Tabs";
+import GeneralInfoForm from "@/Components/project/projectForm/GeneralInfoForm";
+// import FarmInfoForm from "@/Components/project/projectForm/FarmInfoItem";
+import DataRecordingForm from "@/Components/project/projectForm/DataRecordingForm";
+import ProjectBudgetList from "@/Components/project/projectForm/ProjectBudgetList";
+import FarmInfoList from "@/Components/project/projectForm/FarmInfoList";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

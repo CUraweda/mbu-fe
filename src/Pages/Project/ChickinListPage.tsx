@@ -1,18 +1,19 @@
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/Search";
-import Filter from "../../Components/Filter";
-import Chickinlist from "../../Components/project/ChickinList";
-import chickinData from "../../Data/ChickinData";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import DataSelector from "@/Components/DataSelector";
+import SearchBar from "@/Components/Search";
+import Filter from "@/Components/Filter";
+import Chickinlist from "@/Components/project/ChickinList";
+import chickinData from "@/Data/ChickinData";
 
 // icons
-import { useEffect, useState } from "react";
-import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
-import { FilterField } from "../../Data/dataTypes";
-import ExportButton from "../../Components/ExportButton";
-import PaginationBottom from "../../Components/PaginationBottom";
-import chickinApi from "../../Data/api/chickinApi";
+import { useEffect, useState, useCallback } from "react";
+import HFilter from "@/helpers/HFilter";
+import { FilterField } from "@/Data/dataTypes";
+import ExportButton from "@/Components/ExportButton";
+import PaginationBottom from "@/Components/PaginationBottom";
+import { Project } from "@/Data/types/projectType";
+// import chickinApi from "@/Data/api/chickinApi";
 // import { useNavigate } from "react-router-dom";
 
 const breadcrumbItems = [
@@ -39,38 +40,38 @@ const ProjectListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {}
+    {},
   );
-  const [, setFilteredData] = useState(chickinData);
-  const [chickins, setChickins] = useState([]);
+  const [filteredData, setFilteredData] = useState(chickinData);
+  // const [chickins, setChickins] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const handleFilter = () => {
-    const result = applyFilterByStateAndQuery(
-      chickinData,
-      filterStates,
-      searchQuery
-    );
+  const handleFilter = useCallback(() => {
+    let result = HFilter.byState(chickinData, filterStates);
+
+    result = HFilter.byQuery(chickinData, searchQuery);
 
     setFilteredData(result);
-  };
+  }, [filterStates, searchQuery]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
-      try {
-        const result = await chickinApi.getAllChickin();
-        setChickins(result);
-        handleFilter();
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProjects();
-  }, [searchQuery, filterStates]);
+    // const fetchProjects = async () => {
+    //   setLoading(true);
+    //   try {
+    //     const result = await chickinApi.getAllChickin();
+    //     setChickins(result);
+    //     handleFilter();
+    //   } catch (error) {
+    //     console.error("Error fetching projects:", error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+    //
+    // void fetchProjects();
+    handleFilter();
+    setLoading(false);
+  }, [handleFilter]);
 
   // Fungsi untuk menangani pencarian
 
@@ -104,7 +105,7 @@ const ProjectListPage = () => {
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <Chickinlist chickins={chickins} />
+          <Chickinlist chickins={filteredData as unknown as Project[]} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

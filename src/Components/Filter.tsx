@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import iconMap from "../Data/iconMap";
+import IconMap from "../Data/IconMap";
 import { FilterField } from "../Data/dataTypes";
 import FilterSection from "./FilterSection";
 
@@ -32,7 +32,7 @@ const Filter: React.FC<FilterProps> = ({ fields, onFilterChange }) => {
   return (
     <details className="dropdown dropdown-end ">
       <summary className="m-1 btn btn-ghost">
-        <iconMap.CiFilter size={28} />
+        <IconMap.CiFilter size={28} />
       </summary>
       <div className="menu dropdown-content bg-base-100 rounded-box z-[1] w-max p-4 shadow border border-gray-300">
         <div className="flex flex-col">

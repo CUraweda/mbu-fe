@@ -1,3 +1,4 @@
+import { IconType } from "react-icons";
 import {
   FaHome,
   FaInfoCircle,
@@ -29,7 +30,7 @@ import { CiExport, CiFilter, CiCirclePlus } from "react-icons/ci";
 import { HiChevronRight } from "react-icons/hi";
 import { FaCheck } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
-const iconMap: any = {
+const IconMap: Record<string, IconType> = {
   FaRegTrashAlt,
   FaCheck,
   FaHome,
@@ -61,4 +62,4 @@ const iconMap: any = {
   IoIosAdd,
 };
 
-export default iconMap;
+export default IconMap;

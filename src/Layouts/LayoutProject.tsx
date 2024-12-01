@@ -1,8 +1,10 @@
+import React from "react";
+
 type Props = {
   children?: React.ReactNode;
   bgColor?: string;
 };
-const layoutProject: React.FC<Props> = ({ children, bgColor = "bg-white" }) => {
+const LayoutProject: React.FC<Props> = ({ children, bgColor = "bg-white" }) => {
   return (
     <>
       <div
@@ -13,4 +15,4 @@ const layoutProject: React.FC<Props> = ({ children, bgColor = "bg-white" }) => {
     </>
   );
 };
-export default layoutProject;
+export default LayoutProject;

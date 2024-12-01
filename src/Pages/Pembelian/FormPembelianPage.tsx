@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
 import { BiMessageDetail } from "react-icons/bi";
-import AddItem from "../../Components/pembelian/addItem";
-import AddNote from "../../Components/pembelian/addNote";
+import AddItem from "@/Components/pembelian/addItem";
+import AddNote from "@/Components/pembelian/addNote";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -36,7 +36,6 @@ const FormPembelianPage = () => {
     console.log("Note confirmed:", comment);
     closeNote();
   };
-
 
   return (
     <div>
@@ -106,7 +105,10 @@ const FormPembelianPage = () => {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">List Item</h2>
             <button>
-              <BiMessageDetail className="inline-block mr-2" onClick={handleAddNote} />
+              <BiMessageDetail
+                className="inline-block mr-2"
+                onClick={handleAddNote}
+              />
             </button>
           </div>
           <hr className="my-2" />
@@ -116,10 +118,14 @@ const FormPembelianPage = () => {
                 <th className="border bg-blue-100 px-2 py-1">#</th>
                 <th className="border bg-blue-100 px-2 py-1">Produk</th>
                 <th className="border bg-blue-100 px-2 py-1">Jenis Produk</th>
-                <th className="border bg-blue-100 px-2 py-1">Gudang/Tempat Pengiriman</th>
+                <th className="border bg-blue-100 px-2 py-1">
+                  Gudang/Tempat Pengiriman
+                </th>
                 <th className="border bg-blue-100 px-2 py-1">Jumlah</th>
                 <th className="border bg-blue-100 px-2 py-1">Satuan</th>
-                <th className="border bg-blue-100 px-2 py-1">Harga Satuan (Rp)</th>
+                <th className="border bg-blue-100 px-2 py-1">
+                  Harga Satuan (Rp)
+                </th>
                 <th className="border bg-blue-100 px-2 py-1">Pajak</th>
                 <th className="border bg-blue-100 px-2 py-1">Total (Rp)</th>
               </tr>
@@ -129,12 +135,18 @@ const FormPembelianPage = () => {
                 <td className="border bg-white px-2 py-1 text-center">1</td>
                 <td className="border bg-white px-2 py-1">DOC CP Vaksin</td>
                 <td className="border bg-white px-2 py-1">Sapronak</td>
-                <td className="border bg-white px-2 py-1">Gudang Pangandaran</td>
+                <td className="border bg-white px-2 py-1">
+                  Gudang Pangandaran
+                </td>
                 <td className="border bg-white px-2 py-1 text-right">50,000</td>
                 <td className="border bg-white px-2 py-1">Ekor</td>
-                <td className="border bg-white px-2 py-1 text-right">7,000.00</td>
+                <td className="border bg-white px-2 py-1 text-right">
+                  7,000.00
+                </td>
                 <td className="border bg-white px-2 py-1 text-right">11%</td>
-                <td className="border bg-white px-2 py-1 text-right">350,000,000.00</td>
+                <td className="border bg-white px-2 py-1 text-right">
+                  350,000,000.00
+                </td>
               </tr>
             </tbody>
           </table>
@@ -155,22 +167,22 @@ const FormPembelianPage = () => {
           </div>
 
           <div className="m-5 mt-0 flex justify-end">
-          <table>
-            <tbody className="text-right">
-              <tr>
-                <td className="pr-10">Total Sebelum Pajak:</td>
-                <td>350,500,000.00</td>
-              </tr>
-              <tr>
-                <td className="pr-10">Pajak:</td>
-                <td>38,555,000.00</td>
-              </tr>
-              <tr>
-                <td className="pr-10 font-bold">Total:</td>
-                <td className="font-bold">389,055,000.00</td>
-              </tr>
-            </tbody>
-          </table>
+            <table>
+              <tbody className="text-right">
+                <tr>
+                  <td className="pr-10">Total Sebelum Pajak:</td>
+                  <td>350,500,000.00</td>
+                </tr>
+                <tr>
+                  <td className="pr-10">Pajak:</td>
+                  <td>38,555,000.00</td>
+                </tr>
+                <tr>
+                  <td className="pr-10 font-bold">Total:</td>
+                  <td className="font-bold">389,055,000.00</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -188,11 +200,12 @@ const FormPembelianPage = () => {
         {addItemVisible && (
           <AddItem isOpen={addItemVisible} onClose={closeAdd} />
         )}
-        {addNoteVisible && <AddNote onClose={closeNote} onConfirm={handleConfirmNote} />}
+        {addNoteVisible && (
+          <AddNote onClose={closeNote} onConfirm={handleConfirmNote} />
+        )}
       </LayoutProject>
     </div>
   );
 };
 
 export default FormPembelianPage;
-

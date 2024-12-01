@@ -25,9 +25,7 @@ const AddNote: React.FC<AddNoteProps> = ({ onClose, onConfirm }) => {
         <h2 className="text-xl font-bold text-primary mb-4">
           Tambahkan Catatan
         </h2>
-        <p className="text-gray-700 mb-4">
-          Komentar/Catatan:
-        </p>
+        <p className="text-gray-700 mb-4">Komentar/Catatan:</p>
         <textarea
           className="w-full h-56 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Komentar/catatan"
@@ -54,4 +52,3 @@ const AddNote: React.FC<AddNoteProps> = ({ onClose, onConfirm }) => {
 };
 
 export default AddNote;
-
