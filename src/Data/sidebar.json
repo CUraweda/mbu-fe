@@ -1,10 +1,5 @@
 [
   {
-    "name": "Dashboard",
-    "path": "/dashboard",
-    "icon": "FaHome"
-  },
-  {
     "name": "Project",
     "icon": "IoTimeOutline",
     "children": [
@@ -30,15 +25,24 @@
   },
   {
     "name": "Pembelian",
-    "icon": "LuShoppingCart",
+    "path": "/purchase",
+    "icon": "LuShoppingCart"
+  },
+  {
+    "name": "Persediaan",
+    "icon": "BsBox2",
     "children": [
       {
-        "name": "List Pembelian",
-        "path": "/purchase-list"
+        "name": "List Produk",
+        "path": "/product-list"
       },
       {
-        "name": "List Retur",
-        "path": "/return-list"
+        "name": "Transfer Produk",
+        "path": "/product-transfer"
+      },
+      {
+        "name": "Penyesuaian Stok",
+        "path": "/stock-adjustment"
       }
     ]
   }

@@ -1,6 +1,7 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import sidebarLinks from "../Data/sidebar.json";
+import dashboardLinks from "../Data/dashboard.json";
 import IconMap from "../Data/IconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
@@ -101,15 +102,15 @@ const Layout = () => {
       {/* Sidebar */}
       <div className="h-screen drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="min-h-full p-4 shadow-md min-w-52 menu bg-base-100 text-md">
+        <ul className="min-h-full p-4 shadow-md min-w-56 menu bg-base-100 text-md">
           <li>
             <div className="w-full p-2 mb-5">
               <img src={logo} alt="user" className="h-12" />
             </div>
           </li>
 
-          {/* Sidebar links */}
-          {sidebarLinks.map((link) => {
+          {/* Sidebar Dashboard links::START */}
+          {dashboardLinks.map((link) => {
             const IconComponent = IconMap[link.icon];
             const isOpen = openSubmenus[link.name];
 
@@ -121,21 +122,17 @@ const Layout = () => {
                   }`}
                   onClick={() => toggleSubmenu(link.name)}
                 >
-                  <div className="flex items-center">
-                    {IconComponent && <IconComponent className="mr-2" />}
-                    {link.path ? (
-                      <Link to={link.path}>{link.name}</Link>
-                    ) : (
-                      <span>{link.name}</span>
-                    )}
-                  </div>
+                  {IconComponent && <IconComponent className="mr-2" />}
+                  <span>{link.name}</span>
                   {link.children && (
                     <span
                       className={`transition-transform ${
-                        isOpen ? "rotate-180" : ""
+                        isOpen ? "rotate-90" : ""
                       }`}
                     >
-                      {IconMap.MdExpandMore && <IconMap.MdExpandMore />}
+                      {IconMap.MdKeyboardArrowRight && (
+                        <IconMap.MdKeyboardArrowRight />
+                      )}
                     </span>
                   )}
                 </div>
@@ -161,6 +158,65 @@ const Layout = () => {
               </li>
             );
           })}
+          {/* Sidebar Dashboard links::END */}
+
+          {/* Sidebar Features links::START */}
+          <h3 className="my-3 ml-5 text-md">Features</h3>
+          {sidebarLinks.map((link) => {
+            const IconComponent = IconMap[link.icon];
+            const isOpen = openSubmenus[link.name];
+
+            return (
+              <li key={link.name} className="flex flex-col text-lg">
+                <div
+                  className={`flex items-center justify-between cursor-pointer ${
+                    isOpen ? "bg-[#76A8D8BF] text-white shadow-md" : ""
+                  }`}
+                  onClick={() => toggleSubmenu(link.name)}
+                >
+                  <div className="flex items-center">
+                    {IconComponent && <IconComponent className="mr-2" />}
+                    {link.path ? (
+                      <Link to={link.path}>{link.name}</Link>
+                    ) : (
+                      <span>{link.name}</span>
+                    )}
+                  </div>
+                  {link.children && (
+                    <span
+                      className={`transition-transform ${
+                        isOpen ? "rotate-90" : ""
+                      }`}
+                    >
+                      {IconMap.MdKeyboardArrowRight && (
+                        <IconMap.MdKeyboardArrowRight />
+                      )}
+                    </span>
+                  )}
+                </div>
+
+                {link.children && isOpen && (
+                  <ul className="ml-4">
+                    {link.children.map((subLink) => (
+                      <li key={subLink.path}>
+                        <NavLink
+                          to={subLink.path}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "text-[#76A8D8BF] font-semibold bg-transparent"
+                              : "text-black"
+                          }
+                        >
+                          {subLink.name}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            );
+          })}
+          {/* Sidebar Features links::END */}
         </ul>
       </div>
     </div>

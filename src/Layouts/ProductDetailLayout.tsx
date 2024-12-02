@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import tabs from "../Data/tabsPurchaseDetail.json";
+import tabs from "../Data/tabsProductDetail.json";
 
 type Props = {
   children?: React.ReactNode;
