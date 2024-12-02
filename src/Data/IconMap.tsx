@@ -7,7 +7,7 @@ import {
   FaArrowLeft,
   FaPlus,
 } from "react-icons/fa";
-import { MdExpandMore } from "react-icons/md";
+import { MdExpandMore, MdKeyboardArrowRight } from "react-icons/md";
 import { LuDatabase, LuShoppingCart } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import {
@@ -30,6 +30,7 @@ import { CiExport, CiFilter, CiCirclePlus } from "react-icons/ci";
 import { HiChevronRight } from "react-icons/hi";
 import { FaCheck } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { BsBox2 } from "react-icons/bs";
 const IconMap: Record<string, IconType> = {
   FaRegTrashAlt,
   FaCheck,
@@ -38,6 +39,7 @@ const IconMap: Record<string, IconType> = {
   FaEnvelope,
   FaPlus,
   IoHomeOutline,
+  MdKeyboardArrowRight,
   MdExpandMore,
   LuDatabase,
   LuShoppingCart,
@@ -60,6 +62,7 @@ const IconMap: Record<string, IconType> = {
   FaArrowRight,
   FaArrowLeft,
   IoIosAdd,
+  BsBox2,
 };
 
 export default IconMap;
