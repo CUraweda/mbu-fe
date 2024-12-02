@@ -2,9 +2,9 @@ import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { ProjectPreparation } from "../../Data/types/projectType";
+import { ProjectPreparationsResponse } from "@/Data/types/response.type";
 
-interface PreparationItemProps extends ProjectPreparation {
+interface PreparationItemProps extends ProjectPreparationsResponse {
   isChecked: boolean;
   onCheckboxChange: () => void;
 }
@@ -15,16 +15,17 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
   product,
   area,
   location,
-  project_farms,
-  status,
-  project_preparation,
+  farm,
+  period,
+  status_project,
+  status_preparation,
   isChecked,
   onCheckboxChange,
 }) => {
   const navigate = useNavigate();
 
   const getStatusProjectClass = () => {
-    switch (status.name) {
+    switch (status_project) {
       case "Persiapan":
         return "bg-[#FFDADB] text-[#BE0407]";
       case "Aktif":
@@ -39,7 +40,7 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
   };
 
   const getStatusPersiapanClass = () => {
-    switch (project_preparation.status.name) {
+    switch (status_preparation) {
       case "Belum Selesai":
         return "bg-[#FFDFBE] text-[#EC8917]";
       case "Tercapai":
@@ -66,20 +67,19 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
         />
       </td>
       <td className="px-4 py-2">{id_project}</td>
-      <td className="px-4 py-2">{bussines_unit.name}</td>
+      <td className="px-4 py-2">{bussines_unit}</td>
       <td className="px-4 py-2">{product}</td>
-      <td className="px-4 py-2">{area.name}</td>
-      <td className="px-4 py-2">{location.name}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.name}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.capacity}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.period}</td>
+      <td className="px-4 py-2">{area}</td>
+      <td className="px-4 py-2">{location}</td>
+      <td className="px-4 py-2">{farm}</td>
+      <td className="px-4 py-2">{period}</td>
 
       {/* Status Project Dropdown */}
       <td className="relative px-4 py-2">
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProjectClass()} cursor-pointer`}
         >
-          {status.name}
+          {status_project}
         </div>
       </td>
 
@@ -88,9 +88,10 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusPersiapanClass()} cursor-pointer`}
         >
-          {project_preparation.status.name}
+          {status_preparation}
         </div>
       </td>
+      <td className="px-4 py-2">Waktu</td>
 
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">

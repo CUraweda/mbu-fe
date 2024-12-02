@@ -3,7 +3,7 @@ import LayoutProject from "@/Layouts/LayoutProject";
 import Breadcrumb from "@/Components/Breadcrumb";
 import RecordingList from "@/Components/project/RecordingList";
 import recordingListData from "@/Data/recordingListData";
-import FormRecording from "./recordingForm";
+import FormRecording from "./FormRecording";
 import PaginationBottom from "@/Components/PaginationBottom";
 
 const breadcrumbItems = [
@@ -12,7 +12,7 @@ const breadcrumbItems = [
   { label: "Recording", link: "/recording" },
 ];
 
-const Recording: React.FC = () => {
+const RecordingPage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const Data = recordingListData;
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -76,4 +76,4 @@ const Recording: React.FC = () => {
   );
 };
 
-export default Recording;
+export default RecordingPage;

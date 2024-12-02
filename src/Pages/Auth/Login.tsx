@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import FetchApi from "@/helpers/FetchApi";
 import useAuthStore from "../../store/useAuthStore";
 import IconMap from "../../Data/IconMap";
-import Loading from "../../Components/loading";
+import Loading from "../../Components/Loading";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");

@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Artlogin from "../Components/artlogin";
+import Artlogin from "../Components/Artlogin";
 import logo from "../assets/Image/logo_mbu_primary.png";
 
 const LoginLayout = () => {

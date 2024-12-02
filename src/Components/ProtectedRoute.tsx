@@ -6,8 +6,8 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ allowedRoles }) => {
-  const isLoggedIn = window.localStorage.getItem("accessToken");
-  const userRole = window.localStorage.getItem("accessRole");
+  const isLoggedIn = window.localStorage.getItem("access_token");
+  const userRole = window.localStorage.getItem("access_role");
 
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" />;
