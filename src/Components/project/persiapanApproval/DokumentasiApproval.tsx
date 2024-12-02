@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import dokumentasiData from "../../../Data/dokumentasiData";
-import PaginationBottom from "../../PaginationBottom";
+import dokumentasiData from "@/Data/dokumentasiData";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const DokumentasiForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

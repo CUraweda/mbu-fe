@@ -1,6 +1,6 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import budgetData from "../../../Data/budgetData";
+import budgetData from "@/Data/budgetData";
 
 interface Anggaran {
   id: number;

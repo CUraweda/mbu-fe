@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import dokumentasiData from "../../../Data/dokumentasiData";
-import PaginationBottom from "../../PaginationBottom";
+import dokumentasiData from "@/Data/dokumentasiData";
+import PaginationBottom from "@/Components/PaginationBottom";
 import UploadModal from "./UploadModal";
 import { FaPlus } from "react-icons/fa";
 

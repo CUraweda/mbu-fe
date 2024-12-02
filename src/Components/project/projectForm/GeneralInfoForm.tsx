@@ -4,7 +4,7 @@ import {
   MasterAreas,
   MasterLocations,
   MasterProducts,
-} from "../../../Data/types/allTypes";
+} from "@/Data/types/allTypes";
 import FetchApi from "@/helpers/FetchApi";
 
 const GeneralInfoForm: React.FC = () => {
