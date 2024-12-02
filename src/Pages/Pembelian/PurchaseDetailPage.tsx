@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
-import TimelineApproval from "../../Components/pembelian/TimelineApproval";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import PurchaseDetailLayout from "@/Layouts/PurchaseDetailLayout";
+import TimelineApproval from "@/Components/pembelian/TimelineApproval";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -54,7 +54,10 @@ const PurchaseDetailPage = () => {
               <p className="text-sm font-medium text whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="text-white input input-bordered bg-blue-300" />
+              <input
+                type="date"
+                className="text-white input input-bordered bg-blue-300"
+              />
             </div>
           </div>
           {/* Vendor Details::END */}

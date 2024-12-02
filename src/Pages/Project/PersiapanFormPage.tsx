@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import Tabs from "../../Components/Tabs";
-import CeklisPersiapanForm from "../../Components/project/persiapanForm/CeklisPersiapanForm";
-import DokumentasiForm from "../../Components/project/persiapanForm/DokumentasiForm";
-import PelaksanaForm from "../../Components/project/persiapanForm/PelaksanaPersiapanForm";
-import InformasiUmumForm from "../../Components/project/persiapanForm/InformasiUmumPersiapanForm";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import Tabs from "@/Components/Tabs";
+import CeklisPersiapanForm from "@/Components/project/persiapanForm/CeklisPersiapanForm";
+import DokumentasiForm from "@/Components/project/persiapanForm/DokumentasiForm";
+import PelaksanaForm from "@/Components/project/persiapanForm/PelaksanaPersiapanForm";
+import InformasiUmumForm from "@/Components/project/persiapanForm/InformasiUmumPersiapanForm";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

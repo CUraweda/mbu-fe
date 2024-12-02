@@ -1,13 +1,13 @@
 import { Outlet, Link, NavLink } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import sidebarLinks from "../Data/sidebar.json";
-import iconMap from "../Data/iconMap.tsx";
+import IconMap from "../Data/IconMap.tsx";
 import { useState } from "react";
 import logo from "../assets/Image/logo_mbu_primary.png";
 
 const Layout = () => {
   const [openSubmenus, setOpenSubmenus] = useState<{ [key: string]: boolean }>(
-    {}
+    {},
   );
 
   const toggleSubmenu = (name: string) => {
@@ -110,7 +110,7 @@ const Layout = () => {
 
           {/* Sidebar links */}
           {sidebarLinks.map((link) => {
-            const IconComponent = iconMap[link.icon];
+            const IconComponent = IconMap[link.icon];
             const isOpen = openSubmenus[link.name];
 
             return (
@@ -135,7 +135,7 @@ const Layout = () => {
                         isOpen ? "rotate-180" : ""
                       }`}
                     >
-                      {iconMap.MdExpandMore && <iconMap.MdExpandMore />}
+                      {IconMap.MdExpandMore && <IconMap.MdExpandMore />}
                     </span>
                   )}
                 </div>

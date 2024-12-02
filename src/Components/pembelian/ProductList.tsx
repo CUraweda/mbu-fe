@@ -42,7 +42,7 @@ const ProductList: React.FC = () => {
   const handleProductChange = (
     id: number,
     field: keyof Product,
-    value: string | number
+    value: string | number,
   ) => {
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
@@ -59,14 +59,14 @@ const ProductList: React.FC = () => {
                     (1 + product.pajak / 100)
                   : product.total,
             }
-          : product
-      )
+          : product,
+      ),
     );
   };
 
   const handleDeleteProduct = (id: number) => {
     setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== id)
+      prevProducts.filter((product) => product.id !== id),
     );
   };
 

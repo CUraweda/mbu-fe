@@ -16,7 +16,7 @@ interface PembelianListProps {
 
 const PembelianList: React.FC<PembelianListProps> = ({ items }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(items.length).fill(false)
+    Array(items.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

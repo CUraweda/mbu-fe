@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import masterApi from "../../../Data/api/masterApi";
+import { masterApi } from "@/api";
 import {
   MasterAreas,
   MasterLocations,
   MasterProducts,
 } from "../../../Data/types/allTypes";
+import FetchApi from "@/helpers/FetchApi";
 
 const GeneralInfoForm: React.FC = () => {
-  const [areas, setAreas] = useState([]);
-  const [locations, setLocations] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [areas, setAreas] = useState<MasterAreas[]>([]);
+  const [locations, setLocations] = useState<MasterLocations[]>([]);
+  const [products, setProducts] = useState<MasterProducts[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const [fetchedAreas, fetchedLocations, fetchedProducts] =
-          await Promise.all([
+          await FetchApi.promiseAllTyped([
             masterApi.getAllAreas(),
             masterApi.getAllLocations(),
             masterApi.getAllProducts(),
@@ -29,7 +30,7 @@ const GeneralInfoForm: React.FC = () => {
       }
     };
 
-    fetchData();
+    void fetchData();
   }, []);
 
   return (

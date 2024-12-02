@@ -1,4 +1,4 @@
-import LayoutProject from "../Layouts/layoutProject";
+import LayoutProject from "@/Layouts/LayoutProject";
 
 // pages/Home.tsx
 const Home = () => {

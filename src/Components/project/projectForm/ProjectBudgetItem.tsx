@@ -75,8 +75,8 @@ const ProjectBudgetForm = () => {
   const handleChange = (id: number, field: keyof Anggaran, value: string) => {
     setAnggaranItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item
-      )
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
     );
   };
 
@@ -156,7 +156,7 @@ const ProjectBudgetForm = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusFase(
-                      item.statusFase
+                      item.statusFase,
                     )}`}
                   >
                     {item.statusFase}{" "}

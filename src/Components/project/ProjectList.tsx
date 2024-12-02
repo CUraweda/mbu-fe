@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ProjectItem from "./ProjectItem";
-import { Project } from "../../Data/types/projectType"; // Import tipe data yang sesuai
+import { Project } from "../../Data/types/projectType";
 
 interface ProjectListProps {
   projects: Project[];
@@ -8,7 +8,7 @@ interface ProjectListProps {
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(projects.length).fill(false)
+    Array(projects.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

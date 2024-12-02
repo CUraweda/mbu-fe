@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 
 interface FilterBarProps {
-  onFilterChange: (filters: Record<string, any>) => void;
+  onFilterChange: (filters: Record<string, unknown>) => void;
 }
 
 const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
@@ -13,7 +13,7 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const handleFilterChange = (field: string, value: any) => {
+  const handleFilterChange = (field: string, value: unknown) => {
     onFilterChange({ [field]: value });
   };
 
@@ -41,7 +41,10 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDateDropdownVisible(false);
       }
     };
@@ -62,7 +65,9 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
           id="date"
           className="input input-bordered pl-10 pr-3 py-1 cursor-pointer text-sm"
           onClick={() => setIsDateDropdownVisible(true)}
-          value={startDate && endDate ? `${startDate} to ${endDate}` : "dd/mm/yyyy"}
+          value={
+            startDate && endDate ? `${startDate} to ${endDate}` : "dd/mm/yyyy"
+          }
           readOnly
         />
         {/* Icon Kalender */}
@@ -127,7 +132,6 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
       >
         <option value="">All Vendor</option>
         <option value="PT Malindo Feedmill Tbk">PT Malindo Feedmill Tbk</option>
-        
       </select>
 
       {/* Department Dropdown */}
