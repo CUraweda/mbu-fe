@@ -55,8 +55,6 @@ function App() {
 
             {/* Chick in */}
             <Route path="/chickin" element={<ChickinListPage />} />
-            {/* <Route path="/chickin/add" element={<FormChickinPage />} />
-            <Route path="/chickin/edit" element={<FormEditChickinPage />} /> */}
             <Route path="/chickin/add" element={<AddChickinFormPage />} />
             <Route path="/chickin/edit" element={<EditChickinFormPage />} />
 
@@ -64,7 +62,7 @@ function App() {
             <Route path="/recording" element={<Recording />} />
 
             {/* pembelian */}
-            <Route path="/purchase-list" element={<ListPembelianPage />} />
+            <Route path="/purchase" element={<ListPembelianPage />} />
             <Route path="/purchase-list/add" element={<FormPembelianPage />} />
             <Route
               path="/purchase-list/detail"
