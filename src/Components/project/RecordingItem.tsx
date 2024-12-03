@@ -1,5 +1,5 @@
 import React from "react";
-import IconMap from "@/Data/IconMap";
+import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 
 interface RecordingItemProps {
   projectId: number;
@@ -87,7 +87,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
               <li>
                 <a>
                   <span>
-                    <IconMap.MdOutlineEdit />
+                    <MdOutlineEdit />
                   </span>
                   Edit
                 </a>
@@ -95,7 +95,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
               <li>
                 <a>
                   <span>
-                    <IconMap.MdDeleteOutline size={17} />
+                    <MdDeleteOutline size={17} />
                   </span>
                   Hapus
                 </a>
