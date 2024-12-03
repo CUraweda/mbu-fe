@@ -1,4 +1,5 @@
 import React from "react";
+import { CiMenuKebab } from "react-icons/ci";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 
 interface RecordingItemProps {
@@ -54,6 +55,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
         <td>
           <input
             type="checkbox"
+            className="checkbox checkbox-info"
             checked={isChecked}
             onChange={onCheckboxChange}
           />
@@ -77,8 +79,10 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
         </td>
         <td className="px-4 py-2 text-center">
           <div className="dropdown dropdown-left dropdown-end">
-            <div tabIndex={0} role="button" className="m-1 rotate-90">
-              ...
+            <div tabIndex={0} className="">
+              <span className="btn btn-ghost text-xl font-bold" role="button">
+                <CiMenuKebab />
+              </span>
             </div>
             <ul
               tabIndex={0}

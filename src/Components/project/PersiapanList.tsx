@@ -29,26 +29,28 @@ const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
   };
 
   return (
-    <div>
-      <table className="min-w-full bg-white border">
+    <div className="overflow-x-auto">
+      <table className="table table-zebra bg-white">
         <thead>
           <tr className="text-center bg-blue-100">
             <th className="w-10">
-              <input
+            <input
                 type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-info"
                 checked={isAllSelected}
                 onChange={handleSelectAll}
               />
             </th>
-            <th className="px-4 py-2 font-semibold">Id Persiapan</th>
-            <th className="px-4 py-2 font-semibold">Unit Bisnis</th>
-            <th className="px-4 py-2 font-semibold">Produk</th>
-            <th className="px-4 py-2 font-semibold">Lokasi</th>
-            <th className="px-4 py-2 font-semibold">Kandang</th>
-            <th className="px-4 py-2 font-semibold">Periode</th>
-            <th className="px-4 py-2 font-semibold">Status Project</th>
-            <th className="px-4 py-2 font-semibold">Status Persiapan</th>
-            <th className="px-4 py-2 font-semibold">
+            <th>Id Persiapan</th>
+            <th>Unit Bisnis</th>
+            <th>Produk</th>
+            <th>Lokasi</th>
+            <th>Kandang</th>
+            <th>Periode</th>
+            <th>Status Project</th>
+            <th>Status Persiapan</th>
+            <th>
               Aktual Waktu <br /> Persiapan (hari)
             </th>
             <th className="px-4 py-2 font-semibold">Aksi</th>

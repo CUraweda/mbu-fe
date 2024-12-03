@@ -1,5 +1,6 @@
 import { Inventory } from "@/Data/inventoryData";
 import React from "react";
+import { CiMenuKebab } from "react-icons/ci";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdOutlineEdit, MdOutlineRemoveRedEye } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -28,25 +29,29 @@ const InventoryItem: React.FC<InventoryListProps> = ({
   };
 
   return (
-    <tr className="overflow-x-auto text-base text-center border-b">
+    <tr>
       <td>
         <input
           type="checkbox"
+          defaultChecked
+          className="checkbox checkbox-info"
           checked={isChecked}
           onChange={onCheckboxChange}
         />
       </td>
-      <td className="px-4 py-2 font-medium text-primary-dark">{id}</td>
-      <td className="px-4 py-2">{name}</td>
-      <td className="px-4 py-2">{purchasePrice}</td>
-      <td className="px-4 py-2">{sellingPrice}</td>
-      <td className="px-4 py-2">{category}</td>
-      <td className="px-4 py-2">{totalStock}</td>
-      <td className="px-4 py-2">{unit}</td>
-      <td className="px-4 py-2 text-center">
+      <td className=" text-primary-dark">{id}</td>
+      <td>{name}</td>
+      <td>{purchasePrice}</td>
+      <td>{sellingPrice}</td>
+      <td>{category}</td>
+      <td>{totalStock}</td>
+      <td>{unit}</td>
+      <td className="">
         <div className="dropdown dropdown-left dropdown-end">
-          <div tabIndex={0} role="button" className="m-1 rotate-90">
-            ...
+          <div tabIndex={0} className="">
+            <span className="btn btn-ghost text-xl font-bold" role="button">
+              <CiMenuKebab />
+            </span>
           </div>
           <ul className="z-10 p-2 mr-2 border shadow dropdown-content menu bg-base-100 rounded-box w-52 border-slate-200">
             <li>
