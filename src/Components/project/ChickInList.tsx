@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import ProjectItem from "./ChickinItem";
-import { Project } from "../../Data/types/projectType";
+import ChickInItem from "./ChickInItem";
+import { ProjectChickInResponse } from "@/Data/types/response.type";
 
-interface ProjectListProps {
-  chickins: Project[];
+interface ChickInListProps {
+  chickins: ProjectChickInResponse[];
 }
 
-const ProjectList: React.FC<ProjectListProps> = ({ chickins }) => {
+const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(chickins.length).fill(false)
+    Array(chickins.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -54,7 +54,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ chickins }) => {
         </thead>
         <tbody>
           {chickins.map((chickin, index) => (
-            <ProjectItem
+            <ChickInItem
               key={index}
               {...chickin}
               isChecked={selectedRows[index]}
@@ -67,4 +67,4 @@ const ProjectList: React.FC<ProjectListProps> = ({ chickins }) => {
   );
 };
 
-export default ProjectList;
+export default ChickInList;

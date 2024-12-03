@@ -1,5 +1,5 @@
 import { FC } from "react";
-import iconMap from "../Data/iconMap";
+import IconMap from "../Data/IconMap";
 
 const ExportButton: FC = () => {
   return (
@@ -9,9 +9,9 @@ const ExportButton: FC = () => {
         role="button"
         className="text-gray-500 bg-transparent rounded-md btn btn-outline"
       >
-        <iconMap.CiExport size={20} />
+        <IconMap.CiExport size={20} />
         Export
-        <iconMap.MdExpandMore size={24} />
+        <IconMap.MdExpandMore size={24} />
       </div>
       <ul
         tabIndex={0}

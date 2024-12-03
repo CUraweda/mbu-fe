@@ -1,6 +1,6 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import budgetData from "../../../Data/budgetData";
+import budgetData from "@/Data/budgetData";
 
 interface Anggaran {
   id: number;
@@ -17,8 +17,8 @@ const BudgetApproval = () => {
   const handleChange = (id: number, field: string, value: string) => {
     setAnggaranItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item
-      )
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
     );
   };
 

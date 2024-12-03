@@ -1,7 +1,5 @@
-import {
-  MdDeleteOutline,
-  MdOutlineEdit,
-} from "react-icons/md";
+import React from "react";
+import IconMap from "@/Data/IconMap";
 
 interface RecordingItemProps {
   projectId: number;
@@ -22,7 +20,6 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
   isChecked,
   onCheckboxChange,
 }) => {
-
   const getStatusClass = () => {
     switch (status) {
       case "Pengajuan":
@@ -90,7 +87,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
               <li>
                 <a>
                   <span>
-                    <MdOutlineEdit />
+                    <IconMap.MdOutlineEdit />
                   </span>
                   Edit
                 </a>
@@ -98,7 +95,7 @@ const RecordingItem: React.FC<RecordingItemProps> = ({
               <li>
                 <a>
                   <span>
-                    <MdDeleteOutline size={17} />
+                    <IconMap.MdDeleteOutline size={17} />
                   </span>
                   Hapus
                 </a>

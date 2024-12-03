@@ -1,5 +1,5 @@
-import { FC } from "react";
-import iconMap from "../Data/iconMap";
+import React, { FC } from "react";
+import IconMap from "../Data/IconMap";
 
 interface PaginationBottomProps {
   currentPage: number;
@@ -17,7 +17,7 @@ const PaginationBottom: FC<PaginationBottomProps> = ({
         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
       >
-        <iconMap.FaArrowLeft size={18} className="text-primary" />
+        <IconMap.FaArrowLeft size={18} className="text-primary" />
         <div className="flex text-center">Prev</div>
       </button>
       <span className="mx-2 text-primary">1 of 2</span>
@@ -26,7 +26,7 @@ const PaginationBottom: FC<PaginationBottomProps> = ({
         className="flex items-center gap-5 mx-2 text-primary hover:bg-transparent"
       >
         <div className="flex text-center">Next</div>
-        <iconMap.FaArrowRight size={18} className="text-primary" />
+        <IconMap.FaArrowRight size={18} className="text-primary" />
       </button>
     </div>
   );

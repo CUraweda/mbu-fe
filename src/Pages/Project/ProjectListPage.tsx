@@ -1,20 +1,21 @@
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/Search";
-import Filter from "../../Components/Filter";
-import ProjectList from "../../Components/project/ProjectList";
-import projectData from "../../Data/projectData";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import DataSelector from "@/Components/DataSelector";
+import SearchBar from "@/Components/Search";
+import Filter from "@/Components/Filter";
+import ProjectList from "@/Components/project/ProjectList";
 
 // icons
 import { FaPlus } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import projectApi from "../../Data/api/projectApi";
-import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
-import { FilterField } from "../../Data/dataTypes";
-import ExportButton from "../../Components/ExportButton";
-import PaginationBottom from "../../Components/PaginationBottom";
+import { projectApi } from "@/api";
+import HFilter from "@/helpers/HFilter";
+import { FilterField } from "@/Data/dataTypes";
+import ExportButton from "@/Components/ExportButton";
+import PaginationBottom from "@/Components/PaginationBottom";
+import Swal from "sweetalert2";
+import { ProjectsResponse } from "@/Data/types/response.type";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -38,48 +39,53 @@ const filterFields: FilterField[] = [
 const ProjectListPage = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {}
+    {},
   );
-  const [, setFilteredData] = useState(projectData);
+  const [filteredData, setFilteredData] = useState<ProjectsResponse[]>([]);
+  const [projectData, setProjectData] = useState<ProjectsResponse[]>([]);
 
   const handleDataChange = (value: number) => {
     console.log(`Jumlah data yang dipilih: ${value}`);
-  };
-
-  const handleFilter = () => {
-    const result = applyFilterByStateAndQuery(
-      projectData,
-      filterStates,
-      searchQuery
-    );
-
-    setFilteredData(result);
   };
 
   const handleNavigate = () => {
     navigate("/project/add");
   };
 
+  const handleFilter = useCallback(() => {
+    let result = HFilter.byState(projectData, filterStates);
+
+    result = HFilter.byQuery(projectData, searchQuery);
+
+    setFilteredData(result);
+  }, [filterStates, searchQuery, projectData]);
+
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
+    const fetchData = async () => {
       try {
-        const result = await projectApi.getAllProject();
-        setProjects(result);
-        handleFilter();
+        setLoading(true);
+        const { response } = await projectApi.getAllProject();
+        setProjectData(response);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        void Swal.fire({
+          icon: "error",
+          title: "Login Gagal",
+          text: error instanceof Error ? error.message : "Terjadi kesalahan",
+        });
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProjects();
-  }, [searchQuery, filterStates]);
+    void fetchData();
+  }, []);
+
+  useEffect(() => {
+    handleFilter();
+  }, [handleFilter]);
 
   return (
     <div>
@@ -109,11 +115,10 @@ const ProjectListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        {/* <ProjectList items={projects} /> */}
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <ProjectList projects={projects} />
+          <ProjectList projects={filteredData} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

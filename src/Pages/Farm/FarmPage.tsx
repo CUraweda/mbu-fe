@@ -1,5 +1,5 @@
-import iconMap from "../../Data/iconMap.tsx";
-// import SearchBar from "../../Components/Search.tsx";
+import IconMap from "@/Data/IconMap.tsx";
+// import SearchBar from "@/Components/Search.tsx";
 import { useState } from "react";
 const FarmPage = () => {
   const [modal, setModal] = useState<false | true>(false);
@@ -39,10 +39,10 @@ const FarmPage = () => {
   const handleRowStep3Change = (
     index: number,
     field: string,
-    value: string | number
+    value: string | number,
   ) => {
     const updatedRows = rowsStep3.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
+      rowIndex === index ? { ...row, [field]: value } : row,
     );
     setRowsStep3(updatedRows);
   };
@@ -55,7 +55,7 @@ const FarmPage = () => {
   };
   const handleInputChange = (index: number, field: string, value: string) => {
     const updatedRows = rows.map((row, rowIndex) =>
-      rowIndex === index ? { ...row, [field]: value } : row
+      rowIndex === index ? { ...row, [field]: value } : row,
     );
     setRows(updatedRows);
   };
@@ -120,10 +120,10 @@ const FarmPage = () => {
               <td>Baik</td>
               <td>
                 <button className="btn btn-ghost">
-                  <iconMap.PiNotePencil size={20} />
+                  <IconMap.PiNotePencil size={20} />
                 </button>
                 <button className="btn btn-ghost">
-                  <iconMap.PiTrash size={20} />
+                  <IconMap.PiTrash size={20} />
                 </button>
               </td>
             </tr>
@@ -338,7 +338,7 @@ const FarmPage = () => {
                                       handleInputChange(
                                         index,
                                         "farmName",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -355,7 +355,7 @@ const FarmPage = () => {
                                       handleInputChange(
                                         index,
                                         "blockName",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -429,7 +429,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "namaBlok",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -447,7 +447,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "kodeKandang",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -462,7 +462,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "namaKandang",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -477,7 +477,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "Luas",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -492,7 +492,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "Populasi",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -507,7 +507,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "MaxPopulasi",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />
@@ -522,7 +522,7 @@ const FarmPage = () => {
                                       handleRowStep3Change(
                                         index,
                                         "Keterangan",
-                                        e.target.value
+                                        e.target.value,
                                       )
                                     }
                                   />

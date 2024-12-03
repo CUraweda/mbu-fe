@@ -1,5 +1,6 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
-import tabs from "../Data/sidebarPurchaseDetail.json";
+import tabs from "../Data/tabsPurchaseDetail.json";
 
 type Props = {
   children?: React.ReactNode;
@@ -28,7 +29,7 @@ const PurchaseDetailLayout: React.FC<Props> = ({ children }) => {
         ))}
       </div>
 
-      <div className="p-6 justify-between w-full overflow-x-auto bg-white rounded-md min-h-96 card text-slate-800">
+      <div className="justify-between w-full p-6 overflow-x-auto bg-white rounded-md min-h-96 card text-slate-800">
         {children}
       </div>
     </>

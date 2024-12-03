@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/Search";
-import Filter from "../../Components/Filter";
-import PersiapanList from "../../Components/project/PersiapanList";
-import { FilterField } from "../../Data/dataTypes";
-import ExportButton from "../../Components/ExportButton";
-import PaginationBottom from "../../Components/PaginationBottom";
-import { ProjectPreparation } from "../../Data/types/projectType";
-import persiapanApi from "../../Data/api/persiapanApi";
+import { useState, useEffect, useCallback } from "react";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import DataSelector from "@/Components/DataSelector";
+import SearchBar from "@/Components/Search";
+import Filter from "@/Components/Filter";
+import PersiapanList from "@/Components/project/PersiapanList";
+import { FilterField } from "@/Data/dataTypes";
+import ExportButton from "@/Components/ExportButton";
+import PaginationBottom from "@/Components/PaginationBottom";
+import HFilter from "@/helpers/HFilter";
+import { persiapanApi } from "@/api";
+import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+import Swal from "sweetalert2";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -34,43 +36,53 @@ const PersiapanListPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {}
+    {},
   );
-  const [preparations, setPreparations] = useState<ProjectPreparation[]>([]);
+  const [persiapanData, setPersiapanData] = useState<
+    ProjectPreparationsResponse[]
+  >([]);
   const [loading, setLoading] = useState(true);
+  const [filteredData, setFilteredData] = useState<
+    ProjectPreparationsResponse[]
+  >([]);
 
   const handleDataChange = (value: number) => {
     // TODO: apply data limiting
     console.log(`Jumlah data yang dipilih: `, value);
   };
 
-  // Fungsi untuk menangani pencarian
-  // const handleFilters = useCallback(() => {
-  //   const result = applyFilterByStateAndQuery(
-  //     persiapanData,
-  //     filterStates,
-  //     searchQuery
-  //   );
+  const handleFilter = useCallback(() => {
+    let result = HFilter.byState(persiapanData, filterStates);
 
-  //   setFilteredData(result);
-  // }, [filterStates, searchQuery]);
+    result = HFilter.byQuery(persiapanData, searchQuery);
+
+    setFilteredData(result);
+  }, [filterStates, searchQuery, persiapanData]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
+    const fetchData = async () => {
       try {
-        const result = await persiapanApi.getAllPersiapan();
-        setPreparations(result);
-        // handleFilter();
+        setLoading(true);
+        const { response } = await persiapanApi.getAllPersiapan();
+        setPersiapanData(response);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        void Swal.fire({
+          icon: "error",
+          title: "Login Gagal",
+          text: error instanceof Error ? error.message : "Terjadi kesalahan",
+        });
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProjects();
-  }, [searchQuery, filterStates]);
+    void fetchData();
+  }, []);
+
+  useEffect(() => {
+    handleFilter();
+    setLoading(false);
+  }, [handleFilter]);
 
   return (
     <div>
@@ -93,11 +105,10 @@ const PersiapanListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        {/* <PersiapanList items={persiapanData} /> */}
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <PersiapanList preparations={preparations} />
+          <PersiapanList preparations={filteredData} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

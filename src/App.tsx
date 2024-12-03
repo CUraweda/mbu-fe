@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import Layout from "./Layouts/layout";
-import ProtectedRoute from "./Components/protectedRoute";
+import Layout from "./Layouts/Layout";
+import ProtectedRoute from "./Components/ProtectedRoute";
 import NotFound from "./Pages/NotFound";
 import LoginPage from "./Pages/Auth/Login";
-import LoginLayout from "./Layouts/loginLayout";
+import LoginLayout from "./Layouts/LoginLayout";
 import Home from "./Pages/Home";
 import ProjectListPage from "./Pages/Project/ProjectListPage";
-import ChickinListPage from "./Pages/Project/ChickinListPage";
+import ChickInListPage from "./Pages/Project/ChickInListPage";
 import ProjectFormPage from "./Pages/Project/ProjectFormPage";
 import ListPembelianPage from "./Pages/Pembelian/ListPembelianPage";
 import FormPembelianPage from "./Pages/Pembelian/FormPembelianPage";
 import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import PersiapanApprovalPage from "./Pages/Project/PersiapanApprovalPage";
-import Recording from "./Pages/Project/recordingPage";
+import RecordingPage from "./Pages/Project/RecordingPage";
 // import FormChickinPage from "./Pages/Project/formchickinPage";
 // import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
@@ -54,17 +54,15 @@ function App() {
             />
 
             {/* Chick in */}
-            <Route path="/chickin" element={<ChickinListPage />} />
-            {/* <Route path="/chickin/add" element={<FormChickinPage />} />
-            <Route path="/chickin/edit" element={<FormEditChickinPage />} /> */}
+            <Route path="/chickin" element={<ChickInListPage />} />
             <Route path="/chickin/add" element={<AddChickinFormPage />} />
             <Route path="/chickin/edit" element={<EditChickinFormPage />} />
 
             {/* recording */}
-            <Route path="/recording" element={<Recording />} />
+            <Route path="/recording" element={<RecordingPage />} />
 
             {/* pembelian */}
-            <Route path="/purchase-list" element={<ListPembelianPage />} />
+            <Route path="/purchase" element={<ListPembelianPage />} />
             <Route path="/purchase-list/add" element={<FormPembelianPage />} />
             <Route
               path="/purchase-list/detail"

@@ -5,7 +5,9 @@ interface KomentarPelaksanaPersiapanApprovalProps {
   onConfirm: (comment: string) => void;
 }
 
-const KomentarPelaksanaPersiapanApproval: React.FC<KomentarPelaksanaPersiapanApprovalProps> = ({ onClose, onConfirm }) => {
+const KomentarPelaksanaPersiapanApproval: React.FC<
+  KomentarPelaksanaPersiapanApprovalProps
+> = ({ onClose, onConfirm }) => {
   const [comment, setComment] = useState("");
 
   const handleConfirm = () => {

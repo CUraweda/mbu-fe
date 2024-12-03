@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import PersiapanItem from "./PersiapanItem";
-import { ProjectPreparation } from "../../Data/types/projectType";
-// import { Preparation } from "../../Data/types/persiapanType";
+import { ProjectPreparationsResponse } from "@/Data/types/response.type";
 
 interface PreparationListProps {
-  preparations: ProjectPreparation[];
+  preparations: ProjectPreparationsResponse[];
 }
 
 const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(preparations.length).fill(false)
+    Array(preparations.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 

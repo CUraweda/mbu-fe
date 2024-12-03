@@ -1,19 +1,19 @@
-import Breadcrumb from "../../Components/Breadcrumb";
-import LayoutProject from "../../Layouts/layoutProject";
-import DataSelector from "../../Components/DataSelector";
-import SearchBar from "../../Components/Search";
-import Filter from "../../Components/Filter";
-import Chickinlist from "../../Components/project/ChickinList";
-import chickinData from "../../Data/ChickinData";
+import Breadcrumb from "@/Components/Breadcrumb";
+import LayoutProject from "@/Layouts/LayoutProject";
+import DataSelector from "@/Components/DataSelector";
+import SearchBar from "@/Components/Search";
+import Filter from "@/Components/Filter";
+import ChickInlist from "@/Components/project/ChickInList";
 
 // icons
-import { useEffect, useState } from "react";
-import { applyFilterByStateAndQuery } from "../../helpers/filterHelpers";
-import { FilterField } from "../../Data/dataTypes";
-import ExportButton from "../../Components/ExportButton";
-import PaginationBottom from "../../Components/PaginationBottom";
-import chickinApi from "../../Data/api/chickinApi";
-// import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import HFilter from "@/helpers/HFilter";
+import { FilterField } from "@/Data/dataTypes";
+import ExportButton from "@/Components/ExportButton";
+import PaginationBottom from "@/Components/PaginationBottom";
+import { chickInApi } from "@/api";
+import { ProjectChickInResponse } from "@/Data/types/response.type";
+import Swal from "sweetalert2";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -35,42 +35,48 @@ const filterFields: FilterField[] = [
 ];
 
 const ProjectListPage = () => {
-  // const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {}
+    {},
   );
-  const [, setFilteredData] = useState(chickinData);
-  const [chickins, setChickins] = useState([]);
+  const [filteredData, setFilteredData] = useState<ProjectChickInResponse[]>(
+    [],
+  );
+  const [chickInData, setChickInData] = useState<ProjectChickInResponse[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const handleFilter = () => {
-    const result = applyFilterByStateAndQuery(
-      chickinData,
-      filterStates,
-      searchQuery
-    );
+  const handleFilter = useCallback(() => {
+    let result = HFilter.byState(chickInData, filterStates);
+
+    result = HFilter.byQuery(chickInData, searchQuery);
 
     setFilteredData(result);
-  };
+  }, [filterStates, searchQuery, chickInData]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true);
+    const fetchData = async () => {
       try {
-        const result = await chickinApi.getAllChickin();
-        setChickins(result);
-        handleFilter();
+        setLoading(true);
+        const { response } = await chickInApi.getAllChickIn();
+        setChickInData(response);
       } catch (error) {
-        console.error("Error fetching projects:", error);
+        void Swal.fire({
+          icon: "error",
+          title: "Login Gagal",
+          text: error instanceof Error ? error.message : "Terjadi kesalahan",
+        });
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProjects();
-  }, [searchQuery, filterStates]);
+    void fetchData();
+  }, []);
+
+  useEffect(() => {
+    handleFilter();
+  }, [handleFilter]);
 
   // Fungsi untuk menangani pencarian
 
@@ -99,12 +105,10 @@ const ProjectListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        {/* <Chickinlist items={filteredData} />
-         */}
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <Chickinlist chickins={chickins} />
+          <ChickInlist chickins={filteredData} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

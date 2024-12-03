@@ -1,7 +1,7 @@
-import Breadcrumb from "../../Components/Breadcrumb"; // Pastikan komponen ini ada
-import LayoutProject from "../../Layouts/layoutProject";
-import PurchaseDetailLayout from "../../Layouts/PurchaseDetailLayout";
-import TimelineApproval from "../../Components/pembelian/TimelineApproval";
+import Breadcrumb from "@/Components/Breadcrumb"; // Pastikan komponen ini ada
+import LayoutProject from "@/Layouts/LayoutProject";
+import PurchaseDetailLayout from "@/Layouts/PurchaseDetailLayout";
+import TimelineApproval from "@/Components/pembelian/TimelineApproval";
 import { FaRegFileAlt } from "react-icons/fa";
 
 const breadcrumbItems = [
@@ -41,17 +41,13 @@ const PaymentInfoPage = () => {
               {/* No. PR */}
               <div className="flex items-center">
                 <p className="text-sm font-medium mr-2">No. PR:</p>
-                <span className="font-bold text-blue-300">
-                  PR-MAN-00005
-                </span>
+                <span className="font-bold text-blue-300">PR-MAN-00005</span>
               </div>
 
               {/* No. PO */}
               <div className="flex items-center">
                 <p className="text-sm font-medium mr-2">No. PO:</p>
-                <span className="font-bold text-blue-300">
-                  PO-MAN-00005
-                </span>
+                <span className="font-bold text-blue-300">PO-MAN-00005</span>
               </div>
             </div>
 
@@ -60,7 +56,10 @@ const PaymentInfoPage = () => {
               <p className="text-sm font-medium whitespace-nowrap text-slate-400">
                 Tanggal Dibutuhkan:
               </p>
-              <input type="date" className="input input-bordered bg-blue-300 text-white" />
+              <input
+                type="date"
+                className="input input-bordered bg-blue-300 text-white"
+              />
             </div>
           </div>
 
@@ -69,7 +68,7 @@ const PaymentInfoPage = () => {
             <h3>Info Pembayaran</h3>
             <table className="table w-full table-zebra">
               <thead className="bg-blue-300">
-                <tr className="text-center text-white" >
+                <tr className="text-center text-white">
                   <th>#</th>
                   <th>Tanggal Pembayaran</th>
                   <th>Metode Pembayaran</th>
@@ -102,24 +101,35 @@ const PaymentInfoPage = () => {
           {/* Total Pembayaran */}
 
           <div className="my-4 p-4 border rounded-lg bg-gray-100 flex justify-end">
-              <div className="w-full max-w-sm">
-                <div className="flex justify-end items-center mb-2">
-                  <p className="text-sm font-medium text-gray-400 text-right">Total pembayaran:</p>
-                  <span className="text-sm font-semibold text-gray-800 ml-4">0.00</span>
-                </div>
-                <div className="flex justify-end items-center mb-2">
-                  <p className="text-sm font-medium text-gray-400 text-right">Nominal pembelian:</p>
-                  <span className="text-sm font-semibold text-gray-800 ml-4">0.00</span>
-                </div>
-                <div className="flex justify-end items-center mb-2">
-                  <p className="text-sm font-medium text-gray-400 text-right">Sisa belum dibayar:</p>
-                  <span className="text-sm font-semibold text-gray-800 ml-4">0.00</span>
-                </div>
+            <div className="w-full max-w-sm">
+              <div className="flex justify-end items-center mb-2">
+                <p className="text-sm font-medium text-gray-400 text-right">
+                  Total pembayaran:
+                </p>
+                <span className="text-sm font-semibold text-gray-800 ml-4">
+                  0.00
+                </span>
+              </div>
+              <div className="flex justify-end items-center mb-2">
+                <p className="text-sm font-medium text-gray-400 text-right">
+                  Nominal pembelian:
+                </p>
+                <span className="text-sm font-semibold text-gray-800 ml-4">
+                  0.00
+                </span>
+              </div>
+              <div className="flex justify-end items-center mb-2">
+                <p className="text-sm font-medium text-gray-400 text-right">
+                  Sisa belum dibayar:
+                </p>
+                <span className="text-sm font-semibold text-gray-800 ml-4">
+                  0.00
+                </span>
               </div>
             </div>
+          </div>
 
           <TimelineApproval currentApprovalStep={2} />
-
         </PurchaseDetailLayout>
       </LayoutProject>
     </div>

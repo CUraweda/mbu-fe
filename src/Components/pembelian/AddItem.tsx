@@ -40,10 +40,13 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
           X
         </button>
         <h2 className="text-lg font-medium text-primary">Tambah Item</h2>
-        
+
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
-            <label htmlFor="namaProduk" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="namaProduk"
+              className="block text-sm font-medium text-gray-700"
+            >
               Nama Produk
             </label>
             <input
@@ -58,7 +61,10 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="jenisProduk" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="jenisProduk"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Jenis Produk
               </label>
               <select
@@ -95,7 +101,10 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label htmlFor="jumlah" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="jumlah"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Jumlah
               </label>
               <input
@@ -109,7 +118,10 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
             </div>
 
             <div>
-              <label htmlFor="satuan" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="satuan"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Satuan
               </label>
               <select
@@ -143,7 +155,10 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
           </div>
 
           <div>
-            <label htmlFor="pajak" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="pajak"
+              className="block text-sm font-medium text-gray-700"
+            >
               Pajak (%)
             </label>
             <input
@@ -178,4 +193,3 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
 };
 
 export default AddItem;
-

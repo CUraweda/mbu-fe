@@ -1,9 +1,9 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight, FaRegTrashAlt } from "react-icons/fa";
 import { FiPlusCircle } from "react-icons/fi";
-import budgetData from "../../../Data/budgetData";
-import DataSelector from "../../DataSelector";
-import faseData from "../../../Data/faseData";
+import budgetData from "@/Data/budgetData";
+import DataSelector from "@/Components/DataSelector";
+import faseData from "@/Data/faseData";
 
 interface Anggaran {
   id: number;
@@ -75,8 +75,8 @@ const BudgetApprovalItem = () => {
   const handleChange = (id: number, field: keyof Anggaran, value: string) => {
     setAnggaranItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, [field]: value } : item
-      )
+        item.id === id ? { ...item, [field]: value } : item,
+      ),
     );
   };
 
@@ -156,7 +156,7 @@ const BudgetApprovalItem = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusFase(
-                      item.statusFase
+                      item.statusFase,
                     )}`}
                   >
                     {item.statusFase}{" "}

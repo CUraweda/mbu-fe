@@ -1,4 +1,4 @@
-import farmData from "../../../Data/farmInfoData";
+import farmData from "@/Data/farmInfoData";
 
 const FarmApproval = () => {
   const items = farmData;

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
-import PaginationBottom from "../../PaginationBottom";
+import ceklisPersiapanData from "@/Data/ceklisPersiapanData";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const CeklisPersiapanApproval: React.FC = () => {
   const items = ceklisPersiapanData;
@@ -86,7 +86,7 @@ const CeklisPersiapanApproval: React.FC = () => {
                 <td>
                   <div
                     className={`px-3 py-2 text-center rounded-md text-sm font-semibold ${getstatusCeklis(
-                      item.hasil
+                      item.hasil,
                     )}`}
                   >
                     {item.hasil}{" "}

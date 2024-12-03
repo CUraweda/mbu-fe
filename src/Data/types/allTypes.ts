@@ -1,3 +1,6 @@
+// AUTO GENERATED FILE BY @kalissaac/prisma-typegen
+// DO NOT EDIT
+
 export interface Users {
   id: number;
   name: string;

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import masterApi from "../../../Data/api/masterApi";
+import { masterApi } from "@/api";
 import FarmInfoItem from "./FarmInfoItem";
 import { FiPlusCircle } from "react-icons/fi";
-import { MasterFarms } from "../../../Data/types/allTypes";
+import { MasterFarms } from "@/Data/types/allTypes";
 
 const FarmInfoList: React.FC = () => {
   const [farms, setFarms] = useState<MasterFarms[]>([]);
   const [selectedFarmId, setSelectedFarmId] = useState<number | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFarms = async () => {
       try {
         const fetchedFarms = await masterApi.getAllFarms();
         setFarms(fetchedFarms || []);
@@ -18,7 +18,7 @@ const FarmInfoList: React.FC = () => {
       }
     };
 
-    fetchData();
+    void fetchFarms();
   }, []);
 
   const handleDelete = (id: number) => {
