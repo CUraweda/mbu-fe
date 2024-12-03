@@ -1,9 +1,9 @@
 import React from "react";
 import { FaArrowLeft, FaArrowRight, FaRegTrashAlt } from "react-icons/fa";
 import { FiPlusCircle } from "react-icons/fi";
-import budgetData from "../../../Data/budgetData";
-import DataSelector from "../../DataSelector";
-import faseData from "../../../Data/faseData";
+import budgetData from "@/Data/budgetData";
+import DataSelector from "@/Components/DataSelector";
+import faseData from "@/Data/faseData";
 
 interface Anggaran {
   id: number;

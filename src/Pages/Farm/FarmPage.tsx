@@ -1,5 +1,5 @@
-import IconMap from "../../Data/IconMap.tsx";
-// import SearchBar from "../../Components/Search.tsx";
+import IconMap from "@/Data/IconMap.tsx";
+// import SearchBar from "@/Components/Search.tsx";
 import { useState } from "react";
 const FarmPage = () => {
   const [modal, setModal] = useState<false | true>(false);

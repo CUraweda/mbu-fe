@@ -9,9 +9,9 @@ import { FilterField } from "@/Data/dataTypes";
 import ExportButton from "@/Components/ExportButton";
 import PaginationBottom from "@/Components/PaginationBottom";
 import HFilter from "@/helpers/HFilter";
-import persiapanData from "@/Data/persiapanData";
-import { ProjectPreparation } from "@/Data/types/projectType";
-// import persiapanApi from "@/Data/api/persiapanApi";
+import { persiapanApi } from "@/api";
+import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+import Swal from "sweetalert2";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -38,9 +38,13 @@ const PersiapanListPage = () => {
   const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
     {},
   );
-  // const [preparations, setPreparations] = useState<ProjectPreparation[]>([]);
+  const [persiapanData, setPersiapanData] = useState<
+    ProjectPreparationsResponse[]
+  >([]);
   const [loading, setLoading] = useState(true);
-  const [filteredData, setFilteredData] = useState(persiapanData);
+  const [filteredData, setFilteredData] = useState<
+    ProjectPreparationsResponse[]
+  >([]);
 
   const handleDataChange = (value: number) => {
     // TODO: apply data limiting
@@ -53,23 +57,29 @@ const PersiapanListPage = () => {
     result = HFilter.byQuery(persiapanData, searchQuery);
 
     setFilteredData(result);
-  }, [filterStates, searchQuery]);
+  }, [filterStates, searchQuery, persiapanData]);
 
   useEffect(() => {
-    // const fetchProjects = async () => {
-    //   setLoading(true);
-    //   try {
-    //     const result = await persiapanApi.getAllPersiapan();
-    //     setPreparations(result);
-    //     handleFilter();
-    //   } catch (error) {
-    //     console.error("Error fetching projects:", error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { response } = await persiapanApi.getAllPersiapan();
+        setPersiapanData(response);
+      } catch (error) {
+        void Swal.fire({
+          icon: "error",
+          title: "Login Gagal",
+          text: error instanceof Error ? error.message : "Terjadi kesalahan",
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // fetchProjects();
+    void fetchData();
+  }, []);
+
+  useEffect(() => {
     handleFilter();
     setLoading(false);
   }, [handleFilter]);
@@ -95,13 +105,10 @@ const PersiapanListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        {/* <PersiapanList items={persiapanData} /> */}
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <PersiapanList
-            preparations={filteredData as unknown as ProjectPreparation[]}
-          />
+          <PersiapanList preparations={filteredData} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

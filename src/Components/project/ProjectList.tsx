@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ProjectItem from "./ProjectItem";
-import { Project } from "../../Data/types/projectType";
+import { ProjectsResponse } from "@/Data/types/response.type";
 
 interface ProjectListProps {
-  projects: Project[];
+  projects: ProjectsResponse[];
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {

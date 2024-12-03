@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import IconMap from "../../Data/IconMap";
+import IconMap from "@/Data/IconMap";
 
 const approvalSteps = [
   "Draft",

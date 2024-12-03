@@ -1,24 +1,26 @@
+import { ProjectChickInResponse } from "@/Data/types/response.type";
 import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { Project } from "../../Data/types/projectType";
 
-interface ChickinItemProps extends Project {
+interface ChickinItemProps extends ProjectChickInResponse {
   isChecked: boolean;
   onCheckboxChange: () => void;
 }
 
-const ProjectItem: React.FC<ChickinItemProps> = ({
+const ChickInItem: React.FC<ChickinItemProps> = ({
   id_project,
   bussines_unit,
   product,
   area,
   location,
-  project_farms,
-  status_chick_in_id,
-  status,
+  farm,
+  capacity,
+  period,
+  status_chick_in,
+  status_project,
   isChecked,
   onCheckboxChange,
 }) => {
@@ -33,10 +35,10 @@ const ProjectItem: React.FC<ChickinItemProps> = ({
   };
 
   const getStatusChickin = () => {
-    switch (status_chick_in_id) {
-      case 1:
+    switch (status_chick_in) {
+      case "Sudah":
         return "bg-[#E4FFBD] text-[#12B906]";
-      case 0:
+      case "Belum":
         return "bg-[#FFDFBE] text-[#EC8917]";
       default:
         return "";
@@ -44,7 +46,7 @@ const ProjectItem: React.FC<ChickinItemProps> = ({
   };
 
   const getStatusProject = () => {
-    switch (status.name) {
+    switch (status_project) {
       case "Pengajuan":
         return "bg-[#FFF7C7] text-[#C9C311]";
       case "Persiapan":
@@ -68,25 +70,25 @@ const ProjectItem: React.FC<ChickinItemProps> = ({
         />
       </td>
       <td className="px-4 py-2">{id_project}</td>
-      <td className="px-4 py-2">{bussines_unit.name}</td>
+      <td className="px-4 py-2">{bussines_unit}</td>
       <td className="px-4 py-2">{product}</td>
-      <td className="px-4 py-2">{area.name}</td>
-      <td className="px-4 py-2">{location.name}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.name}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.capacity}</td>
-      <td className="px-4 py-2">{project_farms[0]?.farms.period}</td>
+      <td className="px-4 py-2">{area}</td>
+      <td className="px-4 py-2">{location}</td>
+      <td className="px-4 py-2">{farm}</td>
+      <td className="px-4 py-2">{capacity}</td>
+      <td className="px-4 py-2">{period}</td>
       <td className="px-4 py-2">
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusChickin()}`}
         >
-          {status_chick_in_id === 1 ? "Sudah" : "Belum"}
+          {status_chick_in ? "Sudah" : "Belum"}
         </div>
       </td>
       <td className="px-4 py-2">
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusProject()}`}
         >
-          {status.name === "Belum Selesai" ? "" : status.name}
+          {status_project}
         </div>
       </td>
       <td className="px-4 py-2 text-center">
@@ -137,4 +139,4 @@ const ProjectItem: React.FC<ChickinItemProps> = ({
   );
 };
 
-export default ProjectItem;
+export default ChickInItem;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCloudUploadAlt, FaPlus } from "react-icons/fa";
-import pelaksanaData from "../../../Data/pelaksanaPersiapanData";
-import PaginationBottom from "../../PaginationBottom";
+import pelaksanaData from "@/Data/pelaksanaPersiapanData";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const PelaksanaForm: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);

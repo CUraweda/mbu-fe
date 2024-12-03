@@ -2,8 +2,8 @@ import { useState } from "react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import LayoutProject from "@/Layouts/LayoutProject";
 import { BiMessageDetail } from "react-icons/bi";
-import AddItem from "@/Components/pembelian/addItem";
-import AddNote from "@/Components/pembelian/addNote";
+import AddItem from "@/Components/pembelian/AddItem";
+import AddNote from "@/Components/pembelian/AddNote";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },

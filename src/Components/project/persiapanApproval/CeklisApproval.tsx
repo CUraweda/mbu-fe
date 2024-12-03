@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import ceklisPersiapanData from "../../../Data/ceklisPersiapanData";
-import PaginationBottom from "../../PaginationBottom";
+import ceklisPersiapanData from "@/Data/ceklisPersiapanData";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const CeklisPersiapanApproval: React.FC = () => {
   const items = ceklisPersiapanData;

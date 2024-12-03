@@ -1,6 +1,6 @@
 import { useState } from "react";
-import dataRecordingData from "../../../Data/dataRecording";
-import PaginationBottom from "../../PaginationBottom";
+import dataRecordingData from "@/Data/dataRecording";
+import PaginationBottom from "@/Components/PaginationBottom";
 
 const RecordingApproval = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);

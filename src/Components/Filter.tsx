@@ -37,7 +37,7 @@ const Filter: React.FC<FilterProps> = ({ fields, onFilterChange }) => {
       <div className="menu dropdown-content bg-base-100 rounded-box z-[1] w-max p-4 shadow border border-gray-300">
         <div className="flex flex-col">
           {fields.map((field, index) => (
-            <>
+            <div key={field.name}>
               <FilterSection
                 key={field.name}
                 filterStatuses={filterStates[field.name]}
@@ -48,7 +48,7 @@ const Filter: React.FC<FilterProps> = ({ fields, onFilterChange }) => {
                 label={field.label}
               />
               {fields.length - 1 !== index && <hr className="my-4" />}
-            </>
+            </div>
           ))}
         </div>
       </div>

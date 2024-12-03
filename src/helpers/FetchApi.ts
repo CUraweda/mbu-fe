@@ -75,11 +75,6 @@ class FetchApi {
       { email: string; password: string }
     >("users/auth/login", { email, password });
 
-    console.log(response);
-    console.log(response.user.bussines_unit.id.toString());
-    console.log(response.user.location.id.toString());
-    console.log(response.user.user_roles[0].roles.name);
-
     const authResponse: Record<string, string> = {};
     if (response.token.access_token) {
       authResponse["access_token"] = response.token.access_token;

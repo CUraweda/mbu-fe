@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import FetchApi from "@/helpers/FetchApi";
-import useAuthStore from "../../store/useAuthStore";
-import IconMap from "../../Data/IconMap";
-import Loading from "../../Components/loading";
+import useAuthStore from "@/store/useAuthStore";
+import IconMap from "@/Data/IconMap";
+import Loading from "@/Components/Loading";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
