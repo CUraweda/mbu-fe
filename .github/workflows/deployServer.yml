@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: npm run build
         env: 
-          VITE_REACT_VITE_API_URL: ${{ secrets.VITE_REACT_VITE_API_URL }}
+          VITE_REACT_VITE_API_URL_MBU: ${{ secrets.VITE_REACT_VITE_API_URL_MBU }}
 
       - name: Upload to cPanel
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
