@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import PersiapanItem from "./PersiapanItem";
-import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+// import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+import { Persiapan } from "@/Data/persiapanData";
 
 interface PreparationListProps {
-  preparations: ProjectPreparationsResponse[];
+  preparations: Persiapan[];
 }
 
 const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
@@ -42,14 +43,13 @@ const PersiapanList: React.FC<PreparationListProps> = ({ preparations }) => {
             <th className="px-4 py-2 font-semibold">Id Persiapan</th>
             <th className="px-4 py-2 font-semibold">Unit Bisnis</th>
             <th className="px-4 py-2 font-semibold">Produk</th>
-            <th className="px-4 py-2 font-semibold">Area</th>
             <th className="px-4 py-2 font-semibold">Lokasi</th>
             <th className="px-4 py-2 font-semibold">Kandang</th>
             <th className="px-4 py-2 font-semibold">Periode</th>
             <th className="px-4 py-2 font-semibold">Status Project</th>
             <th className="px-4 py-2 font-semibold">Status Persiapan</th>
             <th className="px-4 py-2 font-semibold">
-              Aktual Waktu Persiapan (hari)
+              Aktual Waktu <br /> Persiapan (hari)
             </th>
             <th className="px-4 py-2 font-semibold">Aksi</th>
           </tr>

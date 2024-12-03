@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ChickInItem from "./ChickInItem";
-import { ProjectChickInResponse } from "@/Data/types/response.type";
+// import { ProjectChickInResponse } from "@/Data/types/response.type";
+import { ChickIn } from "@/Data/ChickinData";
 
 interface ChickInListProps {
-  chickins: ProjectChickInResponse[];
+  chickins: ChickIn[];
 }
 
 const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {

@@ -1,11 +1,12 @@
-import { ProjectChickInResponse } from "@/Data/types/response.type";
+import { ChickIn } from "@/Data/ChickinData";
+// import { ProjectChickInResponse } from "@/Data/types/response.type";
 import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-interface ChickinItemProps extends ProjectChickInResponse {
+interface ChickinItemProps extends ChickIn {
   isChecked: boolean;
   onCheckboxChange: () => void;
 }
@@ -69,7 +70,7 @@ const ChickInItem: React.FC<ChickinItemProps> = ({
           onChange={onCheckboxChange}
         />
       </td>
-      <td className="px-4 py-2">{id_project}</td>
+      <td className="px-4 py-2 text-primary-dark">{id_project}</td>
       <td className="px-4 py-2">{bussines_unit}</td>
       <td className="px-4 py-2">{product}</td>
       <td className="px-4 py-2">{area}</td>
