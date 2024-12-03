@@ -2,9 +2,10 @@ import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+// import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+import { Persiapan } from "@/Data/persiapanData";
 
-interface PreparationItemProps extends ProjectPreparationsResponse {
+interface PreparationItemProps extends Persiapan {
   isChecked: boolean;
   onCheckboxChange: () => void;
 }
@@ -13,12 +14,12 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
   id_project,
   bussines_unit,
   product,
-  area,
   location,
   farm,
   period,
   status_project,
   status_preparation,
+  actual,
   isChecked,
   onCheckboxChange,
 }) => {
@@ -66,10 +67,9 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
           className="w-4 h-4 cursor-pointer"
         />
       </td>
-      <td className="px-4 py-2">{id_project}</td>
+      <td className="px-4 py-2 text-primary-dark">{id_project}</td>
       <td className="px-4 py-2">{bussines_unit}</td>
       <td className="px-4 py-2">{product}</td>
-      <td className="px-4 py-2">{area}</td>
       <td className="px-4 py-2">{location}</td>
       <td className="px-4 py-2">{farm}</td>
       <td className="px-4 py-2">{period}</td>
@@ -91,7 +91,7 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
           {status_preparation}
         </div>
       </td>
-      <td className="px-4 py-2">Waktu</td>
+      <td className="px-4 py-2">{actual}</td>
 
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">

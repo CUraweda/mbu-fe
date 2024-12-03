@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Breadcrumb from "@/Components/Breadcrumb";
 import LayoutProject from "@/Layouts/LayoutProject";
 import DataSelector from "@/Components/DataSelector";
@@ -8,10 +8,11 @@ import PersiapanList from "@/Components/project/PersiapanList";
 import { FilterField } from "@/Data/dataTypes";
 import ExportButton from "@/Components/ExportButton";
 import PaginationBottom from "@/Components/PaginationBottom";
-import HFilter from "@/helpers/HFilter";
-import { persiapanApi } from "@/api";
-import { ProjectPreparationsResponse } from "@/Data/types/response.type";
+// import HFilter from "@/helpers/HFilter";
+// import { persiapanApi } from "@/api";
+// import { ProjectPreparationsResponse } from "@/Data/types/response.type";
 import Swal from "sweetalert2";
+import { persiapanData } from "@/Data/persiapanData";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -33,38 +34,36 @@ const filterFields: FilterField[] = [
 ];
 
 const PersiapanListPage = () => {
+  const persiapan = persiapanData;
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
-  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {},
-  );
-  const [persiapanData, setPersiapanData] = useState<
-    ProjectPreparationsResponse[]
-  >([]);
+  const [, setSearchQuery] = useState<string>(""); // Menyimpan query pencarian
+  const [, setFilterStates] = useState<Record<string, string[]>>({});
+  // const [persiapanData, setPersiapanData] =
+  //   useState<ProjectPreparationsResponse[]>(persiapan);
   const [loading, setLoading] = useState(true);
-  const [filteredData, setFilteredData] = useState<
-    ProjectPreparationsResponse[]
-  >([]);
+  // const [filteredData, setFilteredData] = useState<
+  //   ProjectPreparationsResponse[]
+  // >([]);
 
   const handleDataChange = (value: number) => {
     // TODO: apply data limiting
     console.log(`Jumlah data yang dipilih: `, value);
   };
 
-  const handleFilter = useCallback(() => {
-    let result = HFilter.byState(persiapanData, filterStates);
+  // const handleFilter = useCallback(() => {
+  //   let result = HFilter.byState(persiapanData, filterStates);
 
-    result = HFilter.byQuery(persiapanData, searchQuery);
+  //   result = HFilter.byQuery(persiapanData, searchQuery);
 
-    setFilteredData(result);
-  }, [filterStates, searchQuery, persiapanData]);
+  //   setFilteredData(result);
+  // }, [filterStates, searchQuery, persiapanData]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
         setLoading(true);
-        const { response } = await persiapanApi.getAllPersiapan();
-        setPersiapanData(response);
+        // const { response } = await persiapanApi.getAllPersiapan();
+        // setPersiapanData(response);
       } catch (error) {
         void Swal.fire({
           icon: "error",
@@ -79,10 +78,10 @@ const PersiapanListPage = () => {
     void fetchData();
   }, []);
 
-  useEffect(() => {
-    handleFilter();
-    setLoading(false);
-  }, [handleFilter]);
+  // useEffect(() => {
+  //   handleFilter();
+  //   setLoading(false);
+  // }, [handleFilter]);
 
   return (
     <div>
@@ -108,7 +107,7 @@ const PersiapanListPage = () => {
         {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <PersiapanList preparations={filteredData} />
+          <PersiapanList preparations={persiapan} />
         )}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom

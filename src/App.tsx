@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./Layouts/Layout";
-import ProtectedRoute from "./Components/ProtectedRoute";
+// import ProtectedRoute from "./Components/ProtectedRoute";
 import NotFound from "./Pages/NotFound";
 import LoginPage from "./Pages/Auth/Login";
 import LoginLayout from "./Layouts/LoginLayout";
@@ -14,8 +14,6 @@ import PersiapanListPage from "./Pages/Project/PersiapanListPage";
 import PersiapanFormPage from "./Pages/Project/PersiapanFormPage";
 import PersiapanApprovalPage from "./Pages/Project/PersiapanApprovalPage";
 import RecordingPage from "./Pages/Project/RecordingPage";
-// import FormChickinPage from "./Pages/Project/formchickinPage";
-// import FormEditChickinPage from "./Pages/Project/formeditchickinPage";
 import ProjectApprovalPage from "./Pages/Project/ProjectApprovalPage";
 import PurchaseDetailPage from "./Pages/Pembelian/PurchaseDetailPage";
 import OtherCostDetailPage from "./Pages/Pembelian/OtherCostDetailPage";
@@ -23,6 +21,8 @@ import PaymentInfoPage from "./Pages/Pembelian/PaymentInfoPage";
 import ReceiptReturnPage from "./Pages/Pembelian/ReceiptReturnPage";
 import AddChickinFormPage from "./Pages/Project/AddChickinFormPage";
 import EditChickinFormPage from "./Pages/Project/EditChickinFormPage";
+import InventoryListPage from "./Pages/Persediaan/InventoryListPage";
+import InfoProductDetailPage from "./Pages/Persediaan/InfoProductDetailPage";
 
 function App() {
   return (
@@ -33,10 +33,10 @@ function App() {
           <Route path="/auth/login" element={<LoginPage />} />
         </Route>
 
-        <Route
+        {/* <Route
           element={<ProtectedRoute allowedRoles={["Super Admin", "manager"]} />}
-        >
-          {/* <Route> */}
+        > */}
+        <Route>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
 
@@ -79,6 +79,13 @@ function App() {
             <Route
               path="/purchase-list/receipt-return"
               element={<ReceiptReturnPage />}
+            />
+
+            {/* Persediaan */}
+            <Route path="/inventory/product" element={<InventoryListPage />} />
+            <Route
+              path="/inventory/product/detail"
+              element={<InfoProductDetailPage />}
             />
           </Route>
         </Route>

@@ -1,15 +1,14 @@
+import { Inventory } from "@/Data/inventoryData";
 import React, { useState } from "react";
-import ChickInItem from "./ChickInItem";
-// import { ProjectChickInResponse } from "@/Data/types/response.type";
-import { ChickIn } from "@/Data/ChickinData";
+import InventoryItem from "./InventoryItem";
 
-interface ChickInListProps {
-  chickins: ChickIn[];
+interface InventoryListProps {
+  inventory: Inventory[];
 }
 
-const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {
+const InventoryList: React.FC<InventoryListProps> = ({ inventory }) => {
   const [selectedRows, setSelectedRows] = useState<boolean[]>(
-    Array(chickins.length).fill(false),
+    Array(inventory.length).fill(false),
   );
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -25,9 +24,8 @@ const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {
   const handleSelectAll = () => {
     const newIsAllSelected = !isAllSelected;
     setIsAllSelected(newIsAllSelected);
-    setSelectedRows(Array(chickins.length).fill(newIsAllSelected));
+    setSelectedRows(Array(inventory.length).fill(newIsAllSelected));
   };
-
   return (
     <div>
       <table className="min-w-full bg-white border">
@@ -40,24 +38,21 @@ const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {
                 onChange={handleSelectAll}
               />
             </th>
-            <th className="px-4 py-2 font-semibold">Id Project</th>
-            <th className="px-4 py-2 font-semibold">Unit Bisnis</th>
-            <th className="px-4 py-2 font-semibold">Produk</th>
-            <th className="px-4 py-2 font-semibold">Area</th>
-            <th className="px-4 py-2 font-semibold">Lokasi</th>
-            <th className="px-4 py-2 font-semibold">Kandang</th>
-            <th className="px-4 py-2 font-semibold">Kapasitas</th>
-            <th className="px-4 py-2 font-semibold">Periode</th>
-            <th className="px-4 py-2 font-semibold">Status Chick in</th>
-            <th className="px-4 py-2 font-semibold">Status Project</th>
+            <th className="px-4 py-2 font-semibold">Produk id</th>
+            <th className="px-4 py-2 font-semibold">Nama</th>
+            <th className="px-4 py-2 font-semibold">Harga Beli</th>
+            <th className="px-4 py-2 font-semibold">Harga Jual</th>
+            <th className="px-4 py-2 font-semibold">Kategori</th>
+            <th className="px-4 py-2 font-semibold">Total Stok</th>
+            <th className="px-4 py-2 font-semibold">Satuan</th>
             <th className="px-4 py-2 font-semibold">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          {chickins.map((chickin, index) => (
-            <ChickInItem
-              key={index}
-              {...chickin}
+          {inventory.map((item, index) => (
+            <InventoryItem
+              {...item}
+              key={item.id}
               isChecked={selectedRows[index]}
               onCheckboxChange={() => handleRowSelect(index)}
             />
@@ -68,4 +63,4 @@ const ChickInList: React.FC<ChickInListProps> = ({ chickins }) => {
   );
 };
 
-export default ChickInList;
+export default InventoryList;

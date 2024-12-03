@@ -1,64 +1,69 @@
-interface ChickIn {
+export interface ChickIn {
   id: number;
-  unitBisnis: string;
-  produk: string;
+  id_project: string;
+  bussines_unit: string;
+  product: string;
   area: string;
-  lokasi: string;
-  kandang: string;
-  kapasitas: number;
-  periode: number;
-  statusChickin: string;
-  statusProject: string;
+  location: string;
+  farm: string;
+  capacity: number;
+  period: number;
+  status_chick_in: string;
+  status_project: string;
 }
 
 const chickinData: ChickIn[] = [
   {
     id: 1,
-    unitBisnis: "Manbu",
-    produk: "Parent Stock",
+    id_project: "000001",
+    bussines_unit: "Manbu",
+    product: "Parent Stock",
     area: "Priangan",
-    lokasi: "Pangandaran",
-    kandang: "Pangandaran 1",
-    kapasitas: 50000,
-    periode: 1,
-    statusChickin: "Sudah",
-    statusProject: "Pengajuan",
+    location: "Pangandaran",
+    farm: "Pangandaran 1",
+    capacity: 50000,
+    period: 1,
+    status_chick_in: "Sudah",
+    status_project: "Pengajuan",
   },
   {
     id: 2,
-    unitBisnis: "Manbu",
-    produk: "Parent Stock",
+    id_project: "000002",
+    bussines_unit: "Manbu",
+    product: "Parent Stock",
     area: "Priangan",
-    lokasi: "Lokasi 2",
-    kandang: "Pangandaran 2",
-    kapasitas: 40000,
-    periode: 2,
-    statusChickin: "Belum",
-    statusProject: "Persiapan",
+    location: "Lokasi 2",
+    farm: "Pangandaran 2",
+    capacity: 40000,
+    period: 2,
+    status_chick_in: "Belum",
+    status_project: "Persiapan",
   },
   {
     id: 3,
-    unitBisnis: "Manbu",
-    produk: "Parent Stock",
+    id_project: "000003",
+    bussines_unit: "Manbu",
+    product: "Parent Stock",
     area: "Priangan",
-    lokasi: "Lokasi 3",
-    kandang: "Pangandaran 3",
-    kapasitas: 30000,
-    periode: 3,
-    statusChickin: "Belum",
-    statusProject: "Aktif",
+    location: "Lokasi 3",
+    farm: "Pangandaran 3",
+    capacity: 30000,
+    period: 3,
+    status_chick_in: "Belum",
+    status_project: "Aktif",
   },
   {
     id: 4,
-    unitBisnis: "Manbu",
-    produk: "Parent Stock",
+    id_project: "000004",
+    bussines_unit: "Manbu",
+    product: "Parent Stock",
     area: "Priangan",
-    lokasi: "Lokasi 4",
-    kandang: "Pangandaran 4",
-    kapasitas: 20000,
-    periode: 4,
-    statusChickin: "Belum",
-    statusProject: "Selesai",
+    location: "Lokasi 4",
+    farm: "Pangandaran 4",
+    capacity: 20000,
+    period: 4,
+    status_chick_in: "Belum",
+    status_project: "Selesai",
   },
 ];
 
