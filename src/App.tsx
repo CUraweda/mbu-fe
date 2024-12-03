@@ -21,6 +21,8 @@ import PaymentInfoPage from "./Pages/Pembelian/PaymentInfoPage";
 import ReceiptReturnPage from "./Pages/Pembelian/ReceiptReturnPage";
 import AddChickinFormPage from "./Pages/Project/AddChickinFormPage";
 import EditChickinFormPage from "./Pages/Project/EditChickinFormPage";
+import InventoryListPage from "./Pages/Persediaan/InventoryListPage";
+import InfoProductDetailPage from "./Pages/Persediaan/InfoProductDetailPage";
 
 function App() {
   return (
@@ -77,6 +79,13 @@ function App() {
             <Route
               path="/purchase-list/receipt-return"
               element={<ReceiptReturnPage />}
+            />
+
+            {/* Persediaan */}
+            <Route path="/inventory/product" element={<InventoryListPage />} />
+            <Route
+              path="/inventory/product/detail"
+              element={<InfoProductDetailPage />}
             />
           </Route>
         </Route>

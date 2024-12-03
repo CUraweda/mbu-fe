@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import tabs from "../Data/tabsProductDetail.json";
+import tabs from "../Data/tabsInventoryDetail.json";
 
 type Props = {
   children?: React.ReactNode;
@@ -9,7 +9,7 @@ type Props = {
 const baseStyle =
   "text-center inline-block shadow-md rounded-lg rounded-b-none px-4 py-2 min-w-40 text-lg";
 
-const PurchaseDetailLayout: React.FC<Props> = ({ children }) => {
+const InventoryDetailLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       {/* Tabs */}
@@ -36,4 +36,4 @@ const PurchaseDetailLayout: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default PurchaseDetailLayout;
+export default InventoryDetailLayout;
