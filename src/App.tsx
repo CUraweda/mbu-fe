@@ -54,7 +54,7 @@ function App() {
             />
 
             {/* Chick in */}
-            <Route path="/chickin" element={<ChickinListPage />} />
+            <Route path="/chickin" element={<ChickInListPage />} />
             <Route path="/chickin/add" element={<AddChickinFormPage />} />
             <Route path="/chickin/edit" element={<EditChickinFormPage />} />
 
