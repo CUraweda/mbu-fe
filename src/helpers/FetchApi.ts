@@ -14,7 +14,7 @@ interface LoginResponse {
 class FetchApi {
   private axiosInstance: AxiosInstance;
 
-  constructor(baseURL: string = import.meta.env.VITE_API_URL as string) {
+  constructor(baseURL: string = import.meta.env.VITE_API_URL_MBU as string) {
     if (!baseURL) {
       throw new Error("Api base url is not defined.");
     }
