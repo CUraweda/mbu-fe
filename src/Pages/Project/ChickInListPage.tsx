@@ -6,14 +6,15 @@ import Filter from "@/Components/Filter";
 import ChickInlist from "@/Components/project/ChickInList";
 
 // icons
-import { useEffect, useState, useCallback } from "react";
-import HFilter from "@/helpers/HFilter";
+import { useState } from "react";
+// import HFilter from "@/helpers/HFilter";
 import { FilterField } from "@/Data/dataTypes";
 import ExportButton from "@/Components/ExportButton";
 import PaginationBottom from "@/Components/PaginationBottom";
-import { chickInApi } from "@/api";
-import { ProjectChickInResponse } from "@/Data/types/response.type";
-import Swal from "sweetalert2";
+// import { chickInApi } from "@/api";
+// import { ProjectChickInResponse } from "@/Data/types/response.type";
+import chickinData from "@/Data/ChickinData";
+// import Swal from "sweetalert2";
 
 const breadcrumbItems = [
   { label: "Home", link: "/" },
@@ -34,49 +35,48 @@ const filterFields: FilterField[] = [
   },
 ];
 
-const ProjectListPage = () => {
+const ChickinListPage = () => {
+  const chickins = chickinData;
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState<string>("");
-  const [filterStates, setFilterStates] = useState<Record<string, string[]>>(
-    {},
-  );
-  const [filteredData, setFilteredData] = useState<ProjectChickInResponse[]>(
-    [],
-  );
-  const [chickInData, setChickInData] = useState<ProjectChickInResponse[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [, setSearchQuery] = useState<string>("");
+  const [, setFilterStates] = useState<Record<string, string[]>>({});
+  // const [filteredData, setFilteredData] = useState<ProjectChickInResponse[]>(
+  //   [],
+  // );
+  // const [chickInData, setChickInData] = useState<ProjectChickInResponse[]>([]);
+  // const [loading, setLoading] = useState(true);
 
-  const handleFilter = useCallback(() => {
-    let result = HFilter.byState(chickInData, filterStates);
+  // const handleFilter = useCallback(() => {
+  //   let result = HFilter.byState(chickInData, filterStates);
 
-    result = HFilter.byQuery(chickInData, searchQuery);
+  //   result = HFilter.byQuery(chickInData, searchQuery);
 
-    setFilteredData(result);
-  }, [filterStates, searchQuery, chickInData]);
+  //   setFilteredData(result);
+  // }, [filterStates, searchQuery, chickInData]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const { response } = await chickInApi.getAllChickIn();
-        setChickInData(response);
-      } catch (error) {
-        void Swal.fire({
-          icon: "error",
-          title: "Login Gagal",
-          text: error instanceof Error ? error.message : "Terjadi kesalahan",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const { response } = await chickInApi.getAllChickIn();
+  //       setChickInData(response);
+  //     } catch (error) {
+  //       void Swal.fire({
+  //         icon: "error",
+  //         title: "Login Gagal",
+  //         text: error instanceof Error ? error.message : "Terjadi kesalahan",
+  //       });
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    void fetchData();
-  }, []);
+  //   void fetchData();
+  // }, []);
 
-  useEffect(() => {
-    handleFilter();
-  }, [handleFilter]);
+  // useEffect(() => {
+  //   handleFilter();
+  // }, [handleFilter]);
 
   // Fungsi untuk menangani pencarian
 
@@ -105,11 +105,12 @@ const ProjectListPage = () => {
             <Filter fields={filterFields} onFilterChange={setFilterStates} />
           </div>
         </div>
-        {loading ? (
+        <ChickInlist chickins={chickins} />
+        {/* {loading ? (
           <p className="text-center">Loading...</p>
         ) : (
-          <ChickInlist chickins={filteredData} />
-        )}
+          <ChickInlist chickins={chickins} />
+        )} */}
         <div className="flex flex-col items-center justify-end gap-5 m-5 mt-10 md:mt-20 md:items-end md:flex-row">
           <PaginationBottom
             currentPage={currentPage}
@@ -121,4 +122,4 @@ const ProjectListPage = () => {
   );
 };
 
-export default ProjectListPage;
+export default ChickinListPage;

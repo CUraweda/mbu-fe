@@ -34,15 +34,15 @@
     "children": [
       {
         "name": "List Produk",
-        "path": "/product-list"
+        "path": "/inventory/product"
       },
       {
         "name": "Transfer Produk",
-        "path": "/product-transfer"
+        "path": "/inventory/transfer"
       },
       {
         "name": "Penyesuaian Stok",
-        "path": "/stock-adjustment"
+        "path": "/inventory/adjustment"
       }
     ]
   }

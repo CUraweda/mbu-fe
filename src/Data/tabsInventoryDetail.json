@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Info Produk",
+    "path": "/inventory/product/detail"
+  },
+  {
+    "name": "Tempat",
+    "path": "/inventory/product/place-detail"
+  },
+  {
+    "name": "Buku Stok",
+    "path": "/inventory/product/stock-book-detail"
+  }
+]
