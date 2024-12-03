@@ -33,23 +33,25 @@ const RecordingList: React.FC<RecordingListProps> = ({ items }) => {
   };
 
   return (
-    <div>
-      <table className="min-w-full bg-white border">
+    <div className="overflow-x-auto">
+      <table className="table table-zebra bg-white">
         <thead>
           <tr className="text-center bg-blue-100">
             <th className="w-10">
               <input
                 type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-info"
                 checked={isAllSelected}
                 onChange={handleSelectAll}
               />
             </th>
-            <th className="px-4 py-2 font-semibold">Project Id</th>
-            <th className="px-4 py-2 font-semibold">Waktu Recording</th>
-            <th className="px-4 py-2 font-semibold">Lokasi</th>
-            <th className="px-4 py-2 font-semibold">Status</th>
-            <th className="px-4 py-2 font-semibold">Kecepatan Waktu</th>
-            <th className="px-4 py-2 font-semibold">Aksi</th>
+            <th>Project Id</th>
+            <th>Waktu Recording</th>
+            <th>Lokasi</th>
+            <th>Status</th>
+            <th>Kecepatan Waktu</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>

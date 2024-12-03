@@ -27,25 +27,27 @@ const InventoryList: React.FC<InventoryListProps> = ({ inventory }) => {
     setSelectedRows(Array(inventory.length).fill(newIsAllSelected));
   };
   return (
-    <div>
-      <table className="min-w-full bg-white border">
+    <div className="overflow-x-auto">
+      <table className="table table-zebra">
         <thead>
-          <tr className="text-center bg-blue-100">
+          <tr className=" bg-blue-100">
             <th className="w-10">
-              <input
+            <input
                 type="checkbox"
+                className="checkbox checkbox-info"
                 checked={isAllSelected}
                 onChange={handleSelectAll}
               />
+              
             </th>
-            <th className="px-4 py-2 font-semibold">Produk id</th>
-            <th className="px-4 py-2 font-semibold">Nama</th>
-            <th className="px-4 py-2 font-semibold">Harga Beli</th>
-            <th className="px-4 py-2 font-semibold">Harga Jual</th>
-            <th className="px-4 py-2 font-semibold">Kategori</th>
-            <th className="px-4 py-2 font-semibold">Total Stok</th>
-            <th className="px-4 py-2 font-semibold">Satuan</th>
-            <th className="px-4 py-2 font-semibold">Aksi</th>
+            <th>Produk id</th>
+            <th>Nama</th>
+            <th>Harga Beli</th>
+            <th>Harga Jual</th>
+            <th>Kategori</th>
+            <th>Total Stok</th>
+            <th>Satuan</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
