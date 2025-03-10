@@ -28,28 +28,30 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   };
 
   return (
-    <div>
-      <table className="min-w-full bg-white border">
+    <div className="overflow-x-auto">
+      <table className="table table-zebra bg-white border">
         <thead>
           <tr className="text-center bg-blue-100">
             <th className="w-10">
               <input
                 type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-info"
                 checked={isAllSelected}
                 onChange={handleSelectAll}
               />
             </th>
-            <th className="px-4 py-2 font-semibold">Id Project</th>
-            <th className="px-4 py-2 font-semibold">Unit Bisnis</th>
-            <th className="px-4 py-2 font-semibold">Produk</th>
-            <th className="px-4 py-2 font-semibold">Area</th>
-            <th className="px-4 py-2 font-semibold">Lokasi</th>
-            <th className="px-4 py-2 font-semibold">Kandang</th>
-            <th className="px-4 py-2 font-semibold">Kapasitas</th>
-            <th className="px-4 py-2 font-semibold">Periode</th>
-            <th className="px-4 py-2 font-semibold">Status Chick in</th>
-            <th className="px-4 py-2 font-semibold">Status Project</th>
-            <th className="px-4 py-2 font-semibold">Aksi</th>
+            <th className="font-semibold">Id Project</th>
+            <th className="font-semibold">Unit Bisnis</th>
+            <th className="font-semibold">Produk</th>
+            <th className="font-semibold">Area</th>
+            <th className="font-semibold">Lokasi</th>
+            <th className="font-semibold">Kandang</th>
+            <th className="font-semibold">Kapasitas</th>
+            <th className="font-semibold">Periode</th>
+            <th className="font-semibold">Status Chick in</th>
+            <th className="font-semibold">Status Project</th>
+            <th className="font-semibold">Aksi</th>
           </tr>
         </thead>
         <tbody>

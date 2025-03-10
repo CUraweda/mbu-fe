@@ -4,6 +4,7 @@ import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 // import { ProjectPreparationsResponse } from "@/Data/types/response.type";
 import { Persiapan } from "@/Data/persiapanData";
+import { CiMenuKebab } from "react-icons/ci";
 
 interface PreparationItemProps extends Persiapan {
   isChecked: boolean;
@@ -59,12 +60,12 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
 
   return (
     <tr className="text-base text-center border-b">
-      <td className="px-4 py-2">
+      <td className="">
         <input
           type="checkbox"
+          className="checkbox checkbox-info"
           checked={isChecked}
           onChange={onCheckboxChange}
-          className="w-4 h-4 cursor-pointer"
         />
       </td>
       <td className="px-4 py-2 text-primary-dark">{id_project}</td>
@@ -95,8 +96,10 @@ const PersiapanItem: React.FC<PreparationItemProps> = ({
 
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">
-          <div tabIndex={0} role="button" className="m-1 rotate-90">
-            ...
+        <div tabIndex={0} className="">
+            <span className="btn btn-ghost text-xl font-bold" role="button">
+              <CiMenuKebab />
+            </span>
           </div>
           <ul
             tabIndex={0}

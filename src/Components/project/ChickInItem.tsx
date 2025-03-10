@@ -1,6 +1,7 @@
 import { ChickIn } from "@/Data/ChickinData";
 // import { ProjectChickInResponse } from "@/Data/types/response.type";
 import React from "react";
+import { CiMenuKebab } from "react-icons/ci";
 import { FiCheckCircle } from "react-icons/fi";
 import { GiChicken } from "react-icons/gi";
 import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
@@ -66,19 +67,20 @@ const ChickInItem: React.FC<ChickinItemProps> = ({
       <td>
         <input
           type="checkbox"
+          className="checkbox checkbox-info"
           checked={isChecked}
           onChange={onCheckboxChange}
         />
       </td>
-      <td className="px-4 py-2 text-primary-dark">{id_project}</td>
-      <td className="px-4 py-2">{bussines_unit}</td>
-      <td className="px-4 py-2">{product}</td>
-      <td className="px-4 py-2">{area}</td>
-      <td className="px-4 py-2">{location}</td>
-      <td className="px-4 py-2">{farm}</td>
-      <td className="px-4 py-2">{capacity}</td>
-      <td className="px-4 py-2">{period}</td>
-      <td className="px-4 py-2">
+      <td className=" text-primary-dark">{id_project}</td>
+      <td>{bussines_unit}</td>
+      <td>{product}</td>
+      <td>{area}</td>
+      <td>{location}</td>
+      <td>{farm}</td>
+      <td>{capacity}</td>
+      <td>{period}</td>
+      <td>
         <div
           className={`px-3 py-1 text-center rounded-md text-sm font-semibold ${getStatusChickin()}`}
         >
@@ -94,8 +96,10 @@ const ChickInItem: React.FC<ChickinItemProps> = ({
       </td>
       <td className="px-4 py-2 text-center">
         <div className="dropdown dropdown-left dropdown-end">
-          <div tabIndex={0} role="button" className="m-1 rotate-90">
-            ...
+          <div tabIndex={0} className="">
+            <span className="btn btn-ghost text-xl font-bold" role="button">
+              <CiMenuKebab />
+            </span>
           </div>
           <ul
             tabIndex={0}
